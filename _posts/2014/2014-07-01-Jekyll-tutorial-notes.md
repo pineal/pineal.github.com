@@ -11,7 +11,7 @@ tags:
 I decided to move my posts from Wordpress to github. The host fee is too expensive to afford, and the control panel for WP is so bad. I want a more geek blog. Jekyll is my final choice. This tutorial is  based on the [Youtube video tutorial](http://youtu.be/jVeNnHy65Rs) by Thomas Bradley. It is highly recommended to have a look at his tutorial, clear and easy to understand. I write posts only for memo and learning. This is *part I* for what I have learnt today(video 1 to 15).
 
 ## Installation
-Jekyll is a command line tool used in terminal. We consider you have installed command line tool in your mac, if not, you need to go apple's developer site or use your Xcode to download and install before you start.  
+Jekyll is a command line tool used in terminal. We consider you have installed command line tool in your mac, if not, you need to go apple's developer site or use your Xcode to download and install before you strat.  
 
 Since Jekyll is based on Ruby, you need install gem. Open your terminal, check and update the latest version of gem:
 
@@ -150,12 +150,12 @@ For example, we can extract the navigation as a single page **nav.html** in **_i
 </nav>
 ```
 Then in the **default** layout, we replace this part by the include label like:
-```html
-<header>
-    <h1>First Jekyll site</h1>
-    {% include nav.html %}
+
+```
+<header><h1>First Jekyll site</h1>
 </header>
 ```
+
 You can also put the navigation in the footer.
 
 ##Add CSS
@@ -208,11 +208,6 @@ However we just need to apply this effect in the homepage, now the module is sha
 
 ##Include parameters
 If we want to apply a secondary CSS class to diffierent modules, an include parameter is useful. For example, the navigation module used in header and footer will apply the different CSS styple nav-top and nav-buttom.
-
-```
-<header><h1>First site</h1>{% include nav.html navclass='nav-top' %}</header><footer>{% include nav.html navclass='nav-bottom' %}<P>copyright</P></footer>
-
-```
 
 Then in the nav.html, we need to add:
 
