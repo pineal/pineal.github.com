@@ -1,23 +1,20 @@
 ---
-title: About me
+title: About Me
 layout: page
 comments: yes
 ---
   
 ##Hesen Zhang    
-![](/media/image/portfolio.jpg)
+<img src="/media/image/portfolio.jpg" alt="Hesen Zhang" width="120" height="120" align="right" />
 
+- Birthday: 13th, July, 1991
+- Hometown: Ningbo, China
+- Email: [hesen.zhang@gmail.com](hesen.zhang@gmail.com)
+- Github: [https://github.com/pineal](https://github.com/pineal)
+- LinkedIn: [https://uk.linkedin.com/in/hesenzhang](https://uk.linkedin.com/in/hesenzhang)
 
+##Education Background
 
+(EE MSc)Southern California University, US
 
-
-
-
-
-
-
-
-
-<a class="twitter-timeline" href="https://twitter.com/Pineal_Me" data-widget-id="484795103001587712">Tweets by @Pineal_Me</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
+(EE BEng)University of Liverpool,UK
