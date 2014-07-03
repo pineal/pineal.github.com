@@ -1,7 +1,7 @@
 markdown: rdiscount
 permalink: /:year/:month/:title/
 url: http://pineal.github.com
-author: Pineal
+author: Hesen
 pygments: true
 paginate: 24
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]

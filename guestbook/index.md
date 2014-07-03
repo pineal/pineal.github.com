@@ -1,7 +1,8 @@
 ---
 layout: page
-title: 留言
+title: Comment
 comments: yes
 ---
 
-使用评论留言哦！
+Hi, say something, say something to me.
+
