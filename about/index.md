@@ -15,6 +15,21 @@ comments: yes
 
 ##Education Background
 
-(EE MSc)Southern California University, US
+- MSc( EE on Multimedia & creative technology) in University of Southern California, U.S. 
+- BEng( Electronics ) in University of Liverpool, U.K.
 
-(EE BEng)University of Liverpool,UK
+##Research Interests
+
+- Image processing
+- Robotics
+- FPGA 
+- Linux/Unix programming
+
+##Cool things
+- Photography/videomaking
+- Reading
+- Soccer
+- Music/Guitar
+
+##Description
+Hello world! :) To be continue...
