@@ -7,11 +7,11 @@ tags:
 - Jekyll
 ---
 
-## Introduction
-I decided to move my posts from Wordpress to github. The host fee is too expensive to afford, and the control panel for WP is so bad. I want a more geek blog. Jekyll is my final choice. This tutorial is  based on the [Youtube video tutorial](http://youtu.be/jVeNnHy65Rs) by Thomas Bradley. It is highly recommended to have a look at his tutorial, clear and easy to understand. I write posts only for memo and learning. This is *part I* for what I have learnt today(video 1 to 15).
+>I decided to move my posts from Wordpress to Github. The host fee is too expensive to afford, and the control panel for WP is so bad. I want a more geek blog. Jekyll is my final choice. This tutorial is  based on the [Youtube video tutorial](http://youtu.be/jVeNnHy65Rs) by Thomas Bradley. It is highly recommended to have a look at his tutorial, clear and easy to understand. I write posts only for memo and learning. This is *part I* for what I have learnt today(video 1 to 15).
+
 
 ## Installation
-Jekyll is a command line tool used in terminal. We consider you have installed command line tool in your mac, if not, you need to go apple's developer site or use your Xcode to download and install before you strat.  
+Jekyll is a command line tool used in terminal. We consider you have installed command line tool in your mac, if not, you need to go apple's developer site or use your Xcode to download and install before you start.  
 
 Since Jekyll is based on Ruby, you need install gem. Open your terminal, check and update the latest version of gem:
 
@@ -23,9 +23,9 @@ Then use this command line to install Jekyll:
     
 ## Set up your Github pages
 
-Here Github Pages server is great place to host your Jekyll. Easy to control, and free to go. Here you need have a github account and a github application on mac is necessary (otherwise you need to do following things by using the command line). 
+Here Github Pages server is great place to host your Jekyll. Easy to control, and free to go. Here you need have a Github account and a Github application on mac is necessary (otherwise you need to do following things by using the command line). 
 
- - Create a new public repository with a name and description, check the README initialization option
+ - Create a new public repository with a name and description, check the README initialisation option
  - Clone this repository to your local directory
  - Create and publish a new branch
  - Set this new branch to default and delete the master branch
@@ -36,7 +36,7 @@ Here Github Pages server is great place to host your Jekyll. Easy to control, an
 <html lang="en-ca">
 <head>
 	<meta charset="utf-8">
-	<title>first github site</title>
+	<title>first Github site</title>
 </head>	
 <body>
     <h1>First Jekyll site</h1>
@@ -64,17 +64,17 @@ Open your terminal, use this command:
 
     $ jekyll serve --watch --baseurl ""
     
-You will see server running in terminal. Open your brower, and enter *localhost:4000* to access your website locally. Keep your server runnning when you develop locally. If the change is not shown on brower, stop the server (Control + C) and restart it.
+You will see server running in terminal. Open your browser, and enter *localhost:4000* to access your website locally. Keep your server running when you develop locally. If the change is not shown on browser, stop the server (Control + C) and restart it.
 
 ##_Site Folder
 This folder will generated automatically as a final version of no matter HTML or markdown files in your local site directory. But it is kind of temporary one. What we need to do is go to Github application, and in setting panel, add *_site* into ignore files(.gitignore), then commit it. 
 
 ##Layout
-This is very as similiar as Wordpress. It just like a frame that can contain different modules. 
+This is very as similar as Wordpress. It just like a frame that can contain different modules. 
 
 To achieve this, create a directory in your site, which is called **_layout**. Create a new HTML file in this folder. We name it **default.html**.
 
-For example, the **index.html** metioned previously now can be simpified to body content:
+For example, the **index.html** mentioned previously now can be simplified to body content:
 
 ```
     <h1>First Jekyll site</h1>
@@ -82,7 +82,7 @@ For example, the **index.html** metioned previously now can be simpified to body
 ```
 
 Other codes are moved into the layout page  **default.html**,
-For example, the **index.html** metioned previously now can be simpified to body content:
+For example, the **index.html** mentioned previously now can be simplified to body content:
 
 ```
 <!DOCTYPE html>
@@ -125,14 +125,14 @@ Most blog are unlikely single page. We need hyperlinks to connected all pages. A
 ```
 
 ##Site baseurl
-The hyperlink shown above may cause problem when it publishs globally. To fixed it we need to add baseurl as **config.yml** set: 
+The hyperlink shown above may cause problem when it publishes globally. To fixed it we need to add baseurl as **config.yml** set: 
 
 ```
     <li><a href="{{site.baseurl}}/index.html">Home</a></li>
     <li><a href="{{site.baseurl}}/news.html">News</a></li>
 ```
 
- Commit this change on github, refresh your site and check the source code. 
+ Commit this change on Github, refresh your site and check the source code. 
  
 ##Include
 In real developing process, some modules will be shared in many pages, commonly like header and footer. **Include** is just like C/C++ programming, which to add some modules in. 
@@ -207,7 +207,7 @@ However we just need to apply this effect in the homepage, now the module is sha
 ```
 
 ##Include parameters
-If we want to apply a secondary CSS class to diffierent modules, an include parameter is useful. For example, the navigation module used in header and footer will apply the different CSS styple nav-top and nav-buttom.
+If we want to apply a secondary CSS class to different modules, an include parameter is useful. For example, the navigation module used in header and footer will apply the different CSS style nav-top and nav-buttom.
 
 Then in the nav.html, we need to add:
 
@@ -242,7 +242,7 @@ In the CSS sheet, we can style both of these like:
 ```
 
 ##Lopping over posts
-A folder **_posts** could contain all posts. The name convetion for each post is very strict, e.g.
+A folder **_posts** could contain all posts. The name convention for each post is very strict, e.g.
 
     2013-06-23-A-beautiful-love-with-claire.md
 
@@ -275,7 +275,7 @@ The posts can be displayed by categories by modifying the for loop like:
 The categories are declared very top in every markdown post, and generated in **_site** folder.
 
 ##Summary
-Here we have done almost half of this tutorial, and this is the first time I use markdown to write post. I feel so good. By markdown and Latex, I can say goodbye to word fowever! The Jekyll is as cool as I thought. Since I have some basic knowledge of Github/HTML/CSS/Wordpress, it seems not difficult for me to learn. I will contiune Part II tomorrow.
+Here we have done almost half of this tutorial, and this is the first time I use markdown to write post. I feel so good. By markdown and Latex, I can say goodbye to word forever! The Jekyll is as cool as I thought. Since I have some basic knowledge of Github/HTML/CSS/Wordpress, it seems not difficult for me to learn. I will continue Part II tomorrow.
 
 # Jekyll Tutorial Learning Notes -- Part II
 These notes are for video 16 to 32.
