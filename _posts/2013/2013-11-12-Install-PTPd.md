@@ -2,9 +2,9 @@
 layout: post
 title: Install PTPd
 categories:
--Linux
+- Linux
 Tags:
--PTPd
+- PTPd
 ---
 This blog is going to introduce the on the Raspberry Pi.
 PTPd is an open source implementation of the Precision Time Protocol for Unix-like computers. You can find sources and documentation on this website(or you can google it by yourself): [http://ptpd.sourceforge.net/](http://ptpd.sourceforge.net/).
