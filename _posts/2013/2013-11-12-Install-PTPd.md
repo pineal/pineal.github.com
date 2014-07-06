@@ -3,7 +3,7 @@ layout: post
 title: Install PTPd
 categories:
 - Linux
-Tags:
+tags:
 - PTPd
 ---
 This blog is going to introduce the on the Raspberry Pi.
