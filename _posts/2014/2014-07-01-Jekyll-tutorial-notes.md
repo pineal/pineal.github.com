@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Jekyll Tutorial Learning Notes(Part I)
+title: Jekyll Tutorial Learning Notes
 categories:
 - Jekyll
 tags:
@@ -277,6 +277,4 @@ The categories are declared very top in every markdown post, and generated in **
 ##Summary
 Here we have done almost half of this tutorial, and this is the first time I use markdown to write post. I feel so good. By markdown and Latex, I can say goodbye to word forever! The Jekyll is as cool as I thought. Since I have some basic knowledge of Github/HTML/CSS/Wordpress, it seems not difficult for me to learn. I will continue Part II tomorrow.
 
-# Jekyll Tutorial Learning Notes -- Part II
-These notes are for video 16 to 32.
-##Nested layouts
+##To be Continued
