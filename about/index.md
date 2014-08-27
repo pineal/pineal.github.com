@@ -15,8 +15,8 @@ comments: yes
 
 ##Education Background
 
-- MSc( EE on Multimedia & creative technology) in University of Southern California, U.S. 
-- BEng( Electronics ) in University of Liverpool, U.K.
+- MSc on Computer Science in University of Southern California, U.S. 
+- BEng on Electronics Engineering in University of Liverpool, U.K.
 
 ##Research Interests
 
