@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Start on Fedora
-categories: 
+categories:
 - Linux
-tags： 
+tags:
 - Fedora
 ---
 
