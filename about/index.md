@@ -11,7 +11,9 @@ comments: yes
 - Hometown: Ningbo, China
 - Email: [hesen.zhang@gmail.com](hesen.zhang@gmail.com)
 - Github: [https://github.com/pineal](https://github.com/pineal)
-- LinkedIn: [https://uk.linkedin.com/in/hesenzhang](https://uk.linkedin.com/in/hesenzhang)
+- LinkedIn: [www.linkedin.com/in/hesenzhang/
+](www.linkedin.com/in/hesenzhang/
+)
 
 ##Education Background
 

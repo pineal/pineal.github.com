@@ -48,7 +48,8 @@ If you want to keep dropbox running in the background[3]:
 
 *Futher: Run this command once login.*
   
-
+##Adobe
+This link is for [Adobe Reader](http://www.if-not-true-then-false.com/2010/install-adobe-acrobat-pdf-reader-on-fedora-centos-red-hat-rhel/). The other link is for installing [Adobe Flash player and plugin in Firefox](https://ask.fedoraproject.org/en/question/10217/how-to-install-adobe-flash-on-fedora/).
   
 
 

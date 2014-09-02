@@ -32,4 +32,16 @@ Open Terminal, enter 'emacs' to start. In mac OS X, C refers to "Control" Key, a
 * C-g Stop a command
 * C-x N Split the screen
 * C-x 1 Kill other windows
- 
+* C-u 0 C-l shrink the window, put the current line(cursor) to the top of screen
+* C-h k C-f 
+
+##Delete
+
+* C-d delete the character after current cursor
+* M-d kill the next word after the cursor
+* C-k Kill from the cursor position to the end of line
+* M-k Kill to the end of the current sentence
+* C-SPACE select the text, then C-w to kill the selected text
+
+
+15:17 27th, Aug 2014 at Line 392 30%
