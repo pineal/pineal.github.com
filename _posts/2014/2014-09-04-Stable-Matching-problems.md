@@ -4,21 +4,22 @@ title: Stable Matching Problem
 categories:
 - Algorithm
 tags:
-- Stable matching, - Stable marriage
+- Stable matching
 ---
 
 
 **2.** State True or false? In every instance of the Stable Matching Problem, there is a stable matching containing a pair (m, w) such that m is ranked first on the preference list of w and w is ranked first on the preference list of m.
 
-**False.** Consider this situation for two men and two women instance,
-* m prefers w to w'
+**False.** Consider this situation for two men and two women instance:
+
+* m prefers w to w'
 * m' prefers w' to w
 * w prefers m' to m'
 * w' prefers m to m 
 
 where w ranks first in preference list for m, while m is not first on preference list for w. Clearly, this stable matching contains a pair (m,w) without such a property.
 
-**3.** State True or false? Consider an instance of the Stable Matching Problem in which there exists a man m and a woman w such that m is ranked first on the preference list of w and w is ranked first on the preference list of m. Then in every stable matching S for this instance, the pair (m, w) belongs to S.**True.** Consider this situation:
+**3.** State True or false? Consider an instance of the Stable Matching Problem in which there exists a man m and a woman w such that m is ranked first on the preference list of w and w is ranked first on the preference list of m. Then in every stable matching S for this instance, the pair (m, w) belongs to S.**True.** Consider this situation:
 * m prefers w' to w
 * m' prefers w to w'
 * w prefers m to m'
