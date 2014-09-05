@@ -19,8 +19,10 @@ tags:
 
 where w ranks first in preference list for m, while m is not first on preference list for w. Clearly, this stable matching contains a pair (m,w) without such a property.
 
-**3.** State True or false? Consider an instance of the Stable Matching Problem in which there exists a man m and a woman w such that m is ranked first on the preference list of w and w is ranked first on the preference list of m. Then in every stable matching S for this instance, the pair (m, w) belongs to S.**True.** Consider this situation:
-* m prefers w' to w
+**3.** State True or false? Consider an instance of the Stable Matching Problem in which there exists a man m and a woman w such that m is ranked first on the preference list of w and w is ranked first on the preference list of m. Then in every stable matching S for this instance, the pair (m, w) belongs to S.
+
+**True.** Consider this situation:
+* m prefers w' to w
 * m' prefers w to w'
 * w prefers m to m'
 * w' prefers m' to m  This is a perfect matching situation where two men are both happy and both women are unhappy. S includes (m,w') and (m',w). However, m and w both rank each other on their top of preference list. Nothing can stop (m, w) bing a pair, which indicates that situation is unstable. 
@@ -50,8 +52,8 @@ Suppose in the opening week of the fall season, Network A reveals a schedule S a
 
 The analogue of Gale and Shapley’s question for this kind of stability is the following: For every set of TV shows and ratings, is there always a stable pair of schedules? Resolve this question by doing one of the following two things:
  
-a. give an algorithm that, for any set of TV shows and associated ratings, produces a stable pair of schedules; or
-	b. give an example of a set of TV shows and associated ratings for which there is no stable pair of schedules.
+- give an algorithm that, for any set of TV shows and associated ratings, produces a stable pair of schedules; or
+	- give an example of a set of TV shows and associated ratings for which there is no stable pair of schedules.
 
 **No.** Assume A has two shows a1, a2 with ratings 1 and 3, and B has two shows b1, b2 with ratings 2 and 4. If there is a matching: S: (a1, a2), T:(b1, b2) with paris (a1, b1) and (a2, b2). Then b1 and b2 will win two time slots and network A must want to change their schedule as S':(a2, a1) which can win back one time slot and thus it becomes stable.
 
