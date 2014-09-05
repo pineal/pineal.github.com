@@ -22,6 +22,7 @@ where w ranks first in preference list for m, while m is not first on preference
 **3.** State True or false? Consider an instance of the Stable Matching Problem in which there exists a man m and a woman w such that m is ranked first on the preference list of w and w is ranked first on the preference list of m. Then in every stable matching S for this instance, the pair (m, w) belongs to S.
 
 **True.** Consider this situation:
+
 * m prefers w' to w
 * m' prefers w to w'
 * w prefers m to m'
