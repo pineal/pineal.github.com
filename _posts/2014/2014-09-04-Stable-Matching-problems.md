@@ -22,11 +22,12 @@ where w ranks first in preference list for m, while m is not first on preference
 **3.** State True or false? Consider an instance of the Stable Matching Problem in which there exists a man m and a woman w such that m is ranked first on the preference list of w and w is ranked first on the preference list of m. Then in every stable matching S for this instance, the pair (m, w) belongs to S.
 
 **True.** Consider this situation:
-
 * m prefers w' to w
 * m' prefers w to w'
 * w prefers m to m'
-* w' prefers m' to m  This is a perfect matching situation where two men are both happy and both women are unhappy. S includes (m,w') and (m',w). However, m and w both rank each other on their top of preference list. Nothing can stop (m, w) bing a pair, which indicates that situation is unstable. 
+* w' prefers m' to m 
+
+ This is a perfect matching situation where two men are both happy and both women are unhappy. S includes (m,w') and (m',w). However, m and w both rank each other on their top of preference list. Nothing can stop (m, w) bing a pair, which indicates that situation is unstable. 
 
 
 
@@ -84,10 +85,10 @@ While some hospital h_{i} has available positions
 		if s_{j} prefers h_{k} to h_{i} then
 			s_{j} remains committed to h_{k}
 		else s_{j} becomes committed to h_{i}
-			the number of available positions at h_{k} increases by 1
+			the number of available positions at $$h_{k}$$ increases by 1
 			the number of available positions at h_{i} decreases by 1
 ```	
 
 **8.** N men and N women were participating in a stable matching process in a small town named Walnut Grove. A stable matching was found after the matching process finished and everyone got engaged. However, a man named Almazo Wilder, who is engaged with a woman named Nelly Oleson, suddenly changes his mind by preferring another woman named Laura Ingles, who was originally ranked right below Nelly in his preference list, therefore Laura and Nelly swapped their positions in Almanzos preference list. Your job now is to find a new matching for all of these people and to take into account the new preference of Almanzo, but you dont want to run the whole process from the beginning again, and want to take advantage of the results you currently have from the previous matching. Describe your algorithm for this problem. Assume that no woman gets offended if she got refused and then gets proposed by the same person again.
 
-**Solution:** Swap Nelly Oleson and Laura Ingles.
+**Solution:** Swap Nelly Oleson and Laura Ingles.$$test_{hello}$$
