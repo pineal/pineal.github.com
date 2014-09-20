@@ -50,8 +50,8 @@ $$g\_{1}(n)<g\_{3}(n)<g\_{4}(n)<g\_{5}(n)<g\_{2}(n)<g\_{7}(n)<g\_{6}(n)$$
 
 - Assume you have functions f and g such that \\(f(n)\\) is \\(
 O(g(n))\\). For each of the following statements, decide whether you think it is true or false and give a proof or counterexample.
- - \\( log\_{2}f(n) )\\ is \\( O(\log\_{2}g(n)) \\)
- - \\( 2^f(n) \\) is \\( O(2^{g(n)}) \\)
+ - \\( \log\_{f(n)} \\) is \\( O(\log\_{2}g(n)) \\)
+ - \\( 2^{f(n)} \\) is \\( O(2^{g(n)}) \\)
  - \\( f(n)^{2} \\) is \\( O(g(n)^{2}) \\)
 
 - Consider the following basic problem. You’re given an array A consisting of n integers A[1], A[2], . . . , A[n]. You’d like to output a two-dimensional n-by-n array B in which BB[i, j], for i < j, contains the sum of array entries A[i] through A[j]—that is, the sum A[i] + A[i + 1] + . . . + A[j]. (The value of array entry B[i, j] is left unspecified whenever i ≥ j, so it doesn’t matter what is output for these values.) Here’s a simple algorithm to solve this problem.
