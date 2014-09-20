@@ -13,14 +13,44 @@ tags:
 - data structure
 ---
 
-##Time Complexity
-按数量级递增排列，常见的时间复杂度有：常数阶\\(O(1)\\),对数阶\\(O(log2n)\\),线性阶\\(O(n)\\), 线性对数阶\\( O(nlog2n)\\),平方阶\\(O(n2)\\)，立方阶\\( O(n3) \\),...， k次方阶\\(O(n^{k})\\),指数阶\\(O(2n)\\)。我们应该尽可能选用多项式阶\\(O(nk)\\)的算法，而不希望用指数阶的算法。 
 
-常见的算法时间复杂度由小到大依次为：
+
+##Time Complexity
+###Asymptotic Analysis
+Look at growth of \\(T(n)\\) as \\(n\to\infty\\).
+Upper Bounds: O-notation 
+Lower Bounds: \\(\Omega\\)-notation
+Tight bounds: \\(\Theta\\)-notation
+
+Time complexities of some general algorithms can be ordered as:
 $$ Ο(1)＜ Ο(\log{2n}) ＜ Ο(n) ＜ Ο(n\log2n) ＜ Ο(n^2) ＜ Ο(n^3) ＜ … ＜ Ο(2^n) ＜ Ο(n!) $$
 
-$$ \mathsf{Data = PCs} \times \mathsf{Loadings} $$
-$$ \mathbf{X}\_{n,p} = \mathbf{A}\_{n,k} \mathbf{B}\_{k,p} $$
+###Examples
+- Take the following list of functions and arrange them in ascending order of growth rate. That is, if function \\(g(n)\\) immediately follows function \\(f(n)\\) in your list, then it should be the case that $f(n)$ is \\( O(g(n))\\).
+
+$$ f\_{1}(n) = n^{2.5} $$
+$$ f\_{2}(n) = \sqrt{2n} $$
+$$ f\_{3}(n)=n+10 $$
+$$ f\_{4}(n)=10^{n} $$
+$$ f\_{5}(n)=100^{n}$$
+$$ f\_{6}(n)=n^{2}\log n $$
+
+**Solution:** Growth rate can be arranged as ascending order like:
+$$f\_{2}(n)<f\_{3}(n)<f\_{6}(n)<f\_{1}(n)<f\_{4}(n)<f\_{5}(n)$$
+
+- Take the following list of functions and arrange them in ascending order of growth rate. That is, if function //(g(n)//) immediately follows function //(f(n)//) in your list, then it should be the case that //(f(n)/) is //(O(g(n))//).
+
+$$ g\_{1}(n)=2^{\sqrt{\log n}}$$
+$$ g\_{2}(n)=2^{n}$$
+$$ g\_{4}(n)=n^{4/3}$$
+$$ g\_{3}(n)=n(\log n)^{3}$$
+$$ g\_{5}(n)=n^{\log n}$$
+$$ g\_{6}(n)=2^{2^{n}}$$
+$$ g\_{7}(n)=2^{n^{2}}$$
+
+**Solution:** Growth rate can be arranged as ascending order like:
+$$g\_{1}(n)<g\_{3}(n)<g\_{4}(n)<g\_{5}(n)<g\_{2}(n)<g\_{7}(n)<g\_{6}(n)$$
+
 
 ##Data Structure
 ###Array
