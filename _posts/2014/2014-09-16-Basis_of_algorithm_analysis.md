@@ -35,7 +35,7 @@ $$ f\_{6}(n)=n^{2}\log n $$
 **Solution:** Growth rate can be arranged as ascending order like:
 $$f\_{2}(n)<f\_{3}(n)<f\_{6}(n)<f\_{1}(n)<f\_{4}(n)<f\_{5}(n)$$
 
-- Take the following list of functions and arrange them in ascending order of growth rate. That is, if function \\(g(n)\\) immediately follows function \\(f(n)\\) in your list, then it should be the case that \\(f(n)/) is \\(O(g(n))\\).
+- Take the following list of functions and arrange them in ascending order of growth rate. That is, if function \\(g(n)\\) immediately follows function \\(f(n)\\) in your list, then it should be the case that \\(f(n)\\) is \\(O(g(n))\\).
 
 $$ g\_{1}(n)=2^{\sqrt{\log n}}$$
 $$ g\_{2}(n)=2^{n}$$
