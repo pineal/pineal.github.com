@@ -81,9 +81,8 @@ _{n\to\infty} g(n) /f (n) = 0 \\).
 
 **Solution:**
 
-- The outer loop of the given algorithm runs for exactly n iterations, and the inner loop of ht algorithm runs for at most n iterations. Therefore the line of code that adds up array entries A[i] trough A[j] is executed at most \\(n^2\\) times. Adding up any array entries A[i] through A[j] takes \\(O(j-i+1)\\), which is O(n). Store the result requires constant time. Therefore, the running time of the entire algorithm is at most \\(n^2O(n)\\), and so the algorithm runs in \\(O(n^3))\\.
+- The outer loop of the given algorithm runs for exactly n iterations, and the inner loop of ht algorithm runs for at most n iterations. Therefore the line of code that adds up array entries A[i] trough A[j] is executed at most \\(n^2\\) times. Adding up any array entries A[i] through A[j] takes \\(O(j-i+1)\\), which is O(n). Store the result requires constant time. Therefore, the running time of the entire algorithm is at most \\(n^2O(n)\\), and so the algorithm runs in \\(O(n^3)\\).
 - Remain to be solved.
-
 - Look at the algorithm listed below:
 
 ```
@@ -97,18 +96,35 @@ for k = 2, 3, ..., n-1 do
 	end for
 end for
 ```
-
-
-
-
-
  
-**Q5.** Suppose we have an array A of n integers and wish to compute an n x n array B where B[i,j] holds the sum of A[i] through A[j]. The following code fragment is one way to solve this problem.
+**Q5.** Suppose we have an array A of n integers and wish to compute an \\(n \times n \\) array B where B[i,j] holds the sum of A[i] through A[j]. The following code fragment is one way to solve this problem.
+
+```
+for i = 1 to n
+	for j = 1 to n
+		sum = 0
+		for k = i to j
+			sum += A[k]
+		B[i,j] = sum
+```
 
  - What is the running time of the code fragment? (Hint: it is \\(Ω(n^2)\\) but not \\( O(n^2) \\)
  - Do you suppose this can be solved in time better than \\(O(n^2)\\)? Why or why not?
  - Give a \\(O(n^2)\\) time solution to this problem.
  
  **Solution:**
+ 
+ - The outer two loops are similar to bubble sort being bounded as \\(O(n^2)\\). The inner loop will execute at most n times on each iteration of the \\(O(n^2)\\) outer loops. Therefore, the running time will be \\(O(n^3)\\).
+ - We can't solve this faster than \\(O(n^2)\\) because there are \\(n^2\\) elements in the output array and we need to assign a value to every element. 
+ - We can solve this problem in \\(O(n^2)\\) if we consider that the solution to the previous elements in the output array are sub-solutions to the later elements in the output array. 
+ 
+ ```
+ for i = 1 to n
+ 	B[i,i] = A[i]
+ 	for j = i+1 to n 
+ 		B[i, j] = B[i, j-1] + A[j]
+ 	end for
+ end for
+ ```
  
  
