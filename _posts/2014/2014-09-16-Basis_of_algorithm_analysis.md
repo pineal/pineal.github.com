@@ -14,6 +14,7 @@ tags:
 Look at growth of \\(T(n)\\) as \\(n\to\infty\\).
 
 - Upper Bounds: \\(O\\)-notation 
+ - Def: 
 - Lower Bounds: \\(\Omega\\)-notation
 - Tight bounds: \\(\Theta\\)-notation
  -  \\(\Theta g(n) = \Omega g(n) \cap Og(n)\\)
@@ -61,7 +62,7 @@ O(g(n))\\). For each of the following statements, decide whether you think it is
 **Solution:**
 
 - **False**. Take the example of f(n) = 2 and g(n) = 1.
-- **False**. Take the example of f(n) = 2n and g(n) - n.
+- **False**. Take the example of f(n) = 2n and g(n) = n.
 - **True**. Refer to the definition of O-notation.
 
 
