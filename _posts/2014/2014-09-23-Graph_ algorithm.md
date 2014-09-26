@@ -29,11 +29,11 @@ reference:
 ###Connectivity, DAG and topological Ordering
 
 ##Exercise
-**1.** We have a connected graphG=(V,E), and a specific vertex u∈V. Suppose we compute a depth-first search tree rooted at u, and obtain a tree T that includes all nodes of G. Suppose we then compute a breadth-first search tree rooted at u, and obtain the same tree T. Prove that G = T. (In other words, if T is both a depth-first search tree and a breadth-first search tree rooted at u, then G cannot contain any edges that do not belong to T.)
-**Solution:** Assume that G contains an edge e=(x,y) that does not belong to T. Since T is a DFS tree and (x,y) is an edge of G that is not an edge of T, one of x or y is ancestor of the tree. On the other hand, since T is BFS tree if x and y belong to layer \\(L_i\\) and \\(L_j\\) respectively, then i and j differ by at most 1. By synthesizing these two condition above we can assert that i and j differ by exactly 1, which implies that the edge (x,y) is in the tree T. It contradicts the assumption that e=(x,y) that does not belong to T. Thus G cannot contain any edges that do not belong to T.
-**2.** Let G = (V,E) be a connected undirected graph and let v be a vertex in G. Let T by the depth-first search tree of G starting from v, and let U be the breadth-first search tree of G starting from v. Prove that the depth of T is at least as great as the depth of U.
+**1.** We have a connected graph G=(V,E), and a specific vertex u∈V. Suppose we compute a depth-first search tree rooted at u, and obtain a tree T that includes all nodes of G. Suppose we then compute a breadth-first search tree rooted at u, and obtain the same tree T. Prove that G = T. (In other words, if T is both a depth-first search tree and a breadth-first search tree rooted at u, then G cannot contain any edges that do not belong to T.)
+**Solution:** Assume that G contains an edge e=(x,y) that does not belong to T. Since T is a DFS tree and (x,y) is an edge of G that is not an edge of T, one of x or y is ancestor of the tree. On the other hand, since T is BFS tree if x and y belong to layer \\(L\_i\\) and \\(L\_j\\) respectively, then i and j differ by at most 1. By synthesizing these two condition above we can assert that i and j differ by exactly 1, which implies that the edge (x,y) is in the tree T. It contradicts the assumption that e=(x,y) that does not belong to T. Thus G cannot contain any edges that do not belong to T.
+**2.** Let G = (V,E) be a connected undirected graph and let v be a vertex in G. Let T by the depth-first search tree of G starting from v, and let U be the breadth-first search tree of G starting from v. Prove that the depth of T is at least as great as the depth of U.
 **Solution** Let the depth of U and let w be a vertex on level d of U. We know that the BFS tree from v indicates the shortest path distance from v to every node(counting each edge as distance 1). Thus there is no path in G of length less than d from v to w. If the depth of T were less than d, there would be a path G of length less than d from v to w, given by the path in T. This is impossible, so T cannot have depth less than d. 
-(Hesen: "This proof is bullllshit, isn't it? = =")
+> This proof is bullllshit, isn't it? = =||
 **3.** The police department in a city has made all streets one-way. The mayor contends that there is still a way to drive legally from any intersection in the city to any other intersection, but the opposition is not convinced. A computer program is needed to determine whether the mayor is right. However, the city elections are coming up soon, and there is just enough time to run a linear-time algorithm.
 
 - Formulate this as a graph problem and design a linear-time algorithm. Explain why it can be solved in linear time.
@@ -42,7 +42,6 @@ reference:
 **Solution:** 
 
 - The mayor is merely contending that the graph of the city is a strongly-connected graph, denoted as G. Form a graph of the city(intersections becomes nodes, one-way street become directed edges). Suppose there are n nodes and m edges. The algorithm is:
- 
  - Choose an arbitrary node s in G, and run BFS from s. If all the nodes are reached the BFS tree rooted at s, then go to step 2. Otherwise the mayor's statement must be wrong. This operation takes time O(m+n).
  - Reverse the direction of all the edges to get the graph \\(G^{inv}\\), this step takes time O(m+n).
  - Do BFS in \\(G^{inv}\\) starting from s. If all the nodes are reached, then the mayor's statement is correct; otherwise, the mayor's statement is wrong. This step takes time O(m+n).
