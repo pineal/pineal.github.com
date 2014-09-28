@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Dijkstras Shortest Path Algorithm
+title: Dijkstra's Shortest Path Algorithm
 categories:
 - Algorithm
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 ##Copyright Statement
-> The Exercise and some notes are homework or examples in course CSCI 570, computer science department, university of SoutCalifornia. All copyright belongs to the team of this course, including Professors and TAs. Posts on this blog are just for self-learning. 
+> The Exercise and some notes are homework or examples in course CSCI 570, computer science department, university of Southern California. All copyright belongs to the team of this course, including Professors and TAs. Posts on this blog are just for self-learning. 
 
 ##Problem Formulation
 Given g=(V,E) with wights w(u,v)≥0 for each edge (u,v)∈E find the shortest path from s∈V to V-S.
@@ -46,9 +46,9 @@ The implementation will base on priority queue(Heaps).
 
 ```
 S=Null
-Initialize priority queue Q with all nodes V. With d(v) as their key value (all d(v)'s=infinity except for S where d(s)=0)
+Initialize priority queue Q with all nodes V. With d(v) as their key value (all d(v)'s=infinity except for s where d(s)=0)
 While S ≠ V
-	V = ExtractMin(Q)
+	v = ExtractMin(Q)
 	S=S∪{v}
 	for each vertex u∈Adj(v)
 		if d(u) > d(v) + le:
