@@ -10,6 +10,8 @@ tags:
 - Reverse-Delete algorithm
 - Union-Find data Structure
 ---
+##Copyright Statement
+> The Exercise and some notes are homework or examples in course CSCI 570, computer science department, university of Southern California. All copyright belongs to the team of this course, including Professors and TAs. Posts on this blog are just for self-learning. 
 
 ##Concepts and Definition
 ###Kruskal's algorithm
