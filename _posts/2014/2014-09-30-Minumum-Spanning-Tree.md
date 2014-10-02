@@ -122,4 +122,6 @@ $$ f(x)=\cases{{w(u,v)}&{if (u,v)≠(x,y)}\\{w(u,v)}-k & {if (u,v)=(x,y)}} $$S
 **Solution**
 
 Consider an execution of Prim's algorithm on the Prim's algorithm on the graph G leading to the minimum spanning tree T, and examine what happens when the edge (x,y) is include. Without loss of generality, assume that the node x is included first in the partial tree T_p formed during this execution. Then the minimum weight edge incident on x that does not form a cycle with T_p in the edge (x,y) with weight w(x,y). Since the only difference between the graphs G and G' is the weight of the edge (x,y), the same execution of Prim's algorithm is valid for the graph G' up to the construction of the partial tree T_p, as the algorithm has not "seen" the edge (x,y) yet. Since k>0, w'(x,y) < w(x,y)  and so the minimum weight edge to be selected next by Prim's algorithm on the graph G' is again (x,y) (identical to the execution on G). After this step, the execution on graphs G and G' again proceeds identically and would lead to the same output since the edge(x,y) is never "seen" again by Prim's algorithm. Therefore, an execution of Prim's algorithm leads to the tree T on both graphs G and G' implying that T is also a minimum spanning tree for the graph G'.
+
+Have no reason the github and my blog is done...
  
