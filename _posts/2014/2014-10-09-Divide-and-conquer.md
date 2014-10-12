@@ -11,7 +11,12 @@ in general
 T(n)=\theta(1)  if n=1
 aT(n/b) + \theta(1) + \theta(n)
 
-$$T(n) = \begin{cases}\theta(1) & n=1\\  aT(n/b) + \theta(1) + \theta(n) & x = 0 \\ 1 - x^2 & \text{otherwise} \end{cases}$$	
+$$T(n) = \begin{cases} \theta(1) & n=1 
+\\  aT(n/b) + \theta(1) + \theta(n) & x = 0 
+\\ 1 - x^2 & \text{otherwise} \end{cases}$$	
+
+$$f(x)=\cases{{x+1}&{x>0} \\ {1-x}&{x<0}}$$
+
 
 ##Master method
 It is a cookbook method for solving the recurrence of the form:
@@ -24,8 +29,8 @@ where a≥1, b≥1 are constants, and f(n) in an asymptotically positive functio
 Given the above definition of the recurrence relation, T(n) can be bounded asymptotically as follows:
  
 1. If $$f(n)=O(n^{log_b^a - \epsilon})$$ for some constant \\(\epsilon>0\\)then $$T(b)=\theta(n^(logba)$$
-2. If f(n)=O(n^{(log\_b^a)}) then T(n)=\theta
-3. If $$f(n)=O(n^({log\_b^a+\epsilon})$$
+2. If f(n)=\theta(n^{(log\_b^alg^kn)}) then T(n)=\theta
+3. If $$f(n)=\Omega(n^({log\_b^a+\epsilon})$$
 
 There are three cases:
 http://en.wikipedia.org/wiki/Master_theorem
@@ -55,10 +60,13 @@ Combine:\theta(1)
 f(n)=\theta(1)
 a=2, b=2
 
+Complexity = \theta(n)
 
-###Example
+###Matrix Multiplication
+
 matrice A \times B=C
 Brutal force method takes \theta(n^3) 
+$$\begin{matrix} a11 & a12 \\ a21 & a22 \end{matrix} \times \begin{matrix} b11 & b12 \\ b21 & b22 \end{matrix} = \begin{matrix} c11 & c12 \\ c21 & c22 \end{matrix}$$	
 
 divide A, B, C to A11,A12,A21,A22
 C11=A11\timesB11 + A12\timesB21
@@ -99,39 +107,64 @@ n-1 comparison to find min
 n-1 comparison to find max
 2n-2 comparison to find min and max
 O(n)
-improvement -> 3n/2 - 2
+
+Split two subarray recessively, 
+last level: n comparison, last n/2 level 1 comparison
+improvement -> 2n-2-n/2 = 3n/2 - 2
 
 ###Example
 Find a closest set of points in a set of n points in a plot. 
 Brute force: O(n^2)
 
-Chosse 
-construct px: list of points sorted by x-coord
-construct py: list of points sorted by y-coord
+p1 and p2
+case 1: both pts are in p1
+case 2: both pts are in p2
+case 3: pt1 in p1, pt2 in p1
 
-if|P|<e
+draw boundaries 
+
+
+Implementation 
+
+Choose  pair (P)
+construct p_x: list of points sorted by x-coord
+construct p_y: list of points sorted by y-coord
+
+(p1,p2) = closest-pair-recursive(P_m,P_y)
+
+if|P|<\epsilon
 	solve it directly
 else
 	construct Qx left half of Px
-	construct Qy left half of Qy
-	construct Rx left half of Px
-	construct Ry left half of Ex
+	construct Qy list points of Qy
+	construct Rx right half of Px
+	construct Ry list points of Rx
 	
-(q0,q1) = closest-pair-Rec(Qx,Qy)	
+(q0,q1) = closest-pair-Rec(Qx,Qy)
 (r0,r1) = closest-pair-Rec(Rx,Ry)
-
 \delta = min(d(q0,q1),d(r0,r1))	
 
 S=points in P with distance \delta of L
 Construct Sy ... set of pts in S sorted by y-coord
 For each pt s in Sy, compute distance
-	From s to each of next 11 point in Sy let (s,s') be pair m/min distance
+	srom s to each of next 11 point in Sy let (s,s') be pair with min distance
 	
+if d(s,s') < \delta then
+	return (s,s')
+else if d(q0, q1) < d(r0, r1) then
+	return (q0, q1)
+else
+		
 	
-	
-	
+<http://en.wikipedia.org/wiki/Closest_pair_of_points_problem>	
 f(n)=O(n)
 a=2, b=2
-log_2ˆ2=1
+log_2ˆ2=1 
+Case 2.
 
-Complexity = O(n lgn) + O(n lgn) = O(n lgn) divide and conquer
+Complexity = O(n lgn)divide and conquer + O(n lgn)driving routine = O(n lgn) 
+
+
+###Example
+Find all nearest neighbors 
+O(nlog n)
