@@ -4,21 +4,36 @@ title: Divide and Conquer
 categories:
 - Algorithm
 tags:
-- Master Method
+- Master Theorem
+- Recursion
 ---
 
-##Master method
+##Master Method
 It is a cookbook method for solving the recurrence of the form:
 
 $$T(n)= aT(n/b) + f(n)$$
-where a≥1, b≥1 are constants, and f(n) in an asymptotically positive function. a represents the number of subproblems and n/b represents size of the subproblem.
+where $a≥1$, $b≥1$ are constants, and $f(n)$ in an asymptotically positive function. a represents the number of subproblems and n/b represents size of the subproblem.
 
 ###Master Theorem 
-Given the above definition of the recurrence relation, T(n) can be bounded asymptotically as follows:
+Given the above definition of the recurrence relation, $T(n)$ can be bounded asymptotically as follows:
  
 1. If $f(n)=O(n^{log_b^a - \epsilon})$ for some constant $\epsilon>0$ then $$T(b)= \theta(n^{log\_b^a})$$
-2. If $f(n)=\theta(n^{log\_b^alg^kn})$, then $$T(n)=\theta(n^{log\_b^a}lg^{k+1}n)$$
-3. If $f(n)=\Omega(n^{log\_b^a+\epsilon})$ for constant $\epsilon>0$ and if a f(n/b)≤cf(n) for some constant c<1 and all sufficiently large n, then $$T(n) = \theta(f(n))$$
+2. If $f(n)=\theta(n^{log\_b^a}lg^kn)$, then $$T(n)=\theta(n^{log\_b^a}lg^{k+1}n)$$
+3. If $f(n)=\Omega(n^{log\_b^a+\epsilon})$ for constant $\epsilon>0$ and if $af(n/b)≤cf(n)$ for some constant $c<1$ and all sufficiently large $n$, then $$T(n) = \theta(f(n))$$
+
+**Examples**
+
+1. $T(n)=5T（n/2） + \theta(n^2)$
+2. $T(n)=27T（n/3） + \theta(n^3lgn)$
+3. $T(n)=5T(n/2)+ \theta(n^3)$
+4. $T(n)=27T（n/3） + \theta(n^3/lgn)$
+
+**Solutions**
+
+1. Since $n^{log\_2^5}>n^2$, use case 1 $\implies$ $T(n)=\theta(n^{lg5})$
+2. Since $n^{log\_3^27} = n^3$, $f(n) = n^{log\_3^27 lgn}$ with $k=1$, case 2 $\implies$ $T(n)=\theta(log\_3^27 lg^2n)$
+3. Since $n^{log\_2^5}<n^3$, use case 3 $\implies$ $T(n)=\theta(n^3)$
+4. $f(n)=n^3lg^{-1}n$ with a constant $k=-1$, Master theorem can not be applied.
 
 ###Stock Problem
 input: price of the stock on each day over a year period
