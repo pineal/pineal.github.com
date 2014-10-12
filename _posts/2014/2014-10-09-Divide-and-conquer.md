@@ -21,28 +21,26 @@ Given the above definition of the recurrence relation, $T(n)$ can be bounded asy
 2. If $f(n)=\theta(n^{log\_b^a}lg^kn)$ where $k≥0$, then $$T(n)=\theta(n^{log\_b^a}lg^{k+1}n)$$
 3. If $f(n)=\Omega(n^{log\_b^a+\epsilon})$ for constant $\epsilon>0$ and if $af(n/b)≤cf(n)$ for some constant $c<1$ and all sufficiently large $n$, then $$T(n) = \theta(f(n))$$
 
-**Examples**
+###Examples
 
 1. $T(n)=5T（n/2） + \theta(n^2)$
 2. $T(n)=27T（n/3） + \theta(n^3lgn)$
 3. $T(n)=5T(n/2)+ \theta(n^3)$
 4. $T(n)=27T（n/3） + \theta(n^3/lgn)$
 
-**Solutions**
+###Solutions
 
 1. Since $n^{log\_2^5}>n^2$, use case 1 $\implies$ $T(n)=\theta(n^{lg5})$
-2. Since $n^{log\_3^{27}} = n^3$, $f(n) = n^{log\_3^27 lgn}$ with $k=1$, case 2 $\implies$ $T(n)=\theta(log\_3^{27} lg^2n)$
+2. Since $n^{log\_3^{27}} = n^3$, $f(n) = n^{log\_3^{27} lgn}$ with $k=1$, case 2 $\implies$ $T(n)=\theta(log\_3^{27} lg^2n)$
 3. Since $n^{log\_2^5}<n^3$, use case 3 $\implies$ $T(n)=\theta(n^3)$
 4. $f(n)=n^3lg^{-1}n$ with a constant $k=-1$, Master theorem can not be applied.
 
-###Stock Problem
-input: price of the stock on each day over a year period
-
-output: where t_0 buy and where t_0 sell the stock to maximize profit
-
-constraints: 
-must buy before selling
-must but all 1000shares in one day and sell all in one day
+###Stock Market Problem
+- input: price of the stock on each day over a year period
+- output: where t_0 buy and where t_0 sell the stock to maximize profit
+- constraints: 
+ - must buy before selling
+ - must but all 1000shares in one day and sell all in one day
 
 n-1 + n-2 +... +1
 O(n^2)
@@ -62,17 +60,16 @@ a=2, b=2
 
 Complexity = \theta(n)
 
-###Matrix Multiplication
+###Dense Matrix Multiplication
 
-matrice A \times B=C
-Brutal force method takes \theta(n^3) 
-$$\begin{matrix} a11 & a12 \\\\ a21 & a22 \end{matrix} \times \begin{matrix} b11 & b12 \\\\ b21 & b22 \end{matrix} = \begin{matrix} c11 & c12 \\\\ c21 & c22 \end{matrix}$$	
+Brutal force method to do $A \times B=C$ takes \theta(n^3).
+$$\begin{bmatrix} a11 & a12 \\\\ a21 & a22 \end{bmatrix} \times \begin{bmatrix} b11 & b12 \\\\ b21 & b22 \end{bmatrix} = \begin{bmatrix} c11 & c12 \\\\ c21 & c22 \end{bmatrix}$$	
 
 divide A, B, C to A11,A12,A21,A22
-$$C11=A11\timesB11 + A12\timesB21$$
-$$C12=A11\timesB12 + A22\timesB22$$
-$$C21=A21\timesB11 + A22\timesB21$$
-$$C22=A21\timesB12 + A22\timesB22$$
+$$C11=A11 \times B11 + A12 \times B21 \\\\
+  C12=A11 \times B12 + A22 \times B22 \\\\
+  C21=A21 \times B11 + A22 \times B21 \\\\
+  C22=A21 \times B12 + A22 \times B22$$
 
 times to divide = O(n)
 times to combine = O(n^2)
