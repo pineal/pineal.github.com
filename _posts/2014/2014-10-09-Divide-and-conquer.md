@@ -25,6 +25,16 @@ a_3x+b_3y+c_3z=d_3
 \end{cases}
 $$
 
+$$
+\left\{
+\begin{aligned} 
+a_1x+b_1y+c_1z &=d_1+e_1 \\ 
+a_2x+b_2y&=d_2 \\ 
+a_3x+b_3y+c_3z &=d_3 
+\end{aligned} 
+\right. 
+$$
+
 ##Master method
 It is a cookbook method for solving the recurrence of the form:
 
