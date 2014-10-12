@@ -15,7 +15,7 @@ $$T(n) = \begin{cases} \theta(1) & n=1
 \\  aT(n/b) + \theta(1) + \theta(n) & x = 0 
 \\ 1 - x^2 & \text{otherwise} \end{cases}$$	
 
-$$f(x)=\cases{{x+1}&{x>0} \\ {1-x}&{x<0}}$$
+$$f(x)=\cases{ x+1 & x>0 \\ 1-x & x<0 }$$
 
 
 ##Master method
