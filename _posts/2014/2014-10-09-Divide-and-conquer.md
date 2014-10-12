@@ -23,9 +23,9 @@ where a≥1, b≥1 are constants, and f(n) in an asymptotically positive functio
 ###Master Theorem 
 Given the above definition of the recurrence relation, T(n) can be bounded asymptotically as follows:
  
-1. If $f(n)=O(n^{log_b^a - \epsilon})$ for some constant \\(\epsilon>0\\)then $$T(b)=\theta(n^(logba)$$
-2. If f(n)=\theta(n^{(log\_b^alg^kn)}) then T(n)=\theta
-3. If $$f(n)=\Omega(n^({log\_b^a+\epsilon})$$
+1. If $f(n)=O(n^{log_b^a - \epsilon})$ for some constant $\epsilon>0$ then $$T(b)= \theta(n^(log\_b^a))$$
+2. If $f(n)=\theta(n^{(log\_b^alg^kn)})$ then $$T(n)=\theta$$
+3. If $f(n)=\Omega(n^{log\_b^a+\epsilon})$
 
 There are three cases:
 http://en.wikipedia.org/wiki/Master_theorem
