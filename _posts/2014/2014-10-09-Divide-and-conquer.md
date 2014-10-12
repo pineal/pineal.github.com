@@ -6,31 +6,21 @@ categories:
 tags:
 - Master Method
 ---
-In general, we can express
-
-$$T(n) = \begin{cases} \theta(1) & n=1 
-\\\\  aT(n/b) + \theta(1) + \theta(n) & x = 0 
-\\\\ 1 - x^2 & \text{otherwise} \end{cases}$$	
-
 
 ##Master method
 It is a cookbook method for solving the recurrence of the form:
 
 $$T(n)= aT(n/b) + f(n)$$
-
-where a≥1, b≥1 are constants, and f(n) in an asymptotically positive function.
+where a≥1, b≥1 are constants, and f(n) in an asymptotically positive function. a represents the number of subproblems and n/b represents size of the subproblem.
 
 ###Master Theorem 
 Given the above definition of the recurrence relation, T(n) can be bounded asymptotically as follows:
  
-1. If $f(n)=O(n^{log_b^a - \epsilon})$ for some constant $\epsilon>0$ then $$T(b)= \theta(n^(log\_b^a))$$
-2. If $f(n)=\theta(n^{(log\_b^alg^kn)})$ then $$T(n)=\theta$$
-3. If $f(n)=\Omega(n^{log\_b^a+\epsilon})$
+1. If $f(n)=O(n^{log_b^a - \epsilon})$ for some constant $\epsilon>0$ then $$T(b)= \theta(n^{log\_b^a})$$
+2. If $f(n)=\theta(n^{log\_b^alg^kn})$, then $$T(n)=\theta(n^{log\_b^a}lg^{k+1}n)$$
+3. If $f(n)=\Omega(n^{log\_b^a+\epsilon})$ for constant $\epsilon>0$ and if a f(n/b)≤cf(n) for some constant c<1 and all sufficiently large n, then $$T(n) = \theta(f(n))$$
 
-There are three cases:
-http://en.wikipedia.org/wiki/Master_theorem
-
-###Example
+###Stock Problem
 input: price of the stock on each day over a year period
 
 output: where t_0 buy and where t_0 sell the stock to maximize profit
@@ -61,13 +51,13 @@ Complexity = \theta(n)
 
 matrice A \times B=C
 Brutal force method takes \theta(n^3) 
-$$\begin{matrix} a11 & a12 \\ a21 & a22 \end{matrix} \times \begin{matrix} b11 & b12 \\ b21 & b22 \end{matrix} = \begin{matrix} c11 & c12 \\ c21 & c22 \end{matrix}$$	
+$$\begin{matrix} a11 & a12 \\\\ a21 & a22 \end{matrix} \times \begin{matrix} b11 & b12 \\\\ b21 & b22 \end{matrix} = \begin{matrix} c11 & c12 \\\\ c21 & c22 \end{matrix}$$	
 
 divide A, B, C to A11,A12,A21,A22
-C11=A11\timesB11 + A12\timesB21
-C12=A11\timesB12 + A22\timesB22
-C21=A21\timesB11 + A22\timesB21
-C22=A21\timesB12 + A22\timesB22
+$$C11=A11\timesB11 + A12\timesB21$$
+$$C12=A11\timesB12 + A22\timesB22$$
+$$C21=A21\timesB11 + A22\timesB21$$
+$$C22=A21\timesB12 + A22\timesB22$$
 
 times to divide = O(n)
 times to combine = O(n^2)
