@@ -6,46 +6,24 @@ categories:
 tags:
 - Master Method
 ---
-in general 
-
-T(n)=\theta(1)  if n=1
-aT(n/b) + \theta(1) + \theta(n)
+In general, we can express
 
 $$T(n) = \begin{cases} \theta(1) & n=1 
-\\  aT(n/b) + \theta(1) + \theta(n) & x = 0 
-\\ 1 - x^2 & \text{otherwise} \end{cases}$$	
+\\\\  aT(n/b) + \theta(1) + \theta(n) & x = 0 
+\\\\ 1 - x^2 & \text{otherwise} \end{cases}$$	
 
-$$f(x)=\cases{ x+1 & x>0 \\ 1-x & x<0 }$$
-
-$$
-\begin{cases}
-a_1x+b_1y+c_1z=d_1 \\ 
-a_2x+b_2y+c_2z=d_2 \\ 
-a_3x+b_3y+c_3z=d_3
-\end{cases}
-$$
-
-$$
-\left\{
-\begin{aligned} 
-a_1x+b_1y+c_1z &=d_1+e_1 \\ 
-a_2x+b_2y&=d_2 \\ 
-a_3x+b_3y+c_3z &=d_3 
-\end{aligned} 
-\right. 
-$$
 
 ##Master method
 It is a cookbook method for solving the recurrence of the form:
 
 $$T(n)= aT(n/b) + f(n)$$
 
-where a≥1, b≥1 are constants, and f(n) in an asymptotically positive function
+where a≥1, b≥1 are constants, and f(n) in an asymptotically positive function.
 
 ###Master Theorem 
 Given the above definition of the recurrence relation, T(n) can be bounded asymptotically as follows:
  
-1. If $$f(n)=O(n^{log_b^a - \epsilon})$$ for some constant \\(\epsilon>0\\)then $$T(b)=\theta(n^(logba)$$
+1. If $f(n)=O(n^{log_b^a - \epsilon})$ for some constant \\(\epsilon>0\\)then $$T(b)=\theta(n^(logba)$$
 2. If f(n)=\theta(n^{(log\_b^alg^kn)}) then T(n)=\theta
 3. If $$f(n)=\Omega(n^({log\_b^a+\epsilon})$$
 
