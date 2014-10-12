@@ -17,6 +17,13 @@ $$T(n) = \begin{cases} \theta(1) & n=1
 
 $$f(x)=\cases{ x+1 & x>0 \\ 1-x & x<0 }$$
 
+$$
+\begin{cases}
+a_1x+b_1y+c_1z=d_1 \\ 
+a_2x+b_2y+c_2z=d_2 \\ 
+a_3x+b_3y+c_3z=d_3
+\end{cases}
+$$
 
 ##Master method
 It is a cookbook method for solving the recurrence of the form:
