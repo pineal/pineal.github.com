@@ -42,14 +42,14 @@ list.removeLast()
 ```
 ##ListIterator
 
-```
+```java
 ListIterator<String> iter = list.listIterator();
 ```
 
 - next() will move the next space between two elements, and return the element before the space. 
 - hasNext() to make sure there exist next element after the current space
 
-```
+```java
 ListIterator<Integer> iter = list.listIterator();
 while(iter.hasNext()){
 	int current = iter.next();
@@ -59,7 +59,7 @@ while(iter.hasNext()){
 ```
 Modifying values in element can be achieved by iter.set() to update.
 
-```
+```java
 while(iter.hasNext()){
 	int current = iter.next();
 	iter.set(current+10);
@@ -69,7 +69,7 @@ while(iter.hasNext()){
 
 Example of adding element : duplicate 
 
-```
+```java
 listItertator<String> iter = list.listIterator();
 while (iter.hasNext()){
 	String current = iter.next();
@@ -79,7 +79,7 @@ while (iter.hasNext()){
 
 Example of removing element:
 
-```
+```java
 listIterator<Stirng> iter = list.listIterator();
 while (iter.hasNext()){
 	String current = iter.next();
