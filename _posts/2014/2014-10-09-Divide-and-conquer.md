@@ -37,13 +37,13 @@ Given the above definition of the recurrence relation, $T(n)$ can be bounded asy
 
 ###Stock Market Problem
 - input: price of the stock on each day over a year period
-- output: where t_0 buy and where t_0 sell the stock to maximize profit
+- output: where $t_0$ buy and where $t_0$ sell the stock to maximize profit
 - constraints: 
  - must buy before selling
- - must but all 1000shares in one day and sell all in one day
+ - must but all 1000 shares in one day and sell all in one day
 
 n-1 + n-2 +... +1
-O(n^2)
+$\mathcal{O}(n^2)$
 
 **Solution:**
 Case 1: buy and sell in P1, B=B1, S=S1, 
@@ -53,12 +53,12 @@ MN=min(MN1, MN2),MX=max(MN1,MN2)
 Case 3: but in P1 and sell in P2, B=MN1, S=MX2,
 MN=min(MN1, MN2),MX=max(MN1,MN2)
 
-Divide takes: \theta(1)
-Combine:\theta(1)
-f(n)=\theta(1)
+Divide takes: $\theta(1)$
+Combine: $\theta(1)$
+f(n)= $\theta(1)$
 a=2, b=2
 
-Complexity = \theta(n)
+$Complexity = \theta(n)$
 
 ###Dense Matrix Multiplication
 
