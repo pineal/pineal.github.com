@@ -17,8 +17,8 @@ where $a≥1$, $b≥1$ are constants, and $f(n)$ in an asymptotically positive f
 ###Master Theorem 
 Given the above definition of the recurrence relation, $T(n)$ can be bounded asymptotically as follows:
  
-1. If $f(n)=O(n^{log_b^a - \epsilon})$ for some constant $\epsilon>0$ then $$T(n)= \theta(n^{log_b^a})$$
-2. If $f(n)=\theta(n^{log\_b^a}lg^kn)$ where $k≥0$, then $$T(n)=\theta(n^{log\_b^a}lg^{k+1}n)$$
+1. If $f(n)=\mathcal{O}(n^{log_b^a - \epsilon})$ for some constant $\epsilon>0$ then $$T(n)= \Theta(n^{log_b^a})$$
+2. If $f(n)=\Theta(n^{log\_b^a}lg^kn)$ where $k≥0$, then $$T(n)=\Theta(n^{log\_b^a}lg^{k+1}n)$$
 3. If $f(n)=\Omega(n^{log\_b^a+\epsilon})$ for constant $\epsilon>0$ and if $af(n/b)≤cf(n)$ for some constant $c<1$ and all sufficiently large $n$, then $$T(n) = \theta(f(n))$$
 
 ###Examples
