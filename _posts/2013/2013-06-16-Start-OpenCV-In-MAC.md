@@ -34,7 +34,7 @@ sudo rm -rf \\
 首先要保证安装了ruby, mac自带，所以不用担心，接下来在terminal中输入：
 
 ```
-ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
 即可完成homebrew的安装。

@@ -48,6 +48,7 @@ case 1 j \in Oj \implies OPT(j) = w_j + OPT(p(j))
 case 2 j \notin Oj \implies OPT(j) = OPT(j-1)
 
 solution: 
+
 ```	
 	compute-opt(j)
 		if j =0 then 
@@ -64,7 +65,7 @@ T(n) = T(n-1) + T(n-2) + C
 Memorization
 - Store the value of compute-opt in a globally accessible place.The print time are computed it, then simplify are this precomputed value in place of all future recursive calls.
 
-## # ### M compute opt(j)
+M compute opt(j)
 if j=0 then 
 	return 0
 else if M[j] is not empty then 
@@ -108,5 +109,58 @@ endfor
 
 
 
-		 	
-		
+
+
+
+opt(i) denotes the opt energy level at step i
+
+Case 1 you took one step
+case 2 you jump over one square
+case 3 you jump over two squares
+
+OPT(n)=max(OPT(n-1) - 50 - e_n, OPT(n-2) - 150 -e_n, OPT(n-3) - 350 - e_n)
+
+OPT(0)=0, OPT(1)=-50-e_1
+```
+for(i = 1 to n)
+	OPT(n)=max(OPT(n-1) - 50 - e_n, OPT(n-2) - 150 -e_n, OPT(n-3) - 350 - e_n)
+endfor
+```
+0-1 knapsack & subsetsum
+- A single machine 
+- requests {1...n} each take time w_i to process
+- can schedule jobs at any time between 0 to w
+- objective to schedule jobs such that we maximize the machine's utilization
+
+OPT(i) = value of the opt solution for requests 1 to i
+if n not \in O then OPT(n) = OPT(n-1)
+if n \in O then OPT(n) = w_n + OPT(n-1)
+
+OPT(i, w) = value of the opt solution using a subset of this item {1...i} with maximum allowed weight w. 
+if n not in O then OPT(n,w) = OPT(n-1, w)
+if n \in O then OPT(n,w) = w_n + OPT(n1, w-w_n)
+if w<w_i then OPT(i,w) = OPT(i-1, w)
+
+otherwise OPT(i,w) = Max(OPT(i-1,w), w_i + OPT(i-1, w-w_i))
+
+
+subset-sum(n,w)
+array M[0, w] = 0 for each w=0 to w
+
+for i = 1 to n
+	for w = 0 to W
+		use recurrence formula 1. to compute M[i,w]
+	endfor
+endfor
+return M[n, w]
+take O(nw)
+pseudo-polynominal  
+
+let OPT(i) denote the opt. no of coins to make exact change for i scheduling.
+
+OPT(n) = min(OPT(n+25)+1,OPT(n-20)+1,OPT(n-10)+1,OPT(n-5)+1,OPT(n-1)+1)
+
+
+for i = 25 to n
+	we recurrence formula
+endfor
