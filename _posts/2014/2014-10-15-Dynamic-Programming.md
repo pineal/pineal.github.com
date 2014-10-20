@@ -6,7 +6,7 @@ categories:
 tags:
 - dynamic programming
 ---
-
+##Concepts of Dynamic programming
 General approach to solving optimal problems, using dynamic programming
 
 1. Characterize the structure of an optimal solution.
@@ -14,9 +14,12 @@ General approach to solving optimal problems, using dynamic programming
 3. Compute the value of an optimal solution in a bottom up fashion.
 4. Construct an optimal solution from computed from Step 3.
 
-Problem Def.
+##Weighted Interval Scheduling
+###Problem Definition and analyzing
 We have 1 resource, n request labeled from 1 to n, each request having start time $s_i$ and finish time $f_i$ and weight $w_i$.
-Goal: select a subset S $\subseteq$ {1,...n} of mutually compatible intervals so as to maximize sum of weight. 
+Goal: 
+
+- select a subset S $\subseteq$ {1,...n} of mutually compatible intervals so as to maximize sum of weight. 
 
 Observation:
 
@@ -24,22 +27,22 @@ Observation:
 
  
 **Case 1**
-If it is, value of the optimal solution = w_i + value of the optimal solution for the subproblem that consists only of compatible request with i.
+
+If it is, value of the optimal solution = $w_i$ + value of the optimal solution for the subproblem that consists only of compatible request with i.
 
 **Case 2** 
+
 If it isn't. value of optimal solution = value of optimal solution without job i.
 
 Explore both paths recursively and find out which is optimal
 
-Value of optimal solution = $max[value for case 1, value for case 2]$
+Value of optimal solution = $max$[value for case 1, value for case 2]
 
-Sort request in order of non-decreasing finish time
+Sort request in order of non-decreasing finish time: $f_1≤f_2≤...f_n$
 
-$f_1≤f_2≤...f_n$
+Define $P(j)$ for an interval j to be the largest index i < j such that interval i & j are disjoint
 
-Define p(j) for an interval j to be the largest index i<j such that interval i & j are disjoint
-
-Def Let Oj denote the optimal solution to the problem consisting of requests {i...j}
+Def Let $\mathcal{O}(j)$ denote the optimal solution to the problem consisting of requests {i...j}
 
 Let $OPT(j)$ denote the value of $\mathcal{O}(j)$
 
@@ -48,22 +51,26 @@ case 1 $j \in \mathcal{O}(j)$ $\implies$ $OPT(j) = w_j + OPT(p(j))$
 case 2 $j \notin Oj$ $\implies$ $OPT(j) = OPT(j-1)$
 
 
-**Naive Solution**
+###Naive Solution
+
 
 ```	
-	compute-opt(j)
-		if j =0 then 
-			return 0
-		else 
-			return max(w_j + compute-opt(p_j), compute-opt(j-1))
-		end if
+compute-opt(j)
+	if j =0 then 
+		return 0
+	else 
+		return max(w_j + compute-opt(p_j), compute-opt(j-1))
+	end if
 ```
+
 This algorithm Run exponentially:	
 
 $$T(n) = T(n-1) + T(n-2) + C$$
 
-**Memorization**
+###Memorization
+
 - Store the value of compute-opt in a globally accessible place.The print time are computed it, then simplify are this precomputed value in place of all future recursive calls.
+
 
 ```
 M-compute-opt(j)
@@ -83,7 +90,7 @@ In total we have:
 -time spend in M-compute-opt $\mathcal{O}(n)$
 Therefore, computing an opt solution takes $\mathcal{O}(n)$.
 
-**Find-Solution**
+###Find-Solution
 ```
 Find-solution(j)
 	if j>0 then 
@@ -98,7 +105,7 @@ Find-solution(j)
 
 ```
 M[0] = 0
-for i = 1 for 
+for i = 1 to n 
 	M[j] = max(w_j+M[p(j)], M[j-1])
 endfor
 ```
@@ -170,7 +177,7 @@ Discussion
 - all subproblems are the same
 
 Problem 
-Graduate students get a lot of free food at various events. Suppose you have a schedule of the next n days marked with those days when you get a free dinner, and those days on which you must  acquire dinner on your own. On any given day you can buy dinner at the cafeteria for $3. Alternatively, you can purchase one week's groceries for $10, which will provide dinner for each day that week. However, because you don't have a fridge, the groceries will go bad after seven days and any leftovers must be discarded. Due to your very busy schedule, these are your only two options for dinner each night. Your goal is to eat dinner every night while minimizing the money you spend on food.
+Graduate students get a lot of free food at various events. Suppose you have a schedule of the next n days marked with those days when you get a free dinner, and those days on which you must  acquire dinner on your own. On any given day you can buy dinner at the cafeteria for 3 dollars. Alternatively, you can purchase one week's groceries for 10 dollars, which will provide dinner for each day that week. However, because you don't have a fridge, the groceries will go bad after seven days and any leftovers must be discarded. Due to your very busy schedule, these are your only two options for dinner each night. Your goal is to eat dinner every night while minimizing the money you spend on food.
 
 Solution 1
 define OP(n) to be the cheapest way to eat for day 1..n
