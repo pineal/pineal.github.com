@@ -6,6 +6,8 @@ categories:
 tags:
 - dynamic programming
 ---
+
+
 ##Concepts of Dynamic programming
 General approach to solving optimal problems, using dynamic programming
 
@@ -17,6 +19,7 @@ General approach to solving optimal problems, using dynamic programming
 ##Weighted Interval Scheduling
 ###Problem Definition and analyzing
 We have 1 resource, n request labeled from 1 to n, each request having start time $s_i$ and finish time $f_i$ and weight $w_i$.
+
 Goal: 
 
 - select a subset S $\subseteq$ {1,...n} of mutually compatible intervals so as to maximize sum of weight. 
@@ -46,9 +49,9 @@ Def Let $\mathcal{O}(j)$ denote the optimal solution to the problem consisting o
 
 Let $OPT(j)$ denote the value of $\mathcal{O}(j)$
 
-case 1 $j \in \mathcal{O}(j)$ $\implies$ $OPT(j) = w_j + OPT(p(j))$
+**case 1** $j \in \mathcal{O}(j)$ $\implies$ $OPT(j) = w_j + OPT(p(j))$
 
-case 2 $j \notin Oj$ $\implies$ $OPT(j) = OPT(j-1)$
+**case 2** $j \notin \mathcal{O}(j)$ $\implies$ $OPT(j) = OPT(j-1)$
 
 
 ###Naive Solution
@@ -196,3 +199,129 @@ i = n
 ```
 
 When their respective sport is not in season, USC's student-athletes are very involved in their community, helping people and spreading goodwill for the school. Unfortunately, assume each student-athlete is limited to at most one community service project per semester, so the athletic department is not always able to help every deserving charity. For the upcoming semester, we have s student-athletes who want to volunteer their time, and B buses to help get them between campus and the location of their volunteering. Each bus can only 
+
+
+##Sequence Alignment
+
+
+A DNA strand consists of a string of molecules called bases
+
+A, C, G, T
+
+Line them up to find similarity
+
+e.g.
+
+S1 = A|CC|_ |GGT|C|G|_
+
+S2 = _|CC|A |GGT|G|G|C
+
+Three gaps and one mismatch
+
+**Problem**
+Suppose we have 2 string X&Y
+
+X={x_1,x_2,...x_m}
+Y={y_1,y_2,...y_m}
+
+Def: a matching in a set of ordered pair with property that each item occurs at most once.
+
+Caring
+Racing
+
+Def: a matching is an alignment if there are no crossing pairs. 
+
+(i,j)< (i',j') $\in$ M & i<i' $\implies$ must have j<j'
+
+For a given alignment M between X&Y
+
+- We incur a gap penalty or cost of $\delta$
+- For each mismatch of letters p and q we incur a mismatch cost $\alpha_{pq}$
+
+
+Similarity between string X and Y is the minimum cost in alignment between X and Y.  
+
+Observation: either (x_m, y_n) $\in$ M or not
+Three base cases.
+
+
+
+Define OPT(i,j) on the main cost of an alignment between x1, .. xi & y1, .. yi
+
+Case 1. 
+(x_m, y_n) \in M \implies OPT(m,n) - OPT(m-1,n-1)+\alpha x_m y_n
+
+Case 2.
+x_m is not matched
+OPT(m,n) = OPT(m-1, n) + \delta
+
+Case 3.
+Yn is not matched 
+OPT(m,n) = OPT(m,n-1) + \delta
+
+
+Recursion
+OPT(i,j) = min[\alpha x_iy_j + OPT(i-1,j-1), \delta + OPT(i-1, j), \delta + OPT(i-1, j)]
+
+```
+Alignment (x,y)
+Initialize A[i,0] = i\delta for each i
+			   A[0,j] = j\delta for each j  
+for j = 1 to n
+	for i = 1 to m
+		A[i,j] = min[\alpha x_iy_j + A(i-1,j-1), \delta + A(i-1, j), \delta + A(i-1, j)]
+	endfor
+endfor
+return A[m,n]
+```
+
+complexity = $\mathcal{O}(mn)$
+
+X |_____X_L_____|_____X_R_____|
+Y |________________________________|
+
+X -> Divide and conquer
+Y -> Dynamic programming to find a break point
+
+
+##Shortest path problem
+Bellman-Ford algorithm
+If G has no negative cycles. Then there is a shortest path from S to T that is simple and hence has at most n-1 edges. 
+
+OPT(i,v) denotes the minimum cost of a v-t path using at most i edges. 
+
+We want to compute OPT(n-1, s) 
+
+Find the optimal
+Let P be an opt path 
+either P uses at most i-1 edges $\implies$ OPT(i,v) = OPT(i-1,v)
+or if P uses i edges and the first edge in (v,w) the OPT(i,v) = C_{vw} + OPT{i-1, w}
+w \in Adj(v)
+
+OPT(i,v) = min(OPT(i-1,v), min(OPT(i-1, w)) + c_{vw})
+
+
+```
+Shortest path (G, s, t)
+	n = no of node in G
+	define M[0, t] = 0
+		M[0,v] = \infinity
+	for i = 1 to n - 1
+		for v \in V in any order
+		M[i,v] = min{M[i-1, v], min{M[i-1, w]+C_{vw}}} w \in adj(v)
+		endfor
+	endfor
+return M[n-1,s]
+```
+
+
+$\mathcal{O}(n^3)$
+	Complexity of Belllman Ford $\mathcal{O}(mn)$ ???why
+
+
+Brute force will cost 
+better approach from BF add a new node s
+	cost will be $\mathcal{O}(mn)$
+	
+BellaFord  vs  Dijkstra's
+O(mn)  	vs	 O(m log n)
