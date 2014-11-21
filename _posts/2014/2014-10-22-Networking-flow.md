@@ -41,3 +41,24 @@ f^{out}(s) = \sigma_{e out of V}f(e)
 
 f^{in}(s) = \sigma_{e in of V}f(e)
 
+
+
+Def Gf in the graph of G with the following definition
+
+-	G_f has the same set of nodes as G
+-	For each edge e with f(e)<c_e we include e in G_f with caprice c_e - f(e) (forward edge)
+-	For each edge e with f(e)>0 we include edge e' (opposite direction foe)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
