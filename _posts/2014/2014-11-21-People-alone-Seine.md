@@ -1,6 +1,6 @@
 ---
 layout: post
-title: People Alone the Seine
+title: 塞纳河边的人们
 categories:
 - Photography
 tags:
