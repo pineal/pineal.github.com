@@ -9,7 +9,7 @@ tags:
 ---
 
 
-NP problem
+##NP problem
 
 
 plan: explore the space of computationally hand problem to arrive at a mathematic characteristic a large d of them
