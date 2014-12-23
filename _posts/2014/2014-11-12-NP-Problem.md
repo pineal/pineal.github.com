@@ -8,50 +8,76 @@ tags:
 - NP problem
 ---
 
+##Introduction
 
-##NP problem
+**Plan** 
 
+Explore the space of computationally hand problem to arrive at a mathematic characteristic a large d of them.
 
-plan: explore the space of computationally hand problem to arrive at a mathematic characteristic a large d of them
+**Technique**
 
-Technique: compare negative difficultly of different problem
+Compare negative difficultly of different problem.
 
+**P problem**
 
-Loose definition:
+Problems can find a polynomial time algorithm to solve.
+ 	
+**NP problem**
+
+An algorithm that can be verified if it is a solution to a problem or not in polynomial time.
+
+**Loose definition**
+
 If problem X in at least as hard as problem Y. It means that if we could solve X, we could also solve Y.
 
-Y≤p X Y is polynomial time reduced to X
-if Y can be solved using a poly number of std computational steps plus a poly no of called to a black box to love X.
+**$Y ≤_p X$**
 
-Fact: 
+Y is polynomial time reduced to X. If Y can be solved using a poly number of std computational steps plus a poly no of called to a black box to love X.
 
-Suppose Y ≤P X. If X can be solved in polynomial time, then Y can be solved in polynomial time.
+- Suppose $Y ≤_p X$. If X can be solved in polynomial time, then Y can be solved in polynomial time.
+- Suppose $Y ≤_p X$. If Y cannot be solved in polynomial time, then X cannot be solved in polynomial time.
 
-Suppose Y ≤P X. If Y cannot be solved in polynomial time, then X cannot be solved in polynomial time.
+**NP-Complete Problem**
 
+To prove a problem X is NPC problem:
 
-Independent Set
-Ref: in a graph G = (V,E), we say a set of nodes, s \in V in "independent" if no two nodes in S and joined by an edge. 
+1. Prove it is a NP problem.
+2. Find a known NPC problem Y which satisfied $Y ≤_p X$.
 
+**NP hard Problem**
 
-Find the maximum size independent set in graph G.(Optimization version)
-Given a graph G and a number k, does G contain an independent set of size at least K.(Decision version)
-No solution.
+To prove a problem X is hard problem:
 
-Vertex Cover
-Given a graph G=(V,E) we say that a set of nodes S \in V in a vertex cover if every edge e \in E has at least one end in S.
-
-
-Find the smallest vertex cover set in G (Optimization version)
-Given a graph G=(V,E) and a number k, G contain a vertex cover of size at most k.(Decision version)
+1. Find a known NPC problem Y which satisfied $Y ≤_p X$.
 
 
+##Examples
+
+###Independent Set
+Ref: Given a graph $G = (V,E)$, we say a set of nodes, $S \in V$ in independent if no two nodes in S and joined by an edge. 
+
+1. Find the maximum size independent set in graph G.(Optimization version)
+
+2. Given a graph G and a number k, does G contain an independent set of size at least K.(Decision version)
+
+3. Ans: No solution.
+
+###Vertex Cover
+Ref: Given a $graph G=(V,E)$ we say that a set of nodes $S \in V$ in a vertex cover if every edge $e \in E$ has at least one end in S.
+
+
+1. Find the smallest vertex cover set in G (Optimization version)
+
+2. Given a graph G=(V,E) and a number k, G contain a vertex cover of size at most k.(Decision version)
+
+###Independent Set and Vertex Cover
 
 FACT: let G=(V,E) be a graph then S in an independent set if and only if its complement (V-S) is a vertex cover. 
 
 S is an independent set. 
 
-case 1 
+**case 1 **
+
 U is in S and V is not. 
 V-S will have V and not U. 
 

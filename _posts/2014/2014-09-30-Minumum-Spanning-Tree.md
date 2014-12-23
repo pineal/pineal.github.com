@@ -118,7 +118,7 @@ We add the edge e to the minimum spanning tree T and this creates a unique simpl
 2. w(e) < w(\\(e\_{max}\\))
 Running Time: All we need to compute is the edge \\(e\_{max}\\). Construct the unique path (call it P) in T that connects the two ends of e. This can be accomplished using BFS in O(n) time. The cycle C is path P concatenated with edge e and we can compute \\(e\_{max}\\) as the maximum weighted edge in C.
 ###Question 6Let T be a minimum spanning tree for G with edge weights given by weight function w: E ∈ R. Choose one edge (x, y) ∈ T and a positive number k, and define the weight function w': E ∈ R by:
-$$ f(x)=\cases{ { w(u,v) } & { if (u,v)≠(x,y) } \\\\  
+$$ f(x)=\cases{ { w(u,v) } &  if (u,v)≠(x,y)  \\\\  
 w(u,v)-k  &  if (u,v)=(x,y) } $$Show that T is also a minimum spanning tree for G with edge weights given by w'.
 **Solution**
 
