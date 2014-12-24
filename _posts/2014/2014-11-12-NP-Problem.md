@@ -1,11 +1,10 @@
-
 ---
 layout: post
-title: NP Problem
+title: NP problem
 categories:
 - Algorithm
 tags:
-- NP problem
+- 
 ---
 
 ##Introduction
@@ -30,7 +29,7 @@ An algorithm that can be verified if it is a solution to a problem or not in pol
 
 If problem X in at least as hard as problem Y. It means that if we could solve X, we could also solve Y.
 
-**$Y ≤_p X$**
+**Y X**
 
 Y is polynomial time reduced to X. If Y can be solved using a poly number of std computational steps plus a poly no of called to a black box to love X.
 
