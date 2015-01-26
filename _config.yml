@@ -2,7 +2,7 @@ markdown: redcarpet
 permalink: /:year/:month/:title/
 url: http://pineal.github.com
 author: Hesen Zhang
-highligher: pygments
+pygments: true
 paginate: 24
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 redcarpet:
