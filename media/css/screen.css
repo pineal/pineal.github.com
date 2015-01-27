@@ -87,7 +87,7 @@ table {
       margin-bottom: 0; }
 
 body{
-    font-size:16px;word-spacing:1px;
+    font-size:12px;word-spacing:1px;
     margin-left:auto;
     margin-right:auto;
    /* font-family:MuseoSans,Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode","Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei",Verdana,sans-serif;*/
@@ -109,7 +109,7 @@ body>div {
     border-top: 6px solid #008080;
 }
 h1 {
-    font-size: 28px;
+    font-size: 20px;
     line-height: 28px;
     margin: 0 0 28px 0;
 	/*background-color: rgb(185, 34, 31);*/
@@ -118,17 +118,17 @@ h1 {
 	padding: 12px;
 }
 h2 {
-    font-size: 26px;
+    font-size: 18px;
     line-height: 48px;
     margin: 0 0 24px 0;
 	font-weight: bold;
 }
 h2 i {
-	font-size: 18px;
+	font-size: 16px;
 	color: #ccc;
 }
 h3 {
-    font-size: 18px;
+    font-size: 14px;
     line-height: 24px;
 	font-weight: bold;
 }
@@ -145,7 +145,7 @@ p, ul, ol, dl {
     margin: 0 0 24px 0;
 }
 p.intro {
-    font-size: 24px;
+    font-size: 16px;
 	line-height: 32px;
 }
 ul {
@@ -163,14 +163,14 @@ pre {
     border-left: 6px solid #edebea;
     overflow: auto;
     font-family: monospace;
-    font-size: 14px;
+    font-size: 12px;
     padding: 12px;
     margin: 0 0 24px;
 	background-color: #f3f3f3;
 }
 p code {
     font-family: monospace;
-    font-size: 14px;
+    font-size: 11px;
     border: 1px solid #edebea;
 	padding: 1px 5px;
 	background-color: #EEE;
@@ -190,7 +190,7 @@ a:visited {
 	text-decoration: none;
 }
 a.ss-icon {
-	font-size: 20px;
+	font-size: 16px;
 	padding: 0 0.25em;
 	color: #ccc;
 }
@@ -210,7 +210,7 @@ img.avatar {
 
 .meta{
     text-align:right;
-    font-size:14px;
+    font-size:11px;
     margin-bottom: 10px;
 }
 
@@ -239,7 +239,7 @@ dl .meta {
 
 
 .paginator {
-font: 14px Arial,Helvetica,sans-serif;
+font: 11px Arial,Helvetica,sans-serif;
 color: #AAA;
 margin: 20px 0;
 line-height: 150%;
@@ -269,7 +269,7 @@ border-top: 1px dashed #CCC;
 }
 
 footer small {
-font-size: 13px;
+font-size: 11px;
 color: #999;
 }
 
