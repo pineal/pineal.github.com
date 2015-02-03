@@ -150,12 +150,13 @@ p.intro {
 }
 ul {
     list-style-type: square;
-    padding-left: 12px;
+    padding-left: 20px;
 }
 ol {
     list-style-type: decimal;
-    padding-left: 12px;
+    padding-left: 20px;
 }
+
 dt {
     font-weight: 700;
 }
