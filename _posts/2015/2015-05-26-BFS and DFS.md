@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Introduction to graph algorithm
+title: BFS and DFS
 categories:
 - Algorithm
 tags:
