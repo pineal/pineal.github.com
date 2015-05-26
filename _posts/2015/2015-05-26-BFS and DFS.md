@@ -14,7 +14,8 @@ tags:
 
 ```
 BFS(s):
-Set Discovered[s] = true and Discovered[v] = false for all other v Initialize L[0] to consist of the single element s
+Set Discovered[s] = true and Discovered[v] = false for all other v
+Initialize L[0] to consist of the single element s
 Set the layer counter i=0
 Set the current BFS tree T = ∅
 While L[i] is not empty
