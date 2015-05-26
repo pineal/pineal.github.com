@@ -1,6 +1,6 @@
 ---
 layout: post
-title: BFS and DFS
+title: BFS and DFS implementation
 categories:
 - Algorithm
 tags:
