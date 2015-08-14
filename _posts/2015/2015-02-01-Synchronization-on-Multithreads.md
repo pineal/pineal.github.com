@@ -15,7 +15,7 @@ tags:
 **Life Without Threads**
 
 ```C
-void rlogind(int r_in, int r_out, int l_in, int l_out) { 
+void rlogind(int r_in, int r_out, int l_in, int l_out) {
 	fd_set in = 0, out;
 	int want_l_write = 0, want_r_write = 0;
 	int want_l_read = 1, want_r_read = 1;
@@ -24,55 +24,55 @@ void rlogind(int r_in, int r_out, int l_in, int l_out) {
 	fcntl(r_out, F_SETFL, O_NONBLOCK);
 	fcntl(l_in, F_SETFL, O_NONBLOCK);
 	fcntl(l_out, F_SETFL, O_NONBLOCK);
-	while(!eof) { 
-		FD_ZERO(&in); 
-		FD_ZERO(&out); 
+	while(!eof) {
+		FD_ZERO(&in);
+		FD_ZERO(&out);
 		if (want_l_read)
-			FD_SET(l_in, &in); 
+			FD_SET(l_in, &in);
 		if (want_r_read)
-			FD_SET(r_in, &in); 
+			FD_SET(r_in, &in);
 		if (want_l_write)
-			FD_SET(l_out, &out); 
+			FD_SET(l_out, &out);
 		if (want_r_write)
 			FD_SET(r_out, &out);
-		select(MAXFD, &in, &out, 0, 0); 
+		select(MAXFD, &in, &out, 0, 0);
 		if (FD_ISSET(l_in, &in)) {
-			if ((tsize = read(l_in, tbuf, BSIZE)) > 0) { 
+			if ((tsize = read(l_in, tbuf, BSIZE)) > 0) {
 				want_l_read = 0;
 				want_r_write = 1;
-			} 
-			else 
+			}
+			else
 				eof = 1;
 		}
 		if (FD_ISSET(r_in, &in)) {
-			if ((fsize = read(r_in, fbuf, BSIZE)) > 0) { 
+			if ((fsize = read(r_in, fbuf, BSIZE)) > 0) {
 				want_r_read = 0;
 				want_l_write = 1;
-			} 
-			else 
+			}
+			else
 				eof = 1;
 		}
 		if (FD_ISSET(l_out, &out)) {
-			if ((wret = write(l_out, fbuf, fsize)) == fsize) { 
+			if ((wret = write(l_out, fbuf, fsize)) == fsize) {
 				want_r_read = 1;
 				want_l_write = 0;
-			} 
-			else if (wret >= 0) 
+			}
+			else if (wret >= 0)
 				tsize -= wret;
 			else
-				eof = 1; 
+				eof = 1;
 		}
 		if (FD_ISSET(r_out, &out)) {
 			if ((wret = write(r_out, tbuf, tsize)) == tsize) {
 				want_l_read = 1;
 				want_r_write = 0;
-			} 
+			}
 			else if (wret >= 0)
 				tsize -= wret;
 			else
-				eof = 1; 
+				eof = 1;
 		}
-	} 
+	}
 }
 ```
 
@@ -88,7 +88,7 @@ incoming(int r_in, int l_out) {
 		if (size <= 0)
 			eof = 1;
 		if (write(l_out, buf, size) <= 0)
-			eof = 1; 
+			eof = 1;
 	}
 }
 ```
@@ -119,31 +119,31 @@ The the problem of $x = x + 1$ can be solved by mutexes:
 
 ```C
 pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER; // shared by both threadsint x; // dittopthread_mutex_lock(&m);x = x+1;pthread_mutex_unlock(&m);
-```	
+```
 
 ```C
-void proc1( ) { 
-	pthread_mutex_lock(&m1); 
-	/* use object 1 */ 
-	pthread_mutex_lock(&m2); 
-	/* use objects 1 and 2 */ 
-	pthread_mutex_unlock(&m2); 
+void proc1( ) {
+	pthread_mutex_lock(&m1);
+	/* use object 1 */
+	pthread_mutex_lock(&m2);
+	/* use objects 1 and 2 */
+	pthread_mutex_unlock(&m2);
 	pthread_mutex_unlock(&m1);
 	}
 ```
 
 ```C
-void proc2( ) { 
-	pthread_mutex_lock(&m2); 
-	/* use object 2 */ 
-	pthread_mutex_lock(&m1); 
-	/* use objects 1 and 2 */ 
-	pthread_mutex_unlock(&m1); 
+void proc2( ) {
+	pthread_mutex_lock(&m2);
+	/* use object 2 */
+	pthread_mutex_lock(&m1);
+	/* use objects 1 and 2 */
+	pthread_mutex_unlock(&m1);
 	pthread_mutex_unlock(&m2);}
 ```
 
 ##Deadlock
-###Occur conditions 
+###Occur conditions
 Generally the conditions below are **necessary but not sufficient** for deadlock:
 
 - It must be possible for a thread to hold item it has removed from various container while waiting for items to become available in other containers.
@@ -166,14 +166,15 @@ The V operation is simpler: a thread atomically adds one to the value of the sem
 ```[semaphore = semaphore + 1;]
 ```
 
-###Mutexes implementation 
+###Mutexes implementation
 ```C
-semaphore S = 1; 
+semaphore S = 1;
 void OneAtATime( ) {       P(S);       ...       /* code executed mutually exclusively */       ...       V(S);}
 ```
+
 ###Reader-Writers Problem
 ```C
-void reader( ) {	when (writers == 0) 		[readers++; ] 		// read		[readers--;]}```
+void reader( ) {	when (writers == 0)		[readers++; ]		// read		[readers--;]}```
 
 ```C
 reader(){
