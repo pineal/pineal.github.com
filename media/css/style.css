@@ -36,16 +36,15 @@ body{
 }
 
 #tag_cloud{
-	width: 100px;
+	width: 200px;
 	float: right;
 	margin-right: 20px;
 	height: 2500px;
 }
 
 #tagList{
-	width: 700px;
+	width: 600px;
 	float: left;
-	margin-right: 00px;
 }
 
 #container{    
