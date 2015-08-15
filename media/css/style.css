@@ -36,16 +36,16 @@ body{
 }
 
 #tag_cloud{
-	width: 200px;
+	width: 100px;
 	float: right;
 	margin-right: 20px;
 	height: 2500px;
 }
 
 #tagList{
-	width: 600px;
+	width: 700px;
 	float: left;
-	margin-right: 20px;
+	margin-right: 00px;
 }
 
 #container{    
@@ -111,7 +111,7 @@ li{
 
 .listing li time{
 	float: right;
-	margin-right: 70px;
+	margin-right: 50px;
 	display: none;
 	color: #cccccc;
 }
