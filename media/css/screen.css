@@ -87,11 +87,12 @@ table {
       margin-bottom: 0; }
 
 body{
-    font-size:16px;word-spacing:1px;
+    font-size:14px;
+    word-spacing:1px;
     margin-left:auto;
     margin-right:auto;
    /* font-family:MuseoSans,Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode","Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei",Verdana,sans-serif;*/
-    font-family:"Microsoft YaHei","Helvetica Neue",arial,sans-serif,"Hiragino Sans GB",Tahoma,"Lucida Grande",Helvetica,Arial,sans-serif;
+    font-family:"HelveticaNeue-Light","Microsoft YaHei",arial,sans-serif,"Hiragino Sans GB",Tahoma,"Lucida Grande",Helvetica,Arial,sans-serif;            
     color:#000000;
     background-color:#ffffff;
 }
@@ -109,44 +110,42 @@ body>div {
     border-top: 6px solid #008080;
 }
 h1 {
-    font-size: 28px;
-    line-height: 28px;
-    margin: 0 0 28px 0;
+    font-size: 24px;
+    line-height: 24px;
+    margin: 0 0 24px 0;
 	/*background-color: rgb(185, 34, 31);*/
 	color: #008080;
 	display: inline-block;
 	padding: 12px;
 }
 h2 {
-    font-size: 26px;
+    font-size: 16px;
     line-height: 48px;
     margin: 0 0 24px 0;
-	font-weight: bold;
 }
 h2 i {
-	font-size: 18px;
+	font-size: 16px;
 	color: #ccc;
 }
 h3 {
-    font-size: 18px;
-    line-height: 24px;
-	font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
 }
 section>h3 {
-    margin: 0 0 24px 0;
+    margin: 0 0 20px 0;
 }
 h4 {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 12px;
 	font-weight: bold;
 }
 p, ul, ol, dl {
-    line-height: 24px;
-    margin: 0 0 24px 0;
+    line-height: 20px;
+    margin: 0 0 20px 0;
 }
 p.intro {
-    font-size: 24px;
-	line-height: 32px;
+    font-size: 20px;
+	line-height: 28px;
 }
 ul {
     list-style-type: square;

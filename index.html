@@ -1,8 +1,8 @@
 ---
 title: Pineal.Me
-layout: page
+layout: default
 ---
-
+<!-- 
 <ul class="listing">
 {% for post in paginator.posts %}
   {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
@@ -16,9 +16,31 @@ layout: page
   </li>
 {% endfor %}
 </ul>
+-->
+<div id="indexNav">
+  <ul> 
+    <li><a href="/" title="Home|首页">PINEAL.ME</a></li>
+    <li><a href="/blog" title="Tech|技术">IN A GAINT GUTTER OF</a></li>    
+    <li><a href="/article" title="Prose|随笔">OUTTER SPACE </a></li>
+    <li><a href="/gallary" title="Gallary|展览">GAXXARY </a></li>
+    <li><a href="/about" title="About|关于我">ABCDT </a></li>         
+  </ul>
+</div>
+<!--
+<ul class="listing">
+  {% for post in site.posts %}
+    <li class="listing-item">
+      <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+      <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    </li>
+  {% endfor %}
+</ul>
+-->
 
+
+<!-- 
+ {{ post.content }}
 <div id="post-pagination" class="paginator">
-
   {% if paginator.previous_page %}
     {% if paginator.previous_page == 1 %}
     <a href="/"><前页</a>
@@ -50,4 +72,4 @@ layout: page
   {% endif %}
   (共{{ paginator.total_posts }}篇)
 </div>
-
+-->

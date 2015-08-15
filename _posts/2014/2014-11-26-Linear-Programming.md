@@ -21,7 +21,7 @@ $$A \times X ≥ B$$
 
 Objective function
 
-$$C^T \times X $$ 
+$$C^T \times X $$
 
 linear
 
@@ -35,7 +35,7 @@ x_2 ≥ 0	\\\\
 x1 + x2 ≤ 4
 }$$
 
-Maximize 
+Maximize
 $x1 + 2x_2$
 
 ###Simplex method
@@ -43,12 +43,9 @@ Only look at the vertex
 
 Start of one vertex, go clockwise, find the max before the value going down
 
-###Weighted vertex cover problem 
-	
-for G = (V, E), S $\in$ V in a set such that each edge has at least one end in S 
-W_i ≥ 0 for each i \in V
+###Weighted vertex cover problem
 
-W(S) = \sum i \in S w_i
+for G = (V, E), S $\in$ V in a set such that each edge has at least one end in S $W_i ≥ 0$ for each i $\in$ V $$W(S) = \sum i \in S w_i$$
 
 Objective: Minimize W(S)
 
@@ -57,18 +54,27 @@ Model this as an LP
 
 x_i is a decision valuable for each node i \in V
 
+
 $$
 \cases{
-x_i = 0 && i \notin S \\\\
-x_i = 1 && i \in S
+x_1 - x_2 ≥ 0 \\\\
+x_1 ≥ 0	\\\\
+x_2 ≥ 0	\\\\
+x_1 + x_2 ≤ 4
+}$$
+
+$$
+\cases{
+x_i = 0 & i \notin S \\\\
+x_i = 1 & i \in S
 }
 $$
 
-x_i + x_j ≥ 1 for each edge 
+x_i + x_j ≥ 1 for each edge
 
 
 Minimize \sigma w_ix_i
-Subject to 
+Subject to
 $x_i + x_j ≥ 1 for (i, j) \in E$
 $x_i \in {0,1} for i \in V$  <= discreate
 
@@ -76,7 +82,7 @@ Integer Programming
 
 Linear programming	(continues variables)
 Integer Programming	(discrete variables)
-mixed integer programming 
+mixed integer programming
 
 
 
@@ -101,8 +107,8 @@ W(S) ≤ 2 * W(S^*)
 
 Solve the max. flow problem using LP. Variable are flow over edges.
 
-Maximize \sigma f{e} 
-subject to 
+Maximize \sigma f{e}
+subject to
 0 ≤ f(e) ≤ c_e foe each edge e \in E
 \sigma f(e) - \sigma f(e) = 0 for v \in V
 
@@ -119,9 +125,9 @@ Cap constraint: l_e≤f(e)≤c_e for each edge e \in E
 
 ###Multi commodity flow
 f_i(e): flow of commodity i over edge e
-\alpha_i: is the profit associated with one unit of flow for commodity i. 
+\alpha_i: is the profit associated with one unit of flow for commodity i.
 
-We have m commodities 
+We have m commodities
 
 Objective: maximize profit
 
@@ -145,10 +151,5 @@ d(s) = 0
 
 Objective function:
 	Minimize d(t)
-	
+
 1:36
-
-
-
-
-
