@@ -1,6 +1,56 @@
+
+
+h2, h3, h4{
+	font-size: 14px;
+}
+
+
 body{
 	font-size: 14px;
 	font-family:"HelveticaNeue-Light","Microsoft YaHei",arial,sans-serif,"Hiragino Sans GB",Tahoma,"Lucida Grande",Helvetica,Arial,sans-serif;            
+}
+
+.content blockquote {
+    border-left: 4px solid #DDDDDD;
+    color: #777777;
+    padding: 0 15px;
+	margin: 15px 0;
+}
+
+table {
+  padding: 0; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      text-align: left;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      text-align: left;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+body{
+    font-size:14px;
+    word-spacing:1px;
+    margin-left:auto;
+    margin-right:auto;
+   /* font-family:MuseoSans,Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode","Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei",Verdana,sans-serif;*/
+    font-family:"HelveticaNeue-Light","Microsoft YaHei",arial,sans-serif,"Hiragino Sans GB",Tahoma,"Lucida Grande",Helvetica,Arial,sans-serif;            
+    color:#000000;
+    background-color:#ffffff;
 }
 
 #indexNav{
@@ -33,6 +83,7 @@ body{
 	text-align: center;
 	color: #cccccc;
 	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
 #tag_cloud{

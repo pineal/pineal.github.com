@@ -11,6 +11,10 @@ layout: default
   
   </ul> 
 
+<li><a href="{{ page.link }}" title="{{ page.title }}">{{ page.title }} </a></li>       
+
+
+
 {% if page.categories %}
 <span class="categories">
   In Categories Of
@@ -27,7 +31,14 @@ layout: default
   <li><a href="/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a></li>
   {% endfor %}
 </span>
+<span class="time">
+  <time datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date:"%Y-%m-%d" }}</time>
+</span>
+
+
 {% endif %}
+
+
 
 </section>
 
@@ -36,64 +47,26 @@ layout: default
 <div id="main">
 <section class="post">
 
+
 {{ content }}
 </section>
 <section class="meta">
-<hr/>
-<span class="time">
-  <br/>
-  <time datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date:"%Y-%m-%d" }}</time>
-</span>
-<span class="author">
-<a href="http://pineal.me">{{ site.author }}</a>, Computer Science, Southern California University, U.S.</span>
-<br />
+
+
 <!--
 <span class="license">
   Published under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">(CC) BY-NC-SA</a>
 </span>
 -->
 
+<div id="footer">Copyright©Hesen Zhang</div>
 
 
 {% include comments.md %}
-<div id="footer">Copyright©Hesen Zhang</div>
 </div>
 
-<script type="text/javascript">
-$(function(){
-  $(document).keydown(function(e) {
-    var url = false;
-        if (e.which == 37 || e.which == 74) {  // Left arrow and J
-            {% if page.previous %}
-        url = '{{ site.url }}{{ page.previous.url }}';
-        {% endif %}
-        }
-        else if (e.which == 39 || e.which == 75) {  // Right arrow and K
-            {% if page.next %}
-        url = '{{ site.url }}{{ page.next.url }}';
-        {% endif %}
-        }
-        if (url) {
-            window.location = url;
-        }
-  });
-})
-
-</script>
 
 
-<style type="text/css">
-/*resize the big pic*/
-div.resized_image p {
-  margin: 2px;
-  margin-top: 0;
-  font-size: 8px;
-  /* Awesome icon from here: http://www.famfamfam.com/lab/icons/silk/ */
-  background: url(http://i242.photobucket.com/albums/ff244/9861_omikron/error.png) no-repeat;
-  padding-left: 20px;
-  color: #333;
-}
-</style>
 <script type="text/javascript">
 //resize the big pic
 $(window).load(function() {
