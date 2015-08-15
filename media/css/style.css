@@ -37,14 +37,14 @@ body{
 
 #tag_cloud{
 	width: 200px;
-	float: left;
+	float: right;
 	margin-right: 20px;
 	height: 2500px;
 }
 
 #tagList{
 	width: 600px;
-	float: right;
+	float: left;
 	margin-right: 20px;
 }
 
