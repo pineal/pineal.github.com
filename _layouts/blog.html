@@ -1,0 +1,30 @@
+---
+layout: default
+---
+<div id = "sidenav">
+	<ul> 
+    <li><a href="/" title="Home|首页">PINEAL.ME</a></li>
+    <li><a href="/blog" title="Tech|技术">IN A GAINT GUTTER OF</a></li>    
+    <li><a href="/article" title="Prose|随笔">OUTTER SPACE </a></li>
+    <li><a href="/gallary" title="Gallary|展览">GAXXARY </a></li>
+    <li><a href="/about" title="About|关于我">ABCDT </a></li>       
+	</ul>	
+
+	<ul id = "listSideNav">
+	<li><a href="/blog" title="Prose|随笔">ACHIEVE</a></li>
+	<li><a href="/catagory" title="Home|首页">CATAGORY</a></li>
+    <li><a href="/tags" title="Tech|技术">TAGS</a></li>        
+	</ul>
+</div>
+<div id="main">
+<section class="post">
+{{ content }}
+</section>
+{% if page.comments %}
+{% include comments.md %}
+{% endif %}
+<div id="footer">Copyright©Hesen Zhang</div>
+</div>
+
+
+

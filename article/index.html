@@ -31,9 +31,14 @@ layout: page
 
 
 {% for post in site.categories.gutter %}
-
  <div id = "listPost">
- {{ post.title }}{{ post.content }}</div>   
+ __{{ post.title }}__
+ <!-- <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a> -->
+ {{ post.content }}
+ <div id = "postTime">
+ <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+ </div>
+ </div>   
  <hr size=1 style="color: #cccccc;border-style:dotted;width:490">     
 {% endfor %}
 

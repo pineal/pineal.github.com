@@ -1,3 +1,7 @@
+body{
+	font-size: 14px;
+	font-family:"HelveticaNeue-Light","Microsoft YaHei",arial,sans-serif,"Hiragino Sans GB",Tahoma,"Lucida Grande",Helvetica,Arial,sans-serif;            
+}
 
 #indexNav{
 	float: center;
@@ -10,6 +14,8 @@
 	width:auto;
 
 }
+
+
 
 #indexNav a{
 	padding-left: 5px;
@@ -29,25 +35,32 @@
 	margin-top: 30px;
 }
 
+#tag_cloud{
+	width: 200px;
+	float: left;
+	margin-right: 20px;
+	height: 2500px;
+}
+
+#tagList{
+	width: 600px;
+	float: right;
+	margin-right: 20px;
+}
+
 #container{    
-    font-size:14px;
     word-spacing:1px;
     width: 1000px;
     margin:0 auto;
-    font-family:"HelveticaNeue-Light","Microsoft YaHei",arial,sans-serif,"Hiragino Sans GB",Tahoma,"Lucida Grande",Helvetica,Arial,sans-serif;            
     position: relative;
-    font-style: #cccccc;
-   
 }
 
 
 #sidenav{
 	padding-left: -15px;
-
 	margin-top: 100px;
 	margin-right: 50px;
 	line-height:24px;
-
 	float: left;
 	text-align: right;
     width: 350px;
@@ -66,6 +79,9 @@
 	background: black;
 }
 
+#listSideNav{
+	margin-top: 30px; 
+}
 
 #sidenav a:hover{		
 }
@@ -83,6 +99,51 @@ li{
 }
 
 
+.listing{
+
+}
+
+.listing li a:hover{
+	color: white;
+	background-color: black;
+	text-decoration: underline;
+}
+
+.listing li time{
+	float: right;
+	margin-right: 70px;
+	display: none;
+	color: #cccccc;
+}
+
+
+.listing li:hover > time{
+	display: inline;
+}
+
+li time{
+	display: none;
+}
+
+li:hover > time{
+	display: inline;
+}
+
+#listPost h2{
+	font-size: 14px;
+	font-style: normal;
+	text-align: center;
+	text-decoration: underline;
+}
+
+#postTime{
+	text-align: right;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	color: #cccccc;
+}
+
+
 a:link {
         color: black;    /*teal*/
 		text-decoration: none;
@@ -94,11 +155,13 @@ a:visited {
 }
 
 a:hover {
-        color: #008080;    /*teal*/
+		background: black;
+        color: white;    /*teal*/
 		text-decoration: underline;
 }
 
 a:active {
         color: black;    /*teal*/
+		background: white;
 		text-decoration: none;
 }

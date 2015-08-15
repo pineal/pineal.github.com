@@ -1,0 +1,15 @@
+---
+title: IN A GAINT GUTTER
+layout: blog
+---
+
+<ul class="listing">
+  {% for post in site.posts %}
+  {% unless post.categories contains 'gutter'%}
+    <li class="listing-item">
+      <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+      <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    </li>
+   {% endunless %} 
+  {% endfor %}
+</ul>

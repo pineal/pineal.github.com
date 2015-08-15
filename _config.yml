@@ -1,6 +1,6 @@
 markdown: redcarpet 
 permalink: /:year/:month/:title/
-url: http://pineal.github.com
+url: http://pineal.me
 author: Hesen Zhang
 highligher: pygments
 paginate: 24
