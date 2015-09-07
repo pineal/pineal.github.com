@@ -9,15 +9,16 @@ tags:
 ---
 
 ##Definition of Binary Tree
-Full Binary Tree
-Complete Binary Tree
+1. Full Binary Tree
+2. Complete Binary Tree
 
 ##Three different ways to traverse a binary Tree
-DFS:
+1. DFS:
 前序（pre-order, NLR）
 中序（in-order, LNR）
 后序（post-order, LRN）
-BFS:
+
+2. BFS:
 层序（level-order）
 
 ###Traverse Binary Tree Example
@@ -31,8 +32,11 @@ BFS:
 [F:I]
 [I:None]
 
+
 NLR: A B D C E G H F I
+
 LNR: D B A G E H C F I
+
 LRN: D B G H E I F C A
 
 
@@ -94,8 +98,8 @@ def DFS_Stack_LRN(root):
       print(pre.val)
 ```
 
-##Template For BFS Traverse Using 2 Queues
-##Template For BFS Traverse Using 1 Queue and Dummy Node
+##?Template For BFS Traverse Using 2 Queues?
+##?Template For BFS Traverse Using 1 Queue and Dummy Node?
 ##Template For BFS Traverse Using 1 Queue(Best)
 
 ```py
@@ -111,7 +115,10 @@ def BFS_oneQueue(root):
     if root.right: q.append(root.right)
 ```
 
+##?Morris Traverse?
 
 ##FAQ
 ###Difference of DFS and BFS
+DFS using stacks, and BFS using queues if Non-Recursion
 ###Difference of Recursion and Non-Recursion
+Recursion is dangerous when memory resource is limited: stack may overflow;However Non-Recursion method occupies more space
