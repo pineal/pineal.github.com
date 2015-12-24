@@ -24,9 +24,8 @@ tags:
 
 ##Bellman's Principle of Optimality
 Optimize it using dynamic programming:
-$$
-J_i(X_i) = \mathop{arg min}_{u_i\in u(x_i)}\{{L(x^i, u^i, \alpha) + V^*_{i+1}x_{(i+1)}}\}
-$$
+
+
 ##Linear quadratic regulator
 - Special Assumption: Linear System Dynamics
 $$
