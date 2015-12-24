@@ -51,7 +51,9 @@ The a posteriori estimate error covariance is then
 
 Then How can we optimally (linearly) combine the estimate and measurement to obtain the best reconstruction of ￼the true x? The answer given in “The Probabilistic Origins of the Filter” found.
 
-$$   \hat{x} = \hat{x}_{k}^{-} - K \times residual $$
+$$
+   \hat{x} = \hat{x}_{k}^{-} - K \times residual
+$$
 
 Where *residual* is $z_k - H \hat{x}_{k}^{-}$. It also can be called as measurement innovation.
 
