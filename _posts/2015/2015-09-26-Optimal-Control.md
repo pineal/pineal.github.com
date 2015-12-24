@@ -19,7 +19,6 @@ tags:
     $$
     V = \phi(x^N, \alpha) + \sum^{N-1}_{i=0}L(x^i, u^i, \alpha)
     $$  
-
 - Goal:
     -Find the sequence of commands that minimizes(maximizes) the cost function
 
@@ -43,13 +42,6 @@ $$
     - Note: this an also be done with a nonlinear system by a local linearization
 
 
-$$
-  \begin{aligned}
- V^*_i(X_i) & = \mathop{arg min}_{u_i\in u(x_i)}\{{L(x^i, u^i, \alpha) + V^*_{i+1}x_{(i+1)}}\} \\
-   & = \mathop{arg min}_{u_i\in u(x_i)}\{{x^{i^T}Qx^i + u^{i^T}Ru^{i^T} + V^*_{i+1}x_{(i+1)}}\} \\
-   & = \mathop{arg min}_{u_i\in u(x_i)}\{{x^{i^T}Qx^i + u^{i^T}Ru^{i^T} + V^*_{i+1}(Ax^n + Bu^n)}\} \\
-  \end{aligned}
-$$
 
 - As A linear control law expressed as:
 
