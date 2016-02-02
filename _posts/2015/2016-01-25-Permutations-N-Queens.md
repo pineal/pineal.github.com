@@ -23,6 +23,7 @@ tags:
 - Return *False* if the elements got the "normal"(lexicographical) order: that is, ascending order. So, to run through all permutations, you have to sort all elements and start a loop that calls this function as long as these algorithms return true.
 
 
+
 ```c++
 class Solution:
 public:
@@ -44,6 +45,8 @@ public:
 大致思路为，我们先固定第一个数，然后对右边剩下的数做全排列。什么时候右边剩下的数完成了全排列呢？那就是当这些数变成了降序。然后我们才用第一个数。
 
 [留着慢慢消化，反正直接让我写，我是写不出来。](http://stackoverflow.com/questions/11483060/stdnext-permutation-implementation-explanation)
+
+
 ```c++
 //kan bu dong...
 template<class BidirIt>
@@ -81,6 +84,7 @@ bool next_permutation(BidirIt first, BidirIt last)
 
 ##Recursion Version for Permutations
 常规的backtracking回溯，用DFS递归就行。
+
 ```c++
 class Solution {
 public:
@@ -118,8 +122,11 @@ public:
 };
 
 ```
+
 ##Permutations II
+
 全排列去重。在循环的过程中加入while语句跳过相同的元素。
+
 ```c++
 class Solution {
 public:
@@ -163,6 +170,7 @@ public:
 };
 ```
 ##N-Queens
+
 经典的搜索题。
 
 ```c++
@@ -212,7 +220,9 @@ public:
 };
 ```
 ##N-Queens II
+
 只要求solutions的个数就可以。这道题并不用动归解，还是要用搜索。和上一题基本没差别。
+
 ```c++
 class Solution {
 public:

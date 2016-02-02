@@ -102,6 +102,7 @@ public:
 
 ##Subsets II
 上面那道题的followup，加上了去重的要求。
+
 ```C++
 class Solution {
 public:
@@ -129,7 +130,9 @@ public:
     }
 };
 ```
+
 去重的递归：
+
 ```c++
 class Solution {
 public:
@@ -164,8 +167,11 @@ public:
     }
 };
 ```
+
 ##Combinations
+
 相似的递归模版：
+
 ```c++
 class Solution {
 public:

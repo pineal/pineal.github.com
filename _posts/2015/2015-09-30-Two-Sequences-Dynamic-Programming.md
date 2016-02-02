@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Solve two sequences problem with dynamic programming
+title: Two Sequences Dynamic Programming
 categories:
 - Algorithm
 tags:
 - dynamic programming
 ---
 
-##最长公共子序列
+##Longest Common
