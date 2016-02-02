@@ -3,6 +3,7 @@ layout: post
 title: Kalman Filter
 categories:
 - Algorithm
+- Robotics
 tags:
 - Robotics
 - Signal Processing

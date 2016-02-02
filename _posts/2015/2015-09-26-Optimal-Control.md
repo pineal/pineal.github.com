@@ -19,23 +19,49 @@ tags:
     $$
     V = \phi(x^N, \alpha) + \sum^{N-1}_{i=0}L(x^i, u^i, \alpha)
     $$  
+
 - Goal:
     -Find the sequence of commands that minimizes(maximizes) the cost function
 
 ##Bellman's Principle of Optimality
 Optimize it using dynamic programming:
-
-
+$$
+J_i(X_i) = \mathop{arg min}_{u_i\in u(x_i)}
+$$
 ##Linear quadratic regulator
 - Special Assumption: Linear System Dynamics
-$$
-x^{n+1} = Ax^n + Bu^n
-$$
+ $$
+  x^{n+1} = Ax^n + Bu^n
+ $$
 - Quadratic cost function
-$$
-L(x^i, u^i, \alpha) ＝ x^{i^T}Qx^i + u^{i^T}Ru^{i^T}
-$$
+ $$
+ L(x^i, u^i, \alpha) ＝ x^{i^T}Qx^i + u^{i^T}Ru^{i^T}
+ $$
 
 - Goal:
     - Bring the system to a setpoint and keep it there
-    - Note: this an also be done with a nonlinear system by a local linearization
+    - Note: this an also be did with a nonlinear system by a local linearization
+
+
+$$
+  \begin{aligned}
+   \end{aligned}
+$$
+
+- As A linear control law expressed as:
+
+$$
+    u^{i^*} = -K^ix^i
+$$
+- Rewrite the optimal cost at stage i as a quadratic form:
+
+$$
+    {V^i}^* = {x^i}^TP^ix^i
+$$
+
+Thus,
+$$\mathop{arg min}_{ {u_i} \in  }$$
+
+$$
+  V^*_i(X_i) = \mathop{arg min}
+$$
