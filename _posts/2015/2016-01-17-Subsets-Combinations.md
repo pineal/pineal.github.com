@@ -14,16 +14,20 @@ tags:
 # Subsets and Combinations
 
 Original Questions on [LeetCode](http://www.lintcode.com):
+
 - [Subsets I](http://www.lintcode.com/en/problem/subsets/)
+
 - [Subsets II](http://www.lintcode.com/en/problem/subsets-ii/)
+
 - [Combinations](http://www.lintcode.com/en/problem/combinations/)
 
-##Subsets I
+## Subsets I
 
->Given a set of **distinct** integers, return all possible subsets.
+> Given a set of **distinct** integers, return all possible subsets.
 
-Example
-```
+Example:
+
+~~~
 If S = [1,2,3], a solution is:
 [
   [3],
@@ -35,11 +39,12 @@ If S = [1,2,3], a solution is:
   [1,2],
   []
 ]
-```
-###Recusive Solution
+~~~
+
+### Recursive Solution
 Backtracking的模板。
 
-```c++
+~~~
 class Solution {
 public:
     /**
@@ -69,12 +74,13 @@ public:
             v.pop_back();
         }
     }
-```
+~~~
 
 
-###Iterative Solution
+### Iterative Solution
 建一个result的vector用来储存结果。初始化为一个［］。从nums取出下一个元素$$m$$，和result里所有的vector: $$ temp = v \in rst$$, 把 m 加到这些vector的末端: $$temp = temp \bigcup m$$, 再把这些vector放到result中，进行下一次迭代。一共有两重循环， 外面那层代表了每次从nums中取元素共有nums.size()个，里面那层代表把元素放到新的vector里，一共有result.size() 的次数。
-```C++
+
+~~~
 class Solution {
 public:
     /**
@@ -98,12 +104,13 @@ public:
     	return rst;
     }
 };
-```
+~~~
 
-##Subsets II
+
+## Subsets II
 上面那道题的followup，加上了去重的要求。
 
-```C++
+~~~
 class Solution {
 public:
     /**
@@ -129,11 +136,11 @@ public:
         return result;
     }
 };
-```
+~~~
 
 去重的递归：
 
-```c++
+~~~
 class Solution {
 public:
     /**
@@ -166,13 +173,13 @@ public:
         }
     }
 };
-```
+~~~
 
-##Combinations
+## Combinations
 
 相似的递归模版：
 
-```c++
+~~~
 class Solution {
 public:
     /**
@@ -202,5 +209,4 @@ public:
         }
     }
 };
-
-```
+~~~

@@ -12,19 +12,20 @@ tags:
 ---
 # Permutations and N-Queens
 
-##Permutation from STL Library
+## Permutation from STL Library
+
 最直接的做法：C++11中的STL中有关于排列的algorithm库可以直接用。
 
-- [std::is_permutation](http://en.cppreference.com/w/cpp/algorithm/is_permutation)
-- [std::next_permutation](http://en.cppreference.com/w/cpp/algorithm/next_permutation)
-- [std::prev_permutation](http://en.cppreference.com/w/cpp/algorithm/prev_permutation)
+* [std::is_permutation](http://en.cppreference.com/w/cpp/algorithm/is_permutation)
+* [std::next_permutation](http://en.cppreference.com/w/cpp/algorithm/next_permutation)
+* [std::prev_permutation](http://en.cppreference.com/w/cpp/algorithm/prev_permutation)
 
-- Changes the order of the elements in [Begin, end) acccording to the next permutation.
-- Return *False* if the elements got the "normal"(lexicographical) order: that is, ascending order. So, to run through all permutations, you have to sort all elements and start a loop that calls this function as long as these algorithms return true.
+* Changes the order of the elements in [Begin, end) acccording to the next permutation.
+* Return *False* if the elements got the "normal"(lexicographical) order: that is, ascending order. So, to run through all permutations, you have to sort all elements and start a loop that calls this function as long as these algorithms return true.
 
 
 
-```c++
+~~~
 class Solution:
 public:
     vector<vector<int>> permute(vector<int> nums){
@@ -39,15 +40,17 @@ public:
     return result;
     }
 };    
-```
+~~~
 
-###Implementation of std::next_permutation()
+
+### Implementation of std::next_permutation()
+
 大致思路为，我们先固定第一个数，然后对右边剩下的数做全排列。什么时候右边剩下的数完成了全排列呢？那就是当这些数变成了降序。然后我们才用第一个数。
 
 [留着慢慢消化，反正直接让我写，我是写不出来。](http://stackoverflow.com/questions/11483060/stdnext-permutation-implementation-explanation)
 
 
-```c++
+~~~
 //kan bu dong...
 template<class BidirIt>
 bool next_permutation(BidirIt first, BidirIt last)
@@ -79,13 +82,14 @@ bool next_permutation(BidirIt first, BidirIt last)
     }
 }
 
-```
+~~~
+
 有了这个之后我们可以自己模拟 std::next_permutation()
 
-##Recursion Version for Permutations
+## Recursion Version for Permutations
 常规的backtracking回溯，用DFS递归就行。
 
-```c++
+~~~
 class Solution {
 public:
     /**
@@ -120,14 +124,13 @@ public:
         }
     }
 };
+~~~
 
-```
-
-##Permutations II
+## Permutations II
 
 全排列去重。在循环的过程中加入while语句跳过相同的元素。
 
-```c++
+~~~
 class Solution {
 public:
     vector<vector<int> > permuteUnique(vector<int> &num) {
@@ -168,12 +171,13 @@ public:
         }
     }
 };
-```
-##N-Queens
+~~~
+
+## N-Queens
 
 经典的搜索题。
 
-```c++
+~~~
 class Solution {
 public:
     /**
@@ -218,12 +222,13 @@ public:
         return true;
     }
 };
-```
-##N-Queens II
+~~~
+
+## N-Queens II
 
 只要求solutions的个数就可以。这道题并不用动归解，还是要用搜索。和上一题基本没差别。
 
-```c++
+~~~
 class Solution {
 public:
     /**
@@ -267,4 +272,4 @@ public:
         return true;
     }
 };
-```
+~~~
