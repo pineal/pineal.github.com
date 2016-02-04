@@ -33,6 +33,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -54,9 +55,10 @@ q:before, q:after {
 	content: none;
 }
 ** JIM added below blockquote style*/
-.content blockquote {
+blockquote {
     border-left: 4px solid #DDDDDD;
     color: #777777;
+    background-color: red;
     padding: 0 15px;
 	margin: 15px 0;
 }

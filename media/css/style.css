@@ -45,7 +45,12 @@ body{
     color:#000000;
     background-color:#ffffff;
 }
-
+blockquote {
+    border-left: 5px solid #DDDDDD;
+    color: black;
+    padding: 0 15px;
+	margin: 15px 0;
+}
 #indexNav{
 	float: center;
 	font-size:60px;

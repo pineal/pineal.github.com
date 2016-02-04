@@ -27,7 +27,7 @@ Original Questions on [LeetCode](http://www.lintcode.com):
 
 Example:
 
-~~~cpp
+~~~
 If S = [1,2,3], a solution is:
 [
   [3],
