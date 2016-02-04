@@ -27,7 +27,7 @@ Original Questions on [LeetCode](http://www.lintcode.com):
 
 Example:
 
-~~~
+~~~cpp
 If S = [1,2,3], a solution is:
 [
   [3],
@@ -44,7 +44,7 @@ If S = [1,2,3], a solution is:
 ### Recursive Solution
 Backtracking的模板。
 
-~~~
+~~~cpp
 class Solution {
 public:
     /**
@@ -77,12 +77,11 @@ public:
 ~~~
 
 
-
 ### Iterative Solution
 建一个result的vector用来储存结果。初始化为一个［］。从nums取出下一个元素$$m$$，和result里所有的vector: $ temp = v \in rst$, 把 m 加到这些vector的末端: $temp = temp \bigcup m$, 再把这些vector放到result中，进行下一次迭代。一共有两重循环， 外面那层代表了每次从nums中取元素共有nums.size()个，里面那层代表把元素放到新的vector里，一共有result.size() 的次数。
 
 
-~~~
+~~~cpp
 class Solution {
 public:
     /**
@@ -112,7 +111,7 @@ public:
 ## Subsets II
 上面那道题的followup，加上了去重的要求。
 
-~~~
+~~~cpp
 class Solution {
 public:
     /**
@@ -142,7 +141,7 @@ public:
 
 去重的递归：
 
-~~~
+~~~cpp
 class Solution {
 public:
     /**
@@ -181,7 +180,7 @@ public:
 
 相似的递归模版：
 
-~~~
+~~~cpp
 class Solution {
 public:
     /**

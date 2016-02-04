@@ -17,15 +17,18 @@ tags:
 最直接的做法：C++11中的STL中有关于排列的algorithm库可以直接用。
 
 * [std::is_permutation](http://en.cppreference.com/w/cpp/algorithm/is_permutation)
-* [std::next_permutation](http://en.cppreference.com/w/cpp/algorithm/next_permutation)
 * [std::prev_permutation](http://en.cppreference.com/w/cpp/algorithm/prev_permutation)
+* [std::next_permutation](http://en.cppreference.com/w/cpp/algorithm/next_permutation)
 
-* Changes the order of the elements in [Begin, end) acccording to the next permutation.
+他有什么用呢？
+
+* Changes the order of the elements in [Begin, end) according to the next permutation.
+
 * Return *False* if the elements got the "normal"(lexicographical) order: that is, ascending order. So, to run through all permutations, you have to sort all elements and start a loop that calls this function as long as these algorithms return true.
 
 
 
-~~~
+~~~cpp
 class Solution:
 public:
     vector<vector<int>> permute(vector<int> nums){
@@ -50,7 +53,7 @@ public:
 [留着慢慢消化，反正直接让我写，我是写不出来。](http://stackoverflow.com/questions/11483060/stdnext-permutation-implementation-explanation)
 
 
-~~~
+~~~cpp
 //kan bu dong...
 template<class BidirIt>
 bool next_permutation(BidirIt first, BidirIt last)
@@ -89,7 +92,7 @@ bool next_permutation(BidirIt first, BidirIt last)
 ## Recursion Version for Permutations
 常规的backtracking回溯，用DFS递归就行。
 
-~~~
+~~~cpp
 class Solution {
 public:
     /**
@@ -130,7 +133,7 @@ public:
 
 全排列去重。在循环的过程中加入while语句跳过相同的元素。
 
-~~~
+~~~cpp
 class Solution {
 public:
     vector<vector<int> > permuteUnique(vector<int> &num) {
@@ -177,7 +180,7 @@ public:
 
 经典的搜索题。
 
-~~~
+~~~cpp
 class Solution {
 public:
     /**
@@ -228,7 +231,7 @@ public:
 
 只要求solutions的个数就可以。这道题并不用动归解，还是要用搜索。和上一题基本没差别。
 
-~~~
+~~~cpp
 class Solution {
 public:
     /**
