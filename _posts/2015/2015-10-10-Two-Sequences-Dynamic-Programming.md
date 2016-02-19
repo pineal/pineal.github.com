@@ -4,7 +4,7 @@ title: Two Sequences Dynamic Programming
 categories:
 - Algorithm
 tags:
-- dynamic programming
+- Dynamic Programming
 ---
 
 ## Longest Common Substring

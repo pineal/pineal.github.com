@@ -8,7 +8,7 @@ tags:
 ---
 # Optimal Control
 
-##Optimal Control Framework
+## Optimal Control Framework
 
 Given:
 A controlled dynamical system：$ x^{n+1} = f(x^n, u^n)$
@@ -17,14 +17,14 @@ A cost function：$V = \phi(x^N, \alpha) + \sum^{N-1}_{i=0}L(x^i, u^i, \alpha)$
 
 Goal: Find the sequence of commands that minimizes(maximizes) the cost function
 
-##Bellman's Principle of Optimality
+## Bellman's Principle of Optimality
 Optimize it using dynamic programming:
 
 $$
 J_i(X_i) = \mathop{arg min}_{u_i\in u(x_i)}\{\{L(x^i, u^i, \alpha) + V^*_{i+1}x_{(i+1)}\}\}
 $$
 
-##Linear quadratic regulator
+## Linear quadratic regulator
 
 Special Assumption: Linear System Dynamics
  $$
@@ -67,11 +67,11 @@ $$
    V^*_i(X_i) = \mathop{arg min}_{u_i\in u(x_i)}\{ {x^{i^T}Qx^i + u^{i^T}Ru^{i^T} + V^*_{i+1}(Ax^n + Bu^n)} \} \\
 $$
 
-##Finite horizon approximation
+## Finite horizon approximation
 To be continued...
 
-##Motion Predictive Control
+## Motion Predictive Control
 To be continued...
 
-##Fast MPC
+## Fast MPC
 To be continued...

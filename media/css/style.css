@@ -88,7 +88,11 @@ blockquote {
 	width: 200px;
 	float: right;
 	margin-right: 20px;
-	height: 2500px;
+	height: 2500px;	
+}
+
+#tag_cloud li{
+	list-style-type: none;
 }
 
 #tagList{

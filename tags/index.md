@@ -9,7 +9,7 @@ layout: blog
 {% endfor %}
 </div>
 
-<ul class="listing" id＝"tagList">
+<ul class="listing">
 {% for tag in site.tags %}
   <li class="listing-seperator" id="{{ tag[0] }}"><h4>__{{ tag[0] }}__[{{tag[1].size}}]</h4></li>
 {% for post in tag[1] %}
