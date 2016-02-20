@@ -9,9 +9,10 @@ tags:
 ## Questions
 - [Climbing Stairs](http://www.lintcode.com/en/problem/unique-paths/)
 - [House Robber](http://www.lintcode.com/en/problem/house-robber/)
+- [Longest Increasing Subsequence](http://www.lintcode.com/en/problem/longest-increasing-subsequence/)
+- [Word Break](http://www.lintcode.com/en/problem/word-break/)
 
 ## Climbing Stairs
-
 状态转移方程，两种可能：要么是从i-1爬到i的，要么就是从i-2爬到i的，要计算所有可能的爬法之要把两者相加即可。所以维护一个数组来记录到i的爬法总数，那么:
 
 $$
@@ -74,4 +75,91 @@ long long houseRobber(vector<int>& nums) {
     }
 
 };
+~~~
+
+
+## Longest Increasing Subsequence
+
+~~~cpp
+class Solution {
+public:
+    /**
+     * @param nums: The integer array
+     * @return: The length of LIS (longest increasing subsequence)
+     */
+    int longestIncreasingSubsequence(vector<int> nums) {
+        // write your code here
+        if (nums.empty()) return 0;
+
+        vector<int> dp(nums.size(), 1);
+        int rst = 0;
+
+        for (int i = 1; i < nums.size(); i++){
+            for(int j = i - 1; j >= 0; j--){
+                if (nums[j] <= nums[i]){
+                    dp[i] = max(dp[i], dp[j] + 1);
+                }                             
+            }
+            rst = max(rst, dp[i]);
+        }
+        return rst;
+    }
+};
+
+~~~
+
+
+## Word Break
+
+在做了分割字符串II那道题之后，发现其实这两题一样一样的。
+
+1. State: f[i] 表示前i个字符能否根据词典中的词被成功分词。
+
+2. Function: f[i] = or{f[j], j < i, letter in [j+1, i] can be found in dict}, 含义为小于i的索引j中只要有一个f[j]为真且j+1到i中组成的字符能在词典中找到时，f[i]即为真，否则为假。具体实现可分为自顶向下或者自底向上。
+
+3. Initialization: f[0] = true, 数组长度为字符串长度 + 1，便于处理。
+
+4. Answer: f[s.length]
+
+
+~~~cpp
+class Solution {
+public:
+    /**
+     * @param s: A string s
+     * @param dict: A dictionary of words dict
+     */
+    bool wordBreak(string s, unordered_set<string> &dict) {
+        // write your code here
+        if (s.empty()) return true;
+        if (dict.empty()) return false;
+
+        int len = s.size();
+        int max_word_len = 0;
+
+        for (unordered_set<string>::iterator it = dict.begin(); it != dict.end(); ++it) {
+            int thisLen = (*it).size();
+            max_word_len = max(max_word_len, thisLen);
+        }
+
+        deque<bool> canBreak(len + 1, false);
+        canBreak[0] = true;
+
+        for (int i = 1; i < len + 1; ++i){
+            for (int j = i - 1; j >= 0; --j){
+
+                if (i - j > max_word_len) break;
+
+
+                if (canBreak[j] && dict.find(s.substr(j, i - j))!= dict.end()){
+                    canBreak[i] = true;
+                    break;
+                }   
+            }
+        }
+    return canBreak[len];    
+    }
+};
+
+
 ~~~
