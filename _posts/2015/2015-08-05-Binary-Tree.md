@@ -8,20 +8,17 @@ tags:
 - Binary Tree
 ---
 
-##Definition of Binary Tree
+## Definition of Binary Tree
 1. Full Binary Tree
 2. Complete Binary Tree
 
-##Three different ways to traverse a binary Tree
-1. DFS:
-前序（pre-order, NLR）
-中序（in-order, LNR）
-后序（post-order, LRN）
+## Three different ways to traverse a binary Tree
+1. DFS: 前序（pre-order, NLR）
+2. DFS: 中序（in-order, LNR）
+3. DFS: 后序（post-order, LRN）
+4. BFS: 层序（level-order）
 
-2. BFS:
-层序（level-order）
-
-###Traverse Binary Tree Example
+### Traverse Binary Tree Example
 [A:B, C]
 [B:D]
 [D:None]
@@ -40,8 +37,8 @@ LNR: D B A G E H C F I
 LRN: D B G H E I F C A
 
 
-##Template For DFS Traverse Using Recursion
-```py
+## Template For DFS Traverse Using Recursion
+~~~py
 def DFS_Recursive(root):
     if root:
       #if NLR: print(root.val)
@@ -49,10 +46,11 @@ def DFS_Recursive(root):
       #if LNR: print(root.val)
       DFS_Recursive(root.right)
       #if LRN: print(root.val)
-```
+~~~
 
-##Template For DFS Traverse Using Divide and Conquer
-```py
+## Template For DFS Traverse Using Divide and Conquer
+
+~~~py
 def DFS_DC(root):
   if root is None:
     return
@@ -64,11 +62,11 @@ def DFS_DC(root):
   #Conquer
   #result = Merge from left and right
   return result
-```
+~~~
 
-##Template For DFS Traverse Using None-Recursion(NLR and LNR)
+## Template For DFS Traverse Using None-Recursion(NLR and LNR)
 
-```py
+~~~py
 def DFS_Stack(root):
   s = []
   while root or s:
@@ -80,9 +78,11 @@ def DFS_Stack(root):
       root = s.pop()
       #if LNR: print(root.val) 中序
       root = root.right
-```
-##Template For DFS Traverse Using None-Recursion(LRN)
-```py
+~~~
+
+## Template For DFS Traverse Using None-Recursion(LRN)
+
+~~~py
 def DFS_Stack_LRN(root):
   s = []
   pre = None
@@ -96,13 +96,13 @@ def DFS_Stack_LRN(root):
     else:
       pre = s.pop()
       print(pre.val)
-```
+~~~
 
-##?Template For BFS Traverse Using 2 Queues?
-##?Template For BFS Traverse Using 1 Queue and Dummy Node?
-##Template For BFS Traverse Using 1 Queue(Best)
+## ?Template For BFS Traverse Using 2 Queues?
+## ?Template For BFS Traverse Using 1 Queue and Dummy Node?
+## Template For BFS Traverse Using 1 Queue(Best)
 
-```py
+~~~py
 from collections import deque
 
 def BFS_oneQueue(root):
@@ -113,12 +113,12 @@ def BFS_oneQueue(root):
     print(root.val)
     if root.left: q.append(root.left)
     if root.right: q.append(root.right)
-```
+~~~
 
-##?Morris Traverse?
+## ?Morris Traverse?
 
-##FAQ
-###Difference of DFS and BFS
+## FAQ
+### Difference of DFS and BFS
 DFS using stacks, and BFS using queues if Non-Recursion
-###Difference of Recursion and Non-Recursion
+### Difference of Recursion and Non-Recursion
 Recursion is dangerous when memory resource is limited: stack may overflow;However Non-Recursion method occupies more space

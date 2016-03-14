@@ -8,16 +8,16 @@ tags:
 - Binary Search
 ---
 
-##￼Classical Binary Search
+## ￼Classical Binary Search
 Given an sorted integer array-nums, and an integer target. Find the any or first or last position of target in nums, return -1 if target dose not exsit.
 
-###Recursion or While-Loop?
+### Recursion or While-Loop?
 
-###A generic binary search template
+### A generic binary search template
 
 The answer refers to [九章算法](http://www.jiuzhang.com/solutions/binary-search/).
 
-```python
+~~~python
 class Solution:
 
     # @param nums: The integer array
@@ -48,4 +48,4 @@ class Solution:
         if nums[end] == target:
             return end
         return -1
-```
+~~~
