@@ -9,12 +9,14 @@ tags:
 
 
 
-##Time Complexity
-###Asymptotic Analysis
+## Time Complexity
+
+### Asymptotic Analysis
+
 Look at growth of \\(T(n)\\) as \\(n\to\infty\\).
 
-- Upper Bounds: \\(O\\)-notation 
- - Def: 
+- Upper Bounds: \\(O\\)-notation
+ - Def: worst time
 - Lower Bounds: \\(\Omega\\)-notation
 - Tight bounds: \\(\Theta\\)-notation
  -  \\(\Theta g(n) = \Omega g(n) \cap Og(n)\\)
@@ -22,9 +24,9 @@ Look at growth of \\(T(n)\\) as \\(n\to\infty\\).
 Time complexities of some general algorithms can be ordered as:
 $$ Ο(1)＜ Ο(\log{2n}) ＜ Ο(n) ＜ Ο(n\log2n) ＜ Ο(n^2) ＜ Ο(n^3) ＜ … ＜ Ο(2^n) ＜ Ο(n!) $$
 
-Time complexity with \\(Ο(\log{2n})\\), \\(Ο(n)\\), \\(Ο(n\log2n)\\), \\(Ο(n^2)\\), \\(Ο(n^3)\\) are called polynomial time, and  \\(Ο(2^n)\\), \\(Ο(n!)\\) are exponential time. Problems concerning about polynomial time complexity are called P-problem and  the later one is called NP problems. Generally, algorithms with polynomial time complexity can be treated as efficient algorithm. 
+Time complexity with \\(Ο(\log{2n})\\), \\(Ο(n)\\), \\(Ο(n\log2n)\\), \\(Ο(n^2)\\), \\(Ο(n^3)\\) are called polynomial time, and  \\(Ο(2^n)\\), \\(Ο(n!)\\) are exponential time. Problems concerning about polynomial time complexity are called P-problem and  the later one is called NP problems. Generally, algorithms with polynomial time complexity can be treated as efficient algorithm.
 
-###Exercises
+### Exercises
 **Q1.** Take the following list of functions and arrange them in ascending order of growth rate. That is, if function \\(g(n)\\) immediately follows function \\(f(n)\\) in your list, then it should be the case that \\(f(n)\\) is \\( O(g(n))\\).
 
 $$ f\_{1}(n) = n^{2.5} $$
@@ -68,10 +70,10 @@ O(g(n))\\). For each of the following statements, decide whether you think it is
 
 **Q4.** Consider the following basic problem. You’re given an array A consisting of n integers A[1], A[2], . . . , A[n]. You’d like to output a two-dimensional n-by-n array B in which BB[i, j], for i < j, contains the sum of array entries A[i] through A[j]—that is, the sum A[i] + A[i + 1] + . . . + A[j]. (The value of array entry B[i, j] is left unspecified whenever i ≥ j, so it doesn’t matter what is output for these values.) Here’s a simple algorithm to solve this problem.
 
-```
-for i=1, 2,...,n do	for j=i+1, i+2,...,n do		Add up array entries A[i] through A[j]		Store the result in B[i, j] 
+~~~
+for i=1, 2,...,n do	for j=i+1, i+2,...,n do		Add up array entries A[i] through A[j]		Store the result in B[i, j]
 	end forend for
-```
+~~~
 
 - For some function f that you should choose, give a bound of the form O(f(n)) on the running time of this algorithm on an input of size n (i.e., a bound on the number of operations performed by the algorithm).
 
@@ -86,46 +88,47 @@ _{n\to\infty} g(n) /f (n) = 0 \\).
 - Remain to be solved.
 - Look at the algorithm listed below:
 
-```
-for i =1, 2, ..., n do 
+~~~
+for i =1, 2, ..., n do
 	Set B[i, i+1] to A[i] + A[i+1]
 end for
 for k = 2, 3, ..., n-1 do
-	for i = 1,2,...n-k do 
+	for i = 1,2,...n-k do
 		j = i + k
 	B[i,j] to be B[i, j-1] + A[j]
 	end for
 end for
-```
- 
+~~~
+
 **Q5.** Suppose we have an array A of n integers and wish to compute an \\(n \times n \\) array B where B[i,j] holds the sum of A[i] through A[j]. The following code fragment is one way to solve this problem.
 
-```
+~~~
 for i = 1 to n
 	for j = 1 to n
 		sum = 0
 		for k = i to j
 			sum += A[k]
 		B[i,j] = sum
-```
+~~~
 
  - What is the running time of the code fragment? (Hint: it is \\(Ω(n^2)\\) but not \\( O(n^2) \\)
  - Do you suppose this can be solved in time better than \\(O(n^2)\\)? Why or why not?
  - Give a \\(O(n^2)\\) time solution to this problem.
- 
+
  **Solution:**
- 
+
  - The outer two loops are similar to bubble sort being bounded as \\(O(n^2)\\). The inner loop will execute at most n times on each iteration of the \\(O(n^2)\\) outer loops. Therefore, the running time will be \\(O(n^3)\\).
- - We can't solve this faster than \\(O(n^2)\\) because there are \\(n^2\\) elements in the output array and we need to assign a value to every element. 
- - We can solve this problem in \\(O(n^2)\\) if we consider that the solution to the previous elements in the output array are sub-solutions to the later elements in the output array. 
- 
- ```
+ - We can't solve this faster than \\(O(n^2)\\) because there are \\(n^2\\) elements in the output array and we need to assign a value to every element.
+ - We can solve this problem in \\(O(n^2)\\) if we consider that the solution to the previous elements in the output array are sub-solutions to the later elements in the output array.
+
+~~~
  for i = 1 to n
  	B[i,i] = A[i]
- 	for j = i+1 to n 
+ 	for j = i+1 to n
  		B[i, j] = B[i, j-1] + A[j]
  	end for
  end for
- ```
- 
- 
+ ~~~
+
+
+## Auxiliary Space Complexity

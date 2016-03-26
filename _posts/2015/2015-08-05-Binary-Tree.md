@@ -13,10 +13,11 @@ tags:
 2. Complete Binary Tree
 
 ## Three different ways to traverse a binary Tree
-1. DFS: 前序（pre-order, NLR）
-2. DFS: 中序（in-order, LNR）
-3. DFS: 后序（post-order, LRN）
-4. BFS: 层序（level-order）
+
+- DFS: 前序（pre-order, NLR）
+- DFS: 中序（in-order, LNR）
+- DFS: 后序（post-order, LRN）
+- BFS: 层序（level-order）
 
 ### Traverse Binary Tree Example
 [A:B, C]
@@ -37,21 +38,29 @@ LNR: D B A G E H C F I
 LRN: D B G H E I F C A
 
 
-## Template For DFS Traverse Using Recursion
-~~~py
-def DFS_Recursive(root):
-    if root:
-      #if NLR: print(root.val)
-      DFS_Recursive(root.left)
-      #if LNR: print(root.val)
-      DFS_Recursive(root.right)
-      #if LRN: print(root.val)
+## Template For DFS Traverse Using Recursion(NLR and LNR)
+
+~~~cpp
+void helper(TreeNode* node, vector<int>& rst){
+    if (node != nullptr){
+//      rst.emplace_back(root -> val);  If it is PreOder
+        helper(node -> left, rst);
+//      rst.emplace_back(root -> val);  If it is InOrder
+        helper(node -> right, rst);
+    }
+}
+vector<int> DFS_Traversal(TreeNode* root) {
+    // write your code here
+    vector<int> rst;
+    helper(root, rst);
+    return rst;
+}
 ~~~
 
-## Template For DFS Traverse Using Divide and Conquer
+## Template For DFS Traverse Using Divide and Conquer(NLR and LNR)
 
 ~~~py
-def DFS_DC(root):
+def DFS_Traversal(root):
   if root is None:
     return
 
@@ -66,22 +75,31 @@ def DFS_DC(root):
 
 ## Template For DFS Traverse Using None-Recursion(NLR and LNR)
 
-~~~py
-def DFS_Stack(root):
-  s = []
-  while root or s:
-    if root:
-      #if NLR: print(root.val) 前序
-      s.append(root)
-      root = root.left
-    else:
-      root = s.pop()
-      #if LNR: print(root.val) 中序
-      root = root.right
+~~~cpp
+vector<int> DFS_Traversal(TreeNode *root) {
+    // write your code here
+    vector<int> rst;
+    if (root == nullptr) return rst;
+    stack<TreeNode*> s;
+
+    while (!s.empty() || root != nullptr){
+        if (root != nullptr){
+//          rst.emplace_back(root -> val);  If Pre-Order
+            s.push(root);
+            root = root -> left;
+        }
+        else{
+            root = s.top();
+            s.pop();
+//          rst.emplace_back(root -> val);  If In-Order
+            root = root -> right;
+        }            
+    }
+return rst;
+}
 ~~~
 
 ## Template For DFS Traverse Using None-Recursion(LRN)
-
 ~~~py
 def DFS_Stack_LRN(root):
   s = []
@@ -98,21 +116,32 @@ def DFS_Stack_LRN(root):
       print(pre.val)
 ~~~
 
-## ?Template For BFS Traverse Using 2 Queues?
-## ?Template For BFS Traverse Using 1 Queue and Dummy Node?
+
 ## Template For BFS Traverse Using 1 Queue(Best)
 
-~~~py
-from collections import deque
+~~~cpp
+vector<vector<int>> levelOrder(TreeNode *root) {
+    // write your code here
+    vector<vector<int>> rst;
+    if (root == nullptr) return rst;
 
-def BFS_oneQueue(root):
-  if not root: return
-  q = deque([root])
-  while q:
-    root = q.popleft()
-    print(root.val)
-    if root.left: q.append(root.left)
-    if root.right: q.append(root.right)
+    queue<TreeNode*> nodes;
+    nodes.push(root);
+
+    while(!nodes.empty()){
+        vector<int> level;
+        int size = nodes.size();
+        for (int i = 0; i < size; i++){
+            TreeNode* node = nodes.front();
+            nodes.pop();
+            level.emplace_back(node -> val);
+            if (node -> left != nullptr) nodes.push(node -> left);
+            if (node -> right != nullptr) nodes.push(node -> right);    
+        }
+        rst.emplace_back(level);
+    }
+return rst;    
+}
 ~~~
 
 ## ?Morris Traverse?
@@ -121,4 +150,5 @@ def BFS_oneQueue(root):
 ### Difference of DFS and BFS
 DFS using stacks, and BFS using queues if Non-Recursion
 ### Difference of Recursion and Non-Recursion
-Recursion is dangerous when memory resource is limited: stack may overflow;However Non-Recursion method occupies more space
+Recursion is dangerous when memory resource is limited: stack may overflow;
+However Non-Recursion method occupies more space
