@@ -11,41 +11,59 @@ tags:
 ## ￼Classical Binary Search
 Given an sorted integer array-nums, and an integer target. Find the any or first or last position of target in nums, return -1 if target dose not exsit.
 
-### Recursion or While-Loop?
+~~~cpp
+class Solution {
+ public:
+  int solve(vector<int> input, int target) {
+    if (input.size() == 0) return -1;
+    int left = 0, right = input.size() - 1;
+    while (left <= right){
+      int mid = left + (right - left)/2;
+      if (input[mid] == target){
+        return mid;
+      }
+      else if (input[mid] < target) {
+        left = mid + 1;
+      }
+      else {
+        right = mid - 1;
+      }
+    }
+    return -1;
+  }
+};
+~~~
 
-### A generic binary search template
+## Find first / last element by binary search
+变种。记住就好。
+~~~cpp
+class Solution {
+ public:
+  int firstOccur(vector<int> input, int target) {
+    // Write your solution here
+    if (input.size() == 0) return -1;
+    int left = 0, right = input.size() - 1;
+    while (left < right - 1){
+      int mid = left + (right - left)/2;
+      if (target > input[mid]){
+    //if (target >= input[mid]){  //find last
+        left = mid;
+      }
+      else {
+        right = mid;
+      }
+    }
 
-The answer refers to [九章算法](http://www.jiuzhang.com/solutions/binary-search/).
-
-~~~python
-class Solution:
-
-    # @param nums: The integer array
-    # @param target: Target number to find
-    # @return the first position of target in nums, position start from 0
-
-    def binarySearch(self, nums, target):
-        if len(nums) == 0:
-            return -1
-
-        start, end = 0, len(nums) - 1
-        while start + 1 < end:
-					#why start + 1 < end -> avoid dead loop
-            mid = (start + end) / 2
-						#In Java/C++ with int type ->
-						#start + (end - start) / 2 ->
-						#avoid stack overflow ->
-						#zhuangbility
-
-            if nums[mid] < target:
-                start = mid
-            else:
-                end = mid
-
-				#return the first ? last ? any?
-        if nums[start] == target:
-            return start
-        if nums[end] == target:
-            return end
-        return -1
+    if (input[left] == target){
+      return left;
+    }
+    else if (input[right] == target) {
+      return right;
+    }
+    //find last element
+    //if (input[right] == target) return right;
+    //else if (input[left] == target) return left;    
+    return -1;
+  }
+};
 ~~~

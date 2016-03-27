@@ -13,6 +13,7 @@ tags:
 - [Edit Distance](http://www.lintcode.com/en/problem/edit-distance/)
 - [Interleaving String](http://www.lintcode.com/en/problem/interleaving-string/)
 - [Distinct Subsequences](http://www.lintcode.com/en/problem/distinct-subsequences/)
+
 ## Longest Common Sequences
 LCS是的经典动归问题。
 
@@ -25,7 +26,6 @@ public:
      */
     int longestCommonSubsequence(string A, string B) {
         // write your code here
-
         int dp[A.size() + 1][B.size() + 1];
 
         for (int i = 0; i < A.size() + 1; ++i){
