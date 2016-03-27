@@ -8,34 +8,45 @@ tags:
 - Robotics
 - Signal Processing
 ---
+
 ##Purpose and Usage
+
 - Eliminate noise in measurements
 - Generate non-observable states(e.g., Velocity from position signals)
 - For prediction of future state
 - Optimal filtering
 
 ##Framework and Model
+
 ###Given:
-- A discrete stochastic linear controlled dynamical system
+- A discrete stochastic linear controlled dynamical system:
+
+
   $$x_k = Ax_{k-1} + Bu_{k-1} + w_{k-1}$$
 
 Each current signal value x^k is a combination of previous signal value $x_{k-1}$ times a constant, a control signal $u_{k}$ and a process noise and a process noise signal $w_{k-1}$(which usually considered as zero).
 
-- A measurement function
+- A measurement function, where $v_{k}$ is the measurement noise.
+
+
   $$ y_{k} = Hx_{k} + v_{k} $$
-Where $v_{k}$ is the measurement noise.
+
 
 - Assume the process noise and the measurement noise are both considered to be normal distribution that
 
     $$ p(w) ∼ N (0, Q), $$
+
     $$ p(v) ∼ N (0, R). $$
+
 In reality, covariance matrix Q and R may change in every iteration. We assume they are constant here however.
 
 
 ###Goal:
+
 Find the best (recursive) estimate of the state x of the system.
 
 ###Computational Origins
+
 Define $e_{k}^{-}$ to be a priori state estimate at step k given knowledge of the process prior to step $k$, and define $e_{k}$  to be a posteriori state estimate at step $k$ given measurement $z_{k}$. Then a priori and a posteriori estimate errors can be defined as:
 
   $$e_{k}^{-} ≡ x_{k} - \hat{x}_{k}^{-}$$

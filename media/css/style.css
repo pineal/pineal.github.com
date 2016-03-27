@@ -11,24 +11,32 @@ h4{
 }
 
 table {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	border-collapse: collapse;
+	float: center;
+	width: 100%;
   padding: 0; }
 
   table tr {
-    border-top: 1px solid #cccccc;
+    border-top: 0px solid #cccccc;
     background-color: white;
     margin: 0;
     padding: 0; }
     table tr:nth-child(2n) {
-      background-color: #f8f8f8; }
+      background-color: white; }
     table tr th {
+      background-color: #cccccc;
       font-weight: bold;
-      border: 1px solid #cccccc;
-      text-align: left;
+/*      border: 1px solid #cccccc;
+*/      text-align: center;
       margin: 0;
       padding: 6px 13px; }
     table tr td {
-      border: 1px solid #cccccc;
-      text-align: left;
+      /*border: 1px solid #cccccc;*/
+          border-bottom: 1px solid black;
+
+      text-align: center;
       margin: 0;
       padding: 6px 13px; }
     table tr th :first-child, table tr td :first-child {
@@ -145,6 +153,7 @@ blockquote {
 }
 
 #sidenav a:hover{		
+	border-right: 3px solid white;
 }
 
 

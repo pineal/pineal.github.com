@@ -10,11 +10,12 @@ tags:
 - threads
 ---
 ##Threads
+
 ###Example: remote login function with or without threads
 
 **Life Without Threads**
 
-```C
+~~~cpp
 void rlogind(int r_in, int r_out, int l_in, int l_out) {
 	fd_set in = 0, out;
 	int want_l_write = 0, want_r_write = 0;
@@ -74,11 +75,11 @@ void rlogind(int r_in, int r_out, int l_in, int l_out) {
 		}
 	}
 }
-```
+~~~
 
 **Life with threads**
 
-```C
+~~~cpp
 incoming(int r_in, int l_out) {
 	int eof = 0;
 	char buf[BSIZE];
@@ -91,9 +92,9 @@ incoming(int r_in, int l_out) {
 			eof = 1;
 	}
 }
-```
+~~~
 
-```C
+~~~cpp
 outgoing(int l_in, int r_out) {
 	int eof = 0;
 	char buf[BSIZE];
@@ -105,23 +106,26 @@ outgoing(int l_in, int r_out) {
 		if (write(r_out, buf, size) <= 0)
 			eof = 1;
 	}
-}```
+}~~~
 
 ##Mutex
+
 ###Definition
+
 A new data type called mutex standing for Mutual exclusion is defined in POSIX. Mutex is used for:
 
 - Code locking: only one thread is executing a particular piece of code at once.
 - Data locking: only one thread is accessing a particular data structure at once.
 
 ###Example
+
 The the problem of $x = x + 1$ can be solved by mutexes:
 
-```C
+~~~cpp
 pthread_mutex_t m = PTHREAD_MUTEX_INITIALIZER; // shared by both threadsint x; // dittopthread_mutex_lock(&m);x = x+1;pthread_mutex_unlock(&m);
-```
+~~~
 
-```C
+~~~cpp
 void proc1( ) {
 	pthread_mutex_lock(&m1);
 	/* use object 1 */
@@ -130,9 +134,10 @@ void proc1( ) {
 	pthread_mutex_unlock(&m2);
 	pthread_mutex_unlock(&m1);
 	}
-```
+~~~
 
-```C
+
+~~~cpp
 void proc2( ) {
 	pthread_mutex_lock(&m2);
 	/* use object 2 */
@@ -140,9 +145,11 @@ void proc2( ) {
 	/* use objects 1 and 2 */
 	pthread_mutex_unlock(&m1);
 	pthread_mutex_unlock(&m2);}
-```
+~~~
+
 
 ##Deadlock
+
 ###Occur conditions
 Generally the conditions below are **necessary but not sufficient** for deadlock:
 
@@ -154,29 +161,32 @@ Generally the conditions below are **necessary but not sufficient** for deadlock
 When threads can wait on only one of them at a time (while holding locks on any number of them), these conditions are **necessary and also sufficient**.
 
 ##Semaphores
+
 We use the following notation to describe the semantics of P:
 
-```
+~~~
 when (semaphore > 0)
 [semaphore = semaphore – 1;]
-```
+~~~
 
 The V operation is simpler: a thread atomically adds one to the value of the semaphore. We write this as:
 
-```[semaphore = semaphore + 1;]
-```
+~~~[semaphore = semaphore + 1;]
+~~~
 
 ###Mutexes implementation
-```C
+
+~~~cpp
 semaphore S = 1;
 void OneAtATime( ) {       P(S);       ...       /* code executed mutually exclusively */       ...       V(S);}
-```
+~~~
 
 ###Reader-Writers Problem
-```C
-void reader( ) {	when (writers == 0)		[readers++; ]		// read		[readers--;]}```
 
-```C
+~~~cpp
+void reader( ) {	when (writers == 0)		[readers++; ]		// read		[readers--;]}~~~
+
+~~~cpp
 reader(){
 pthread_mutex_lock(&m);
 while (!(writers == 0))
@@ -190,7 +200,7 @@ if (--readers == 0)
 	pthread_cond_signal(&writersQ);
 	pthread_mutex_unlock(&m);
 }
-```
+~~~
 
-```C
-void writer( ) {when ((writers == 0) &&}   writers++;]// write[writers--;]}```
+~~~cpp
+void writer( ) {when ((writers == 0) &&}   writers++;]// write[writers--;]}~~~
