@@ -12,6 +12,7 @@ h4{
 
 table {
   padding: 0; }
+
   table tr {
     border-top: 1px solid #cccccc;
     background-color: white;
@@ -45,36 +46,39 @@ body{
     color:#000000;
     background-color:#ffffff;
 }
+
 blockquote {
     border-left: 5px solid #DDDDDD;
     color: black;
     padding: 0 15px;
 	margin: 15px 0;
 }
+
 #indexNav{
+	padding-top: 20px;
 	float: center;
 	font-size:60px;
-	
+	color: white;
+
 }
 
 #indexNav li{
-	line-height:68px;
-	width:auto;
+	line-height: 100%;
 	list-style-type: none;
 }
 
-
-
 #indexNav a{
-	padding-left: 5px;
-	padding-right: 15px;
 	color: white;
 	background: black;
+	display: inline-block;	
+	line-height: 60px;
+	width: auto;
+	padding-left: 10px;
+	padding-right: 20px;
 }
 
 #indexNav a:hover{
 	text-decoration: underline;
-
 }
 
 #footer{
@@ -119,13 +123,13 @@ blockquote {
 }
 
 #sidenav li{
-	line-height:24px;
-	width:auto;
+	line-height: 100%;
 	list-style-type: none;
-
 }
 
 #sidenav a{
+	display: inline-block;
+	line-height: 24px;
 	font-size: 24px;
 	padding-left: 15px;
 	padding-right: 5px;
