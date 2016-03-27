@@ -63,11 +63,13 @@ blockquote {
 }
 
 #indexNav li{
+
 	line-height: 100%;
 	list-style-type: none;
 }
 
 #indexNav a{
+
 	color: white;
 	background: black;
 	display: inline-block;	
@@ -78,7 +80,8 @@ blockquote {
 }
 
 #indexNav a:hover{
-	text-decoration: underline;
+	border-right: 3px solid black;
+	border-bottom: 10px solid black;
 }
 
 #footer{
