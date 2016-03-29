@@ -10,8 +10,16 @@ tags:
 
 ## Definition of Binary Tree
 1. Full Binary Tree
-2. Complete Binary Tree
+  全部都填满的树。
 
+2. Complete Binary Tree
+  除了最后一行其他都填满，最后一行的最后一个之前（左边）全部是满的。
+
+3. Balanced Binary Tree
+  左右子树的高度最多差1. Height of the tree: $$O(log(n))$$
+
+4. Binary Search Tree
+  将二叉树按inorder方式遍历，是递增的。
 ## Three different ways to traverse a binary Tree
 
 - DFS: 前序（pre-order, NLR）
@@ -41,12 +49,13 @@ LRN: D B G H E I F C A
 ## Template For DFS Traverse Using Recursion(NLR and LNR)
 
 ~~~cpp
-void helper(TreeNode* node, vector<int>& rst){
+void helper(TreeNode* node, vector<int> & rst){
     if (node != nullptr){
 //      rst.emplace_back(root -> val);  If it is PreOder
         helper(node -> left, rst);
 //      rst.emplace_back(root -> val);  If it is InOrder
         helper(node -> right, rst);
+//      rst.emplace_back(root -> val);  If it is PostOrder
     }
 }
 vector<int> DFS_Traversal(TreeNode* root) {
