@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Binary Tree
+title: Bit Manipulation
 categories:
 - Algorithm
 tags:
