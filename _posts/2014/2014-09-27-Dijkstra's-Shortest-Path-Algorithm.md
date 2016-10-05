@@ -5,16 +5,15 @@ categories:
 - Algorithm
 tags:
 - Dijkstras
+- Greedy
 ---
-
-## Copyright Statement
-> The Exercise and some notes are homework or examples in course CSCI 570, computer science department, university of Southern California. All copyright belongs to the team of this course, including Professors and TAs. Posts on this blog are just for self-learning.
 
 ## Problem Formulation
 Given g=(V,E) with wights w(u,v)≥0 for each edge (u,v)∈E find the shortest path from s∈V to V-S.
 
 
 ## Algorithm Design
+
 The algorithm can be designed in following procedure:
 
 1. Start with a set S of vertices whose final shortest path we already know.
@@ -24,7 +23,7 @@ The algorithm can be designed in following procedure:
 
 It can also be represented by the pseudocode in following:
 
-~~~
+```
 Dijkstra's Algorithm (G,l)
 Let S be the set of explored nodes
 	For each u∈S, we store a distance d(u)
@@ -34,7 +33,7 @@ While S ≠ V
 		d(v)= min(d(u) + le)e=(u,v):u∈S is as small as possible
 	Add v to S and define d(v) = d'(v)
 Endwhile
-~~~
+```
 
 ## Demonstration
 ![ExampleProblem](http://img.blog.163.com/photo/WfZavQsDv8XkOKX7DnpGUg==/583497626721859365.jpg)
@@ -44,7 +43,7 @@ Endwhile
 ## Implementation
 The implementation will base on priority queue(Heaps).
 
-~~~
+```
 S=Null
 Initialize priority queue Q with all nodes V. With d(v) as their key value (all d(v)'s=infinity except for s where d(s)=0)
 While S ≠ V
@@ -55,9 +54,10 @@ While S ≠ V
 			decrease-key(Q,u,d(v)+le)
 	endfor
 endwhile
-~~~
+```
 
-> decrease-key(x, k, H): Replace the key of item x in heap H by k, which is smaller than thecurrent key of x.
+> decrease-key(x, k, H): Replace the key of item x in heap H by k, which is smaller than the
+current key of x.
 
 ### Complexity Analysis
 O(n) for the initialization
@@ -79,6 +79,7 @@ m decreaseKey's
 |Dense Graph				| n^2lgn| n^2lgn | n^2    |
 
 ## Example
+
 ### Question 1
 
 Hardy decides to start running to work in SF city to get in shoe. He prefers a route that goes entirely uphill and then entirely downhill so that he could work up a sweat uphill and get a nice, cool grease at the end of his run as he runs faster downhill. He starts running from his home and ends at his workplace. To guide his run, he prints out a detailed map of the road between home and work with k intersections and m road segments(any existing road between two intersections). Each intersection has a distinct elevation. Assuming that every road segment is either fully uphill or fully downhill, give an efficient algorithm to find the shortest path that meets Hardy's specifications. If no such path meets Hardy's specifications, your algorithm should determine this. Justify your answer.
@@ -115,16 +116,21 @@ Complexity Analysis: Since each directed edge is checked at most once, the compl
 ### Solution 2
 Run a modified version of Dijkstra’s algorithm without using the priority queue.
 
-~~~
+```
 Set S = {s}
 While t ̸∈ S
-	For each node u satisfying u ̸∈ S, (v,u) ∈ E and v ∈ S, check if the condition δ(s,u) = w(v, u) + δ(s, v) is true.	If true, add u to S, and v is the predecessor of u.Endwhile
-~~~
+	For each node u satisfying u ̸∈ S, (v,u) ∈ E and v ∈ S, check if the condition δ(s,u) = w(v, u) + δ(s, v) is true.
+	If true, add u to S, and v is the predecessor of u.
+Endwhile
+```
 
 Complexity Analysis: Since each directed edge is checked at most once, the complexity is O(|V | + |E|).
 
 ### Question 4
 We are given a directed graph G = (V, E) on which each edge (u, v) ∈ E has an associated value r(u, v), which is a real number in the range 0 ≤ r(u, v) ≤ 1 that represents the reliability of a communication channel from vertex u to vertex v. We interpret r(u, v) as the probability that the channel from u to v will not fail, and we assume that these probabilities are independent. Give an efficient algorithm to find the most reliable path between any two given vertices.
 
-1. Assign the edge weight w(u, v) = − log r(u, v) to each edge (u, v) ∈ E, with appropriate representation for edge weight of infinity.2. Run Dijkstra’s shortest path algorithm and return the path found from node s to node t as the path P∗.
-Since r(u,v) ∈ [0,1], all weights w(u,v) are non-negative and hence Dijkstra’s algorithm gives thecorrect shortest path, and thus also the most reliable path connecting node s to node t.
+1. Assign the edge weight w(u, v) = − log r(u, v) to each edge (u, v) ∈ E, with appropriate representation for edge weight of infinity.
+2. Run Dijkstra’s shortest path algorithm and return the path found from node s to node t as the path P∗.
+
+Since r(u,v) ∈ [0,1], all weights w(u,v) are non-negative and hence Dijkstra’s algorithm gives the
+correct shortest path, and thus also the most reliable path connecting node s to node t.
