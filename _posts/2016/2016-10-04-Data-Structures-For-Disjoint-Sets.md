@@ -1,52 +1,54 @@
 ---
 layout: post
-title: Data Structures for disjoint sets 
+title: Data Structures for Disjoint Sets
 categories:
 - Data Structure
 tags:
-- Disjoint Sets 
-- Union Find 
+- Disjoint Sets
+- Union Find
 ---
 
 # Disjoint Sets
 
 ## 基本操作
 
-1. make_set(x) 
+1. make_set(x)
 将一个vertex变成一个disjoint
 
 2. union(x, y)
-将包含vertex x 的 set 和 包含vertex y 的 set 并起来 
+将包含vertex x 的 set 和 包含vertex y 的 set 并起来
 
 3. find_set(x)
 返回一个指针，指向包含这个vertex 的唯一的 set
 
 ## 简单的应用
 
-最基本的应用是来确定一个 undirected graph 中的 connected components. 
+最基本的应用是来确定一个 undirected graph 中的 connected components.
+
+连接components:
 
 ```
 connected_component(G)
     for each vertex v in G
         make_set(v)
     for each edge(u, v) e in G
-        if (find_set(u) != find_set(v)) 
-            union(u, v) 
+        if (find_set(u) != find_set(v))
+            union(u, v)
 ```        
 
-判断两个vertices是否连接在同一component中：
+判断两个vertices是否连接在同一component中:
+
 ```
 same_component(u, v)
     if find_set(u) == find_set(v)
         return true
-    else 
+    else
         return false
 ```
-## 链表的实现 
 
 ## 并查集森林 (Disjoint-Set Forest)
 
-这是一种比链表实现更快的实现。我们将sets表示为rooted trees。 每一个 node 包括一个 vertex，每一棵树代表一个set. 所有的node都指向各自的parent。 在树中那个指向自己的显然就是tree root。这种数据结构高效的原因是用了
+除了可以用链表来实现 disjoint-set， disjoint-set forest是一种比链表实现更快的实现。我们将sets表示为rooted trees。 每一个 node 包括一个 vertex，每一棵树代表一个set. 所有的node都指向各自的parent. 在树中那个指向自己的显然就是tree root。这种数据结构高效的原因是用了
 以下两种技巧："union by rank", "path compression".
 
 ### Union By Rank
@@ -73,7 +75,7 @@ link(x,y)
         y.p = x
     else if x.rank < y.rank
         x.p = y
-    else 
+    else
         x.p = y
         y.rank = y.rank + 1
 ```
@@ -95,10 +97,9 @@ TODO: 分析
 
 ## Detect Cycle in a undirected graph
 
-```cpp
-#include <stdio.h>
-#include <stdlib.h>
+图的相关数据结构表示和函数：
 
+```cpp
 typedef struct Edge_t {
 	int src;
 	int dest;
@@ -109,11 +110,6 @@ typedef struct Graph_t {
 	Edge* edges;
 } Graph;
 
-typedef struct disjoint_set_t {
-	int parent;
-	int rank;
-}Disjoint_Set;
-
 Graph* build_graph(int V, int E) {
 	Graph* graph = (Graph*)malloc(sizeof(Graph));
 	graph->V = V;
@@ -121,6 +117,15 @@ Graph* build_graph(int V, int E) {
 	graph->edges = (Edge*)malloc(E * sizeof(Edge));
 	return graph;
 }
+```
+
+Disjoint-Set的相关数据结构和函数：
+
+```cpp
+typedef struct disjoint_set_t {
+	int parent;
+	int rank;
+}Disjoint_Set;
 
 int find_set(Disjoint_Set allsets[], int x) {
 	if (allsets[x].parent != x) {
@@ -133,7 +138,7 @@ void union_set(Disjoint_Set allsets[], int x, int y) {
 
 	int xroot = find_set(allsets, x);
 	int yroot = find_set(allsets, y);
-	
+
 	if (allsets[xroot].rank > allsets[yroot].rank) {
 		allsets[yroot].parent = xroot;
 	} else if (allsets[xroot].rank < allsets[yroot].rank) {
@@ -153,7 +158,7 @@ bool is_cycle(Graph* graph) {
 		allsets[v].parent = v;
 		allsets[v].rank = 0;
 	}
-	
+
 	for (int e = 0; e < E; e++) {
 		int x = find_set(allsets, graph->edges[e].src);
 		int y = find_set(allsets, graph->edges[e].dest);
@@ -165,7 +170,11 @@ bool is_cycle(Graph* graph) {
 	}
 	return false;
 }
+```
 
+main函数测试：
+
+```cpp
 int main () {
 
 	int V = 3;
@@ -191,5 +200,3 @@ int main () {
 
 
 ## LeetCode 305 Number of Islands II
-
-
