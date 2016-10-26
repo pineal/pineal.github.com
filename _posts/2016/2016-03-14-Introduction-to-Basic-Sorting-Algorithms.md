@@ -64,7 +64,7 @@ template<typename T>
 void selection_sort(T arr[], int len){
   for (int i = 0; i < len - 1; i++){  //len - 1即可，最后一次交换在倒数第一个和倒数第二个之间进行
     int min_index = i;
-    for (int j = i + 1; j < len - 1; j++){
+    for (int j = i + 1; j < len; j++){
       //找到未排序的数组中最小的数的index
       if (arr[j]<arr[min_index]){
           min_index = j;
@@ -72,6 +72,21 @@ void selection_sort(T arr[], int len){
     }
     swap(arr[i], arr[min_index]);
   }
+}
+~~~
+
+附上冒泡排序代码。
+
+~~~cpp
+void bubble_sort(int arr[], int n) {
+    int i, j;
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
 }
 ~~~
 
