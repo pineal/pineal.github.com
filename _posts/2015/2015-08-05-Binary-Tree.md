@@ -4,7 +4,6 @@ title: Binary Tree
 categories:
 - Algorithm
 tags:
-- Algorithm
 - Binary Tree
 ---
 
