@@ -267,4 +267,149 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
   }
 ~~~
 
-这样的解法可以归结为一种类型。比如一堆数中只有两种，三种四种数，那么就可以对应个数的挡板将数分割成相应区域，每次检查条件是否满足。Eg: Rainbow Sort。这样的做法复杂度只需要$O(n)$?
+这样的解法可以归结为一种类型。比如一堆数中只有两种，三种四种数，那么就可以对应个数的挡板将数分割成相应区域，每次检查条件是否满足。Eg: Sort colors。这样的做法复杂度只需要$O(n)$.
+
+### Sort Colors
+Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue. Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.
+
+```cpp
+void sortColors(vector<int>& nums) {
+    int zero = 0;
+    int one = 0;    //explorer
+    int two = nums.size() - 1;
+    //Three seperator Four regions
+    //[0, zero)     0
+    //[zero, one]   1
+    //(two, end]    2
+    while (one <= two) {
+        if (nums[one] == 0) {   
+            swap(nums[one++], nums[zero++]);
+        } else if (nums[one] == 1) {
+            one++;
+        } else {
+            swap(nums[one], nums[two--]);
+            //don't move 'one':
+            //you don't know what is swaped from 'two'
+        }
+    }
+}
+```
+### Follow up I: four colors
+
+```cpp
+vector<int> rainbowSortII(vector<int> array) {
+   int zero = 0, one = 0, other = array.size() - 1;
+   while (one <= other) {
+     if (array[one] < 1) {
+       swap(array[one++], array[zero++]);
+     } else if (array[one] > 1) {
+       swap(array[other--], array[one]);
+     } else {
+       one++;
+     }
+   }
+   int two = one, three = array.size() - 1;
+   while (two <= three) {
+     if (array[two] == 3 && array[three] == 2) {
+       swap(array[two++], array[three--]);
+     } else if (array[two] == 2) {
+       two++;
+     } else {
+       three--;
+     }
+   }
+   return array;
+ }
+```
+
+### Follow up II: k colors
+TODO
+
+
+## Wiggle Sort
+
+nums[0] <= nums[1] >= nums[2] <= nums[3]....
+
+这个时间复杂度优化到了O(n)。下面那个做法是通用的。
+```cpp
+void wiggleSort(vector<int>& nums) {
+    for (int i=0; i<(int)nums.size() - 1; i++) {
+        if (i % 2 == 0 && nums[i] > nums[i+1]) {
+            swap(nums[i], nums[i+1]);
+        }
+        if (i % 2 == 1 && nums[i] < nums[i+1]) {
+            swap(nums[i], nums[i+1]);
+        }
+    }        
+}
+```
+### Follow up: Wiggle Sort II
+
+nums[0] < nums[1] > nums[2] < nums[3]...
+
+根据这个性质，我们可以确定一种排法一定可以成立：把小的那一半排在偶数位，把大的那一半排在奇数位。这个是通用的。
+ 时间复杂度 $ O(nlog(n)) $.
+
+```cpp
+void wiggleSort(vector<int>& nums) {
+    vector<int> copy(nums);
+    sort(copy.begin(), copy.end());
+    int left = (nums.size() + 1) / 2 - 1;
+    int right = nums.size() - 1;
+    for (int i = 0; i < nums.size(); i++) {
+        nums[i] = (i % 2 == 0)? copy[left--] : copy[right--];
+    }
+}
+```
+传说中$O(n)$ 的解法。
+
+
+## Sort In Specified Order
+A1 = {2, 1, 2, 5, 7, 1, 9, 3}, A2 = {2, 1, 3}, A1 is sorted to {2, 2, 1, 1, 3, 5, 7, 9}
+
+```cpp
+vector<int> helper(vector<int> & A1, vector<int> & A2) {
+   // Write your solution here.
+   if (A1.size() <= 1 || A2.size() == 0) {
+       sort(A1.begin(), A1.end());
+       return A1;
+   }
+   map<int, int> t;
+   for (int i = 0; i < A2.size(); i++) {
+       t.emplace(A2[i], i);
+   }
+
+   int j = 0, k = A1.size() - 1;
+   while (j <= k) {
+       if (t.find(A1[j]) == t.end() && t.find(A1[k]) != t.end()) {
+           swap(A1[j], A1[k]);
+           j++;
+           k--;
+       }
+       else if (t.find(A1[j]) != t.end()) {
+           j++;
+       }
+       else {
+           k--;
+       }
+   }
+
+   //sort the [0, j) in specified order
+   //[2 1 3 4]
+   //2 1 2 1 4 3 => 2 2 1 1 3 4
+
+   for (int i = 0; i < j; i++) {
+       int min_index = i;
+       for (int l = i; l < j; l++) {
+           if (t[A1[min_index]] > t[A1[l]]) {
+               min_index = l;
+           }
+       }
+       swap(A1[i], A1[min_index]);
+   }
+
+   //sort the (k, n) part in ascending order
+   sort(A1.begin() + k + 1, A1.end());
+   return A1;
+ }
+ ```

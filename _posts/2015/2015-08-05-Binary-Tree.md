@@ -65,22 +65,6 @@ vector<int> DFS_Traversal(TreeNode* root) {
 }
 ~~~
 
-## Template For DFS Traverse Using Divide and Conquer(NLR and LNR)
-
-~~~py
-def DFS_Traversal(root):
-  if root is None:
-    return
-
-  #Divide
-  left = DFS_DC(root.left);
-  right = DFS_DC(root.right);
-
-  #Conquer
-  #result = Merge from left and right
-  return result
-~~~
-
 ## Template For DFS Traverse Using None-Recursion(NLR and LNR)
 
 ~~~cpp

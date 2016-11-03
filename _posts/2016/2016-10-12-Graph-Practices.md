@@ -25,6 +25,53 @@ Course Schedule
 
 最后判断如果出度中还有点，说明还有边存在着。
 
+```cpp
+//BFS
+class Solution {
+	public:
+		bool canFinish(int numCourses, vector<pair<int, int>>& pres) {
+			queue<int> zeroInDegree;
+
+			unordered_map<int, unordered_set<int>> inDegree;
+			unordered_map<int, unordered_set<int>> outDegree;
+
+			for (int i = 0; i < pres.size(); i++) {
+				inDegree[pres[i].first].emplace(pres[i].second);
+				outDegree[pres[i].second].emplace(pres[i].first);
+			}
+
+			for (int i = 0; i < numCourses; i++) {
+				if (!inDegree.count(i)) {
+					zeroInDegree.push(i);
+				}
+			}
+
+			while (!zeroInDegree.empty()) {
+				int parent = zeroInDegree.front();
+				zeroInDegree.pop();
+				//for each child has a edge from parent
+				for (auto child : outDegree[parent]) {
+					//remove edge
+					inDegree[child].erase(parent);
+					//if this child has no edge, add to queue
+					if (inDegree[child].empty()) {
+						zeroInDegree.push(child);
+					}
+				}
+				outDegree.erase(parent);
+			}
+
+			//if still exist edges in the graph, return false
+			if (!outDegree.empty()) {
+				return false;
+			}
+			return true;   
+		}
+};
+
+```
+
+
 Course Schedule II
 
 BFS的过程中顺便记录弹出的顺序就行了。
