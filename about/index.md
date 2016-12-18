@@ -36,16 +36,18 @@ comments: no
 
 #### __Research Interests__
 
-- Image processing
 - Robotics
-- FPGA
-- Linux/Unix programming
+- AI
+- Game Programming
+- Networks
 
 #### __Cool things__
-- Photography/videomaking
+
+- Photography/Videography
 - Reading
 - Soccer
 - Music/Guitar
 
 #### __Description__
+
 Hello world! :) To be continued...
