@@ -70,26 +70,45 @@ blockquote {
 
 }
 
-#indexNav li{
-
-	line-height: 100%;
-	list-style-type: none;
+#indexNav ul {
+    display: inline-block;
+    list-style-type: none;
+    line-height: 70%;
 }
 
-#indexNav a{
-
-	color: white;
-	background: black;
-	display: inline-block;	
-	line-height: 62px;
-	width: auto;
-	padding-left: 10px;
-	padding-right: 25px;
+#indexNav li a {
+    background-color: black;
+    width: auto;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;    
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    position: relative;
+    overflow: hidden;
 }
 
-#indexNav a:hover{
-	border-right: 3px solid black;
-	border-bottom: 10px solid black;
+#indexNav li a:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  background: white;
+  height: 4px;
+  -webkit-transition-property: right;
+  transition-property: right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+#indexNav li a:hover:before, #indexNav li a:focus:before, #indexNav li a:active:before {
+  right: 0;
 }
 
 #footer{
@@ -127,34 +146,71 @@ blockquote {
 	padding-left: -15px;
 	margin-top: 100px;
 	margin-right: 50px;
-	line-height:24px;
 	float: left;
 	text-align: right;
     width: 350px;
 }
 
-#sidenav li{
-	line-height: 100%;
-	list-style-type: none;
+#sidenav ul {
+    display: inline-block;
+    line-height: 70%;
+}
+
+#sidenav ul li {
+    list-style-type: none;
 }
 
 #sidenav a{
-	display: inline-block;
-	line-height: 24px;
+    text-decoration: none;    
+    list-style-type: none;
+	line-height: 28px;
 	font-size: 24px;
 	padding-left: 15px;
 	padding-right: 5px;
 	color: white;
 	background: black;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.hvr-underline-from-right {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  overflow: hidden;
+}
+#sidenav a:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 100%;
+  right: 0;
+  bottom: 0;
+  background: white;
+  height: 2px;
+  -webkit-transition-property: left;
+  transition-property: left;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+#sidenav a:hover:before, #sidenav a:focus:before, #sidenav a:active:before {
+  left: 0;
 }
 
 #listSideNav{
 	margin-top: 30px; 
 }
 
-#sidenav a:hover{		
-	border-right: 3px solid white;
-}
 
 
 li{
