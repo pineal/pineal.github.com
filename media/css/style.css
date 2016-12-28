@@ -51,7 +51,7 @@ body{
     margin-right:auto;
    /* font-family:MuseoSans,Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",""Lucida Grande",Helvetica,Arial,sans-serif;            
     color:#000000;Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei",Verdana,sans-serif;*/
-    font-family:"HelveticaNeue-Light","Microsoft YaHei",Trebuchet,MuseoSans,arial,sans-serif,"Hiragino Sans GB",Tahoma;
+    font-family:"HelveticaNeue-Light",'Raleway', "Microsoft YaHei",Trebuchet,MuseoSans,arial,sans-serif,"Hiragino Sans GB",Tahoma;
     background-color:#ffffff;
 }
 
