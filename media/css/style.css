@@ -206,6 +206,35 @@ blockquote {
 	margin-top: 30px; 
 }
 
+#flashAlphabet {
+    padding-top: 80px;
+    float: center;
+    margin: 0 0 0 0;
+    width: 100%;
+}
+
+#flashAlphabet table td th tr{
+    border: none;
+    float: center;
+    margin: 0 0 0 0;
+    width: 100%;
+}
+
+#flashAlphabet a {
+        color: white;    /*teal*/
+		text-decoration: none;
+}
+
+#flashAlphabet td:hover {
+		background: black;
+        color: white;    /*teal*/
+}
+
+#flashAlphabet td.active {
+		background: black;
+        color: white;    /*teal*/
+}
+
 
 li{
     list-style-type: square;
