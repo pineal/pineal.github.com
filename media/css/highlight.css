@@ -1,5 +1,6 @@
 .highlight .hll { background-color: #ffffcc }
-.highlight  { background: #f8f8f8; overflow-x: auto}
+
+.highlight  { background: white; overflow-x: auto;font-family:'Roboto','Raleway'; border-right: 1px dotted; border-bottom: 1px dotted;}
 .highlight .c { color: #408080; font-style: italic } /* Comment */
 .highlight .err { border: 1px solid #FF0000 } /* Error */
 .highlight .k { color: #008000; font-weight: bold } /* Keyword */
