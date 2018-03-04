@@ -264,3 +264,4 @@ class Solution {
 ~~~
 
 visited尽量用bool数组表示，二维三维都可。不要存放node类的class，地址不一样。
+

@@ -130,13 +130,7 @@ Walls and Gates
 
 最基础的BFS找路径。
 
-Shortest Distance from All Buildings
 
-找到一个点，从他开始到所有的buildings的距离最短的和，中间有障碍物。对每个点做BFS，然后加起来求一个最小值。这样的时间复杂度是 O(m*n)(BFS) * O(m*n)(matrix) = O(m^2*n^2)。优化：从building开始搜。那么时间复杂度为O(k*m*n)。 k是building的个数。
-
-Best Meeting Point（TODO）
-
-和上题一样的条件，只是距离的计算方法变成了 Manhattan Distance 。第一反应：把BFS变成Dijkstra，把queue变成priority_queue。答案里给的方法是算出median, 需要有数学证明。
 
 Word Ladder ／ Word Ladder II（TODO）
 
@@ -157,3 +151,227 @@ k是word的长度。
 Surrounded Regions
 
 标记法。
+
+## Search In Gragh
+
+### Leetcode 317: Shortest Distance from All Buildings
+
+找到一个点，从他开始到所有的buildings的距离最短的和，中间有障碍物。对每个点做BFS，然后加起来求一个最小值。这样的时间复杂度是 $O(m*n)[BFS] * O(m*n)[matrix] = O(m^2*n^2)$。优化：从building开始搜。那么时间复杂度为$O(k*m*n)$。 $k$ 是 building 的个数。
+
+```cpp
+class Solution {
+public:
+    int shortestDistance(vector<vector<int>>& grid) {
+        int res = INT_MAX;
+        
+        vector<vector<pair<int, int>>> dis(grid.size(), vector<pair<int, int>>(grid[0].size()));    
+        //dis[i][j].first => total distance from k buildings to grid[i][j]
+        //dis[i][j].second => num of times search from k buildings and visited to grid[i][j] successfully (avoid dead end)
+        int m = grid.size();
+        int n = grid[0].size();
+        int num_buildings = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    bfs(grid, dis, i, j);
+                    num_buildings++;
+                }
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (dis[i][j].second == num_buildings) {
+                    res = min(res, dis[i][j].first);
+                }
+            }
+        }
+        return res == INT_MAX? -1 : res;
+    }
+    
+    
+    void bfs(const vector<vector<int>> & grid, vector<vector<pair<int, int>>> & dis, int i, int j) {
+        queue<pair<int, int>> q;
+        q.emplace(i, j);
+        int m = grid.size();
+        int n = grid[0].size();
+        deque<deque<bool>> visited(m, deque<bool>(n, false));
+        
+        vector<pair<int, int>> dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        
+        int level = 0;      //distance to building in grid[i][j]
+        while (!q.empty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                int x = q.front().first;
+                int y = q.front().second;
+                q.pop();
+                if (level != 0) {
+                    dis[x][y].first += level;
+                    dis[x][y].second++;
+                }
+                for (const auto & dir : dirs) {
+                    int x_prime = x + dir.first;
+                    int y_prime = y + dir.second;
+                    if (x_prime < m && x_prime >= 0 && y_prime < n && y_prime >= 0 && 
+                        grid[x_prime][y_prime] == 0 &&
+                        visited[x_prime][y_prime] == false) {
+                        q.emplace(x_prime, y_prime);
+                        visited[x_prime][y_prime] = true;
+                    }
+                }    
+            }            
+            level++;
+        }
+        
+    }
+};
+```
+Best Meeting Point
+
+和上题一样的做法，只是可以在人所在的位置。做BFS标记visited的时候要注意。
+```cpp
+class Solution {
+public:
+    int minTotalDistance(vector<vector<int>>& grid) {
+        int res = INT_MAX;        
+        vector<vector<int>> dis(grid.size(), vector<int>(grid[0].size()));    
+        int m = grid.size();
+        int n = grid[0].size();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 1) {
+                    bfs(grid, dis, i, j);
+                }
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                    res = min(res, dis[i][j]);
+            }
+        }
+        return res == INT_MAX? -1 : res;        
+    }
+    void bfs(const vector<vector<int>> & grid, vector<vector<int>> & dis, int i, int j) {
+        queue<pair<int, int>> q;
+        q.emplace(i, j);
+        int m = grid.size();
+        int n = grid[0].size();
+        deque<deque<bool>> visited(m, deque<bool>(n, false));
+        visited[i][j] = true;
+        vector<pair<int, int>> dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        
+        int level = 0;      //distance to grid[i][j]
+        while (!q.empty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                int x = q.front().first;
+                int y = q.front().second;
+                q.pop();
+                if (level != 0) {
+                    dis[x][y] += level;
+                }
+                for (const auto & dir : dirs) {
+                    int x_prime = x + dir.first;
+                    int y_prime = y + dir.second;
+                    if (x_prime < m && x_prime >= 0 && y_prime < n && y_prime >= 0 && 
+                        visited[x_prime][y_prime] == false) {
+                        q.emplace(x_prime, y_prime);
+                        visited[x_prime][y_prime] = true;
+                    }
+                }    
+            }            
+            level++;
+        }
+    }    
+};
+```
+但超时啦。
+答案里给的方法是算出median。并不适用有obstacle的情况（是嘛？）。
+
+```cpp
+// Time:  O(mn)
+// Space: O(m+n)
+
+class Solution {
+public:
+    int minTotalDistance(vector<vector<int>>& grid) {
+        vector<int> x, y;
+        for (int i = 0; i < grid.size(); ++i) {
+            for (int j = 0; j < grid[0].size(); ++j) {
+                if (grid[i][j]) {
+                    x.emplace_back(i);
+                    y.emplace_back(j);
+                }
+            }
+        }
+        nth_element(x.begin(), x.begin() + x.size() / 2, x.end());
+        nth_element(y.begin(), y.begin() + y.size() / 2, y.end());
+        const int mid_x = x[x.size() / 2];
+        const int mid_y = y[y.size() / 2];
+        int sum = 0;
+        for (int i = 0; i < grid.size(); ++i) {
+            for (int j = 0; j < grid[0].size(); ++j) {
+                if (grid[i][j]) {
+                    sum += abs(mid_x - i) + abs(mid_y - j);
+                }
+            }
+        }
+        return sum;
+    }
+};
+```
+
+[数学证明参考链接](https://math.stackexchange.com/questions/113270/the-median-minimizes-the-sum-of-absolute-deviations)
+
+STL中的nth_element()方法的使用 通过调用nth_element(start, start+n, end) 方法可以使第n大元素处于第n位置（从0开始,其位置是下标为 n的元素），并且比这个元素小的元素都排在这个元素之前，比这个元素大的元素都排在这个元素之后，但不能保证他们是有序的。时间复杂度 $O(n)$ 比 sort好一些。
+
+### Leetcode 407: Trapping Rain Water II
+```cpp
+class Solution {
+public:
+    int trapRainWater(vector<vector<int>>& heightMap) {
+        if (heightMap.empty()) {
+            return 0;
+        }
+        int rst = 0;
+        int m = heightMap.size();
+        int n = heightMap[0].size();
+
+        auto cmp = [&heightMap](const pair<int, int> & a, const pair<int, int> & b) {
+            return heightMap[a.first][a.second] > heightMap[b.first][b.second]; 
+        };
+        
+        priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(cmp)> min_heap(cmp);
+        vector<vector<bool>> visited(m, vector<bool>(n, false));
+        vector<pair<int, int>> dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        
+        //start with boundary
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if(!(i==0 || i==m-1 || j==0 || j==n-1)) continue;
+                min_heap.emplace(i, j);
+                visited[i][j] = 1;
+            }
+        }
+        
+        int max_h = 0;
+        int x, y;
+        while (!min_heap.empty()) {
+            x = min_heap.top().first;
+            y = min_heap.top().second;
+            max_h = max(heightMap[x][y], max_h);
+            min_heap.pop();
+            for (auto dir : dirs) {
+              int x_n = x + dir.first;
+              int y_n = y + dir.second;
+              if (x_n > 0 && x_n < m - 1 && y_n > 0 && y_n < n - 1 && !visited[x_n][y_n]) {
+                visited[x_n][y_n] = true;
+                rst += max(0, (max_h - heightMap[x_n][y_n]));
+                min_heap.emplace(x_n, y_n);
+              }              
+            }
+        }
+        return rst;
+    }
+};
+```

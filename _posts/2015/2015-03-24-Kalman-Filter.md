@@ -38,12 +38,12 @@ Each current signal value $x^k$ is a combination of previous signal value $x_{k-
 
     $$ p(v) \sim N (0, R). $$
 
-In reality, covariance matrix Q and R may change in every iteration. We assume they are constant here however.
+In reality, covariance matrix $Q$ and $R$ may change in every iteration. We assume they are constant here however.
 
 
 ### Goal:
 
-Find the best (recursive) estimate of the state x of the system.
+Find the best (recursive) estimate of the state $x$ of the system.
 
 ### Computational Origins
 
@@ -71,7 +71,7 @@ Where *residual* is $z_k - H \hat{x}_{k}^{-}$. It also can be called as measurem
 
 The Kalman filter gains are derived by minimizing the posterior error covariance, resulting in
 
-$$K_k = \frac{P_k^-H^T}{(HP_k^- + R)^{-1}}$$
+$$K_k = \frac{P_k^-H^T}{(HP_k^-H^T + R)^{-1}}$$
 
 
 If the a priori estimate of the process noise is zero, Then
