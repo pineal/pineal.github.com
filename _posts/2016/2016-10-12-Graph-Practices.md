@@ -158,7 +158,7 @@ Surrounded Regions
 
 找到一个点，从他开始到所有的buildings的距离最短的和，中间有障碍物。对每个点做BFS，然后加起来求一个最小值。这样的时间复杂度是 $O(m*n)[BFS] * O(m*n)[matrix] = O(m^2*n^2)$。优化：从building开始搜。那么时间复杂度为$O(k*m*n)$。 $k$ 是 building 的个数。
 
-```cpp
+~~~cpp
 class Solution {
 public:
     int shortestDistance(vector<vector<int>>& grid) {
@@ -225,11 +225,11 @@ public:
         
     }
 };
-```
+~~~
 Best Meeting Point
 
 和上题一样的做法，只是可以在人所在的位置。做BFS标记visited的时候要注意。
-```cpp
+~~~cpp
 class Solution {
 public:
     int minTotalDistance(vector<vector<int>>& grid) {
@@ -284,11 +284,11 @@ public:
         }
     }    
 };
-```
+~~~
 但超时啦。
 答案里给的方法是算出median。并不适用有obstacle的情况（是嘛？）。
 
-```cpp
+~~~cpp
 // Time:  O(mn)
 // Space: O(m+n)
 
@@ -319,14 +319,14 @@ public:
         return sum;
     }
 };
-```
+~~~
 
 [数学证明参考链接](https://math.stackexchange.com/questions/113270/the-median-minimizes-the-sum-of-absolute-deviations)
 
 STL中的nth_element()方法的使用 通过调用nth_element(start, start+n, end) 方法可以使第n大元素处于第n位置（从0开始,其位置是下标为 n的元素），并且比这个元素小的元素都排在这个元素之前，比这个元素大的元素都排在这个元素之后，但不能保证他们是有序的。时间复杂度 $O(n)$ 比 sort好一些。
 
 ### Leetcode 407: Trapping Rain Water II
-```cpp
+~~~cpp
 class Solution {
 public:
     int trapRainWater(vector<vector<int>>& heightMap) {
@@ -374,4 +374,4 @@ public:
         return rst;
     }
 };
-```
+~~~
