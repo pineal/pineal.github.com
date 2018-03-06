@@ -156,7 +156,7 @@ Surrounded Regions
 
 ### Leetcode 317: Shortest Distance from All Buildings
 
-找到一个点，从他开始到所有的buildings的距离最短的和，中间有障碍物。对每个点做BFS，然后加起来求一个最小值。这样的时间复杂度是 $O(m*n)[BFS] * O(m*n)[matrix] = O(m^2*n^2)$。优化：从building开始搜。那么时间复杂度为$O(k*m*n)$。 $k$ 是 building 的个数。
+找到一个点，从他开始到所有的buildings的距离最短的和，中间有障碍物。对每个点做BFS，然后加起来求一个最小值。这样的时间复杂度是 $O(m*n) * O(m*n) = O(m^2*n^2)$。优化：从building开始搜。那么时间复杂度为$O(k*m*n)$。 $k$ 是 building 的个数。
 
 ~~~cpp
 class Solution {
