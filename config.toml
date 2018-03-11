@@ -1,8 +1,0 @@
-baseURL = "https://pineal.github.io"
-languageCode = "en-us"
-title = "PINEAL.ME"
-
-theme = "pineal"
-
-[params]
-    navigation = ["archives.md", "about.md"]
