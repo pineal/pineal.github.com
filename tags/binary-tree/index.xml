@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Binary Tree on PINEAL.ME</title>
+    <link>https://pineal.me/tags/binary-tree/</link>
+    <description>Recent content in Binary Tree on PINEAL.ME</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 05 Aug 2015 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://pineal.me/tags/binary-tree/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Binary Tree</title>
+      <link>https://pineal.me/posts/binary_tree/</link>
+      <pubDate>Wed, 05 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/posts/binary_tree/</guid>
+      <description>
+
+&lt;h2 id=&#34;definition-of-binary-tree&#34;&gt;Definition of Binary Tree&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Full Binary Tree
+全部都填满的树。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Complete Binary Tree
+除了最后一行其他都填满，最后一行的最后一个之前（左边）全部是满的。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Balanced Binary Tree
+左右子树的高度最多差1. Height of the tree: $$O(log(n))$$&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Binary Search Tree
+将二叉树按inorder方式遍历，是递增的。&lt;/p&gt;
+
+&lt;h2 id=&#34;three-different-ways-to-traverse-a-binary-tree&#34;&gt;Three different ways to traverse a binary Tree&lt;/h2&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+&lt;li&gt;DFS: 前序（pre-order, NLR）&lt;/li&gt;
+&lt;li&gt;DFS: 中序（in-order, LNR）&lt;/li&gt;
+&lt;li&gt;DFS: 后序（post-order, LRN）&lt;/li&gt;
+&lt;li&gt;BFS: 层序（level-order）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;traverse-binary-tree-example&#34;&gt;Traverse Binary Tree Example&lt;/h3&gt;
+
+&lt;p&gt;[A:B, C]
+[B:D]
+[D:None]
+[C:E,F]
+[E:G,H]
+[G:None]
+[H:None]
+[F:I]
+[I:None]&lt;/p&gt;
+
+&lt;p&gt;NLR: A B D C E G H F I&lt;/p&gt;
+
+&lt;p&gt;LNR: D B A G E H C F I&lt;/p&gt;
+
+&lt;p&gt;LRN: D B G H E I F C A&lt;/p&gt;
+
+&lt;h2 id=&#34;template-for-dfs-traverse-using-recursion-nlr-and-lnr&#34;&gt;Template For DFS Traverse Using Recursion(NLR and LNR)&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void helper(TreeNode* node, vector&amp;lt;int&amp;gt; &amp;amp; rst){
+    if (node != nullptr){
+//      rst.emplace_back(root -&amp;gt; val);  If it is PreOder
+        helper(node -&amp;gt; left, rst);
+//      rst.emplace_back(root -&amp;gt; val);  If it is InOrder
+        helper(node -&amp;gt; right, rst);
+//      rst.emplace_back(root -&amp;gt; val);  If it is PostOrder
+    }
+}
+vector&amp;lt;int&amp;gt; DFS_Traversal(TreeNode* root) {
+    // write your code here
+    vector&amp;lt;int&amp;gt; rst;
+    helper(root, rst);
+    return rst;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;template-for-dfs-traverse-using-none-recursion-nlr-and-lnr&#34;&gt;Template For DFS Traverse Using None-Recursion(NLR and LNR)&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;vector&amp;lt;int&amp;gt; DFS_Traversal(TreeNode *root) {
+    // write your code here
+    vector&amp;lt;int&amp;gt; rst;
+    if (root == nullptr) return rst;
+    stack&amp;lt;TreeNode*&amp;gt; s;
+
+    while (!s.empty() || root != nullptr){
+        if (root != nullptr){
+//          rst.emplace_back(root -&amp;gt; val);  If Pre-Order
+            s.push(root);
+            root = root -&amp;gt; left;
+        }
+        else{
+            root = s.top();
+            s.pop();
+//          rst.emplace_back(root -&amp;gt; val);  If In-Order
+            root = root -&amp;gt; right;
+        }            
+    }
+return rst;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;template-for-dfs-traverse-using-none-recursion-lrn&#34;&gt;Template For DFS Traverse Using None-Recursion(LRN)&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-py&#34;&gt;def DFS_Stack_LRN(root):
+  s = []
+  pre = None
+  while root or s:
+    if root:
+      s.append(root)
+      root = root.left
+    elif s[-1].right != pre:
+      root = s[-1].right
+      pre = None
+    else:
+      pre = s.pop()
+      print(pre.val)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;template-for-bfs-traverse-using-1-queue-best&#34;&gt;Template For BFS Traverse Using 1 Queue(Best)&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; levelOrder(TreeNode *root) {
+    // write your code here
+    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; rst;
+    if (root == nullptr) return rst;
+
+    queue&amp;lt;TreeNode*&amp;gt; nodes;
+    nodes.push(root);
+
+    while(!nodes.empty()){
+        vector&amp;lt;int&amp;gt; level;
+        int size = nodes.size();
+        for (int i = 0; i &amp;lt; size; i++){
+            TreeNode* node = nodes.front();
+            nodes.pop();
+            level.emplace_back(node -&amp;gt; val);
+            if (node -&amp;gt; left != nullptr) nodes.push(node -&amp;gt; left);
+            if (node -&amp;gt; right != nullptr) nodes.push(node -&amp;gt; right);    
+        }
+        rst.emplace_back(level);
+    }
+return rst;    
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;morris-traverse&#34;&gt;?Morris Traverse?&lt;/h2&gt;
+
+&lt;h2 id=&#34;faq&#34;&gt;FAQ&lt;/h2&gt;
+
+&lt;h3 id=&#34;difference-of-dfs-and-bfs&#34;&gt;Difference of DFS and BFS&lt;/h3&gt;
+
+&lt;p&gt;DFS using stacks, and BFS using queues if Non-Recursion&lt;/p&gt;
+
+&lt;h3 id=&#34;difference-of-recursion-and-non-recursion&#34;&gt;Difference of Recursion and Non-Recursion&lt;/h3&gt;
+
+&lt;p&gt;Recursion is dangerous when memory resource is limited: stack may overflow;
+However Non-Recursion method occupies more space&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

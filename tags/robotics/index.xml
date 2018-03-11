@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Robotics on PINEAL.ME</title>
+    <link>https://pineal.me/tags/robotics/</link>
+    <description>Recent content in Robotics on PINEAL.ME</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://pineal.me/tags/robotics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Extended Kalman Filter</title>
+      <link>https://pineal.me/posts/extended_kalman_filter/</link>
+      <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/posts/extended_kalman_filter/</guid>
+      <description>
+
+&lt;h2 id=&#34;review-of-kalman-filter&#34;&gt;Review of Kalman filter&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://pineal.github.io/2015/03/Kalman-Filter/]&#34;&gt;Previous post on basic kalman filter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.ilectureonline.com/lectures/subject/SPECIAL%20TOPICS/26/190&#34;&gt;iLecture lessons&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Distribution of Gausion is not Gaussian, it becomes non-linear&lt;/p&gt;
+
+&lt;p&gt;Extented Kalman filter uses a linear approximation of h(x)
+Here we use first order taylor expansion to&lt;/p&gt;
+
+&lt;p&gt;Given a function f(x), a taylor series expansion could be expressed:&lt;/p&gt;
+
+&lt;p&gt;$$f(x) \approx \frac{\partial{f(\mu)} }{\partial{x}}(x - \mu)$$&lt;/p&gt;
+
+&lt;h2 id=&#34;multivariate-taylor-series&#34;&gt;Multivariate Taylor Series&lt;/h2&gt;
+
+&lt;h2 id=&#34;design-kalman-filter-for-1d-tracking-problem&#34;&gt;Design Kalman Filter for 1D tracking problem&lt;/h2&gt;
+
+&lt;p&gt;We need to define two linear functions:
+1. state transition function
+2. measurement function&lt;/p&gt;
+
+&lt;h3 id=&#34;state-transition-function&#34;&gt;State transition function&lt;/h3&gt;
+
+&lt;p&gt;$$ x&amp;rsquo; = F * x + noise $$&lt;/p&gt;
+
+&lt;p&gt;where,&lt;/p&gt;
+
+&lt;p&gt;$$F = \begin{pmatrix}
+        1 &amp;amp; \Delta{t} &lt;br /&gt;
+        0 &amp;amp; 1
+     \end{pmatrix}$$&lt;/p&gt;
+
+&lt;p&gt;$$x = \begin{pmatrix} p \ v\end{pmatrix}$$&lt;/p&gt;
+
+&lt;p&gt;postion $p$ is linear motion model, calculation is:&lt;/p&gt;
+
+&lt;p&gt;$$p&amp;rsquo; = p + v * \Delta{t}$$&lt;/p&gt;
+
+&lt;p&gt;Thus We can express it in a matrix form:&lt;/p&gt;
+
+&lt;p&gt;$$&lt;/p&gt;
+
+&lt;h1 id=&#34;begin-pmatrix-p-v-end-pmatrix&#34;&gt;\begin{pmatrix} p&amp;rsquo; \ v&amp;rsquo; \end{pmatrix}&lt;/h1&gt;
+
+&lt;p&gt;\begin{pmatrix}
+        1 &amp;amp; \Delta{t} &lt;br /&gt;
+        0 &amp;amp; 1
+     \end{pmatrix}
+\begin{pmatrix} p \ v\end{pmatrix}
+$$&lt;/p&gt;
+
+&lt;h3 id=&#34;measurement-update-function&#34;&gt;Measurement Update function&lt;/h3&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Kalman Filter</title>
+      <link>https://pineal.me/posts/kalman_filter/</link>
+      <pubDate>Tue, 24 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/posts/kalman_filter/</guid>
+      <description>
+
+&lt;h2 id=&#34;purpose-and-usage&#34;&gt;Purpose and Usage&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Eliminate noise in measurements&lt;/li&gt;
+&lt;li&gt;Generate non-observable states(e.g., Velocity from position signals)&lt;/li&gt;
+&lt;li&gt;For prediction of future state&lt;/li&gt;
+&lt;li&gt;Optimal filtering&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;framework-and-model&#34;&gt;Framework and Model&lt;/h2&gt;
+
+&lt;h3 id=&#34;given&#34;&gt;Given:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A discrete stochastic linear controlled dynamical system:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$x_k = Ax_{k-1} + Bu_{k-1} + w_{k-1}$$&lt;/p&gt;
+
+&lt;p&gt;Each current signal value $x^k$ is a combination of previous signal value $x_{k-1}$ times a constant, a control signal $u_{k}$ and a process noise and a process noise signal $w_{k-1}$ (which usually considered as zero).&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A measurement function, where $v_{k}$ is the measurement noise.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$ y_{k} = Hx_{k} + v_{k} $$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Assume the process noise and the measurement noise are both considered to be normal distribution that&lt;/p&gt;
+
+&lt;p&gt;$$ p(w) \sim N (0, Q), $$&lt;/p&gt;
+
+&lt;p&gt;$$ p(v) \sim N (0, R). $$&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In reality, covariance matrix $Q$ and $R$ may change in every iteration. We assume they are constant here however.&lt;/p&gt;
+
+&lt;h3 id=&#34;goal&#34;&gt;Goal:&lt;/h3&gt;
+
+&lt;p&gt;Find the best (recursive) estimate of the state $x$ of the system.&lt;/p&gt;
+
+&lt;h3 id=&#34;computational-origins&#34;&gt;Computational Origins&lt;/h3&gt;
+
+&lt;p&gt;Define $e_{k}^{-}$ to be a priori state estimate at step k given knowledge of the process prior to step $k$, and define $e_{k}$  to be a posteriori state estimate at step $k$ given measurement $z_{k}$. Then a priori and a posteriori estimate errors can be defined as:&lt;/p&gt;
+
+&lt;p&gt;$$e_{k}^{-} \equiv x_{k} - \hat{x}_{k}^{-}$$&lt;/p&gt;
+
+&lt;p&gt;$$e_{k} \equiv x_{k} - \hat{x}_{k}$$&lt;/p&gt;
+
+&lt;p&gt;The a priori estimate error covariance is then&lt;/p&gt;
+
+&lt;p&gt;$$P_{k}^{-} = E[e_{k}^{-}e_{k}^{-T}]$$&lt;/p&gt;
+
+&lt;p&gt;The a posteriori estimate error covariance is then&lt;/p&gt;
+
+&lt;p&gt;$$P_{k} = E[e_{k}e_{k}^{T}]$$&lt;/p&gt;
+
+&lt;p&gt;Then How can we optimally (linearly) combine the estimate and measurement to obtain the best reconstruction of ￼the true x?&lt;/p&gt;
+
+&lt;p&gt;The answer given in “The Probabilistic Origins of the Filter” found.&lt;/p&gt;
+
+&lt;p&gt;$$
+   \hat{x} = \hat{x}_{k}^{-} - K \times residual
+$$&lt;/p&gt;
+
+&lt;p&gt;Where &lt;em&gt;residual&lt;/em&gt; is $z_k - H \hat{x}_{k}^{-}$. It also can be called as measurement innovation.&lt;/p&gt;
+
+&lt;p&gt;The Kalman filter gains are derived by minimizing the posterior error covariance, resulting in&lt;/p&gt;
+
+&lt;p&gt;$$K_k = \frac{P_k^-H^T}{(HP_k^-H^T + R)^{-1}}$$&lt;/p&gt;
+
+&lt;p&gt;If the a priori estimate of the process noise is zero, Then&lt;/p&gt;
+
+&lt;p&gt;$$K = 0$$&lt;/p&gt;
+
+&lt;p&gt;If the measurement noise is zero&lt;/p&gt;
+
+&lt;p&gt;$$K = H^{-1}$$&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

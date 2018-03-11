@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Sorting Algorithms</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="Sorting Algorithms">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="og:title" content="Sorting Algorithms">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="https://pineal.me/posts/sorting_algorithms/">
+	<meta name="og:site_name" content="Sorting Algorithms">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:tag" content="Sorting ">
+	<link rel="stylesheet" type="text/css" href="https://pineal.mecss/style.css">
+	
+	
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+	tex2jax: {
+	  inlineMath: [['$','$'], ['\\(','\\)']],
+	  displayMath: [['$$','$$'], ['\[','\]']],
+	  processEscapes: true,
+	  processEnvironments: true,
+	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+	  TeX: { equationNumbers: { autoNumber: "AMS" },
+		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	}
+  });
+  </script>
+</head>
+
+<body>
+
+<header>
+	
+	<a href="https://pineal.me" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
+	
+	&nbsp;&nbsp;<a href="https://pineal.me/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.me/about/" style="color:#777;"><strong>About</strong></a>
+	
+	
+	
+	<a href="https://pineal.meindex.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
+</header>
+
+
+<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
+<script>
+function fadeOut(el) {
+  el.style.opacity = 1;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
+    last = +new Date();
+    
+
+    if (el.style.opacity > 0) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    } else {
+      el.style.display='none';
+    }
+  };
+
+  tick();
+}
+
+function ready(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+         el = document.getElementById('loadingMask');
+         fadeOut(el);
+        var elements = document.querySelectorAll("img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("alt")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("alt"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+window.onload = ready;
+</script>
+
+<div class="content">
+  <h1>Sorting Algorithms <aside><a href="/tags/sorting/">Sorting</a></a>&nbsp;&nbsp;&nbsp;</aside></h1>
+  
+
+<p>假设这里的排序都是升序。</p>
+
+<h2 id="insertion-sort">Insertion Sort:</h2>
+
+<p>插入排序。假设一个长度为N的数组A[]，总体过程过程为，从index为1开始到N-1，使得A[0,index]是一个排好序的数组。</p>
+
+<p>具体过程为，把A[index]从index到0逐一比较（这里的顺序一定要从后往前，因为已经是排好序的了），找到第一个比他小的数，然后插到这个数的后面，当然原来位置及以后的数都要往后挪一位。实际代码中是在for循环中加入找到这个小数的条件，每次都往后挪，循环完了才插入。</p>
+
+<p>举个栗子：</p>
+
+<p>| Original | 34  8  64  51  32  21 | Position Moved |
+| &ndash; | &ndash;  &ndash;  &ndash;  &ndash;  &ndash;  &ndash; | &ndash; |
+| after i = 1 | 8  34  64  51  32  21 | 1 |
+| after i = 2 | 8  34  64  51  32  21 | 0 |
+| after i = 3 | 8  34  51  64  32  21 | 1 |
+| after i = 4 | 8  32  34  51  64  21 | 3 |
+| after i = 5 | 8  21  32  34  51  64 | 4 |</p>
+
+<pre><code class="language-cpp">template&lt;typename T&gt;
+void insertion_sort(T arr[], int len){
+  for (int i = 1; i &lt; len; i++){
+    int temp = arr[i];
+      for (int j = i; j &gt; 0 &amp;&amp; arr[j-1]&gt;temp; j--){ //实际比较的是j-1
+        arr[j] = arr[j-1];  //全部往后移一位腾出位置等插入
+      }
+    arr[j] = temp;    //插入到腾出来的位置
+  }
+}
+</code></pre>
+
+<p>复杂度分析：</p>
+
+<h2 id="selection-sort">Selection Sort:</h2>
+
+<p>选择排序。假设一个长度为N的数组A[]，总体过程过程为，从index为0开始到N-1，使得A[0,index]是一个排好序的数组。</p>
+
+<p>怎么跟插入排序这么像呢？</p>
+
+<p>是挺像的，但是具体的过程是有区别。这区别就是“插入”和“选择”的区别。</p>
+
+<p>插入排序是每次往前面那些已经排序好的数里“插入”进去，而选择排序则是，每次从这个数后面那些没排好序的数里“选择”到最小的，和这个数交换。</p>
+
+<p>举个栗子：</p>
+
+<p>| Original | 34  8  64  51  32  21 | Position Moved |
+| &ndash; | &ndash;  &ndash;  &ndash;  &ndash;  &ndash;  &ndash; | &ndash; |
+| after i = 1 | 8  34  64  51  32  21 | 1 |
+| after i = 2 | 8  21  64  51  32  34 | 4 |
+| after i = 3 | 8  21  32  51  64  34 | 2 |
+| after i = 4 | 8  21  32  34  64  51 | 2 |
+| after i = 5 | 8  21  32  34  51  64 | 1 |</p>
+
+<pre><code class="language-cpp">template&lt;typename T&gt;
+void selection_sort(T arr[], int len){
+  for (int i = 0; i &lt; len - 1; i++){  //len - 1即可，最后一次交换在倒数第一个和倒数第二个之间进行
+    int min_index = i;
+    for (int j = i + 1; j &lt; len; j++){
+      //找到未排序的数组中最小的数的index
+      if (arr[j]&lt;arr[min_index]){
+          min_index = j;
+      }        
+    }
+    swap(arr[i], arr[min_index]);
+  }
+}
+</code></pre>
+
+<p>附上冒泡排序代码。</p>
+
+<pre><code class="language-cpp">void bubble_sort(int arr[], int n) {
+    int i, j;
+    for (i = 0; i &lt; n - 1; i++) {
+        for (j = 0; j &lt; n - 1 - i; j++) {
+            if (arr[j] &gt; arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>复杂度分析：
+$O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时间复杂度上是一样的。</p>
+
+<h2 id="merge-sort">Merge Sort:</h2>
+
+<p>归并排序。分治法（divide and conquer）思想入门的算法。Recursively 递归入栈时将字符串分为左右两半，直到无法分割为止。出栈时再把这两半合并起来，在合并的过程中排序。最后所有的栈返回是一个排好序的数组。在用分治法的时候注意一下和纯递归求解的区别。</p>
+
+<pre><code class="language-cpp">//Merge part
+  vector&lt;int&gt; merge(vector&lt;int&gt; A, vector&lt;int&gt; B) {
+	  vector&lt;int&gt; rst;
+	  std::vector&lt;int&gt;::iterator iter1 = A.begin(), iter2 = B.begin();
+//this is not elegant, may be &amp;&amp; and insert the rest may be better
+	  while (iter1 != A.end() || iter2 != B.end()) {
+	  	if (iter1 == A.end()) {
+		  	rst.insert(rst.end(), iter2, B.end());
+		  	break;
+		  }
+		  if (iter2 == B.end()) {
+		  	rst.insert(rst.end(), iter1, A.end());
+		  	break;
+		  }
+		  if (*iter1 &lt; *iter2) {
+			  rst.emplace_back(*iter1);
+			  iter1++;
+		  }
+		  else {
+			  rst.emplace_back(*iter2);
+			  iter2++;
+		  }
+	  }
+	  return rst;
+  }
+
+//Key part of Merge sort, recursive function
+  vector&lt;int&gt; MSort(vector&lt;int&gt; array, int left, int right) {
+	  vector&lt;int&gt; rst;
+	  if (left == right) {
+		  rst.emplace_back(array[left]);
+		  return rst;
+	  }
+	  int mid = left + (right - left) / 2;
+	  vector&lt;int&gt; leftArr = MSort(array, left, mid);
+	  vector&lt;int&gt; rightArr = MSort(array, mid + 1, right);
+	  rst = merge(leftArr, rightArr);
+	  return rst;
+  }
+//Driver for Merge Sort
+  vector&lt;int&gt; mergeSort(vector&lt;int&gt; array) {
+    if (array.size() &lt;= 1) return array;
+	  vector&lt;int&gt; rst;
+	  rst = MSort(array, 0, array.size() - 1);
+	  return rst;
+  }
+</code></pre>
+
+<p>复杂度分析： $$O(nlog(n))$$：画出递归树，一共$$log(n)$$层, 每一层是$$O(n)$$的复杂度.</p>
+
+<h2 id="quick-sort">Quick Sort:</h2>
+
+<p>快速排序。快速排序是一个比较复杂的问题。基本的思想为：</p>
+
+<ol>
+<li>选取一个pivot。</li>
+<li>所有比pivot小的数放在pivot的左边，所有比pivot大的数放在pivot的右边。</li>
+<li>分割数组：对pivot两边的数组递归重复以上步骤，直到不能分割。</li>
+</ol>
+
+<p>具体有哪些实现呢。
+先来看第一种方法。这是一个textbook的解法。</p>
+
+<pre><code class="language-cpp"> int median(vector&lt;int&gt;&amp; arr, int left, int right){
+   // arr[left] &lt;= arr[center] &lt;= arr[right]
+   int center = left + (right - left)/2;
+   if (arr[left] &gt; arr[center]) swap(&amp;arr[left], &amp;arr[center]);
+   if (arr[left] &gt; arr[right])  swap(&amp;arr[left], &amp;arr[right]);
+   if (arr[center] &gt; arr[right]) swap(&amp;arr[center], &amp;arr[right]);
+   swap(&amp;arr[center], &amp;arr[right - 1]); //hide pivot
+   return arr[right - 1];
+ }
+
+ void QSort(vector&lt;int&gt; &amp; arr, int left, int right) {
+
+//   if (left &gt;= right) return;
+   if (left + CutOff &lt;= right){
+     int pivot = median(arr, left, right);
+     int i = left;
+     int j = right - 1;
+     for(;;){
+      while (arr[++i] &lt; pivot){}
+       while (arr[--j] &gt; pivot){}
+      if (i &lt; j) swap(&amp;arr[i], &amp;arr[j]);
+       else  break;
+     }
+//   if (left + 1 != right){
+       swap(&amp;arr[i], &amp;arr[right - 1]); //restore pivot
+//   }  
+     QSort(arr, left, i - 1);
+     QSort(arr, i + 1, right);
+   }
+   else{
+     insertion_Sort(arr, left, right - left + 1);
+   }
+ }
+
+ vector&lt;int&gt; quickSort(vector&lt;int&gt; array) {
+   if (array.size() &lt;= 1) return array;
+   QSort(array, 0, array.size() - 1);
+   return array;
+ }
+</code></pre>
+
+<p>另一个解法。基本思想是一样的。每次都要保持所有比pivot小的数放在pivot的左边，所有比pivot大的数放在pivot的右边这个条件。
+实现的过程为，选取两块挡板，分别从数组的头和尾往中间靠拢，直到挡板相遇。在每一次的循环中，保证第一块挡板左边的数都小于pivot，第二块挡板右边的数都大于pivot。</p>
+
+<p>事实上根据上面这个general rule来分，两个挡板指向的两个数只有四种情况：</p>
+
+<ol>
+<li><p>a[i] &lt; pivot, a[j] &gt; pivot</p></li>
+
+<li><p>a[i] &lt; pivot, a[j] &lt; pivot</p></li>
+
+<li><p>a[i] &gt; pivot, a[j] &gt; pivot</p></li>
+
+<li><p>a[i] &gt;= pivot, a[j] &lt;= pivot</p></li>
+</ol>
+
+<p>那么对应刚才的rule该做着么呢？</p>
+
+<ol>
+<li><p>满足条件：移动挡板i++， j&ndash;</p></li>
+
+<li><p>满足前半个条件，移动挡板i++，继续检查条件</p></li>
+
+<li><p>满足后半个条件，移动挡板j&ndash;，继续检查条件</p></li>
+
+<li><p>不满足任何条件，但是一旦交换两个挡板上的数，即可让条件满足</p></li>
+</ol>
+
+<p>来看下代码。</p>
+
+<pre><code class="language-cpp">  void QuickSort(vector&lt;int&gt; &amp; array, int left, int right){
+    if (left &gt; right) return;
+    int pivot_index = (left + right)/2;
+    int pivot =  array[pivot_index];
+    int left_bound = left;
+    int right_bound = right - 1;
+    //hide the pivot in the rightmost
+    std::swap(array[pivot_index], array[right]);
+    //three regions:
+    //1. [0, leftbound - 1] : all elements smaller than pivot should be here
+    //2. [leftbound, rightbound]: to be discovered, scan the element in a[leftbound], and move leftbound every step
+    //3. [rightbound + 1, array.size() - 1] all elements bigger than pivot should be here
+    while (left_bound &lt;= right_bound) {
+      //check two
+      if (array[left_bound] &lt; pivot) {
+      // obey all three rules, move leftbound
+        ++left_bound;
+      }
+      else if (array[right_bound] &gt; pivot) {
+        --right_bound;
+      }
+      else {
+        //array[left_bound] &gt; pivot &amp;&amp; array[right_bound &lt; pivot]
+        std::swap(array[left_bound++], array[right_bound--]);      
+      }
+    }
+    //restore the pivot to the original position
+    std::swap(array[left_bound], array[right]);
+    //partition and recursion
+    QuickSort(array, left, left_bound - 1);
+    QuickSort(array, left_bound + 1, right);
+  }
+
+  vector&lt;int&gt; quickSort(vector&lt;int&gt; array) {
+    if (array.size() &lt;= 1) return array;
+    QuickSort(array, 0, array.size() - 1);
+    return array;
+  }
+</code></pre>
+
+<p>这样的解法可以归结为一种类型。比如一堆数中只有两种，三种四种数，那么就可以对应个数的挡板将数分割成相应区域，每次检查条件是否满足。Eg: Sort colors。这样的做法复杂度只需要$O(n)$.</p>
+
+<h3 id="sort-colors">Sort Colors</h3>
+
+<p>Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue. Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.</p>
+
+<pre><code class="language-cpp">void sortColors(vector&lt;int&gt;&amp; nums) {
+    int zero = 0;
+    int one = 0;    //explorer
+    int two = nums.size() - 1;
+    //Three seperator Four regions
+    //[0, zero)     0
+    //[zero, one]   1
+    //(two, end]    2
+    while (one &lt;= two) {
+        if (nums[one] == 0) {   
+            swap(nums[one++], nums[zero++]);
+        } else if (nums[one] == 1) {
+            one++;
+        } else {
+            swap(nums[one], nums[two--]);
+            //don't move 'one':
+            //you don't know what is swaped from 'two'
+        }
+    }
+}
+</code></pre>
+
+<h3 id="follow-up-i-four-colors">Follow up I: four colors</h3>
+
+<pre><code class="language-cpp">vector&lt;int&gt; rainbowSortII(vector&lt;int&gt; array) {
+   int zero = 0, one = 0, other = array.size() - 1;
+   while (one &lt;= other) {
+     if (array[one] &lt; 1) {
+       swap(array[one++], array[zero++]);
+     } else if (array[one] &gt; 1) {
+       swap(array[other--], array[one]);
+     } else {
+       one++;
+     }
+   }
+   int two = one, three = array.size() - 1;
+   while (two &lt;= three) {
+     if (array[two] == 3 &amp;&amp; array[three] == 2) {
+       swap(array[two++], array[three--]);
+     } else if (array[two] == 2) {
+       two++;
+     } else {
+       three--;
+     }
+   }
+   return array;
+ }
+</code></pre>
+
+<h3 id="follow-up-ii-k-colors">Follow up II: k colors</h3>
+
+<p>TODO</p>
+
+<h2 id="wiggle-sort">Wiggle Sort</h2>
+
+<p>nums[0] &lt;= nums[1] &gt;= nums[2] &lt;= nums[3]&hellip;.</p>
+
+<p>这个时间复杂度优化到了O(n)。下面那个做法是通用的。</p>
+
+<pre><code class="language-cpp">void wiggleSort(vector&lt;int&gt;&amp; nums) {
+    for (int i=0; i&lt;(int)nums.size() - 1; i++) {
+        if (i % 2 == 0 &amp;&amp; nums[i] &gt; nums[i+1]) {
+            swap(nums[i], nums[i+1]);
+        }
+        if (i % 2 == 1 &amp;&amp; nums[i] &lt; nums[i+1]) {
+            swap(nums[i], nums[i+1]);
+        }
+    }        
+}
+</code></pre>
+
+<h3 id="follow-up-wiggle-sort-ii">Follow up: Wiggle Sort II</h3>
+
+<p>nums[0] &lt; nums[1] &gt; nums[2] &lt; nums[3]&hellip;</p>
+
+<p>根据这个性质，我们可以确定一种排法一定可以成立：把小的那一半排在偶数位，把大的那一半排在奇数位。这个是通用的。
+ 时间复杂度 $ O(nlog(n)) $.</p>
+
+<pre><code class="language-cpp">void wiggleSort(vector&lt;int&gt;&amp; nums) {
+    vector&lt;int&gt; copy(nums);
+    sort(copy.begin(), copy.end());
+    int left = (nums.size() + 1) / 2 - 1;
+    int right = nums.size() - 1;
+    for (int i = 0; i &lt; nums.size(); i++) {
+        nums[i] = (i % 2 == 0)? copy[left--] : copy[right--];
+    }
+}
+</code></pre>
+
+<p>传说中$O(n)$ 的解法。</p>
+
+<h2 id="sort-in-specified-order">Sort In Specified Order</h2>
+
+<p>A1 = {2, 1, 2, 5, 7, 1, 9, 3}, A2 = {2, 1, 3}, A1 is sorted to {2, 2, 1, 1, 3, 5, 7, 9}</p>
+
+<pre><code class="language-cpp">vector&lt;int&gt; helper(vector&lt;int&gt; &amp; A1, vector&lt;int&gt; &amp; A2) {
+   // Write your solution here.
+   if (A1.size() &lt;= 1 || A2.size() == 0) {
+       sort(A1.begin(), A1.end());
+       return A1;
+   }
+   map&lt;int, int&gt; t;
+   for (int i = 0; i &lt; A2.size(); i++) {
+       t.emplace(A2[i], i);
+   }
+
+   int j = 0, k = A1.size() - 1;
+   while (j &lt;= k) {
+       if (t.find(A1[j]) == t.end() &amp;&amp; t.find(A1[k]) != t.end()) {
+           swap(A1[j], A1[k]);
+           j++;
+           k--;
+       }
+       else if (t.find(A1[j]) != t.end()) {
+           j++;
+       }
+       else {
+           k--;
+       }
+   }
+
+   //sort the [0, j) in specified order
+   //[2 1 3 4]
+   //2 1 2 1 4 3 =&gt; 2 2 1 1 3 4
+
+   for (int i = 0; i &lt; j; i++) {
+       int min_index = i;
+       for (int l = i; l &lt; j; l++) {
+           if (t[A1[min_index]] &gt; t[A1[l]]) {
+               min_index = l;
+           }
+       }
+       swap(A1[i], A1[min_index]);
+   }
+
+   //sort the (k, n) part in ascending order
+   sort(A1.begin() + k + 1, A1.end());
+   return A1;
+ }
+</code></pre>
+
+</div>
+
+
+
+
+<footer>
+	<p>© 2017-2018, all rights reserved.</a>
+</footer>
+</body>
+</html>

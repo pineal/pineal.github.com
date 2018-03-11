@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on PINEAL.ME</title>
+    <link>https://pineal.me/tags/</link>
+    <description>Recent content in Tags on PINEAL.ME</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 24 Nov 2014 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://pineal.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://pineal.me/tags/</link>
+      <pubDate>Mon, 24 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Algorithm</title>
+      <link>https://pineal.me/tags/algorithm/</link>
+      <pubDate>Thu, 14 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Array</title>
+      <link>https://pineal.me/tags/array/</link>
+      <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/array/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Backtracking</title>
+      <link>https://pineal.me/tags/backtracking/</link>
+      <pubDate>Thu, 18 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/backtracking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bfs</title>
+      <link>https://pineal.me/tags/bfs/</link>
+      <pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/bfs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Binary Search</title>
+      <link>https://pineal.me/tags/binary-search/</link>
+      <pubDate>Sat, 25 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/binary-search/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Binary Tree</title>
+      <link>https://pineal.me/tags/binary-tree/</link>
+      <pubDate>Wed, 05 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/binary-tree/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bit Manipulation</title>
+      <link>https://pineal.me/tags/bit-manipulation/</link>
+      <pubDate>Thu, 14 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/bit-manipulation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cache</title>
+      <link>https://pineal.me/tags/cache/</link>
+      <pubDate>Sun, 29 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/cache/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Combinations</title>
+      <link>https://pineal.me/tags/combinations/</link>
+      <pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/combinations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Control Theory</title>
+      <link>https://pineal.me/tags/control-theory/</link>
+      <pubDate>Sat, 26 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/control-theory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dfs</title>
+      <link>https://pineal.me/tags/dfs/</link>
+      <pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/dfs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Disjoint Sets</title>
+      <link>https://pineal.me/tags/disjoint-sets/</link>
+      <pubDate>Tue, 04 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/disjoint-sets/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dynamic Programming</title>
+      <link>https://pineal.me/tags/dynamic-programming/</link>
+      <pubDate>Fri, 19 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/dynamic-programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Graph</title>
+      <link>https://pineal.me/tags/graph/</link>
+      <pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/graph/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Greedy</title>
+      <link>https://pineal.me/tags/greedy/</link>
+      <pubDate>Fri, 19 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/greedy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Heap</title>
+      <link>https://pineal.me/tags/heap/</link>
+      <pubDate>Thu, 13 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/heap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linear Programming</title>
+      <link>https://pineal.me/tags/linear-programming/</link>
+      <pubDate>Wed, 26 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/linear-programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Math</title>
+      <link>https://pineal.me/tags/math/</link>
+      <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/math/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>N Queens</title>
+      <link>https://pineal.me/tags/n-queens/</link>
+      <pubDate>Mon, 25 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/n-queens/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Permutations</title>
+      <link>https://pineal.me/tags/permutations/</link>
+      <pubDate>Mon, 25 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/permutations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Priority Queue</title>
+      <link>https://pineal.me/tags/priority-queue/</link>
+      <pubDate>Thu, 13 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/priority-queue/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Robotics</title>
+      <link>https://pineal.me/tags/robotics/</link>
+      <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/robotics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Search</title>
+      <link>https://pineal.me/tags/search/</link>
+      <pubDate>Thu, 18 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/search/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Signal Processing</title>
+      <link>https://pineal.me/tags/signal-processing/</link>
+      <pubDate>Tue, 24 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/signal-processing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sorting</title>
+      <link>https://pineal.me/tags/sorting/</link>
+      <pubDate>Mon, 14 Mar 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/sorting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Stack</title>
+      <link>https://pineal.me/tags/stack/</link>
+      <pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/stack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Subsets</title>
+      <link>https://pineal.me/tags/subsets/</link>
+      <pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/subsets/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Union Find</title>
+      <link>https://pineal.me/tags/union-find/</link>
+      <pubDate>Tue, 04 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/tags/union-find/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

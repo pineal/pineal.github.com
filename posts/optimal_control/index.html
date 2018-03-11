@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Optimal Control</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="Optimal Control">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="og:title" content="Optimal Control">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="https://pineal.me/posts/optimal_control/">
+	<meta name="og:site_name" content="Optimal Control">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:tag" content="Control Theory ">
+	<link rel="stylesheet" type="text/css" href="https://pineal.mecss/style.css">
+	
+	
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+	tex2jax: {
+	  inlineMath: [['$','$'], ['\\(','\\)']],
+	  displayMath: [['$$','$$'], ['\[','\]']],
+	  processEscapes: true,
+	  processEnvironments: true,
+	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+	  TeX: { equationNumbers: { autoNumber: "AMS" },
+		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	}
+  });
+  </script>
+</head>
+
+<body>
+
+<header>
+	
+	<a href="https://pineal.me" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
+	
+	&nbsp;&nbsp;<a href="https://pineal.me/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.me/about/" style="color:#777;"><strong>About</strong></a>
+	
+	
+	
+	<a href="https://pineal.meindex.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
+</header>
+
+
+<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
+<script>
+function fadeOut(el) {
+  el.style.opacity = 1;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
+    last = +new Date();
+    
+
+    if (el.style.opacity > 0) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    } else {
+      el.style.display='none';
+    }
+  };
+
+  tick();
+}
+
+function ready(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+         el = document.getElementById('loadingMask');
+         fadeOut(el);
+        var elements = document.querySelectorAll("img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("alt")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("alt"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+window.onload = ready;
+</script>
+
+<div class="content">
+  <h1>Optimal Control <aside><a href="/tags/control-theory/">Control Theory</a></a>&nbsp;&nbsp;&nbsp;</aside></h1>
+  
+
+<h1 id="optimal-control">Optimal Control</h1>
+
+<h2 id="optimal-control-framework">Optimal Control Framework</h2>
+
+<p>Given:
+A controlled dynamical system：$ x^{n+1} = f(x^n, u^n)$</p>
+
+<p>A cost function：$V = \phi(x^N, \alpha) + \sum^{N-1}_{i=0}L(x^i, u^i, \alpha)$</p>
+
+<p>Goal: Find the sequence of commands that minimizes(maximizes) the cost function</p>
+
+<h2 id="bellman-s-principle-of-optimality">Bellman&rsquo;s Principle of Optimality</h2>
+
+<p>Optimize it using dynamic programming:</p>
+
+<p>$$
+J_i(X<em>i) = \mathop{arg min}</em>{u_i\in u(x<em>i)}{{L(x^i, u^i, \alpha) + V^*</em>{i+1}x_{(i+1)}}}
+$$</p>
+
+<h2 id="linear-quadratic-regulator">Linear quadratic regulator</h2>
+
+<p>Special Assumption: Linear System Dynamics
+ $$
+  x^{n+1} = Ax^n + Bu^n
+ $$</p>
+
+<p>Quadratic cost function
+ $$
+ L(x^i, u^i, \alpha) ＝ x^{i^T}Qx^i + u^{i^T}Ru^{i^T}
+ $$</p>
+
+<p>Goal:
+    - Bring the system to a setpoint and keep it there
+    - Note: this an also be did with a nonlinear system by a local linearization</p>
+
+<p>$$
+  \begin{aligned}
+ V^<em>_i(X<em>i) &amp; = \mathop{arg min}</em>{u_i\in u(x_i)}{{L(x^i, u^i, \alpha) + V^</em><em>{i+1}x</em>{(i+1)}}} <br />
+   &amp; = \mathop{arg min}_{u_i\in u(x<em>i)}{{x^{i^T}Qx^i + u^{i^T}Ru^{i^T} + V^*</em>{i+1}x<em>{(i+1)}}} <br />
+   &amp; = \mathop{arg min}</em>{u_i\in u(x<em>i)}{{x^{i^T}Qx^i + u^{i^T}Ru^{i^T} + V^*</em>{i+1}(Ax^n + Bu^n)}} <br />
+  \end{aligned}
+$$</p>
+
+<ul>
+<li>As A linear control law expressed as:</li>
+</ul>
+
+<p>$$
+    u^{i^*} = -K^ix^i
+$$</p>
+
+<p>Rewrite the optimal cost at stage i as a quadratic form:</p>
+
+<p>$$
+    {V^i}^* = {x^i}^TP^ix^i
+$$</p>
+
+<p>Thus,</p>
+
+<p>$$
+   V^<em>_i(X<em>i) = \mathop{arg min}</em>{u_i\in u(x_i)}{ {x^{i^T}Qx^i + u^{i^T}Ru^{i^T} + V^</em>_{i+1}(Ax^n + Bu^n)} } <br />
+$$</p>
+
+<h2 id="finite-horizon-approximation">Finite horizon approximation</h2>
+
+<p>To be continued&hellip;</p>
+
+<h2 id="motion-predictive-control">Motion Predictive Control</h2>
+
+<p>To be continued&hellip;</p>
+
+<h2 id="fast-mpc">Fast MPC</h2>
+
+<p>To be continued&hellip;</p>
+
+</div>
+
+
+
+
+<footer>
+	<p>© 2017-2018, all rights reserved.</a>
+</footer>
+</body>
+</html>

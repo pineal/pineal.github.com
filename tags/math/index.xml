@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Math on PINEAL.ME</title>
+    <link>https://pineal.me/tags/math/</link>
+    <description>Recent content in Math on PINEAL.ME</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://pineal.me/tags/math/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Extended Kalman Filter</title>
+      <link>https://pineal.me/posts/extended_kalman_filter/</link>
+      <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.me/posts/extended_kalman_filter/</guid>
+      <description>
+
+&lt;h2 id=&#34;review-of-kalman-filter&#34;&gt;Review of Kalman filter&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://pineal.github.io/2015/03/Kalman-Filter/]&#34;&gt;Previous post on basic kalman filter&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.ilectureonline.com/lectures/subject/SPECIAL%20TOPICS/26/190&#34;&gt;iLecture lessons&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Distribution of Gausion is not Gaussian, it becomes non-linear&lt;/p&gt;
+
+&lt;p&gt;Extented Kalman filter uses a linear approximation of h(x)
+Here we use first order taylor expansion to&lt;/p&gt;
+
+&lt;p&gt;Given a function f(x), a taylor series expansion could be expressed:&lt;/p&gt;
+
+&lt;p&gt;$$f(x) \approx \frac{\partial{f(\mu)} }{\partial{x}}(x - \mu)$$&lt;/p&gt;
+
+&lt;h2 id=&#34;multivariate-taylor-series&#34;&gt;Multivariate Taylor Series&lt;/h2&gt;
+
+&lt;h2 id=&#34;design-kalman-filter-for-1d-tracking-problem&#34;&gt;Design Kalman Filter for 1D tracking problem&lt;/h2&gt;
+
+&lt;p&gt;We need to define two linear functions:
+1. state transition function
+2. measurement function&lt;/p&gt;
+
+&lt;h3 id=&#34;state-transition-function&#34;&gt;State transition function&lt;/h3&gt;
+
+&lt;p&gt;$$ x&amp;rsquo; = F * x + noise $$&lt;/p&gt;
+
+&lt;p&gt;where,&lt;/p&gt;
+
+&lt;p&gt;$$F = \begin{pmatrix}
+        1 &amp;amp; \Delta{t} &lt;br /&gt;
+        0 &amp;amp; 1
+     \end{pmatrix}$$&lt;/p&gt;
+
+&lt;p&gt;$$x = \begin{pmatrix} p \ v\end{pmatrix}$$&lt;/p&gt;
+
+&lt;p&gt;postion $p$ is linear motion model, calculation is:&lt;/p&gt;
+
+&lt;p&gt;$$p&amp;rsquo; = p + v * \Delta{t}$$&lt;/p&gt;
+
+&lt;p&gt;Thus We can express it in a matrix form:&lt;/p&gt;
+
+&lt;p&gt;$$&lt;/p&gt;
+
+&lt;h1 id=&#34;begin-pmatrix-p-v-end-pmatrix&#34;&gt;\begin{pmatrix} p&amp;rsquo; \ v&amp;rsquo; \end{pmatrix}&lt;/h1&gt;
+
+&lt;p&gt;\begin{pmatrix}
+        1 &amp;amp; \Delta{t} &lt;br /&gt;
+        0 &amp;amp; 1
+     \end{pmatrix}
+\begin{pmatrix} p \ v\end{pmatrix}
+$$&lt;/p&gt;
+
+&lt;h3 id=&#34;measurement-update-function&#34;&gt;Measurement Update function&lt;/h3&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

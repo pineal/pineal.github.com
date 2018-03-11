@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Binary Tree</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="Binary Tree">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="og:title" content="Binary Tree">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="https://pineal.me/posts/binary_tree/">
+	<meta name="og:site_name" content="Binary Tree">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:tag" content="Binary Tree ">
+	<link rel="stylesheet" type="text/css" href="https://pineal.mecss/style.css">
+	
+	
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+	tex2jax: {
+	  inlineMath: [['$','$'], ['\\(','\\)']],
+	  displayMath: [['$$','$$'], ['\[','\]']],
+	  processEscapes: true,
+	  processEnvironments: true,
+	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+	  TeX: { equationNumbers: { autoNumber: "AMS" },
+		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	}
+  });
+  </script>
+</head>
+
+<body>
+
+<header>
+	
+	<a href="https://pineal.me" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
+	
+	&nbsp;&nbsp;<a href="https://pineal.me/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.me/about/" style="color:#777;"><strong>About</strong></a>
+	
+	
+	
+	<a href="https://pineal.meindex.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
+</header>
+
+
+<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
+<script>
+function fadeOut(el) {
+  el.style.opacity = 1;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
+    last = +new Date();
+    
+
+    if (el.style.opacity > 0) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    } else {
+      el.style.display='none';
+    }
+  };
+
+  tick();
+}
+
+function ready(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+         el = document.getElementById('loadingMask');
+         fadeOut(el);
+        var elements = document.querySelectorAll("img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("alt")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("alt"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+window.onload = ready;
+</script>
+
+<div class="content">
+  <h1>Binary Tree <aside><a href="/tags/binary-tree/">Binary Tree</a></a>&nbsp;&nbsp;&nbsp;</aside></h1>
+  
+
+<h2 id="definition-of-binary-tree">Definition of Binary Tree</h2>
+
+<ol>
+<li><p>Full Binary Tree
+全部都填满的树。</p></li>
+
+<li><p>Complete Binary Tree
+除了最后一行其他都填满，最后一行的最后一个之前（左边）全部是满的。</p></li>
+
+<li><p>Balanced Binary Tree
+左右子树的高度最多差1. Height of the tree: $$O(log(n))$$</p></li>
+
+<li><p>Binary Search Tree
+将二叉树按inorder方式遍历，是递增的。</p>
+
+<h2 id="three-different-ways-to-traverse-a-binary-tree">Three different ways to traverse a binary Tree</h2></li>
+</ol>
+
+<ul>
+<li>DFS: 前序（pre-order, NLR）</li>
+<li>DFS: 中序（in-order, LNR）</li>
+<li>DFS: 后序（post-order, LRN）</li>
+<li>BFS: 层序（level-order）</li>
+</ul>
+
+<h3 id="traverse-binary-tree-example">Traverse Binary Tree Example</h3>
+
+<p>[A:B, C]
+[B:D]
+[D:None]
+[C:E,F]
+[E:G,H]
+[G:None]
+[H:None]
+[F:I]
+[I:None]</p>
+
+<p>NLR: A B D C E G H F I</p>
+
+<p>LNR: D B A G E H C F I</p>
+
+<p>LRN: D B G H E I F C A</p>
+
+<h2 id="template-for-dfs-traverse-using-recursion-nlr-and-lnr">Template For DFS Traverse Using Recursion(NLR and LNR)</h2>
+
+<pre><code class="language-cpp">void helper(TreeNode* node, vector&lt;int&gt; &amp; rst){
+    if (node != nullptr){
+//      rst.emplace_back(root -&gt; val);  If it is PreOder
+        helper(node -&gt; left, rst);
+//      rst.emplace_back(root -&gt; val);  If it is InOrder
+        helper(node -&gt; right, rst);
+//      rst.emplace_back(root -&gt; val);  If it is PostOrder
+    }
+}
+vector&lt;int&gt; DFS_Traversal(TreeNode* root) {
+    // write your code here
+    vector&lt;int&gt; rst;
+    helper(root, rst);
+    return rst;
+}
+</code></pre>
+
+<h2 id="template-for-dfs-traverse-using-none-recursion-nlr-and-lnr">Template For DFS Traverse Using None-Recursion(NLR and LNR)</h2>
+
+<pre><code class="language-cpp">vector&lt;int&gt; DFS_Traversal(TreeNode *root) {
+    // write your code here
+    vector&lt;int&gt; rst;
+    if (root == nullptr) return rst;
+    stack&lt;TreeNode*&gt; s;
+
+    while (!s.empty() || root != nullptr){
+        if (root != nullptr){
+//          rst.emplace_back(root -&gt; val);  If Pre-Order
+            s.push(root);
+            root = root -&gt; left;
+        }
+        else{
+            root = s.top();
+            s.pop();
+//          rst.emplace_back(root -&gt; val);  If In-Order
+            root = root -&gt; right;
+        }            
+    }
+return rst;
+}
+</code></pre>
+
+<h2 id="template-for-dfs-traverse-using-none-recursion-lrn">Template For DFS Traverse Using None-Recursion(LRN)</h2>
+
+<pre><code class="language-py">def DFS_Stack_LRN(root):
+  s = []
+  pre = None
+  while root or s:
+    if root:
+      s.append(root)
+      root = root.left
+    elif s[-1].right != pre:
+      root = s[-1].right
+      pre = None
+    else:
+      pre = s.pop()
+      print(pre.val)
+</code></pre>
+
+<h2 id="template-for-bfs-traverse-using-1-queue-best">Template For BFS Traverse Using 1 Queue(Best)</h2>
+
+<pre><code class="language-cpp">vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode *root) {
+    // write your code here
+    vector&lt;vector&lt;int&gt;&gt; rst;
+    if (root == nullptr) return rst;
+
+    queue&lt;TreeNode*&gt; nodes;
+    nodes.push(root);
+
+    while(!nodes.empty()){
+        vector&lt;int&gt; level;
+        int size = nodes.size();
+        for (int i = 0; i &lt; size; i++){
+            TreeNode* node = nodes.front();
+            nodes.pop();
+            level.emplace_back(node -&gt; val);
+            if (node -&gt; left != nullptr) nodes.push(node -&gt; left);
+            if (node -&gt; right != nullptr) nodes.push(node -&gt; right);    
+        }
+        rst.emplace_back(level);
+    }
+return rst;    
+}
+</code></pre>
+
+<h2 id="morris-traverse">?Morris Traverse?</h2>
+
+<h2 id="faq">FAQ</h2>
+
+<h3 id="difference-of-dfs-and-bfs">Difference of DFS and BFS</h3>
+
+<p>DFS using stacks, and BFS using queues if Non-Recursion</p>
+
+<h3 id="difference-of-recursion-and-non-recursion">Difference of Recursion and Non-Recursion</h3>
+
+<p>Recursion is dangerous when memory resource is limited: stack may overflow;
+However Non-Recursion method occupies more space</p>
+
+</div>
+
+
+
+
+<footer>
+	<p>© 2017-2018, all rights reserved.</a>
+</footer>
+</body>
+</html>
