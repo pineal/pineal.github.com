@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Matrix Dynamic Programming</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="Matrix Dynamic Programming">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="og:title" content="Matrix Dynamic Programming">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="http://pineal.github.io/posts/matrix_dynamic_programming/">
+	<meta name="og:site_name" content="Matrix Dynamic Programming">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:tag" content="Dynamic Programming ">
+	<link rel="stylesheet" type="text/css" href="http://pineal.github.iocss/style.css">
+	
+	
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+	tex2jax: {
+	  inlineMath: [['$','$'], ['\\(','\\)']],
+	  displayMath: [['$$','$$'], ['\[','\]']],
+	  processEscapes: true,
+	  processEnvironments: true,
+	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+	  TeX: { equationNumbers: { autoNumber: "AMS" },
+		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	}
+  });
+  </script>
+</head>
+
+<body>
+
+<header>
+	
+	<a href="http://pineal.github.io" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
+	
+	&nbsp;&nbsp;<a href="http://pineal.github.io/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="http://pineal.github.io/about/" style="color:#777;"><strong>About</strong></a>
+	
+	
+	
+	<a href="http://pineal.github.ioindex.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
+</header>
+
+
+<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
+<script>
+function fadeOut(el) {
+  el.style.opacity = 1;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
+    last = +new Date();
+    
+
+    if (el.style.opacity > 0) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    } else {
+      el.style.display='none';
+    }
+  };
+
+  tick();
+}
+
+function ready(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+         el = document.getElementById('loadingMask');
+         fadeOut(el);
+        var elements = document.querySelectorAll("img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("alt")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("alt"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+window.onload = ready;
+</script>
+
+<div class="content">
+  <h1>Matrix Dynamic Programming <aside><a href="/tags/dynamic-programming/">Dynamic Programming</a></a>&nbsp;&nbsp;&nbsp;</aside></h1>
+  
+
+<h2 id="questions">Questions</h2>
+
+<ul>
+<li><a href="http://www.lintcode.com/en/problem/unique-paths/">Unique Paths</a></li>
+<li><a href="http://www.lintcode.com/en/problem/minimum-path-sum/">Min Path Sum</a></li>
+</ul>
+
+<p>一般这类问题都是给了一个m＊n的矩阵(或者三角形)，从一个方向走到另一个方向（从顶到底，或者从左上角到右下角 .etc），一般来说只会朝固定的方向走。</p>
+
+<p>初始化两条边，然后根据条件循环更新状态方程，主要看上一步的状态，最后得出结果。</p>
+
+<h2 id="unique-paths">Unique Paths</h2>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    /**
+     * @param n, m: positive integer (1 &lt;= n ,m &lt;= 100)
+     * @return an integer
+     */
+    int uniquePaths(int m, int n) {
+        // wirte your code here
+
+    int dp[m][n];
+
+        for (int i = 0; i &lt; m; i++){
+            dp[i][0] =  1;
+        }
+
+        for (int i = 0; i &lt; n; i++){
+            dp[0][i] =  1;
+        }
+
+        for (int i = 1;i &lt; m; i++){
+            for (int j = 1; j &lt; n;j++){
+                dp[i][j] = dp[i-1][j] + dp[i][j-1];
+            }
+        }
+
+        return dp[m-1][n-1];
+    }
+};
+</code></pre>
+
+<h2 id="min-path-sum">Min Path Sum</h2>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    /**
+     * @param grid: a list of lists of integers.
+     * @return: An integer, minimizes the sum of all numbers along its path
+     */
+    int minPathSum(vector&lt;vector&lt;int&gt; &gt; &amp;grid) {
+        // write your code here
+        int m = grid.size(), n = grid[0].size();
+        int sum[m][n];
+
+        sum[0][0] = grid[0][0];
+
+        for (int i = 1; i &lt; m; i++){
+            sum[i][0] =  sum[i-1][0] + grid[i][0];
+        }
+
+        for (int i = 1; i &lt; n; i++){
+            sum[0][i] =  sum[0][i-1] + grid[0][i];
+        }
+
+        for (int i = 1; i &lt; m; i++){
+            for (int j = 1 ; j &lt; n; j++){
+                sum[i][j] = min(sum[i-1][j], sum[i][j-1]) + grid[i][j];
+            }
+        }
+        return sum[m-1][n-1];
+    }
+};
+</code></pre>
+
+</div>
+
+
+
+
+<footer>
+	<p>© 2017-2018, all rights reserved.</a>
+</footer>
+</body>
+</html>

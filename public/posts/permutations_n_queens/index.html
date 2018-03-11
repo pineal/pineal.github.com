@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Permutations and N-Queens</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="Permutations and N-Queens">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="og:title" content="Permutations and N-Queens">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="http://pineal.github.io/posts/permutations_n_queens/">
+	<meta name="og:site_name" content="Permutations and N-Queens">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:tag" content="search DFS backtracking Permutations N-Queens ">
+	<link rel="stylesheet" type="text/css" href="http://pineal.github.iocss/style.css">
+	
+	
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+	tex2jax: {
+	  inlineMath: [['$','$'], ['\\(','\\)']],
+	  displayMath: [['$$','$$'], ['\[','\]']],
+	  processEscapes: true,
+	  processEnvironments: true,
+	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+	  TeX: { equationNumbers: { autoNumber: "AMS" },
+		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	}
+  });
+  </script>
+</head>
+
+<body>
+
+<header>
+	
+	<a href="http://pineal.github.io" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
+	
+	&nbsp;&nbsp;<a href="http://pineal.github.io/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="http://pineal.github.io/about/" style="color:#777;"><strong>About</strong></a>
+	
+	
+	
+	<a href="http://pineal.github.ioindex.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
+</header>
+
+
+<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
+<script>
+function fadeOut(el) {
+  el.style.opacity = 1;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
+    last = +new Date();
+    
+
+    if (el.style.opacity > 0) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    } else {
+      el.style.display='none';
+    }
+  };
+
+  tick();
+}
+
+function ready(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+         el = document.getElementById('loadingMask');
+         fadeOut(el);
+        var elements = document.querySelectorAll("img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("alt")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("alt"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+window.onload = ready;
+</script>
+
+<div class="content">
+  <h1>Permutations and N-Queens <aside><a href="/tags/search/">search</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/dfs/">DFS</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/backtracking/">backtracking</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/permutations/">Permutations</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/n-queens/">N-Queens</a></a>&nbsp;&nbsp;&nbsp;</aside></h1>
+  
+
+<h1 id="permutations-and-n-queens">Permutations and N-Queens</h1>
+
+<h2 id="permutation-from-stl-library">Permutation from STL Library</h2>
+
+<p>最直接的做法：C++11中的STL中有关于排列的algorithm库可以直接用。</p>
+
+<ul>
+<li><a href="http://en.cppreference.com/w/cpp/algorithm/is_permutation">std::is_permutation</a></li>
+<li><a href="http://en.cppreference.com/w/cpp/algorithm/prev_permutation">std::prev_permutation</a></li>
+<li><a href="http://en.cppreference.com/w/cpp/algorithm/next_permutation">std::next_permutation</a></li>
+</ul>
+
+<p>他有什么用呢？</p>
+
+<ul>
+<li><p>Changes the order of the elements in [Begin, end) according to the next permutation.</p></li>
+
+<li><p>Return <em>False</em> if the elements got the &ldquo;normal&rdquo;(lexicographical) order: that is, ascending order. So, to run through all permutations, you have to sort all elements and start a loop that calls this function as long as these algorithms return true.</p></li>
+</ul>
+
+<pre><code class="language-cpp">class Solution:
+public:
+    vector&lt;vector&lt;int&gt;&gt; permute(vector&lt;int&gt; nums){
+    vector&lt;vector&lt;int&gt;&gt; result;
+
+    if (nums.empty()){return {}};
+    std::sort(nums.begin(), nums.end());
+
+    do{
+        result.emplace_back(nums);
+    } while(next_permutation(nums.begin(), nums.end()));
+    return result;
+    }
+};    
+</code></pre>
+
+<h3 id="implementation-of-std-next-permutation">Implementation of std::next_permutation()</h3>
+
+<p>大致思路为，我们先固定第一个数，然后对右边剩下的数做全排列。什么时候右边剩下的数完成了全排列呢？那就是当这些数变成了降序。然后我们才用第一个数。</p>
+
+<p><a href="http://stackoverflow.com/questions/11483060/stdnext-permutation-implementation-explanation">留着慢慢消化，反正直接让我写，我是写不出来。</a></p>
+
+<pre><code class="language-cpp">//kan bu dong...
+template&lt;class BidirIt&gt;
+bool next_permutation(BidirIt first, BidirIt last)
+{
+    if (first == last) return false;
+    BidirIt i = last;
+    if (first == --i) return false;
+
+    while (true) {
+        BidirIt i1, i2;
+
+        i1 = i;
+        //if the elements are in ascending order
+        if (*--i &lt; *i1) {
+            i2 = last;
+            //find the next largest digit
+            while (!(*i &lt; *--i2));
+            // and put it in front
+            std::iter_swap(i, i2);
+            //put the remaining digits in ascending order
+            std::reverse(i1, last);
+            return true;
+        }
+        //last purmutation
+        if (i == first) {
+            std::reverse(first, last);
+            return false;
+        }
+    }
+}
+
+</code></pre>
+
+<p>有了这个之后我们可以自己模拟 std::next_permutation()</p>
+
+<h2 id="recursion-version-for-permutations">Recursion Version for Permutations</h2>
+
+<p>常规的backtracking回溯，用DFS递归就行。</p>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    /**
+     * @param nums: A list of integers.
+     * @return: A list of permutations.
+     */
+    vector&lt;vector&lt;int&gt; &gt; permute(vector&lt;int&gt; nums) {
+        // write your code here
+        vector&lt;vector&lt;int&gt;&gt; rst;
+        if (nums.size() == 0) return rst;
+        vector&lt;int&gt; v;
+        backtracking(rst, nums, v);
+        return rst;
+    }
+
+
+    void backtracking(vector&lt;vector&lt;int&gt;&gt;&amp; rst, vector&lt;int&gt;&amp; nums, vector&lt;int&gt;&amp; v){
+        if (v.size() == nums.size()){
+            rst.emplace_back(v);
+            return ;
+        }
+
+        for (int i = 0; i &lt; nums.size(); ++i){
+            //can employ map to improve the time complexity
+            //vector&lt;bool&gt; is not a container. do not use. alternates: deque&lt;bool&gt;, or bitset
+            if (find(v.begin(), v.end(), nums[i]) != v.end()){
+                continue;
+            }
+            v.emplace_back(nums[i]);
+            backtracking(rst, nums, v);
+            v.pop_back();
+        }
+    }
+};
+</code></pre>
+
+<h2 id="permutations-ii">Permutations II</h2>
+
+<p>全排列去重。在循环的过程中加入while语句跳过相同的元素。</p>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    vector&lt;vector&lt;int&gt; &gt; permuteUnique(vector&lt;int&gt; &amp;num) {
+        vector&lt;vector&lt;int&gt;&gt; permutations;
+        if(num.size() == 0)
+            return permutations;
+        vector&lt;int&gt; curr;
+        vector&lt;bool&gt; isVisited(num.size(), false);
+        /* we need to sort the input array here because of this array
+           contains the duplication value, then we need to skip the duplication
+           value for the final result */
+        sort(num.begin(),num.end());
+        dfs(permutations,curr,num,isVisited);
+        return permutations;
+    }
+
+    void dfs(vector&lt;vector&lt;int&gt;&gt;&amp; ret, vector&lt;int&gt; curr, vector&lt;int&gt; num, vector&lt;bool&gt; isVisited)
+    {
+        if(curr.size() == num.size())
+        {
+            ret.push_back(curr);
+            return;
+        }
+
+        for(int i = 0; i &lt; num.size(); ++i)
+        {
+            if(isVisited[i] == false)
+            {
+                isVisited[i] = true;
+                curr.push_back(num[i]);
+                dfs(ret,curr,num,isVisited);
+                isVisited[i] = false;
+                curr.pop_back();
+                while(i &lt; num.size()-1 &amp;&amp; num[i] == num[i+1])
+                //we use this while loop to skip the duplication value in the input array.
+                    ++i;
+            }
+        }
+    }
+};
+</code></pre>
+
+<h2 id="n-queens">N-Queens</h2>
+
+<p>经典的搜索题。</p>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    /**
+     * Get all distinct N-Queen solutions
+     * @param n: The number of queens
+     * @return: All distinct solutions
+     * For example, A string '...Q' shows a queen on forth position
+     */
+    vector&lt;vector&lt;string&gt; &gt; solveNQueens(int n) {
+        // write your code here
+        vector&lt;vector&lt;string&gt;&gt; rst;
+        vector&lt;string&gt; cur(n, string(n, '.'));
+        backtracking(rst, cur, 0);
+        return rst;
+    }
+
+    void backtracking(vector&lt;vector&lt;string&gt;&gt;&amp; rst, vector&lt;string&gt;&amp; cur, int row){
+        if (row == cur.size()){
+            rst.emplace_back(cur);
+            return;
+        }
+
+        for (int col = 0; col &lt; cur.size(); col++){
+            if (isValid(cur, row, col)){
+                cur[row][col] = 'Q';
+                backtracking(rst, cur, row + 1);
+                cur[row][col] = '.';
+            }
+        }
+    }
+
+    bool isValid(vector&lt;string&gt; cur, int row, int col){
+        for (int i = 0; i &lt; row; i++){
+            if (cur[i][col] == 'Q') return false;
+        }
+        for (int i = row - 1, j = col - 1; i &gt;=0 &amp;&amp; j &gt;=0; i--, j--){
+            if (cur[i][j] == 'Q') return false;
+        }
+        for (int i = row - 1, j = col + 1; i &gt;=0 &amp;&amp; j &lt; cur.size(); i--, j++){
+            if (cur[i][j] == 'Q') return false;
+        }
+        return true;
+    }
+};
+</code></pre>
+
+<h2 id="n-queens-ii">N-Queens II</h2>
+
+<p>只要求solutions的个数就可以。这道题并不用动归解，还是要用搜索。和上一题基本没差别。</p>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    /**
+     * Calculate the total number of distinct N-Queen solutions.
+     * @param n: The number of queens.
+     * @return: The total number of distinct solutions.
+     */
+    int totalNQueens(int n) {
+         // write your code here
+        int rst = 0;
+        vector&lt;string&gt; cur(n, string(n, '.'));
+        backtracking(rst, cur, 0);
+        return rst;
+    }
+
+    void backtracking(int&amp; rst, vector&lt;string&gt;&amp; cur, int row){
+        if (row == cur.size()){
+            ++rst;
+            return;
+        }
+
+        for (int col = 0; col &lt; cur.size(); col++){
+            if (isValid(cur, row, col)){
+                cur[row][col] = 'Q';
+                backtracking(rst, cur, row + 1);
+                cur[row][col] = '.';
+            }
+        }
+    }
+
+    bool isValid(vector&lt;string&gt; cur, int row, int col){
+        for (int i = 0; i &lt; row; i++){
+            if (cur[i][col] == 'Q') return false;
+        }
+        for (int i = row - 1, j = col - 1; i &gt;=0 &amp;&amp; j &gt;=0; i--, j--){
+            if (cur[i][j] == 'Q') return false;
+        }
+        for (int i = row - 1, j = col + 1; i &gt;=0 &amp;&amp; j &lt; cur.size(); i--, j++){
+            if (cur[i][j] == 'Q') return false;
+        }
+        return true;
+    }
+};
+</code></pre>
+
+</div>
+
+
+
+
+<footer>
+	<p>© 2017-2018, all rights reserved.</a>
+</footer>
+</body>
+</html>

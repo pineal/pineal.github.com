@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Sequence Dynamic Programming</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="Sequence Dynamic Programming">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="og:title" content="Sequence Dynamic Programming">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="http://pineal.github.io/posts/sequence_dynamic_programming/">
+	<meta name="og:site_name" content="Sequence Dynamic Programming">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:tag" content="Dynamic Programming ">
+	<link rel="stylesheet" type="text/css" href="http://pineal.github.iocss/style.css">
+	
+	
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+	tex2jax: {
+	  inlineMath: [['$','$'], ['\\(','\\)']],
+	  displayMath: [['$$','$$'], ['\[','\]']],
+	  processEscapes: true,
+	  processEnvironments: true,
+	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+	  TeX: { equationNumbers: { autoNumber: "AMS" },
+		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	}
+  });
+  </script>
+</head>
+
+<body>
+
+<header>
+	
+	<a href="http://pineal.github.io" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
+	
+	&nbsp;&nbsp;<a href="http://pineal.github.io/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="http://pineal.github.io/about/" style="color:#777;"><strong>About</strong></a>
+	
+	
+	
+	<a href="http://pineal.github.ioindex.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
+</header>
+
+
+<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
+<script>
+function fadeOut(el) {
+  el.style.opacity = 1;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
+    last = +new Date();
+    
+
+    if (el.style.opacity > 0) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    } else {
+      el.style.display='none';
+    }
+  };
+
+  tick();
+}
+
+function ready(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+         el = document.getElementById('loadingMask');
+         fadeOut(el);
+        var elements = document.querySelectorAll("img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("alt")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("alt"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+window.onload = ready;
+</script>
+
+<div class="content">
+  <h1>Sequence Dynamic Programming <aside><a href="/tags/dynamic-programming/">Dynamic Programming</a></a>&nbsp;&nbsp;&nbsp;</aside></h1>
+  
+
+<h2 id="questions">Questions</h2>
+
+<ul>
+<li><a href="http://www.lintcode.com/en/problem/unique-paths/">Climbing Stairs</a></li>
+<li><a href="http://www.lintcode.com/en/problem/house-robber/">House Robber</a></li>
+<li><a href="http://www.lintcode.com/en/problem/longest-increasing-subsequence/">Longest Increasing Subsequence</a></li>
+<li><a href="http://www.lintcode.com/en/problem/word-break/">Word Break</a></li>
+</ul>
+
+<h2 id="climbing-stairs">Climbing Stairs</h2>
+
+<p>状态转移方程，两种可能：要么是从i-1爬到i的，要么就是从i-2爬到i的，要计算所有可能的爬法之要把两者相加即可。所以维护一个数组来记录到i的爬法总数，那么:</p>
+
+<p>$$
+f[i] = f[i-1] + f[i-2]
+$$</p>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    /**
+     * @param n: An integer
+     * @return: An integer
+     */
+    int climbStairs(int n) {
+        // write your code here
+        if (n &lt;= 1){
+            return 1;
+        }
+
+        vector&lt;int&gt; opt = {0, 1, 2};
+
+        for (int i = 3; i &lt;= n; i++){
+            opt.emplace_back(opt[i-1] + opt[i-2]);
+        }
+
+        return opt[n];
+    }
+};
+</code></pre>
+
+<h2 id="house-robber">House Robber</h2>
+
+<p>这道题很像学校里上算法课的时候给的例题。最重要的是想清楚状态转移方程是怎么样的。常规的动归思路：维护一个相同大小的一维数组，因为是一个累积的过程，并且不能取邻近位置，那么在位置i的最优解只有两种可能：不取位置i上的值，那么这个最优值就跟i-1位置上的一样；或者取i上的值加上i-2上的最优值。比较这两者之间的大小即可。这类问题可以枚举初始状态，然后顺着这个思路写出状态转移方程。并且一般都是从头到尾的一次循环。</p>
+
+<p>$$
+f[i] = max(f[i-1], f[i-2] + A[i])
+$$</p>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    /**
+     * @param A: An array of non-negative integers.
+     * return: The maximum amount of money you can rob tonight
+     */
+long long houseRobber(vector&lt;int&gt;&amp; nums) {
+    int len = nums.size();
+    if (len == 0) return 0;
+    if (len == 1) return nums[0];
+
+    vector&lt;long long&gt; s = {nums[0], max(nums[0],nums[1])};
+
+    for (int i=2;i&lt;len;i++){
+        s.emplace_back(max(s[i-1], s[i-2] + nums[i]));
+    }
+
+    return s[len-1];
+    }
+
+};
+</code></pre>
+
+<h2 id="longest-increasing-subsequence">Longest Increasing Subsequence</h2>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    /**
+     * @param nums: The integer array
+     * @return: The length of LIS (longest increasing subsequence)
+     */
+    int longestIncreasingSubsequence(vector&lt;int&gt; nums) {
+        // write your code here
+        if (nums.empty()) return 0;
+
+        vector&lt;int&gt; dp(nums.size(), 1);
+        int rst = 0;
+
+        for (int i = 1; i &lt; nums.size(); i++){
+            for(int j = i - 1; j &gt;= 0; j--){
+                if (nums[j] &lt;= nums[i]){
+                    dp[i] = max(dp[i], dp[j] + 1);
+                }                             
+            }
+            rst = max(rst, dp[i]);
+        }
+        return rst;
+    }
+};
+
+</code></pre>
+
+<h2 id="word-break">Word Break</h2>
+
+<p>在做了分割字符串II那道题之后，发现其实这两题一样一样的。</p>
+
+<ol>
+<li><p>State: f[i] 表示前i个字符能否根据词典中的词被成功分词。</p></li>
+
+<li><p>Function: f[i] = or{f[j], j &lt; i, letter in [j+1, i] can be found in dict}, 含义为小于i的索引j中只要有一个f[j]为真且j+1到i中组成的字符能在词典中找到时，f[i]即为真，否则为假。具体实现可分为自顶向下或者自底向上。</p></li>
+
+<li><p>Initialization: f[0] = true, 数组长度为字符串长度 + 1，便于处理。</p></li>
+
+<li><p>Answer: f[s.length]</p></li>
+</ol>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    /**
+     * @param s: A string s
+     * @param dict: A dictionary of words dict
+     */
+    bool wordBreak(string s, unordered_set&lt;string&gt; &amp;dict) {
+        // write your code here
+        if (s.empty()) return true;
+        if (dict.empty()) return false;
+
+        int len = s.size();
+        int max_word_len = 0;
+
+        for (unordered_set&lt;string&gt;::iterator it = dict.begin(); it != dict.end(); ++it) {
+            int thisLen = (*it).size();
+            max_word_len = max(max_word_len, thisLen);
+        }
+
+        deque&lt;bool&gt; canBreak(len + 1, false);
+        canBreak[0] = true;
+
+        for (int i = 1; i &lt; len + 1; ++i){
+            for (int j = i - 1; j &gt;= 0; --j){
+
+                if (i - j &gt; max_word_len) break;
+
+
+                if (canBreak[j] &amp;&amp; dict.find(s.substr(j, i - j))!= dict.end()){
+                    canBreak[i] = true;
+                    break;
+                }   
+            }
+        }
+    return canBreak[len];    
+    }
+};
+
+
+</code></pre>
+
+</div>
+
+
+
+
+<footer>
+	<p>© 2017-2018, all rights reserved.</a>
+</footer>
+</body>
+</html>

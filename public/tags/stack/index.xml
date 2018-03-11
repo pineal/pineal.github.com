@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stack on PINEAL.ME</title>
+    <link>http://pineal.github.io/tags/stack/</link>
+    <description>Recent content in Stack on PINEAL.ME</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 10 Dec 2016 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="http://pineal.github.io/tags/stack/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Problems with Parentheses</title>
+      <link>http://pineal.github.io/posts/problem_with_parentheses/</link>
+      <pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://pineal.github.io/posts/problem_with_parentheses/</guid>
+      <description>
+
+&lt;h1 id=&#34;括号问题&#34;&gt;括号问题&lt;/h1&gt;
+
+&lt;p&gt;对括号的处理，最经典的做法是对左右括号计数，因为一定会成对。也可以用栈的性质，来配对。&lt;/p&gt;
+
+&lt;h3 id=&#34;生成所有的括号&#34;&gt;生成所有的括号&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    vector&amp;lt;string&amp;gt; generateParenthesis(int n) {
+        vector&amp;lt;string&amp;gt; rst;
+        string cur;
+        dfs(cur, rst, 0, 0, n);
+        return rst;
+    }
+
+    void dfs(string &amp;amp; cur, vector&amp;lt;string&amp;gt; &amp;amp; rst, int l, int r, int n) {
+        if (l + r == 2 * n) {
+            rst.emplace_back(cur);
+            return;
+        }
+
+        if (l &amp;lt; n) {
+            cur += &#39;(&#39;;
+            dfs(cur, rst, l + 1, r, n);
+            cur.pop_back();
+        }
+
+        if (r &amp;lt; l) {
+            cur += &#39;)&#39;;
+            dfs(cur, rst, l, r + 1, n);
+            cur.pop_back();
+        }
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;验证合法的括号&#34;&gt;验证合法的括号&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    bool isValid(string s) {
+        stack&amp;lt;char&amp;gt; st;
+        for (auto c : s)
+            if (!st.empty() &amp;amp;&amp;amp;
+                ((c == &#39;)&#39; &amp;amp;&amp;amp; st.top() == &#39;(&#39;) ||
+                 (c == &#39;}&#39; &amp;amp;&amp;amp; st.top() == &#39;{&#39;) ||
+                 (c == &#39;]&#39; &amp;amp;&amp;amp; st.top() == &#39;[&#39;))
+               ) {
+                st.pop();    
+               }
+            else {
+                st.push(c);
+            }
+        return st.empty();
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

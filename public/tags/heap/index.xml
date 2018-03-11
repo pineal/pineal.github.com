@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Heap on PINEAL.ME</title>
+    <link>http://pineal.github.io/tags/heap/</link>
+    <description>Recent content in Heap on PINEAL.ME</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 13 Oct 2016 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="http://pineal.github.io/tags/heap/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kth Problems</title>
+      <link>http://pineal.github.io/posts/kth_problems/</link>
+      <pubDate>Thu, 13 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://pineal.github.io/posts/kth_problems/</guid>
+      <description>
+
+&lt;h1 id=&#34;kth-problems&#34;&gt;Kth Problems&lt;/h1&gt;
+
+&lt;p&gt;套路：找第K个的问题，最常用的做法就是用优先队列来实现，根据题意用最大堆或者最小堆把时间复杂度优化到 O(nlogk).&lt;/p&gt;
+
+&lt;h3 id=&#34;merge-k-sorted-lists&#34;&gt;Merge k Sorted Lists&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;
+//Time O(nlogk)
+//Space O(n)
+//provides greater
+struct Cmp {
+  bool operator() (ListNode* n1, ListNode* n2) {
+    return n1 -&amp;gt; val &amp;gt; n2 -&amp;gt; val;
+  }
+};
+
+class Solution {
+public:
+  ListNode* mergeKLists(vector&amp;lt;ListNode*&amp;gt;&amp;amp; lists) {
+    //min_heap needs a greater comparator
+    //Method 1: redefine functor
+    //priority_queue&amp;lt;ListNode*, vector&amp;lt;ListNode*&amp;gt;, Cmp&amp;gt; min_heap;
+    //Method 2: Lambda
+    auto cmp = [](ListNode* n1, ListNode* n2) {return n1 -&amp;gt; val &amp;gt; n2 -&amp;gt; val;};
+    priority_queue&amp;lt;ListNode*, vector&amp;lt;ListNode*&amp;gt;, decltype(cmp)&amp;gt; min_heap(cmp);
+    //maintain the min_heap of size k instead of all nodes
+    // klogn =&amp;gt; nlogk
+    for (int i = 0; i &amp;lt; lists.size(); i++) {
+      if (lists[i]) {
+        min_heap.emplace(lists[i]);
+      }
+    }
+
+    ListNode* dummy = new ListNode(0);
+    ListNode* cur = dummy;
+    while (!min_heap.empty()) {
+      ListNode* temp = min_heap.top();
+      cur -&amp;gt; next = temp;
+      min_heap.pop();
+      if (temp -&amp;gt; next) {
+        min_heap.emplace(temp -&amp;gt; next);
+      }
+      cur = cur -&amp;gt; next;
+    }
+    return dummy -&amp;gt; next;
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;kth-smallest-number-in-sorted-matrix&#34;&gt;Kth Smallest Number In Sorted Matrix&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;
+class Cell {
+public:
+    int row;
+    int col;
+    int value;
+    Cell(int _row, int _column, int _value) {
+        row = _row;
+        col = _column;
+        value = _value;
+    }
+
+    bool operator &amp;lt; (const Cell &amp;amp; c) const {
+        return value &amp;lt;= c.value;
+    }
+
+    bool operator &amp;gt; (const Cell &amp;amp; c) const {
+        return value &amp;gt; c.value;
+    }
+};
+
+int kthSmallest(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; m, int k) {
+    priority_queue&amp;lt;Cell, vector&amp;lt;Cell&amp;gt;, greater&amp;lt;Cell&amp;gt;&amp;gt; min_heap;
+    min_heap.emplace(Cell(0, 0, m[0][0]));
+    size_t num_row = m.size();
+    size_t num_col = m[0].size();
+    vector&amp;lt;vector&amp;lt;bool&amp;gt;&amp;gt; visited(num_row, vector&amp;lt;bool&amp;gt;(num_col, false));
+    visited[0][0] = true;
+    for (int i = 0; i &amp;lt; k - 1; i++) {
+        Cell c = min_heap.top();
+        min_heap.pop();
+        if (c.row + 1 &amp;lt; num_row &amp;amp;&amp;amp; visited[c.row + 1][c.col] == false) {
+                min_heap.emplace(Cell(c.row + 1, c.col, m[c.row + 1][c.col]));
+                visited[c.row + 1][c.col] = true;
+        }
+
+        if (c.col + 1 &amp;lt; num_col &amp;amp;&amp;amp; visited[c.row][c.col + 1] == false) {
+                min_heap.emplace(Cell(c.row, c.col + 1, m[c.row][c.col + 1]));
+                visited[c.row][c.col + 1] = true;
+        }
+    }
+    return min_heap.top().value;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;kth-smallest-sum-in-two-sorted-arrays&#34;&gt;Kth Smallest Sum In Two Sorted Arrays&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Cell {
+public:
+  int i;
+  int j;
+  int sum;
+  Cell(int _i, int _j, int _sum) {
+    i = _i;
+    j = _j;
+    sum = _sum;
+  }
+
+  bool operator &amp;lt; (const Cell &amp;amp; c) const {
+    return sum &amp;lt;= c.sum;
+  }
+
+  bool operator &amp;gt; (const Cell &amp;amp; c) const {
+    return sum &amp;gt; c.sum;
+  }
+};
+
+class Solution {
+ public:
+  int kthSum(vector&amp;lt;int&amp;gt; a, vector&amp;lt;int&amp;gt; b, int k) {
+    // Write your solution here
+    priority_queue&amp;lt;Cell, vector&amp;lt;Cell&amp;gt;, greater&amp;lt;Cell&amp;gt;&amp;gt; min_heap;
+    vector&amp;lt;vector&amp;lt;bool&amp;gt;&amp;gt; visited(a.size(), vector&amp;lt;bool&amp;gt;(b.size(), false));
+    visited[0][0] = true;
+    min_heap.emplace(Cell(0, 0, a[0] + b[0]));
+    for (int i = 0; i &amp;lt; k - 1; i++) {
+      Cell cur = min_heap.top();
+      min_heap.pop();
+      if (cur.i + 1 &amp;lt; a.size() &amp;amp;&amp;amp; !visited[cur.i + 1][cur.j]) {
+        int sum = a[cur.i + 1] + b[cur.j];
+        min_heap.emplace(Cell(cur.i + 1, cur.j, sum));
+        visited[cur.i + 1][cur.j] = true;
+      }
+
+      if (cur.j + 1 &amp;lt; b.size() &amp;amp;&amp;amp; !visited[cur.i][cur.j + 1]) {
+        int sum = a[cur.i] + b[cur.j + 1];
+        min_heap.emplace(Cell(cur.i, cur.j + 1, sum));
+        visited[cur.i][cur.j + 1] = true;
+      }
+    }
+    return min_heap.top().sum;
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;kth-smallest-with-only-3-5-7-as-factors&#34;&gt;Kth Smallest With Only 3, 5, 7 As Factors&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;  long kth(int k) {
+    // Write your solution here.
+    priority_queue&amp;lt;long, vector&amp;lt;long&amp;gt;, greater&amp;lt;long&amp;gt;&amp;gt; min_heap;
+    min_heap.emplace(105);
+    set&amp;lt;long&amp;gt; visited;
+    visited.emplace(105);
+    for (int i = 0; i &amp;lt; k - 1; i++) {
+      long cur = min_heap.top();
+      min_heap.pop();
+      if (visited.find(cur * 3) == visited.end()) {
+        min_heap.emplace(cur * 3);
+        visited.emplace(cur * 3);
+      }
+
+      if (visited.find(cur * 5) == visited.end()) {
+        min_heap.emplace(cur * 5);
+        visited.emplace(cur * 5);
+      }      
+
+      if (visited.find(cur * 7) == visited.end()) {
+        min_heap.emplace(cur * 7);
+        visited.emplace(cur * 7);
+      }      
+    }
+
+    return min_heap.top();
+  }
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;kth-closest-point&#34;&gt;Kth Closest Point&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Point {
+public:
+    int x;
+    int y;
+    int z;
+    double dis;
+    Point (int _x, int _y, int _z, double _dis) {
+        x = _x;
+        y = _y;
+        z = _z;
+        dis = _dis;
+    }
+
+    bool operator &amp;lt; (const Point &amp;amp; p1) const {
+        return dis &amp;lt;= p1.dis;
+    }
+
+    bool operator &amp;gt; (const Point &amp;amp; p1) const {
+        return dis &amp;gt; p1.dis;
+    }
+
+};
+
+class Solution {
+ public:
+    vector&amp;lt;int&amp;gt; closest(vector&amp;lt;int&amp;gt; a, vector&amp;lt;int&amp;gt; b, vector&amp;lt;int&amp;gt; c, int k) {
+        priority_queue&amp;lt;Point, vector&amp;lt;Point&amp;gt;, greater&amp;lt;Point&amp;gt;&amp;gt; min_heap;
+        set&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; visited;
+        double d = sqrt(a[0] * a[0] + b[0] * b[0] + c[0] * c[0] + 0.0);
+        Point* start = new Point(0,0,0,d);
+        min_heap.emplace(*start);
+        visited.emplace(vector&amp;lt;int&amp;gt;{0,0,0});
+        for (int i = 0; i &amp;lt; k - 1; i++) {
+            Point p = min_heap.top();
+            min_heap.pop();
+            if (p.x + 1 &amp;lt; a.size()) {
+                double d = sqrt(a[p.x + 1] * a[p.x + 1] + b[p.y] * b[p.y] + c[p.z] * c[p.z] + 0.0);
+                Point* temp = new Point(p.x + 1,p.y,p.z,d);
+                if (visited.find({p.x + 1,p.y,p.z}) == visited.end()) {
+                    min_heap.emplace(*temp);
+                    vector&amp;lt;int&amp;gt; v = {p.x + 1, p.y, p.z};
+                    visited.emplace(v);
+                }
+            }
+            if (p.y + 1 &amp;lt; b.size()) {
+                double d = sqrt(a[p.x] * a[p.x] + b[p.y + 1] * b[p.y + 1] + c[p.z] * c[p.z] + 0.0);
+                Point* temp = new Point(p.x,p.y + 1,p.z,d);
+                if (visited.find({p.x,p.y + 1,p.z}) == visited.end()) {
+                    min_heap.emplace(*temp);
+                    vector&amp;lt;int&amp;gt; v = {p.x,p.y + 1,p.z};
+                    visited.emplace(v);
+                }
+            }
+
+            if (p.z + 1 &amp;lt; c.size()) {
+                double d = sqrt(a[p.x] * a[p.x] + b[p.y] * b[p.y] + c[p.z + 1] * c[p.z + 1] + 0.0);
+                Point* temp = new Point(p.x,p.y,p.z + 1,d);
+                if (visited.find({p.x,p.y,p.z + 1}) == visited.end()) {
+                    min_heap.emplace(*temp);
+                    vector&amp;lt;int&amp;gt; v = {p.x,p.y,p.z + 1};
+                    visited.emplace(v);
+                }
+            }      
+        }
+
+        Point rst = min_heap.top();
+        return {a[rst.x], b[rst.y], c[rst.z]};
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;visited尽量用bool数组表示，二维三维都可。不要存放node类的class，地址不一样。&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

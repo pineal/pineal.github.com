@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Greedy on PINEAL.ME</title>
+    <link>http://pineal.github.io/tags/greedy/</link>
+    <description>Recent content in Greedy on PINEAL.ME</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 19 Feb 2016 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="http://pineal.github.io/tags/greedy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Jump Game</title>
+      <link>http://pineal.github.io/posts/jump_game/</link>
+      <pubDate>Fri, 19 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://pineal.github.io/posts/jump_game/</guid>
+      <description>
+
+&lt;h2 id=&#34;questions&#34;&gt;Questions&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.lintcode.com/en/problem/jump-game/&#34;&gt;Jump Game&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.lintcode.com/en/problem/jump-game-ii/&#34;&gt;Jume Game II&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这两题明眼看是序列形动态规划的题，但是时间复杂度上其实并不好，会出现超时的情况。而用贪心法则能避免。单独拿出来记录一下贪心法。尤其是Jump Game II 的做法非常巧妙。&lt;/p&gt;
+
+&lt;h2 id=&#34;jump-game&#34;&gt;Jump Game&lt;/h2&gt;
+
+&lt;p&gt;动态规划解法，无法被AC, c++的解法会超时。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    /**
+     * @param A: A list of integers
+     * @return: The boolean answer
+     */
+    bool canJump(vector&amp;lt;int&amp;gt; A) {
+        if (A.empty()) {
+            return true;
+        }
+
+        vector&amp;lt;bool&amp;gt; jumpto(A.size(), false);
+        jumpto[0] = true;
+
+        for (int i = 1; i != A.size(); ++i) {
+            for (int j = i - 1; j &amp;gt;= 0; --j) {
+                if (jumpto[j] &amp;amp;&amp;amp; (j + A[j] &amp;gt;= i)) {
+                    jumpto[i] = true;
+                    break;
+                }
+            }
+        }
+
+        return jumpto[A.size() - 1];
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;贪心法的解法，很快。&lt;/p&gt;
+
+&lt;p&gt;维护一个最远能到达的变量，如果当前位置的值超过了这个变量那么更新该变量。从头循环到尾，如果现在的位置超过了最远能到达的位置，那说明到不了最后，返回false。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    /**
+     * @param A: A list of integers
+     * @return: The boolean answer
+     */
+    bool canJump(vector&amp;lt;int&amp;gt; A) {
+        // write you code here
+
+        int reachable = 0;
+        for (int i = 0; i &amp;lt; A.size(); ++i){
+            if (i &amp;gt; reachable){
+                return false;
+            }
+            reachable = max(reachable, i + A[i]);
+        }
+        return true;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;jump-game-ii&#34;&gt;Jump Game II&lt;/h2&gt;
+
+&lt;p&gt;动态规划的和之前的没什么大差别，把维护的数组类型从bool换成了int记录步数。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    /**
+     * @param A: A list of lists of integers
+     * @return: An integer
+     */
+    int jump(vector&amp;lt;int&amp;gt; A) {
+        if (A.empty()) {
+            return -1;
+        }
+
+        const int N = A.size() - 1;
+        vector&amp;lt;int&amp;gt; steps(N, INT_MAX);
+        steps[0] = 0;
+
+        for (int i = 1; i != N + 1; ++i) {
+            for (int j = 0; j != i; ++j) {
+                if ((steps[j] != INT_MAX) &amp;amp;&amp;amp; (j + A[j] &amp;gt;= i)) {
+                    steps[i] = steps[j] + 1;
+                    break;
+                }
+            }
+        }
+
+        return steps[N];
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;贪心法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;// Time:  O(n)
+// Space: O(1)
+
+class Solution {
+public:
+    /**
+     * @param A: A list of lists of integers
+     * @return: An integer
+     */
+    int jump(vector&amp;lt;int&amp;gt; A) {
+        int jump_count = 0;
+        int reachable = 0;
+        int curr_reachable = 0;
+        for (int i = 0; i &amp;lt; A.size(); ++i) {
+            if (i &amp;gt; curr_reachable) {
+                // current jumps are not enough,
+                // jump one more step, which enlarges curr_reachable to reachable.
+                curr_reachable = reachable;
+                ++jump_count;
+            }
+            reachable = max(reachable, i + A[i]);
+        }   
+
+        return jump_count;
+    }
+};
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://www.kancloud.cn/kancloud/data-structure-and-algorithm-notes/73079&#34;&gt;reference&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

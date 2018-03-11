@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Control Theory on PINEAL.ME</title>
+    <link>http://pineal.github.io/tags/control-theory/</link>
+    <description>Recent content in Control Theory on PINEAL.ME</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 26 Sep 2015 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="http://pineal.github.io/tags/control-theory/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Optimal Control</title>
+      <link>http://pineal.github.io/posts/optimal_control/</link>
+      <pubDate>Sat, 26 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://pineal.github.io/posts/optimal_control/</guid>
+      <description>
+
+&lt;h1 id=&#34;optimal-control&#34;&gt;Optimal Control&lt;/h1&gt;
+
+&lt;h2 id=&#34;optimal-control-framework&#34;&gt;Optimal Control Framework&lt;/h2&gt;
+
+&lt;p&gt;Given:
+A controlled dynamical system：$ x^{n+1} = f(x^n, u^n)$&lt;/p&gt;
+
+&lt;p&gt;A cost function：$V = \phi(x^N, \alpha) + \sum^{N-1}_{i=0}L(x^i, u^i, \alpha)$&lt;/p&gt;
+
+&lt;p&gt;Goal: Find the sequence of commands that minimizes(maximizes) the cost function&lt;/p&gt;
+
+&lt;h2 id=&#34;bellman-s-principle-of-optimality&#34;&gt;Bellman&amp;rsquo;s Principle of Optimality&lt;/h2&gt;
+
+&lt;p&gt;Optimize it using dynamic programming:&lt;/p&gt;
+
+&lt;p&gt;$$
+J_i(X&lt;em&gt;i) = \mathop{arg min}&lt;/em&gt;{u_i\in u(x&lt;em&gt;i)}{{L(x^i, u^i, \alpha) + V^*&lt;/em&gt;{i+1}x_{(i+1)}}}
+$$&lt;/p&gt;
+
+&lt;h2 id=&#34;linear-quadratic-regulator&#34;&gt;Linear quadratic regulator&lt;/h2&gt;
+
+&lt;p&gt;Special Assumption: Linear System Dynamics
+ $$
+  x^{n+1} = Ax^n + Bu^n
+ $$&lt;/p&gt;
+
+&lt;p&gt;Quadratic cost function
+ $$
+ L(x^i, u^i, \alpha) ＝ x^{i^T}Qx^i + u^{i^T}Ru^{i^T}
+ $$&lt;/p&gt;
+
+&lt;p&gt;Goal:
+    - Bring the system to a setpoint and keep it there
+    - Note: this an also be did with a nonlinear system by a local linearization&lt;/p&gt;
+
+&lt;p&gt;$$
+  \begin{aligned}
+ V^&lt;em&gt;_i(X&lt;em&gt;i) &amp;amp; = \mathop{arg min}&lt;/em&gt;{u_i\in u(x_i)}{{L(x^i, u^i, \alpha) + V^&lt;/em&gt;&lt;em&gt;{i+1}x&lt;/em&gt;{(i+1)}}} &lt;br /&gt;
+   &amp;amp; = \mathop{arg min}_{u_i\in u(x&lt;em&gt;i)}{{x^{i^T}Qx^i + u^{i^T}Ru^{i^T} + V^*&lt;/em&gt;{i+1}x&lt;em&gt;{(i+1)}}} &lt;br /&gt;
+   &amp;amp; = \mathop{arg min}&lt;/em&gt;{u_i\in u(x&lt;em&gt;i)}{{x^{i^T}Qx^i + u^{i^T}Ru^{i^T} + V^*&lt;/em&gt;{i+1}(Ax^n + Bu^n)}} &lt;br /&gt;
+  \end{aligned}
+$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;As A linear control law expressed as:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$
+    u^{i^*} = -K^ix^i
+$$&lt;/p&gt;
+
+&lt;p&gt;Rewrite the optimal cost at stage i as a quadratic form:&lt;/p&gt;
+
+&lt;p&gt;$$
+    {V^i}^* = {x^i}^TP^ix^i
+$$&lt;/p&gt;
+
+&lt;p&gt;Thus,&lt;/p&gt;
+
+&lt;p&gt;$$
+   V^&lt;em&gt;_i(X&lt;em&gt;i) = \mathop{arg min}&lt;/em&gt;{u_i\in u(x_i)}{ {x^{i^T}Qx^i + u^{i^T}Ru^{i^T} + V^&lt;/em&gt;_{i+1}(Ax^n + Bu^n)} } &lt;br /&gt;
+$$&lt;/p&gt;
+
+&lt;h2 id=&#34;finite-horizon-approximation&#34;&gt;Finite horizon approximation&lt;/h2&gt;
+
+&lt;p&gt;To be continued&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;motion-predictive-control&#34;&gt;Motion Predictive Control&lt;/h2&gt;
+
+&lt;p&gt;To be continued&amp;hellip;&lt;/p&gt;
+
+&lt;h2 id=&#34;fast-mpc&#34;&gt;Fast MPC&lt;/h2&gt;
+
+&lt;p&gt;To be continued&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

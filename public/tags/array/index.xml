@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Array on PINEAL.ME</title>
+    <link>http://pineal.github.io/tags/array/</link>
+    <description>Recent content in Array on PINEAL.ME</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 03 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="http://pineal.github.io/tags/array/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sliding Window Problems</title>
+      <link>http://pineal.github.io/posts/sliding_windows/</link>
+      <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://pineal.github.io/posts/sliding_windows/</guid>
+      <description>
+
+&lt;h1 id=&#34;sliding-window-problems&#34;&gt;Sliding Window Problems&lt;/h1&gt;
+
+&lt;h3 id=&#34;719-find-k-th-smallest-pair-distance&#34;&gt;719. Find K-th Smallest Pair Distance&lt;/h3&gt;
+
+&lt;p&gt;Binary Search + Sliding Window&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/minimum-window-substring/&#34;&gt;76. Minimum Window Substring&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/minimum-size-subarray-sum/&#34;&gt;209. Minimum Size Subarray Sum&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/sliding-window-maximum/&#34;&gt;239. Sliding Window Maximum&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/&#34;&gt;340. Longest Substring with At Most K Distinct Characters&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/&#34;&gt;159. Longest Substring with At Most Two Distinct Characters&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/substring-with-concatenation-of-all-words/&#34;&gt;30. Substring with Concatenation of All Words&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/longest-substring-without-repeating-characters/&#34;&gt;3. Longest Substring Without Repeating Characters&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
