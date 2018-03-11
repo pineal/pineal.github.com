@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Binary Tree on PINEAL.ME</title>
-    <link>https://pineal.me/tags/binary-tree/</link>
+    <link>https://pineal.github.com/tags/binary-tree/</link>
     <description>Recent content in Binary Tree on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 05 Aug 2015 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.me/tags/binary-tree/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://pineal.github.com/tags/binary-tree/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Binary Tree</title>
-      <link>https://pineal.me/posts/binary_tree/</link>
+      <link>https://pineal.github.com/posts/binary_tree/</link>
       <pubDate>Wed, 05 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/binary_tree/</guid>
+      <guid>https://pineal.github.com/posts/binary_tree/</guid>
       <description>
 
 &lt;h2 id=&#34;definition-of-binary-tree&#34;&gt;Definition of Binary Tree&lt;/h2&gt;

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Disjoint Sets on PINEAL.ME</title>
-    <link>https://pineal.me/tags/disjoint-sets/</link>
+    <link>https://pineal.github.com/tags/disjoint-sets/</link>
     <description>Recent content in Disjoint Sets on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 04 Oct 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.me/tags/disjoint-sets/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://pineal.github.com/tags/disjoint-sets/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Data Structures for Disjoint Sets</title>
-      <link>https://pineal.me/posts/data_structures_for_disjoint_sets/</link>
+      <link>https://pineal.github.com/posts/data_structures_for_disjoint_sets/</link>
       <pubDate>Tue, 04 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/data_structures_for_disjoint_sets/</guid>
+      <guid>https://pineal.github.com/posts/data_structures_for_disjoint_sets/</guid>
       <description>
 
 &lt;h1 id=&#34;disjoint-sets&#34;&gt;Disjoint Sets&lt;/h1&gt;

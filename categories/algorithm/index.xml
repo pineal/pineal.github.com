@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Algorithm on PINEAL.ME</title>
-    <link>https://pineal.me/categories/algorithm/</link>
+    <link>https://pineal.github.com/categories/algorithm/</link>
     <description>Recent content in Algorithm on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 03 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.me/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://pineal.github.com/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Sliding Window Problems</title>
-      <link>https://pineal.me/posts/sliding_windows/</link>
+      <link>https://pineal.github.com/posts/sliding_windows/</link>
       <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/sliding_windows/</guid>
+      <guid>https://pineal.github.com/posts/sliding_windows/</guid>
       <description>
 
 &lt;h1 id=&#34;sliding-window-problems&#34;&gt;Sliding Window Problems&lt;/h1&gt;
@@ -43,10 +43,10 @@
     
     <item>
       <title>Extended Kalman Filter</title>
-      <link>https://pineal.me/posts/extended_kalman_filter/</link>
+      <link>https://pineal.github.com/posts/extended_kalman_filter/</link>
       <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/extended_kalman_filter/</guid>
+      <guid>https://pineal.github.com/posts/extended_kalman_filter/</guid>
       <description>
 
 &lt;h2 id=&#34;review-of-kalman-filter&#34;&gt;Review of Kalman filter&lt;/h2&gt;
@@ -109,10 +109,10 @@ $$&lt;/p&gt;
     
     <item>
       <title>Cache Design</title>
-      <link>https://pineal.me/posts/cache_design/</link>
+      <link>https://pineal.github.com/posts/cache_design/</link>
       <pubDate>Sun, 29 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/cache_design/</guid>
+      <guid>https://pineal.github.com/posts/cache_design/</guid>
       <description>
 
 &lt;h1 id=&#34;cache-design&#34;&gt;Cache Design&lt;/h1&gt;
@@ -129,10 +129,10 @@ $$&lt;/p&gt;
     
     <item>
       <title>Problems with Parentheses</title>
-      <link>https://pineal.me/posts/problem_with_parentheses/</link>
+      <link>https://pineal.github.com/posts/problem_with_parentheses/</link>
       <pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/problem_with_parentheses/</guid>
+      <guid>https://pineal.github.com/posts/problem_with_parentheses/</guid>
       <description>
 
 &lt;h1 id=&#34;括号问题&#34;&gt;括号问题&lt;/h1&gt;
@@ -197,10 +197,10 @@ public:
     
     <item>
       <title>Kth Problems</title>
-      <link>https://pineal.me/posts/kth_problems/</link>
+      <link>https://pineal.github.com/posts/kth_problems/</link>
       <pubDate>Thu, 13 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/kth_problems/</guid>
+      <guid>https://pineal.github.com/posts/kth_problems/</guid>
       <description>
 
 &lt;h1 id=&#34;kth-problems&#34;&gt;Kth Problems&lt;/h1&gt;
@@ -460,10 +460,10 @@ class Solution {
     
     <item>
       <title>Gragh practice</title>
-      <link>https://pineal.me/posts/graph_practices/</link>
+      <link>https://pineal.github.com/posts/graph_practices/</link>
       <pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/graph_practices/</guid>
+      <guid>https://pineal.github.com/posts/graph_practices/</guid>
       <description>
 
 &lt;h1 id=&#34;graph&#34;&gt;Graph&lt;/h1&gt;
@@ -840,10 +840,10 @@ public:
     
     <item>
       <title>Bit Manipulation</title>
-      <link>https://pineal.me/posts/bit_manipulation/</link>
+      <link>https://pineal.github.com/posts/bit_manipulation/</link>
       <pubDate>Thu, 14 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/bit_manipulation/</guid>
+      <guid>https://pineal.github.com/posts/bit_manipulation/</guid>
       <description>
 
 &lt;h1 id=&#34;summary-of-basic-bit-manipulation&#34;&gt;Summary of Basic Bit Manipulation&lt;/h1&gt;
@@ -1032,10 +1032,10 @@ public:
     
     <item>
       <title>Sorting Algorithms</title>
-      <link>https://pineal.me/posts/sorting_algorithms/</link>
+      <link>https://pineal.github.com/posts/sorting_algorithms/</link>
       <pubDate>Mon, 14 Mar 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/sorting_algorithms/</guid>
+      <guid>https://pineal.github.com/posts/sorting_algorithms/</guid>
       <description>
 
 &lt;p&gt;假设这里的排序都是升序。&lt;/p&gt;
@@ -1450,10 +1450,10 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
     
     <item>
       <title>Jump Game</title>
-      <link>https://pineal.me/posts/jump_game/</link>
+      <link>https://pineal.github.com/posts/jump_game/</link>
       <pubDate>Fri, 19 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/jump_game/</guid>
+      <guid>https://pineal.github.com/posts/jump_game/</guid>
       <description>
 
 &lt;h2 id=&#34;questions&#34;&gt;Questions&lt;/h2&gt;
@@ -1592,10 +1592,10 @@ public:
     
     <item>
       <title>Palindrome Partitioning</title>
-      <link>https://pineal.me/posts/palindrome_partitioning/</link>
+      <link>https://pineal.github.com/posts/palindrome_partitioning/</link>
       <pubDate>Thu, 18 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/palindrome_partitioning/</guid>
+      <guid>https://pineal.github.com/posts/palindrome_partitioning/</guid>
       <description>
 
 &lt;h2 id=&#34;questions&#34;&gt;Questions&lt;/h2&gt;
@@ -1718,10 +1718,10 @@ private:
     
     <item>
       <title>Permutations and N-Queens</title>
-      <link>https://pineal.me/posts/permutations_n_queens/</link>
+      <link>https://pineal.github.com/posts/permutations_n_queens/</link>
       <pubDate>Mon, 25 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/permutations_n_queens/</guid>
+      <guid>https://pineal.github.com/posts/permutations_n_queens/</guid>
       <description>
 
 &lt;h1 id=&#34;permutations-and-n-queens&#34;&gt;Permutations and N-Queens&lt;/h1&gt;
@@ -1990,10 +1990,10 @@ public:
     
     <item>
       <title>Subsets and Combinations</title>
-      <link>https://pineal.me/posts/subsets_combinations/</link>
+      <link>https://pineal.github.com/posts/subsets_combinations/</link>
       <pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/subsets_combinations/</guid>
+      <guid>https://pineal.github.com/posts/subsets_combinations/</guid>
       <description>
 
 &lt;h1 id=&#34;subsets-and-combinations&#34;&gt;Subsets and Combinations&lt;/h1&gt;
@@ -2199,10 +2199,10 @@ public:
     
     <item>
       <title>Two Sequences Dynamic Programming</title>
-      <link>https://pineal.me/posts/two_sequences_dynamic_programming/</link>
+      <link>https://pineal.github.com/posts/two_sequences_dynamic_programming/</link>
       <pubDate>Sat, 10 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/two_sequences_dynamic_programming/</guid>
+      <guid>https://pineal.github.com/posts/two_sequences_dynamic_programming/</guid>
       <description>
 
 &lt;h2 id=&#34;questions&#34;&gt;Questions&lt;/h2&gt;
@@ -2387,10 +2387,10 @@ public:
     
     <item>
       <title>Matrix Dynamic Programming</title>
-      <link>https://pineal.me/posts/matrix_dynamic_programming/</link>
+      <link>https://pineal.github.com/posts/matrix_dynamic_programming/</link>
       <pubDate>Wed, 30 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/matrix_dynamic_programming/</guid>
+      <guid>https://pineal.github.com/posts/matrix_dynamic_programming/</guid>
       <description>
 
 &lt;h2 id=&#34;questions&#34;&gt;Questions&lt;/h2&gt;
@@ -2473,10 +2473,10 @@ public:
     
     <item>
       <title>Sequence Dynamic Programming</title>
-      <link>https://pineal.me/posts/sequence_dynamic_programming/</link>
+      <link>https://pineal.github.com/posts/sequence_dynamic_programming/</link>
       <pubDate>Wed, 30 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/sequence_dynamic_programming/</guid>
+      <guid>https://pineal.github.com/posts/sequence_dynamic_programming/</guid>
       <description>
 
 &lt;h2 id=&#34;questions&#34;&gt;Questions&lt;/h2&gt;
@@ -2638,10 +2638,10 @@ public:
     
     <item>
       <title>Binary Tree</title>
-      <link>https://pineal.me/posts/binary_tree/</link>
+      <link>https://pineal.github.com/posts/binary_tree/</link>
       <pubDate>Wed, 05 Aug 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/binary_tree/</guid>
+      <guid>https://pineal.github.com/posts/binary_tree/</guid>
       <description>
 
 &lt;h2 id=&#34;definition-of-binary-tree&#34;&gt;Definition of Binary Tree&lt;/h2&gt;
@@ -2791,10 +2791,10 @@ However Non-Recursion method occupies more space&lt;/p&gt;
     
     <item>
       <title>Binary Search</title>
-      <link>https://pineal.me/posts/binary_search/</link>
+      <link>https://pineal.github.com/posts/binary_search/</link>
       <pubDate>Sat, 25 Jul 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/binary_search/</guid>
+      <guid>https://pineal.github.com/posts/binary_search/</guid>
       <description>
 
 &lt;h2 id=&#34;经典二分搜索及其变种&#34;&gt;经典二分搜索及其变种&lt;/h2&gt;
@@ -2927,10 +2927,10 @@ However Non-Recursion method occupies more space&lt;/p&gt;
     
     <item>
       <title>Kalman Filter</title>
-      <link>https://pineal.me/posts/kalman_filter/</link>
+      <link>https://pineal.github.com/posts/kalman_filter/</link>
       <pubDate>Tue, 24 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/kalman_filter/</guid>
+      <guid>https://pineal.github.com/posts/kalman_filter/</guid>
       <description>
 
 &lt;h2 id=&#34;purpose-and-usage&#34;&gt;Purpose and Usage&lt;/h2&gt;
@@ -3016,10 +3016,10 @@ $$&lt;/p&gt;
     
     <item>
       <title>Linear Programming</title>
-      <link>https://pineal.me/posts/linear_programming/</link>
+      <link>https://pineal.github.com/posts/linear_programming/</link>
       <pubDate>Wed, 26 Nov 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/linear_programming/</guid>
+      <guid>https://pineal.github.com/posts/linear_programming/</guid>
       <description>&lt;p&gt;$$\matrix{A} \times \matrix{X} = \matrix{B}  $$&lt;/p&gt;
 
 &lt;p&gt;Coeffienent matrix&lt;/p&gt;
@@ -3165,10 +3165,10 @@ d(s) = 0&lt;/p&gt;
     
     <item>
       <title>NP problem</title>
-      <link>https://pineal.me/posts/np_problem/</link>
+      <link>https://pineal.github.com/posts/np_problem/</link>
       <pubDate>Wed, 12 Nov 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/np_problem/</guid>
+      <guid>https://pineal.github.com/posts/np_problem/</guid>
       <description>&lt;p&gt;##Introduction&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Plan&lt;/strong&gt;&lt;/p&gt;

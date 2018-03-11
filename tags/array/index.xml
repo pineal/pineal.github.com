@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Array on PINEAL.ME</title>
-    <link>https://pineal.me/tags/array/</link>
+    <link>https://pineal.github.com/tags/array/</link>
     <description>Recent content in Array on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 03 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.me/tags/array/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://pineal.github.com/tags/array/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Sliding Window Problems</title>
-      <link>https://pineal.me/posts/sliding_windows/</link>
+      <link>https://pineal.github.com/posts/sliding_windows/</link>
       <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/sliding_windows/</guid>
+      <guid>https://pineal.github.com/posts/sliding_windows/</guid>
       <description>
 
 &lt;h1 id=&#34;sliding-window-problems&#34;&gt;Sliding Window Problems&lt;/h1&gt;

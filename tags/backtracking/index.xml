@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Backtracking on PINEAL.ME</title>
-    <link>https://pineal.me/tags/backtracking/</link>
+    <link>https://pineal.github.com/tags/backtracking/</link>
     <description>Recent content in Backtracking on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 18 Feb 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.me/tags/backtracking/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://pineal.github.com/tags/backtracking/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Palindrome Partitioning</title>
-      <link>https://pineal.me/posts/palindrome_partitioning/</link>
+      <link>https://pineal.github.com/posts/palindrome_partitioning/</link>
       <pubDate>Thu, 18 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/palindrome_partitioning/</guid>
+      <guid>https://pineal.github.com/posts/palindrome_partitioning/</guid>
       <description>
 
 &lt;h2 id=&#34;questions&#34;&gt;Questions&lt;/h2&gt;
@@ -139,10 +139,10 @@ private:
     
     <item>
       <title>Permutations and N-Queens</title>
-      <link>https://pineal.me/posts/permutations_n_queens/</link>
+      <link>https://pineal.github.com/posts/permutations_n_queens/</link>
       <pubDate>Mon, 25 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/permutations_n_queens/</guid>
+      <guid>https://pineal.github.com/posts/permutations_n_queens/</guid>
       <description>
 
 &lt;h1 id=&#34;permutations-and-n-queens&#34;&gt;Permutations and N-Queens&lt;/h1&gt;
@@ -411,10 +411,10 @@ public:
     
     <item>
       <title>Subsets and Combinations</title>
-      <link>https://pineal.me/posts/subsets_combinations/</link>
+      <link>https://pineal.github.com/posts/subsets_combinations/</link>
       <pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/subsets_combinations/</guid>
+      <guid>https://pineal.github.com/posts/subsets_combinations/</guid>
       <description>
 
 &lt;h1 id=&#34;subsets-and-combinations&#34;&gt;Subsets and Combinations&lt;/h1&gt;

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Permutations on PINEAL.ME</title>
-    <link>https://pineal.me/tags/permutations/</link>
+    <link>https://pineal.github.com/tags/permutations/</link>
     <description>Recent content in Permutations on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 25 Jan 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.me/tags/permutations/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://pineal.github.com/tags/permutations/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Permutations and N-Queens</title>
-      <link>https://pineal.me/posts/permutations_n_queens/</link>
+      <link>https://pineal.github.com/posts/permutations_n_queens/</link>
       <pubDate>Mon, 25 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/permutations_n_queens/</guid>
+      <guid>https://pineal.github.com/posts/permutations_n_queens/</guid>
       <description>
 
 &lt;h1 id=&#34;permutations-and-n-queens&#34;&gt;Permutations and N-Queens&lt;/h1&gt;

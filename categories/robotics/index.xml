@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Robotics on PINEAL.ME</title>
-    <link>https://pineal.me/categories/robotics/</link>
+    <link>https://pineal.github.com/categories/robotics/</link>
     <description>Recent content in Robotics on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 01 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.me/categories/robotics/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://pineal.github.com/categories/robotics/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Extended Kalman Filter</title>
-      <link>https://pineal.me/posts/extended_kalman_filter/</link>
+      <link>https://pineal.github.com/posts/extended_kalman_filter/</link>
       <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/extended_kalman_filter/</guid>
+      <guid>https://pineal.github.com/posts/extended_kalman_filter/</guid>
       <description>
 
 &lt;h2 id=&#34;review-of-kalman-filter&#34;&gt;Review of Kalman filter&lt;/h2&gt;
@@ -79,10 +79,10 @@ $$&lt;/p&gt;
     
     <item>
       <title>Optimal Control</title>
-      <link>https://pineal.me/posts/optimal_control/</link>
+      <link>https://pineal.github.com/posts/optimal_control/</link>
       <pubDate>Sat, 26 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/optimal_control/</guid>
+      <guid>https://pineal.github.com/posts/optimal_control/</guid>
       <description>
 
 &lt;h1 id=&#34;optimal-control&#34;&gt;Optimal Control&lt;/h1&gt;
@@ -164,10 +164,10 @@ $$&lt;/p&gt;
     
     <item>
       <title>Kalman Filter</title>
-      <link>https://pineal.me/posts/kalman_filter/</link>
+      <link>https://pineal.github.com/posts/kalman_filter/</link>
       <pubDate>Tue, 24 Mar 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/kalman_filter/</guid>
+      <guid>https://pineal.github.com/posts/kalman_filter/</guid>
       <description>
 
 &lt;h2 id=&#34;purpose-and-usage&#34;&gt;Purpose and Usage&lt;/h2&gt;

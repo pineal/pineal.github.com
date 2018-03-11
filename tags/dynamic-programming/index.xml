@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dynamic Programming on PINEAL.ME</title>
-    <link>https://pineal.me/tags/dynamic-programming/</link>
+    <link>https://pineal.github.com/tags/dynamic-programming/</link>
     <description>Recent content in Dynamic Programming on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 19 Feb 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.me/tags/dynamic-programming/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://pineal.github.com/tags/dynamic-programming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Jump Game</title>
-      <link>https://pineal.me/posts/jump_game/</link>
+      <link>https://pineal.github.com/posts/jump_game/</link>
       <pubDate>Fri, 19 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/jump_game/</guid>
+      <guid>https://pineal.github.com/posts/jump_game/</guid>
       <description>
 
 &lt;h2 id=&#34;questions&#34;&gt;Questions&lt;/h2&gt;
@@ -155,10 +155,10 @@ public:
     
     <item>
       <title>Palindrome Partitioning</title>
-      <link>https://pineal.me/posts/palindrome_partitioning/</link>
+      <link>https://pineal.github.com/posts/palindrome_partitioning/</link>
       <pubDate>Thu, 18 Feb 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/palindrome_partitioning/</guid>
+      <guid>https://pineal.github.com/posts/palindrome_partitioning/</guid>
       <description>
 
 &lt;h2 id=&#34;questions&#34;&gt;Questions&lt;/h2&gt;
@@ -281,10 +281,10 @@ private:
     
     <item>
       <title>Two Sequences Dynamic Programming</title>
-      <link>https://pineal.me/posts/two_sequences_dynamic_programming/</link>
+      <link>https://pineal.github.com/posts/two_sequences_dynamic_programming/</link>
       <pubDate>Sat, 10 Oct 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/two_sequences_dynamic_programming/</guid>
+      <guid>https://pineal.github.com/posts/two_sequences_dynamic_programming/</guid>
       <description>
 
 &lt;h2 id=&#34;questions&#34;&gt;Questions&lt;/h2&gt;
@@ -469,10 +469,10 @@ public:
     
     <item>
       <title>Matrix Dynamic Programming</title>
-      <link>https://pineal.me/posts/matrix_dynamic_programming/</link>
+      <link>https://pineal.github.com/posts/matrix_dynamic_programming/</link>
       <pubDate>Wed, 30 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/matrix_dynamic_programming/</guid>
+      <guid>https://pineal.github.com/posts/matrix_dynamic_programming/</guid>
       <description>
 
 &lt;h2 id=&#34;questions&#34;&gt;Questions&lt;/h2&gt;
@@ -555,10 +555,10 @@ public:
     
     <item>
       <title>Sequence Dynamic Programming</title>
-      <link>https://pineal.me/posts/sequence_dynamic_programming/</link>
+      <link>https://pineal.github.com/posts/sequence_dynamic_programming/</link>
       <pubDate>Wed, 30 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/sequence_dynamic_programming/</guid>
+      <guid>https://pineal.github.com/posts/sequence_dynamic_programming/</guid>
       <description>
 
 &lt;h2 id=&#34;questions&#34;&gt;Questions&lt;/h2&gt;

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linear Programming on PINEAL.ME</title>
-    <link>https://pineal.me/tags/linear-programming/</link>
+    <link>https://pineal.github.com/tags/linear-programming/</link>
     <description>Recent content in Linear Programming on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 26 Nov 2014 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.me/tags/linear-programming/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://pineal.github.com/tags/linear-programming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Linear Programming</title>
-      <link>https://pineal.me/posts/linear_programming/</link>
+      <link>https://pineal.github.com/posts/linear_programming/</link>
       <pubDate>Wed, 26 Nov 2014 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/linear_programming/</guid>
+      <guid>https://pineal.github.com/posts/linear_programming/</guid>
       <description>&lt;p&gt;$$\matrix{A} \times \matrix{X} = \matrix{B}  $$&lt;/p&gt;
 
 &lt;p&gt;Coeffienent matrix&lt;/p&gt;

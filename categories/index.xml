@@ -2,48 +2,48 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on PINEAL.ME</title>
-    <link>https://pineal.me/categories/</link>
+    <link>https://pineal.github.com/categories/</link>
     <description>Recent content in Categories on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 03 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.me/categories/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://pineal.github.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Algorithm</title>
-      <link>https://pineal.me/categories/algorithm/</link>
+      <link>https://pineal.github.com/categories/algorithm/</link>
       <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/categories/algorithm/</guid>
+      <guid>https://pineal.github.com/categories/algorithm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Data Structure</title>
-      <link>https://pineal.me/categories/data-structure/</link>
+      <link>https://pineal.github.com/categories/data-structure/</link>
       <pubDate>Tue, 04 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/categories/data-structure/</guid>
+      <guid>https://pineal.github.com/categories/data-structure/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Gutter</title>
-      <link>https://pineal.me/categories/gutter/</link>
+      <link>https://pineal.github.com/categories/gutter/</link>
       <pubDate>Sun, 18 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/categories/gutter/</guid>
+      <guid>https://pineal.github.com/categories/gutter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Robotics</title>
-      <link>https://pineal.me/categories/robotics/</link>
+      <link>https://pineal.github.com/categories/robotics/</link>
       <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/categories/robotics/</guid>
+      <guid>https://pineal.github.com/categories/robotics/</guid>
       <description></description>
     </item>
     

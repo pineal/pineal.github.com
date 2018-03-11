@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Priority Queue on PINEAL.ME</title>
-    <link>https://pineal.me/tags/priority-queue/</link>
+    <link>https://pineal.github.com/tags/priority-queue/</link>
     <description>Recent content in Priority Queue on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 13 Oct 2016 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.me/tags/priority-queue/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://pineal.github.com/tags/priority-queue/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Kth Problems</title>
-      <link>https://pineal.me/posts/kth_problems/</link>
+      <link>https://pineal.github.com/posts/kth_problems/</link>
       <pubDate>Thu, 13 Oct 2016 00:00:00 +0000</pubDate>
       
-      <guid>https://pineal.me/posts/kth_problems/</guid>
+      <guid>https://pineal.github.com/posts/kth_problems/</guid>
       <description>
 
 &lt;h1 id=&#34;kth-problems&#34;&gt;Kth Problems&lt;/h1&gt;
