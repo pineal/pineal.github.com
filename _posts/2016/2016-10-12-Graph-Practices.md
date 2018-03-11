@@ -323,7 +323,8 @@ public:
 
 [数学证明参考链接](https://math.stackexchange.com/questions/113270/the-median-minimizes-the-sum-of-absolute-deviations)
 
-STL中的nth_element()方法的使用 通过调用nth_element(start, start+n, end) 方法可以使第n大元素处于第n位置（从0开始,其位置是下标为 n的元素），并且比这个元素小的元素都排在这个元素之前，比这个元素大的元素都排在这个元素之后，但不能保证他们是有序的。时间复杂度 $O(n)$ 比 sort好一些。
+- nth_element()
+把按 comparator 排序的有第n个数放在 n 的位置，前面的都比它“小”， 后面的都比它“大”。 但其他并不保证有序，时间复杂度 $O(n)$ 比 sort 好一些。
 
 ### Leetcode 407: Trapping Rain Water II
 ```cpp
@@ -375,3 +376,5 @@ public:
     }
 };
 ```
+
+Skyline
