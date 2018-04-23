@@ -109,7 +109,32 @@ window.onload = ready;
 </script>
 
 <div class="content">
-  <h1>Extended Kalman Filter <aside><a href="/tags/robotics/">Robotics</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/math/">Math</a></a>&nbsp;&nbsp;&nbsp;</aside></h1>
+  <h1>Extended Kalman Filter</h1>
+  <aside> <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#review-of-kalman-filter">Review of Kalman filter</a></li>
+<li><a href="#multivariate-taylor-series">Multivariate Taylor Series</a></li>
+<li><a href="#design-kalman-filter-for-1d-tracking-problem">Design Kalman Filter for 1D tracking problem</a>
+<ul>
+<li><a href="#state-transition-function">State transition function</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#begin-pmatrix-p-v-end-pmatrix">\begin{pmatrix} p&rsquo; \\ v&rsquo; \end{pmatrix}</a>
+<ul>
+<li>
+<ul>
+<li><a href="#measurement-update-function">Measurement Update function</a>
+<ul>
+<li><a href="#process-model">Process Model</a></li>
+<li><a href="#measurement-model">Measurement Model</a></li>
+<li><a href="#kalman-filter-algorithm">Kalman Filter Algorithm</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav></aside>
   
 
 <h2 id="review-of-kalman-filter">Review of Kalman filter</h2>
@@ -143,11 +168,10 @@ Here we use first order taylor expansion to</p>
 <p>where,</p>
 
 <p>$$F = \begin{pmatrix}
-        1 &amp; \Delta{t} <br />
-        0 &amp; 1
-     \end{pmatrix}$$</p>
+        1 &amp; \Delta{t}  \\ 0 &amp; 1
+      \end{pmatrix}$$</p>
 
-<p>$$x = \begin{pmatrix} p \ v\end{pmatrix}$$</p>
+<p>$$x = \begin{pmatrix} p \\ v\end{pmatrix}$$</p>
 
 <p>postion $p$ is linear motion model, calculation is:</p>
 
@@ -157,16 +181,38 @@ Here we use first order taylor expansion to</p>
 
 <p>$$</p>
 
-<h1 id="begin-pmatrix-p-v-end-pmatrix">\begin{pmatrix} p&rsquo; \ v&rsquo; \end{pmatrix}</h1>
+<h1 id="begin-pmatrix-p-v-end-pmatrix">\begin{pmatrix} p&rsquo; \\ v&rsquo; \end{pmatrix}</h1>
 
 <p>\begin{pmatrix}
-        1 &amp; \Delta{t} <br />
-        0 &amp; 1
-     \end{pmatrix}
-\begin{pmatrix} p \ v\end{pmatrix}
+        1 &amp; \Delta{t} \\ 0 &amp; 1
+\end{pmatrix}
+\begin{pmatrix} p \\ v\end{pmatrix}
 $$</p>
 
 <h3 id="measurement-update-function">Measurement Update function</h3>
+
+<p>At time $t$, the belief is represented by the mean $\mu_t$ and the covariance $\Sigma_t$.</p>
+
+<h4 id="process-model">Process Model</h4>
+
+<p>The state transition probability $p(x_t \mid u<em>t, x</em>{t-1})$ must be a linear functoin in its arguments with added Gaussian noise. This is expressed by the following equation:</p>
+
+<p>$$x_t = A<em>tx</em>{t-1} + B_tu_t + \epsilon_t$$</p>
+
+<h4 id="measurement-model">Measurement Model</h4>
+
+<p>The measurement probability $p(z_t \mid x_t)$ must also be linear in its arguments, with added Gaussian noise:</p>
+
+<p>$$z_t = C_tx_t + \delta_t$$</p>
+
+<h4 id="kalman-filter-algorithm">Kalman Filter Algorithm</h4>
+
+<p>$$\bar\mu_t  = A<em>t\mu</em>{t-1} + B_tu_t$$</p>
+
+<p>$$\bar\Sigma_t = A<em>t\Sigma</em>{t-1} + R_t $$</p>
+
+
+  <a href="/tags/robotics/">Robotics</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/math/">Math</a></a>&nbsp;&nbsp;&nbsp;
 
 </div>
 

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://pineal.github.com/posts/backtracking/</loc>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://pineal.github.com/posts/sliding_windows/</loc>
     <lastmod>2018-03-03T00:00:00+00:00</lastmod>
   </url>
@@ -20,11 +25,6 @@
   <url>
     <loc>https://pineal.github.com/posts/%E5%B0%91%E5%B9%B4%E5%B8%B8%E6%88%9A%E6%88%9A/</loc>
     <lastmod>2016-12-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://pineal.github.com/posts/problem_with_parentheses/</loc>
-    <lastmod>2016-12-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -60,16 +60,6 @@
   <url>
     <loc>https://pineal.github.com/posts/palindrome_partitioning/</loc>
     <lastmod>2016-02-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://pineal.github.com/posts/permutations_n_queens/</loc>
-    <lastmod>2016-01-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://pineal.github.com/posts/subsets_combinations/</loc>
-    <lastmod>2016-01-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -143,14 +133,14 @@
   </url>
   
   <url>
-    <loc>https://pineal.github.com/tags/algorithm/</loc>
-    <lastmod>2016-04-14T00:00:00+00:00</lastmod>
+    <loc>https://pineal.github.com/categories/algorithm/</loc>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pineal.github.com/categories/algorithm/</loc>
-    <lastmod>2018-03-03T00:00:00+00:00</lastmod>
+    <loc>https://pineal.github.com/tags/algorithm/</loc>
+    <lastmod>2016-04-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -166,7 +156,7 @@
   
   <url>
     <loc>https://pineal.github.com/tags/backtracking/</loc>
-    <lastmod>2016-02-18T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -202,18 +192,12 @@
   
   <url>
     <loc>https://pineal.github.com/categories/</loc>
-    <lastmod>2018-03-03T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pineal.github.com/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https://pineal.github.com/tags/combinations/</loc>
-    <lastmod>2016-01-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -230,7 +214,7 @@
   
   <url>
     <loc>https://pineal.github.com/tags/dfs/</loc>
-    <lastmod>2016-12-10T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -283,26 +267,14 @@
   </url>
   
   <url>
-    <loc>https://pineal.github.com/tags/n-queens/</loc>
-    <lastmod>2016-01-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://pineal.github.com/</loc>
-    <lastmod>2018-03-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://pineal.github.com/tags/permutations/</loc>
-    <lastmod>2016-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pineal.github.com/posts/</loc>
-    <lastmod>2018-03-03T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -313,20 +285,20 @@
   </url>
   
   <url>
-    <loc>https://pineal.github.com/tags/robotics/</loc>
-    <lastmod>2018-02-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://pineal.github.com/categories/robotics/</loc>
     <lastmod>2018-02-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://pineal.github.com/tags/robotics/</loc>
+    <lastmod>2018-02-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://pineal.github.com/tags/search/</loc>
-    <lastmod>2016-02-18T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -339,18 +311,6 @@
   <url>
     <loc>https://pineal.github.com/tags/sorting/</loc>
     <lastmod>2016-03-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://pineal.github.com/tags/stack/</loc>
-    <lastmod>2016-12-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://pineal.github.com/tags/subsets/</loc>
-    <lastmod>2016-01-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

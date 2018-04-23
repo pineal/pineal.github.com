@@ -109,7 +109,17 @@ window.onload = ready;
 </script>
 
 <div class="content">
-  <h1>Palindrome Partitioning <aside><a href="/tags/search/">Search</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/dfs/">DFS</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/backtracking/">Backtracking</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/dynamic-programming/">Dynamic Programming</a></a>&nbsp;&nbsp;&nbsp;</aside></h1>
+  <h1>Palindrome Partitioning</h1>
+  <aside> <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#questions">Questions</a></li>
+<li><a href="#palindrome-partitioning-ii">Palindrome Partitioning II</a></li>
+<li><a href="#palindrome-partitioning">Palindrome Partitioning</a></li>
+</ul></li>
+</ul>
+</nav></aside>
   
 
 <h2 id="questions">Questions</h2>
@@ -227,6 +237,12 @@ private:
     }
 };
 </code></pre>
+
+<p>当状态可以用index 从 0 到 i 可以表示，一维DP往往是足够的。
+当过去的状态不能从i 开始， 那么i-j开始，需要用二维DP。</p>
+
+
+  <a href="/tags/search/">Search</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/dfs/">DFS</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/backtracking/">Backtracking</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/dynamic-programming/">Dynamic Programming</a></a>&nbsp;&nbsp;&nbsp;
 
 </div>
 

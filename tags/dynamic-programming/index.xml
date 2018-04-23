@@ -276,6 +276,9 @@ private:
     }
 };
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当状态可以用index 从 0 到 i 可以表示，一维DP往往是足够的。
+当过去的状态不能从i 开始， 那么i-j开始，需要用二维DP。&lt;/p&gt;
 </description>
     </item>
     

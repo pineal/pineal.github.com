@@ -50,11 +50,10 @@ Here we use first order taylor expansion to&lt;/p&gt;
 &lt;p&gt;where,&lt;/p&gt;
 
 &lt;p&gt;$$F = \begin{pmatrix}
-        1 &amp;amp; \Delta{t} &lt;br /&gt;
-        0 &amp;amp; 1
-     \end{pmatrix}$$&lt;/p&gt;
+        1 &amp;amp; \Delta{t}  \\ 0 &amp;amp; 1
+      \end{pmatrix}$$&lt;/p&gt;
 
-&lt;p&gt;$$x = \begin{pmatrix} p \ v\end{pmatrix}$$&lt;/p&gt;
+&lt;p&gt;$$x = \begin{pmatrix} p \\ v\end{pmatrix}$$&lt;/p&gt;
 
 &lt;p&gt;postion $p$ is linear motion model, calculation is:&lt;/p&gt;
 
@@ -64,16 +63,35 @@ Here we use first order taylor expansion to&lt;/p&gt;
 
 &lt;p&gt;$$&lt;/p&gt;
 
-&lt;h1 id=&#34;begin-pmatrix-p-v-end-pmatrix&#34;&gt;\begin{pmatrix} p&amp;rsquo; \ v&amp;rsquo; \end{pmatrix}&lt;/h1&gt;
+&lt;h1 id=&#34;begin-pmatrix-p-v-end-pmatrix&#34;&gt;\begin{pmatrix} p&amp;rsquo; \\ v&amp;rsquo; \end{pmatrix}&lt;/h1&gt;
 
 &lt;p&gt;\begin{pmatrix}
-        1 &amp;amp; \Delta{t} &lt;br /&gt;
-        0 &amp;amp; 1
-     \end{pmatrix}
-\begin{pmatrix} p \ v\end{pmatrix}
+        1 &amp;amp; \Delta{t} \\ 0 &amp;amp; 1
+\end{pmatrix}
+\begin{pmatrix} p \\ v\end{pmatrix}
 $$&lt;/p&gt;
 
 &lt;h3 id=&#34;measurement-update-function&#34;&gt;Measurement Update function&lt;/h3&gt;
+
+&lt;p&gt;At time $t$, the belief is represented by the mean $\mu_t$ and the covariance $\Sigma_t$.&lt;/p&gt;
+
+&lt;h4 id=&#34;process-model&#34;&gt;Process Model&lt;/h4&gt;
+
+&lt;p&gt;The state transition probability $p(x_t \mid u&lt;em&gt;t, x&lt;/em&gt;{t-1})$ must be a linear functoin in its arguments with added Gaussian noise. This is expressed by the following equation:&lt;/p&gt;
+
+&lt;p&gt;$$x_t = A&lt;em&gt;tx&lt;/em&gt;{t-1} + B_tu_t + \epsilon_t$$&lt;/p&gt;
+
+&lt;h4 id=&#34;measurement-model&#34;&gt;Measurement Model&lt;/h4&gt;
+
+&lt;p&gt;The measurement probability $p(z_t \mid x_t)$ must also be linear in its arguments, with added Gaussian noise:&lt;/p&gt;
+
+&lt;p&gt;$$z_t = C_tx_t + \delta_t$$&lt;/p&gt;
+
+&lt;h4 id=&#34;kalman-filter-algorithm&#34;&gt;Kalman Filter Algorithm&lt;/h4&gt;
+
+&lt;p&gt;$$\bar\mu_t  = A&lt;em&gt;t\mu&lt;/em&gt;{t-1} + B_tu_t$$&lt;/p&gt;
+
+&lt;p&gt;$$\bar\Sigma_t = A&lt;em&gt;t\Sigma&lt;/em&gt;{t-1} + R_t $$&lt;/p&gt;
 </description>
     </item>
     

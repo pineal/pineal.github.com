@@ -21,6 +21,8 @@
 
 &lt;h2 id=&#34;经典二分搜索及其变种&#34;&gt;经典二分搜索及其变种&lt;/h2&gt;
 
+&lt;p&gt;二分搜索的核心思想是，在给定的搜索空间内，排除掉一定不对的那一部分。应用场景往往是有序的，或者局部有序的。这样从n可以优化到logn。&lt;/p&gt;
+
 &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;  int classic_binary_search(vector&amp;lt;int&amp;gt; input, int target) {
     if (input.empty()) {
       return -1;
@@ -99,7 +101,9 @@
 
 &lt;h2 id=&#34;二维二分搜索&#34;&gt;二维二分搜索&lt;/h2&gt;
 
-&lt;h3 id=&#34;search-a-2d-matrix-https-leetcode-com-problems-search-a-2d-matrix&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/search-a-2d-matrix/&#34;&gt;Search a 2D Matrix&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;search-a-2d-matrix&#34;&gt;Search a 2D Matrix&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/search-a-2d-matrix/&#34;&gt;Problem Link from Leetcode&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;从左到右递增，下一行的开头一定比上一行的末尾大。那么就可以转化为一维的二分搜索。考点在二维矩阵到一维矩阵的变换。&lt;/p&gt;
 
@@ -122,7 +126,9 @@
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;search-a-2d-matrix-ii-https-leetcode-com-problems-search-a-2d-matrix-ii&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/search-a-2d-matrix-ii/&#34;&gt;Search a 2D matrix II&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;search-a-2d-matrix-ii&#34;&gt;Search a 2D matrix II&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/search-a-2d-matrix-ii/&#34;&gt;Problem Link from Leetcode&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;从左往右一定递增，从上到下一定递增。跟之前一题相比，这里的二维矩阵并不能保证转化成一维递增的矩阵。
 如果从左上角开始往右下角搜索，那么有多种可能，刚开始用的是分治法，把矩阵分成四块，由于这个矩形的性质，我们只能排除掉一块，然后往三块可能的继续搜。时间复杂度为$O(n^{1.58})$, 参考分治法时间复杂度分析公式.
@@ -144,6 +150,27 @@
 	return false;
 }
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;advanced-using-binary-search-to-solve-kth-problem&#34;&gt;Advanced - using binary search to solve kth problem&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/&#34;&gt;https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Follow up:&lt;a href=&#34;https://leetcode.com/problems/find-k-closest-elements/&#34;&gt;https://leetcode.com/problems/find-k-closest-elements/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/&#34;&gt;https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Follow up: find kth smallest element in m sorted arrays&lt;/p&gt;
+
+&lt;h3 id=&#34;more-questions&#34;&gt;More questions&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/description/&#34;&gt;https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/description/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/&#34;&gt;https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Dynamic programming and binary search (TONY)&lt;/p&gt;
+
+&lt;p&gt;LIS &lt;a href=&#34;https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/&#34;&gt;https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/&lt;/a&gt;
+Russian Doll Envelopes&lt;/p&gt;
 </description>
     </item>
     

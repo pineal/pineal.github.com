@@ -6,10 +6,185 @@
     <description>Recent content in Algorithm on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 24 Mar 2018 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pineal.github.com/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Basic Backtracking Problems</title>
+      <link>https://pineal.github.com/posts/backtracking/</link>
+      <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/posts/backtracking/</guid>
+      <description>
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Backtracking 类型的题目最重要的是想清楚每一层在做什么，以及到下一层一共有几个分叉。&lt;/p&gt;
+
+&lt;h2 id=&#34;subsets&#34;&gt;Subsets&lt;/h2&gt;
+
+&lt;p&gt;这一类的题目的框架为，在递归树中的第 i 层，代表正在处理 nums 里的第 i 个元素。 从该层的父节点一定会伸展出两个分叉： 第一个分叉代表着一层会放这个元素，第二个分叉代表不放这个元素。 这样出来的递归树非常平衡。&lt;/p&gt;
+
+&lt;h3 id=&#34;subsets-i-http-www-lintcode-com-en-problem-subsets&#34;&gt;&lt;a href=&#34;http://www.lintcode.com/en/problem/subsets/&#34;&gt;Subsets I&lt;/a&gt;&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; subsets(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; rst;
+        sort(nums.begin(), nums.end());
+        vector&amp;lt;int&amp;gt; cur;
+        dfs(rst, cur, nums, 0);
+        return rst;
+    }
+    void dfs(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; rst, vector&amp;lt;int&amp;gt; &amp;amp; cur, const vector&amp;lt;int&amp;gt;&amp;amp; nums, int level) {
+        if (level == nums.size()) {
+            rst.emplace_back(cur);
+            return;
+        }
+        cur.emplace_back(nums[level]);
+        dfs(rst, cur, nums, level + 1);
+        cur.pop_back();
+        dfs(rst, cur, nums, level + 1);
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;subsets-ii-dedup-http-www-lintcode-com-en-problem-subsets-ii&#34;&gt;&lt;a href=&#34;http://www.lintcode.com/en/problem/subsets-ii/&#34;&gt;Subsets II - Dedup&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;去重首先需要排序，要利用有序性。从递归树上看的话，放的那一个分支不变，因为我们是先做放元素，再走不放该元素的。如果不放该元素，那么此时的结果会跟父节点的是重复的。ab1 -&amp;gt; ab1b2, ab1。  a -&amp;gt; ab2, a。 ab1 和 ab2 不能同时出现。 所以这个分支就需要直接跳到跟当前层元素不同的那一层。在代码上体现就是level++。&lt;/p&gt;
+
+&lt;p&gt;ab1 ab2 出发产生的分支都是完全一样的。那么我们可以去掉ab2。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; subsetsWithDup(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; rst;
+        vector&amp;lt;int&amp;gt; cur;
+        sort(nums.begin(), nums.end());
+        dfs(rst, nums, 0, cur);
+        return rst;
+    }
+    void dfs(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; result, vector&amp;lt;int&amp;gt; &amp;amp; nums, int level, vector&amp;lt;int&amp;gt; &amp;amp; cur) {
+        if (level == nums.size()) {
+            result.emplace_back(cur);
+            return;
+        }
+        
+        cur.emplace_back(nums[level]);
+        dfs(result, nums, level + 1, cur);
+        cur.pop_back();
+        //pruning techniques
+        while (level &amp;lt; nums.size() - 1 &amp;amp;&amp;amp; nums[level] == nums[level+1]) {
+            level++;
+        }                
+        dfs(result, nums, level + 1, cur);
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;variant-i-combination&#34;&gt;Variant I - Combination&lt;/h3&gt;
+
+&lt;p&gt;整体框架跟 Subset I 一模一样， 唯一的区别是 base case return 的时候加上条件： 当前结果的长度为 k 才返回。
+原题链接：&lt;a href=&#34;http://www.lintcode.com/en/problem/combinations/&#34;&gt;Combinations&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;去重的方法也应该和 Subset II 一样。&lt;/p&gt;
+
+&lt;h3 id=&#34;variant-ii-permutations-of-inserting-spaces-into-a-string&#34;&gt;Variant II - Permutations of inserting spaces into a string&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/print-possible-strings-can-made-placing-spaces/&#34;&gt;https://www.geeksforgeeks.org/print-possible-strings-can-made-placing-spaces/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;others&#34;&gt;Others&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;还有别的问法，比如如何分一个给定的数组成两部分，两部分的和相同。或者要在一串数组/字符串里面插入。&lt;/li&gt;
+&lt;li&gt;时间复杂度是$O(2^n)$&lt;/li&gt;
+&lt;li&gt;另一种常见做法：k层，每层的意义为最后的结果钟第几个元素应该是什么。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;permutations&#34;&gt;Permutations&lt;/h2&gt;
+
+&lt;p&gt;因为全排列需要全部元素都出现，唯一不同的是他们的顺序，那么我们可以不停两两交换数组钟的元素，得到全排列。&lt;/p&gt;
+
+&lt;h3 id=&#34;permutations-i&#34;&gt;Permutations I&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+ public:
+  vector&amp;lt;string&amp;gt; solve(string input) {
+  if (input == &amp;quot;&amp;quot;) {
+    return {&amp;quot;&amp;quot;};
+  }
+  vector&amp;lt;string&amp;gt; result;
+  helper(result, input, 0);
+  return result;
+  }
+  
+private:
+  void swap(string &amp;amp;s, int i, int j) {
+    auto temp = s[i];
+    s[i] = s[j];
+    s[j] = temp;
+  }
+
+  void helper(vector&amp;lt;string&amp;gt; &amp;amp; result, string &amp;amp; s, int index) {
+    if (index == s.size()){
+      result.emplace_back(s);
+      return;
+    }
+    for (int i = index; i &amp;lt; s.size(); i++) {
+      swap(s, i, index);
+      helper(result, s, index + 1);
+      swap(s, i, index);
+    }
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;permutations-ii-dedup&#34;&gt;Permutations II - Dedup&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+ public:
+  vector&amp;lt;string&amp;gt; solve(string input) {
+    vector&amp;lt;string&amp;gt; result;
+    helper(input, result, 0);
+    return result;
+  }
+  
+private:
+  void helper(string &amp;amp; input, vector&amp;lt;string&amp;gt; &amp;amp; result, int level) {
+    if (level == input.size()) {
+        result.emplace_back(input);
+        return;
+    }
+    
+    set&amp;lt;char&amp;gt; charset;
+    for (int i = level; i &amp;lt; input.size(); ++i) {
+      if (charset.find(input[i]) != charset.end()) {
+        continue;
+      }
+      charset.emplace(input[i]);
+      swap(input[i], input[level]);
+      helper(input, result, level + 1);
+      swap(input[i], input[level]);
+    }
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;parenthesis-problems&#34;&gt;Parenthesis Problems&lt;/h2&gt;
+
+&lt;h2 id=&#34;coin-combinations&#34;&gt;Coin Combinations&lt;/h2&gt;
+
+&lt;h3 id=&#34;99-cents&#34;&gt;99 Cents&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/&#34;&gt;https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;find-all-valid-combinations-of-factors-that-form-an-integer&#34;&gt;find all valid combinations of factors that form an integer&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/given-array-strings-find-strings-can-chained-form-circle/&#34;&gt;https://www.geeksforgeeks.org/given-array-strings-find-strings-can-chained-form-circle/&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Sliding Window Problems</title>
@@ -80,11 +255,10 @@ Here we use first order taylor expansion to&lt;/p&gt;
 &lt;p&gt;where,&lt;/p&gt;
 
 &lt;p&gt;$$F = \begin{pmatrix}
-        1 &amp;amp; \Delta{t} &lt;br /&gt;
-        0 &amp;amp; 1
-     \end{pmatrix}$$&lt;/p&gt;
+        1 &amp;amp; \Delta{t}  \\ 0 &amp;amp; 1
+      \end{pmatrix}$$&lt;/p&gt;
 
-&lt;p&gt;$$x = \begin{pmatrix} p \ v\end{pmatrix}$$&lt;/p&gt;
+&lt;p&gt;$$x = \begin{pmatrix} p \\ v\end{pmatrix}$$&lt;/p&gt;
 
 &lt;p&gt;postion $p$ is linear motion model, calculation is:&lt;/p&gt;
 
@@ -94,16 +268,35 @@ Here we use first order taylor expansion to&lt;/p&gt;
 
 &lt;p&gt;$$&lt;/p&gt;
 
-&lt;h1 id=&#34;begin-pmatrix-p-v-end-pmatrix&#34;&gt;\begin{pmatrix} p&amp;rsquo; \ v&amp;rsquo; \end{pmatrix}&lt;/h1&gt;
+&lt;h1 id=&#34;begin-pmatrix-p-v-end-pmatrix&#34;&gt;\begin{pmatrix} p&amp;rsquo; \\ v&amp;rsquo; \end{pmatrix}&lt;/h1&gt;
 
 &lt;p&gt;\begin{pmatrix}
-        1 &amp;amp; \Delta{t} &lt;br /&gt;
-        0 &amp;amp; 1
-     \end{pmatrix}
-\begin{pmatrix} p \ v\end{pmatrix}
+        1 &amp;amp; \Delta{t} \\ 0 &amp;amp; 1
+\end{pmatrix}
+\begin{pmatrix} p \\ v\end{pmatrix}
 $$&lt;/p&gt;
 
 &lt;h3 id=&#34;measurement-update-function&#34;&gt;Measurement Update function&lt;/h3&gt;
+
+&lt;p&gt;At time $t$, the belief is represented by the mean $\mu_t$ and the covariance $\Sigma_t$.&lt;/p&gt;
+
+&lt;h4 id=&#34;process-model&#34;&gt;Process Model&lt;/h4&gt;
+
+&lt;p&gt;The state transition probability $p(x_t \mid u&lt;em&gt;t, x&lt;/em&gt;{t-1})$ must be a linear functoin in its arguments with added Gaussian noise. This is expressed by the following equation:&lt;/p&gt;
+
+&lt;p&gt;$$x_t = A&lt;em&gt;tx&lt;/em&gt;{t-1} + B_tu_t + \epsilon_t$$&lt;/p&gt;
+
+&lt;h4 id=&#34;measurement-model&#34;&gt;Measurement Model&lt;/h4&gt;
+
+&lt;p&gt;The measurement probability $p(z_t \mid x_t)$ must also be linear in its arguments, with added Gaussian noise:&lt;/p&gt;
+
+&lt;p&gt;$$z_t = C_tx_t + \delta_t$$&lt;/p&gt;
+
+&lt;h4 id=&#34;kalman-filter-algorithm&#34;&gt;Kalman Filter Algorithm&lt;/h4&gt;
+
+&lt;p&gt;$$\bar\mu_t  = A&lt;em&gt;t\mu&lt;/em&gt;{t-1} + B_tu_t$$&lt;/p&gt;
+
+&lt;p&gt;$$\bar\Sigma_t = A&lt;em&gt;t\Sigma&lt;/em&gt;{t-1} + R_t $$&lt;/p&gt;
 </description>
     </item>
     
@@ -124,74 +317,6 @@ $$&lt;/p&gt;
 &lt;h2 id=&#34;lfu&#34;&gt;LFU&lt;/h2&gt;
 
 &lt;iframe src=&#34;https://docs.google.com/presentation/d/1B_BeXdSxWUKpag_fWd_4laL8HVRmXZ5KU8prgOWIxB8/embed?start=false&amp;loop=false&amp;delayms=3000&#34; frameborder=&#34;0&#34; width=&#34;480&#34; height=&#34;399&#34; allowfullscreen=&#34;true&#34; mozallowfullscreen=&#34;true&#34; webkitallowfullscreen=&#34;true&#34;&gt;&lt;/iframe&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Problems with Parentheses</title>
-      <link>https://pineal.github.com/posts/problem_with_parentheses/</link>
-      <pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/posts/problem_with_parentheses/</guid>
-      <description>
-
-&lt;h1 id=&#34;括号问题&#34;&gt;括号问题&lt;/h1&gt;
-
-&lt;p&gt;对括号的处理，最经典的做法是对左右括号计数，因为一定会成对。也可以用栈的性质，来配对。&lt;/p&gt;
-
-&lt;h3 id=&#34;生成所有的括号&#34;&gt;生成所有的括号&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    vector&amp;lt;string&amp;gt; generateParenthesis(int n) {
-        vector&amp;lt;string&amp;gt; rst;
-        string cur;
-        dfs(cur, rst, 0, 0, n);
-        return rst;
-    }
-
-    void dfs(string &amp;amp; cur, vector&amp;lt;string&amp;gt; &amp;amp; rst, int l, int r, int n) {
-        if (l + r == 2 * n) {
-            rst.emplace_back(cur);
-            return;
-        }
-
-        if (l &amp;lt; n) {
-            cur += &#39;(&#39;;
-            dfs(cur, rst, l + 1, r, n);
-            cur.pop_back();
-        }
-
-        if (r &amp;lt; l) {
-            cur += &#39;)&#39;;
-            dfs(cur, rst, l, r + 1, n);
-            cur.pop_back();
-        }
-    }
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;验证合法的括号&#34;&gt;验证合法的括号&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    bool isValid(string s) {
-        stack&amp;lt;char&amp;gt; st;
-        for (auto c : s)
-            if (!st.empty() &amp;amp;&amp;amp;
-                ((c == &#39;)&#39; &amp;amp;&amp;amp; st.top() == &#39;(&#39;) ||
-                 (c == &#39;}&#39; &amp;amp;&amp;amp; st.top() == &#39;{&#39;) ||
-                 (c == &#39;]&#39; &amp;amp;&amp;amp; st.top() == &#39;[&#39;))
-               ) {
-                st.pop();    
-               }
-            else {
-                st.push(c);
-            }
-        return st.empty();
-    }
-};
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -1040,97 +1165,15 @@ public:
 
 &lt;p&gt;假设这里的排序都是升序。&lt;/p&gt;
 
-&lt;h2 id=&#34;insertion-sort&#34;&gt;Insertion Sort:&lt;/h2&gt;
-
-&lt;p&gt;插入排序。假设一个长度为N的数组A[]，总体过程过程为，从index为1开始到N-1，使得A[0,index]是一个排好序的数组。&lt;/p&gt;
-
-&lt;p&gt;具体过程为，把A[index]从index到0逐一比较（这里的顺序一定要从后往前，因为已经是排好序的了），找到第一个比他小的数，然后插到这个数的后面，当然原来位置及以后的数都要往后挪一位。实际代码中是在for循环中加入找到这个小数的条件，每次都往后挪，循环完了才插入。&lt;/p&gt;
-
-&lt;p&gt;举个栗子：&lt;/p&gt;
-
-&lt;p&gt;| Original | 34  8  64  51  32  21 | Position Moved |
-| &amp;ndash; | &amp;ndash;  &amp;ndash;  &amp;ndash;  &amp;ndash;  &amp;ndash;  &amp;ndash; | &amp;ndash; |
-| after i = 1 | 8  34  64  51  32  21 | 1 |
-| after i = 2 | 8  34  64  51  32  21 | 0 |
-| after i = 3 | 8  34  51  64  32  21 | 1 |
-| after i = 4 | 8  32  34  51  64  21 | 3 |
-| after i = 5 | 8  21  32  34  51  64 | 4 |&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;template&amp;lt;typename T&amp;gt;
-void insertion_sort(T arr[], int len){
-  for (int i = 1; i &amp;lt; len; i++){
-    int temp = arr[i];
-      for (int j = i; j &amp;gt; 0 &amp;amp;&amp;amp; arr[j-1]&amp;gt;temp; j--){ //实际比较的是j-1
-        arr[j] = arr[j-1];  //全部往后移一位腾出位置等插入
-      }
-    arr[j] = temp;    //插入到腾出来的位置
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;复杂度分析：&lt;/p&gt;
-
-&lt;h2 id=&#34;selection-sort&#34;&gt;Selection Sort:&lt;/h2&gt;
-
-&lt;p&gt;选择排序。假设一个长度为N的数组A[]，总体过程过程为，从index为0开始到N-1，使得A[0,index]是一个排好序的数组。&lt;/p&gt;
-
-&lt;p&gt;怎么跟插入排序这么像呢？&lt;/p&gt;
-
-&lt;p&gt;是挺像的，但是具体的过程是有区别。这区别就是“插入”和“选择”的区别。&lt;/p&gt;
-
-&lt;p&gt;插入排序是每次往前面那些已经排序好的数里“插入”进去，而选择排序则是，每次从这个数后面那些没排好序的数里“选择”到最小的，和这个数交换。&lt;/p&gt;
-
-&lt;p&gt;举个栗子：&lt;/p&gt;
-
-&lt;p&gt;| Original | 34  8  64  51  32  21 | Position Moved |
-| &amp;ndash; | &amp;ndash;  &amp;ndash;  &amp;ndash;  &amp;ndash;  &amp;ndash;  &amp;ndash; | &amp;ndash; |
-| after i = 1 | 8  34  64  51  32  21 | 1 |
-| after i = 2 | 8  21  64  51  32  34 | 4 |
-| after i = 3 | 8  21  32  51  64  34 | 2 |
-| after i = 4 | 8  21  32  34  64  51 | 2 |
-| after i = 5 | 8  21  32  34  51  64 | 1 |&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;template&amp;lt;typename T&amp;gt;
-void selection_sort(T arr[], int len){
-  for (int i = 0; i &amp;lt; len - 1; i++){  //len - 1即可，最后一次交换在倒数第一个和倒数第二个之间进行
-    int min_index = i;
-    for (int j = i + 1; j &amp;lt; len; j++){
-      //找到未排序的数组中最小的数的index
-      if (arr[j]&amp;lt;arr[min_index]){
-          min_index = j;
-      }        
-    }
-    swap(arr[i], arr[min_index]);
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;附上冒泡排序代码。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void bubble_sort(int arr[], int n) {
-    int i, j;
-    for (i = 0; i &amp;lt; n - 1; i++) {
-        for (j = 0; j &amp;lt; n - 1 - i; j++) {
-            if (arr[j] &amp;gt; arr[j + 1]) {
-                swap(arr[j], arr[j + 1]);
-            }
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;复杂度分析：
-$O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时间复杂度上是一样的。&lt;/p&gt;
-
 &lt;h2 id=&#34;merge-sort&#34;&gt;Merge Sort:&lt;/h2&gt;
 
 &lt;p&gt;归并排序。分治法（divide and conquer）思想入门的算法。Recursively 递归入栈时将字符串分为左右两半，直到无法分割为止。出栈时再把这两半合并起来，在合并的过程中排序。最后所有的栈返回是一个排好序的数组。在用分治法的时候注意一下和纯递归求解的区别。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;//Merge part
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;// merge part
   vector&amp;lt;int&amp;gt; merge(vector&amp;lt;int&amp;gt; A, vector&amp;lt;int&amp;gt; B) {
 	  vector&amp;lt;int&amp;gt; rst;
 	  std::vector&amp;lt;int&amp;gt;::iterator iter1 = A.begin(), iter2 = B.begin();
-//this is not elegant, may be &amp;amp;&amp;amp; and insert the rest may be better
+
 	  while (iter1 != A.end() || iter2 != B.end()) {
 	  	if (iter1 == A.end()) {
 		  	rst.insert(rst.end(), iter2, B.end());
@@ -1152,7 +1195,7 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 	  return rst;
   }
 
-//Key part of Merge sort, recursive function
+// key part of merge sort, recursive function
   vector&amp;lt;int&amp;gt; MSort(vector&amp;lt;int&amp;gt; array, int left, int right) {
 	  vector&amp;lt;int&amp;gt; rst;
 	  if (left == right) {
@@ -1165,7 +1208,7 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 	  rst = merge(leftArr, rightArr);
 	  return rst;
   }
-//Driver for Merge Sort
+// driver for merge sort
   vector&amp;lt;int&amp;gt; mergeSort(vector&amp;lt;int&amp;gt; array) {
     if (array.size() &amp;lt;= 1) return array;
 	  vector&amp;lt;int&amp;gt; rst;
@@ -1174,11 +1217,17 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
   }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;复杂度分析： $$O(nlog(n))$$：画出递归树，一共$$log(n)$$层, 每一层是$$O(n)$$的复杂度.&lt;/p&gt;
+&lt;p&gt;复杂度分析： $O(nlog(n))$&lt;/p&gt;
+
+&lt;p&gt;画出递归树，一共 $log(n)$ 层, 每一层是 $O(n)$ 的复杂度.&lt;/p&gt;
+
+&lt;p&gt;Demo: GeeksforGeeks&lt;/p&gt;
 
 &lt;h2 id=&#34;quick-sort&#34;&gt;Quick Sort:&lt;/h2&gt;
 
-&lt;p&gt;快速排序。快速排序是一个比较复杂的问题。基本的思想为：&lt;/p&gt;
+&lt;p&gt;快速排序的核心的思想为是 &lt;strong&gt;partition&lt;/strong&gt;. 这个思想在很多类型的问题中都会用到，会在后文举例说明。&lt;/p&gt;
+
+&lt;p&gt;快速排序的基本操作为：&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;选取一个pivot。&lt;/li&gt;
@@ -1236,13 +1285,13 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 &lt;p&gt;事实上根据上面这个general rule来分，两个挡板指向的两个数只有四种情况：&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;a[i] &amp;lt; pivot, a[j] &amp;gt; pivot&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;$$a[i] &amp;lt; pivot, a[j] &amp;gt; pivot$$&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;a[i] &amp;lt; pivot, a[j] &amp;lt; pivot&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;$$a[i] &amp;lt; pivot, a[j] &amp;lt; pivot$$&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;a[i] &amp;gt; pivot, a[j] &amp;gt; pivot&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;$$a[i] &amp;gt; pivot, a[j] &amp;gt; pivot$$&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;a[i] &amp;gt;= pivot, a[j] &amp;lt;= pivot&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;$$a[i] &amp;gt;= pivot, a[j] &amp;lt;= pivot$$&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;那么对应刚才的rule该做着么呢？&lt;/p&gt;
@@ -1256,8 +1305,6 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 
 &lt;li&gt;&lt;p&gt;不满足任何条件，但是一旦交换两个挡板上的数，即可让条件满足&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;来看下代码。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;  void QuickSort(vector&amp;lt;int&amp;gt; &amp;amp; array, int left, int right){
     if (left &amp;gt; right) return;
@@ -1301,7 +1348,9 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 
 &lt;p&gt;这样的解法可以归结为一种类型。比如一堆数中只有两种，三种四种数，那么就可以对应个数的挡板将数分割成相应区域，每次检查条件是否满足。Eg: Sort colors。这样的做法复杂度只需要$O(n)$.&lt;/p&gt;
 
-&lt;h3 id=&#34;sort-colors&#34;&gt;Sort Colors&lt;/h3&gt;
+&lt;p&gt;Demo: GeeksforGeeks&lt;/p&gt;
+
+&lt;h3 id=&#34;partition-extension-i-sort-colors&#34;&gt;Partition Extension I: Sort Colors&lt;/h3&gt;
 
 &lt;p&gt;Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue. Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.&lt;/p&gt;
 
@@ -1356,11 +1405,16 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 
 &lt;h3 id=&#34;follow-up-ii-k-colors&#34;&gt;Follow up II: k colors&lt;/h3&gt;
 
-&lt;p&gt;TODO&lt;/p&gt;
+&lt;p&gt;TODO: couting sort.&lt;/p&gt;
+
+&lt;h3 id=&#34;partition-extension-ii-kth-smallest-largest-element-in-an-unsorted-array&#34;&gt;Partition Extension II: Kth smallest/largest element in an unsorted array&lt;/h3&gt;
+
+&lt;p&gt;quick sort partition 思想的另一经典应用。
+&lt;a href=&#34;https://www.geeksforgeeks.org/kth-smallestlargest-element-unsorted-array/&#34;&gt;https://www.geeksforgeeks.org/kth-smallestlargest-element-unsorted-array/&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;wiggle-sort&#34;&gt;Wiggle Sort&lt;/h2&gt;
 
-&lt;p&gt;nums[0] &amp;lt;= nums[1] &amp;gt;= nums[2] &amp;lt;= nums[3]&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;$nums[0] &amp;lt;= nums[1] &amp;gt;= nums[2] &amp;lt;= nums[3]&amp;hellip;.$&lt;/p&gt;
 
 &lt;p&gt;这个时间复杂度优化到了O(n)。下面那个做法是通用的。&lt;/p&gt;
 
@@ -1378,7 +1432,7 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 
 &lt;h3 id=&#34;follow-up-wiggle-sort-ii&#34;&gt;Follow up: Wiggle Sort II&lt;/h3&gt;
 
-&lt;p&gt;nums[0] &amp;lt; nums[1] &amp;gt; nums[2] &amp;lt; nums[3]&amp;hellip;&lt;/p&gt;
+&lt;p&gt;$nums[0] &amp;lt; nums[1] &amp;gt; nums[2] &amp;lt; nums[3]&amp;hellip;$&lt;/p&gt;
 
 &lt;p&gt;根据这个性质，我们可以确定一种排法一定可以成立：把小的那一半排在偶数位，把大的那一半排在奇数位。这个是通用的。
  时间复杂度 $ O(nlog(n)) $.&lt;/p&gt;
@@ -1398,11 +1452,15 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 
 &lt;h2 id=&#34;sort-in-specified-order&#34;&gt;Sort In Specified Order&lt;/h2&gt;
 
-&lt;p&gt;A1 = {2, 1, 2, 5, 7, 1, 9, 3}, A2 = {2, 1, 3}, A1 is sorted to {2, 2, 1, 1, 3, 5, 7, 9}&lt;/p&gt;
+&lt;p&gt;A1 = {2, 1, 2, 5, 7, 1, 9, 3},&lt;/p&gt;
+
+&lt;p&gt;A2 = {2, 1, 3},&lt;/p&gt;
+
+&lt;p&gt;A1 is sorted to {2, 2, 1, 1, 3, 5, 7, 9}&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;vector&amp;lt;int&amp;gt; helper(vector&amp;lt;int&amp;gt; &amp;amp; A1, vector&amp;lt;int&amp;gt; &amp;amp; A2) {
    // Write your solution here.
-   if (A1.size() &amp;lt;= 1 || A2.size() == 0) {
+   if (A1.size() &amp;lt;= 1 |||| A2.size() == 0) {
        sort(A1.begin(), A1.end());
        return A1;
    }
@@ -1444,6 +1502,65 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
    sort(A1.begin() + k + 1, A1.end());
    return A1;
  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;insertion-sort&#34;&gt;Insertion Sort:&lt;/h2&gt;
+
+&lt;p&gt;插入排序。假设一个长度为N的数组$A[]$，总体过程为，从 index 为 1 开始到 N-1，使得 $A[0,index]$ 是一个排好序的数组。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;template&amp;lt;typename T&amp;gt;
+void insertion_sort(T arr[], int len){
+  for (int i = 1; i &amp;lt; len; i++){
+    int temp = arr[i];
+      for (int j = i; j &amp;gt; 0 &amp;amp;&amp;amp; arr[j-1]&amp;gt;temp; j--){ //实际比较的是j-1
+        arr[j] = arr[j-1];  //全部往后移一位腾出位置等插入
+      }
+    arr[j] = temp;    //插入到腾出来的位置
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;复杂度：
+$O(n^2)$&lt;/p&gt;
+
+&lt;h2 id=&#34;selection-sort&#34;&gt;Selection Sort:&lt;/h2&gt;
+
+&lt;p&gt;选择排序。假设一个长度为N的数组$A[]$，总体过程为，从index为0开始到N-1，使得$A[0,index]$是一个排好序的数组。&lt;/p&gt;
+
+&lt;p&gt;怎么跟插入排序这么像呢？是挺像的，但是具体的过程是有区别。这区别就是“插入”和“选择”的区别。&lt;/p&gt;
+
+&lt;p&gt;插入排序是每次往前面那些已经排序好的数里“插入”进去，而选择排序则是，每次从这个数后面那些没排好序的数里“选择”到最小的，和这个数交换。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;template&amp;lt;typename T&amp;gt;
+void selection_sort(T arr[], int len){
+  for (int i = 0; i &amp;lt; len - 1; i++){  //len - 1即可，最后一次交换在倒数第一个和倒数第二个之间进行
+    int min_index = i;
+    for (int j = i + 1; j &amp;lt; len; j++){
+      //找到未排序的数组中最小的数的index
+      if (arr[j]&amp;lt;arr[min_index]){
+          min_index = j;
+      }        
+    }
+    swap(arr[i], arr[min_index]);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;复杂度分析：
+$O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时间复杂度上是一样的。&lt;/p&gt;
+
+&lt;p&gt;附上冒泡排序代码。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void bubble_sort(int arr[], int n) {
+    int i, j;
+    for (i = 0; i &amp;lt; n - 1; i++) {
+        for (j = 0; j &amp;lt; n - 1 - i; j++) {
+            if (arr[j] &amp;gt; arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
@@ -1713,487 +1830,9 @@ private:
     }
 };
 &lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Permutations and N-Queens</title>
-      <link>https://pineal.github.com/posts/permutations_n_queens/</link>
-      <pubDate>Mon, 25 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/posts/permutations_n_queens/</guid>
-      <description>
 
-&lt;h1 id=&#34;permutations-and-n-queens&#34;&gt;Permutations and N-Queens&lt;/h1&gt;
-
-&lt;h2 id=&#34;permutation-from-stl-library&#34;&gt;Permutation from STL Library&lt;/h2&gt;
-
-&lt;p&gt;最直接的做法：C++11中的STL中有关于排列的algorithm库可以直接用。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://en.cppreference.com/w/cpp/algorithm/is_permutation&#34;&gt;std::is_permutation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://en.cppreference.com/w/cpp/algorithm/prev_permutation&#34;&gt;std::prev_permutation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://en.cppreference.com/w/cpp/algorithm/next_permutation&#34;&gt;std::next_permutation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;他有什么用呢？&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Changes the order of the elements in [Begin, end) according to the next permutation.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Return &lt;em&gt;False&lt;/em&gt; if the elements got the &amp;ldquo;normal&amp;rdquo;(lexicographical) order: that is, ascending order. So, to run through all permutations, you have to sort all elements and start a loop that calls this function as long as these algorithms return true.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution:
-public:
-    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; permute(vector&amp;lt;int&amp;gt; nums){
-    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; result;
-
-    if (nums.empty()){return {}};
-    std::sort(nums.begin(), nums.end());
-
-    do{
-        result.emplace_back(nums);
-    } while(next_permutation(nums.begin(), nums.end()));
-    return result;
-    }
-};    
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;implementation-of-std-next-permutation&#34;&gt;Implementation of std::next_permutation()&lt;/h3&gt;
-
-&lt;p&gt;大致思路为，我们先固定第一个数，然后对右边剩下的数做全排列。什么时候右边剩下的数完成了全排列呢？那就是当这些数变成了降序。然后我们才用第一个数。&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://stackoverflow.com/questions/11483060/stdnext-permutation-implementation-explanation&#34;&gt;留着慢慢消化，反正直接让我写，我是写不出来。&lt;/a&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;//kan bu dong...
-template&amp;lt;class BidirIt&amp;gt;
-bool next_permutation(BidirIt first, BidirIt last)
-{
-    if (first == last) return false;
-    BidirIt i = last;
-    if (first == --i) return false;
-
-    while (true) {
-        BidirIt i1, i2;
-
-        i1 = i;
-        //if the elements are in ascending order
-        if (*--i &amp;lt; *i1) {
-            i2 = last;
-            //find the next largest digit
-            while (!(*i &amp;lt; *--i2));
-            // and put it in front
-            std::iter_swap(i, i2);
-            //put the remaining digits in ascending order
-            std::reverse(i1, last);
-            return true;
-        }
-        //last purmutation
-        if (i == first) {
-            std::reverse(first, last);
-            return false;
-        }
-    }
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;有了这个之后我们可以自己模拟 std::next_permutation()&lt;/p&gt;
-
-&lt;h2 id=&#34;recursion-version-for-permutations&#34;&gt;Recursion Version for Permutations&lt;/h2&gt;
-
-&lt;p&gt;常规的backtracking回溯，用DFS递归就行。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    /**
-     * @param nums: A list of integers.
-     * @return: A list of permutations.
-     */
-    vector&amp;lt;vector&amp;lt;int&amp;gt; &amp;gt; permute(vector&amp;lt;int&amp;gt; nums) {
-        // write your code here
-        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; rst;
-        if (nums.size() == 0) return rst;
-        vector&amp;lt;int&amp;gt; v;
-        backtracking(rst, nums, v);
-        return rst;
-    }
-
-
-    void backtracking(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; rst, vector&amp;lt;int&amp;gt;&amp;amp; nums, vector&amp;lt;int&amp;gt;&amp;amp; v){
-        if (v.size() == nums.size()){
-            rst.emplace_back(v);
-            return ;
-        }
-
-        for (int i = 0; i &amp;lt; nums.size(); ++i){
-            //can employ map to improve the time complexity
-            //vector&amp;lt;bool&amp;gt; is not a container. do not use. alternates: deque&amp;lt;bool&amp;gt;, or bitset
-            if (find(v.begin(), v.end(), nums[i]) != v.end()){
-                continue;
-            }
-            v.emplace_back(nums[i]);
-            backtracking(rst, nums, v);
-            v.pop_back();
-        }
-    }
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;permutations-ii&#34;&gt;Permutations II&lt;/h2&gt;
-
-&lt;p&gt;全排列去重。在循环的过程中加入while语句跳过相同的元素。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    vector&amp;lt;vector&amp;lt;int&amp;gt; &amp;gt; permuteUnique(vector&amp;lt;int&amp;gt; &amp;amp;num) {
-        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; permutations;
-        if(num.size() == 0)
-            return permutations;
-        vector&amp;lt;int&amp;gt; curr;
-        vector&amp;lt;bool&amp;gt; isVisited(num.size(), false);
-        /* we need to sort the input array here because of this array
-           contains the duplication value, then we need to skip the duplication
-           value for the final result */
-        sort(num.begin(),num.end());
-        dfs(permutations,curr,num,isVisited);
-        return permutations;
-    }
-
-    void dfs(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; ret, vector&amp;lt;int&amp;gt; curr, vector&amp;lt;int&amp;gt; num, vector&amp;lt;bool&amp;gt; isVisited)
-    {
-        if(curr.size() == num.size())
-        {
-            ret.push_back(curr);
-            return;
-        }
-
-        for(int i = 0; i &amp;lt; num.size(); ++i)
-        {
-            if(isVisited[i] == false)
-            {
-                isVisited[i] = true;
-                curr.push_back(num[i]);
-                dfs(ret,curr,num,isVisited);
-                isVisited[i] = false;
-                curr.pop_back();
-                while(i &amp;lt; num.size()-1 &amp;amp;&amp;amp; num[i] == num[i+1])
-                //we use this while loop to skip the duplication value in the input array.
-                    ++i;
-            }
-        }
-    }
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;n-queens&#34;&gt;N-Queens&lt;/h2&gt;
-
-&lt;p&gt;经典的搜索题。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    /**
-     * Get all distinct N-Queen solutions
-     * @param n: The number of queens
-     * @return: All distinct solutions
-     * For example, A string &#39;...Q&#39; shows a queen on forth position
-     */
-    vector&amp;lt;vector&amp;lt;string&amp;gt; &amp;gt; solveNQueens(int n) {
-        // write your code here
-        vector&amp;lt;vector&amp;lt;string&amp;gt;&amp;gt; rst;
-        vector&amp;lt;string&amp;gt; cur(n, string(n, &#39;.&#39;));
-        backtracking(rst, cur, 0);
-        return rst;
-    }
-
-    void backtracking(vector&amp;lt;vector&amp;lt;string&amp;gt;&amp;gt;&amp;amp; rst, vector&amp;lt;string&amp;gt;&amp;amp; cur, int row){
-        if (row == cur.size()){
-            rst.emplace_back(cur);
-            return;
-        }
-
-        for (int col = 0; col &amp;lt; cur.size(); col++){
-            if (isValid(cur, row, col)){
-                cur[row][col] = &#39;Q&#39;;
-                backtracking(rst, cur, row + 1);
-                cur[row][col] = &#39;.&#39;;
-            }
-        }
-    }
-
-    bool isValid(vector&amp;lt;string&amp;gt; cur, int row, int col){
-        for (int i = 0; i &amp;lt; row; i++){
-            if (cur[i][col] == &#39;Q&#39;) return false;
-        }
-        for (int i = row - 1, j = col - 1; i &amp;gt;=0 &amp;amp;&amp;amp; j &amp;gt;=0; i--, j--){
-            if (cur[i][j] == &#39;Q&#39;) return false;
-        }
-        for (int i = row - 1, j = col + 1; i &amp;gt;=0 &amp;amp;&amp;amp; j &amp;lt; cur.size(); i--, j++){
-            if (cur[i][j] == &#39;Q&#39;) return false;
-        }
-        return true;
-    }
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;n-queens-ii&#34;&gt;N-Queens II&lt;/h2&gt;
-
-&lt;p&gt;只要求solutions的个数就可以。这道题并不用动归解，还是要用搜索。和上一题基本没差别。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    /**
-     * Calculate the total number of distinct N-Queen solutions.
-     * @param n: The number of queens.
-     * @return: The total number of distinct solutions.
-     */
-    int totalNQueens(int n) {
-         // write your code here
-        int rst = 0;
-        vector&amp;lt;string&amp;gt; cur(n, string(n, &#39;.&#39;));
-        backtracking(rst, cur, 0);
-        return rst;
-    }
-
-    void backtracking(int&amp;amp; rst, vector&amp;lt;string&amp;gt;&amp;amp; cur, int row){
-        if (row == cur.size()){
-            ++rst;
-            return;
-        }
-
-        for (int col = 0; col &amp;lt; cur.size(); col++){
-            if (isValid(cur, row, col)){
-                cur[row][col] = &#39;Q&#39;;
-                backtracking(rst, cur, row + 1);
-                cur[row][col] = &#39;.&#39;;
-            }
-        }
-    }
-
-    bool isValid(vector&amp;lt;string&amp;gt; cur, int row, int col){
-        for (int i = 0; i &amp;lt; row; i++){
-            if (cur[i][col] == &#39;Q&#39;) return false;
-        }
-        for (int i = row - 1, j = col - 1; i &amp;gt;=0 &amp;amp;&amp;amp; j &amp;gt;=0; i--, j--){
-            if (cur[i][j] == &#39;Q&#39;) return false;
-        }
-        for (int i = row - 1, j = col + 1; i &amp;gt;=0 &amp;amp;&amp;amp; j &amp;lt; cur.size(); i--, j++){
-            if (cur[i][j] == &#39;Q&#39;) return false;
-        }
-        return true;
-    }
-};
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Subsets and Combinations</title>
-      <link>https://pineal.github.com/posts/subsets_combinations/</link>
-      <pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/posts/subsets_combinations/</guid>
-      <description>
-
-&lt;h1 id=&#34;subsets-and-combinations&#34;&gt;Subsets and Combinations&lt;/h1&gt;
-
-&lt;p&gt;Original Questions on &lt;a href=&#34;http://www.lintcode.com&#34;&gt;LeetCode&lt;/a&gt;:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.lintcode.com/en/problem/subsets/&#34;&gt;Subsets I&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.lintcode.com/en/problem/subsets-ii/&#34;&gt;Subsets II&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.lintcode.com/en/problem/combinations/&#34;&gt;Combinations&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;subsets-i&#34;&gt;Subsets I&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Given a set of &lt;strong&gt;distinct&lt;/strong&gt; integers, return all possible subsets.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;If S = [1,2,3], a solution is:
-[
-  [3],
-  [1],
-  [2],
-  [1,2,3],
-  [1,3],
-  [2,3],
-  [1,2],
-  []
-]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;recursive-solution&#34;&gt;Recursive Solution&lt;/h3&gt;
-
-&lt;p&gt;Backtracking的模板。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    /**
-     * @param S: A set of numbers.
-     * @return: A list of lists. All valid subsets.
-     */
-    vector&amp;lt;vector&amp;lt;int&amp;gt; &amp;gt; subsets(vector&amp;lt;int&amp;gt; &amp;amp;nums) {
-    	// write your code here
-    	vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; rst;
-    	if (nums.size() == 0)
-    	    return {};
-    	vector&amp;lt;int&amp;gt; v;
-    	sort(nums.begin(), nums.end());
-    	backtracking(rst, v, nums, 0);
-    	return rst;
-
-    }
-
-
-    void backtracking(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; rst, vector&amp;lt;int&amp;gt;&amp;amp; v, vector&amp;lt;int&amp;gt;&amp;amp; nums, int pos){
-
-        rst.emplace_back(v);
-
-        for (int i = pos; i &amp;lt; nums.size(); ++i){
-            v.emplace_back(nums[i]);
-            backtracking(rst, v, nums, i + 1);
-            v.pop_back();
-        }
-    }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;iterative-solution&#34;&gt;Iterative Solution&lt;/h3&gt;
-
-&lt;p&gt;建一个result的vector用来储存结果。初始化为一个［］。从nums取出下一个元素$$m$$，和result里所有的vector: $ temp = v \in rst$, 把 m 加到这些vector的末端: $temp = temp \bigcup m$, 再把这些vector放到result中，进行下一次迭代。一共有两重循环， 外面那层代表了每次从nums中取元素共有nums.size()个，里面那层代表把元素放到新的vector里，一共有result.size() 的次数。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    /**
-     * @param S: A set of numbers.
-     * @return: A list of lists. All valid subsets.
-     */
-    vector&amp;lt;vector&amp;lt;int&amp;gt; &amp;gt; subsets(vector&amp;lt;int&amp;gt; &amp;amp;nums) {
-    	// write your code here
-    	sort(nums.begin(),nums.end());
-    	vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; rst(1);
-    	vector&amp;lt;int&amp;gt; temp;
-    	for (int i = 0; i &amp;lt; nums.size(); ++i){
-    	  int size = rst.size();  
-    	  for (int j = 0; j &amp;lt; size; ++j){
-    	      temp = rst[j];
-    	      temp.emplace_back(nums[i]);
-    	      rst.emplace_back(temp);
-    	      temp.clear();
-    	  }
-    	}
-    	return rst;
-    }
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;subsets-ii&#34;&gt;Subsets II&lt;/h2&gt;
-
-&lt;p&gt;上面那道题的followup，加上了去重的要求。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    /**
-     * @param S: A set of numbers.
-     * @return: A list of lists. All valid subsets.
-     */
-    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; subsetsWithDup(const vector&amp;lt;int&amp;gt; &amp;amp;S) {
-        vector&amp;lt;int&amp;gt; sorted_S(S);
-        sort(sorted_S.begin(), sorted_S.end());
-        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; result(1);
-        size_t previous_size = 0;
-        for (size_t i = 0; i &amp;lt; sorted_S.size(); ++i) {
-            const size_t size = result.size();
-            for (size_t j = 0; j &amp;lt; size; ++j) {
-
-                if (i == 0 || sorted_S[i] != sorted_S[i - 1] || j &amp;gt;= previous_size) {
-                    result.emplace_back(result[j]);
-                    result.back().emplace_back(sorted_S[i]);
-                }
-            }
-            previous_size = size;
-        }
-        return result;
-    }
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;去重的递归：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    /**
-     * @param S: A set of numbers.
-     * @return: A list of lists. All valid subsets.
-     */
-    vector&amp;lt;vector&amp;lt;int&amp;gt; &amp;gt; subsetsWithDup(const vector&amp;lt;int&amp;gt; &amp;amp;S) {
-        // write your code here
-        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; rst;
-        if (S.size() == 0)
-            return {};
-        vector &amp;lt;int&amp;gt; v;
-        vector&amp;lt;int&amp;gt; nums(S);
-        sort(nums.begin(), nums.end());
-        backtracking(rst, nums, v, 0);
-        return rst;
-    }
-
-    void backtracking(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; rst, vector&amp;lt;int&amp;gt;&amp;amp; nums, vector&amp;lt;int&amp;gt;&amp;amp; v, int pos){
-
-        rst.emplace_back(v);    
-
-        for (int i = pos; i &amp;lt; nums.size(); i++){
-            v.emplace_back(nums[i]);
-            backtracking (rst, nums, v, i + 1);
-            v.pop_back();
-            while(i &amp;lt; nums.size()-1 &amp;amp;&amp;amp; nums[i] == nums[i+1]){
-                ++i;
-            }
-        }
-    }
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;combinations&#34;&gt;Combinations&lt;/h2&gt;
-
-&lt;p&gt;相似的递归模版：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    /**
-     * @param n: Given the range of numbers
-     * @param k: Given the numbers of combinations
-     * @return: All the combinations of k numbers out of 1..n
-     */
-    vector&amp;lt;vector&amp;lt;int&amp;gt; &amp;gt; combine(int n, int k) {
-        // write your code here
-        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; rst;
-        vector&amp;lt;int&amp;gt; v;
-        backtracking(n, k, rst, v, 1);
-        return rst;
-    }
-
-
-    void backtracking(int n, int k, vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; rst, vector&amp;lt;int&amp;gt;&amp;amp; v, int curr){
-        if (v.size() == k){
-            rst.emplace_back(v);
-            return;
-        }
-
-        for (int i = curr;  i &amp;lt;= n; ++i){
-            v.emplace_back(i);
-            backtracking(n, k, rst, v, i+1);
-            v.pop_back();
-        }
-    }
-};
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当状态可以用index 从 0 到 i 可以表示，一维DP往往是足够的。
+当过去的状态不能从i 开始， 那么i-j开始，需要用二维DP。&lt;/p&gt;
 </description>
     </item>
     
@@ -2799,6 +2438,8 @@ However Non-Recursion method occupies more space&lt;/p&gt;
 
 &lt;h2 id=&#34;经典二分搜索及其变种&#34;&gt;经典二分搜索及其变种&lt;/h2&gt;
 
+&lt;p&gt;二分搜索的核心思想是，在给定的搜索空间内，排除掉一定不对的那一部分。应用场景往往是有序的，或者局部有序的。这样从n可以优化到logn。&lt;/p&gt;
+
 &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;  int classic_binary_search(vector&amp;lt;int&amp;gt; input, int target) {
     if (input.empty()) {
       return -1;
@@ -2877,7 +2518,9 @@ However Non-Recursion method occupies more space&lt;/p&gt;
 
 &lt;h2 id=&#34;二维二分搜索&#34;&gt;二维二分搜索&lt;/h2&gt;
 
-&lt;h3 id=&#34;search-a-2d-matrix-https-leetcode-com-problems-search-a-2d-matrix&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/search-a-2d-matrix/&#34;&gt;Search a 2D Matrix&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;search-a-2d-matrix&#34;&gt;Search a 2D Matrix&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/search-a-2d-matrix/&#34;&gt;Problem Link from Leetcode&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;从左到右递增，下一行的开头一定比上一行的末尾大。那么就可以转化为一维的二分搜索。考点在二维矩阵到一维矩阵的变换。&lt;/p&gt;
 
@@ -2900,7 +2543,9 @@ However Non-Recursion method occupies more space&lt;/p&gt;
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;search-a-2d-matrix-ii-https-leetcode-com-problems-search-a-2d-matrix-ii&#34;&gt;&lt;a href=&#34;https://leetcode.com/problems/search-a-2d-matrix-ii/&#34;&gt;Search a 2D matrix II&lt;/a&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;search-a-2d-matrix-ii&#34;&gt;Search a 2D matrix II&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/search-a-2d-matrix-ii/&#34;&gt;Problem Link from Leetcode&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;从左往右一定递增，从上到下一定递增。跟之前一题相比，这里的二维矩阵并不能保证转化成一维递增的矩阵。
 如果从左上角开始往右下角搜索，那么有多种可能，刚开始用的是分治法，把矩阵分成四块，由于这个矩形的性质，我们只能排除掉一块，然后往三块可能的继续搜。时间复杂度为$O(n^{1.58})$, 参考分治法时间复杂度分析公式.
@@ -2922,6 +2567,27 @@ However Non-Recursion method occupies more space&lt;/p&gt;
 	return false;
 }
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;advanced-using-binary-search-to-solve-kth-problem&#34;&gt;Advanced - using binary search to solve kth problem&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/&#34;&gt;https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Follow up:&lt;a href=&#34;https://leetcode.com/problems/find-k-closest-elements/&#34;&gt;https://leetcode.com/problems/find-k-closest-elements/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/&#34;&gt;https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Follow up: find kth smallest element in m sorted arrays&lt;/p&gt;
+
+&lt;h3 id=&#34;more-questions&#34;&gt;More questions&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/description/&#34;&gt;https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/description/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/&#34;&gt;https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Dynamic programming and binary search (TONY)&lt;/p&gt;
+
+&lt;p&gt;LIS &lt;a href=&#34;https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/&#34;&gt;https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/&lt;/a&gt;
+Russian Doll Envelopes&lt;/p&gt;
 </description>
     </item>
     

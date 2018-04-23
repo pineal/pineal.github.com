@@ -109,10 +109,29 @@ window.onload = ready;
 </script>
 
 <div class="content">
-  <h1>Binary Search <aside><a href="/tags/binary-search/">Binary Search</a></a>&nbsp;&nbsp;&nbsp;</aside></h1>
+  <h1>Binary Search</h1>
+  <aside> <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#经典二分搜索及其变种">经典二分搜索及其变种</a></li>
+<li><a href="#二维二分搜索">二维二分搜索</a>
+<ul>
+<li><a href="#search-a-2d-matrix">Search a 2D Matrix</a></li>
+<li><a href="#search-a-2d-matrix-ii">Search a 2D matrix II</a></li>
+</ul></li>
+<li><a href="#advanced-using-binary-search-to-solve-kth-problem">Advanced - using binary search to solve kth problem</a>
+<ul>
+<li><a href="#more-questions">More questions</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav></aside>
   
 
 <h2 id="经典二分搜索及其变种">经典二分搜索及其变种</h2>
+
+<p>二分搜索的核心思想是，在给定的搜索空间内，排除掉一定不对的那一部分。应用场景往往是有序的，或者局部有序的。这样从n可以优化到logn。</p>
 
 <pre><code class="language-cpp">  int classic_binary_search(vector&lt;int&gt; input, int target) {
     if (input.empty()) {
@@ -192,7 +211,9 @@ window.onload = ready;
 
 <h2 id="二维二分搜索">二维二分搜索</h2>
 
-<h3 id="search-a-2d-matrix-https-leetcode-com-problems-search-a-2d-matrix"><a href="https://leetcode.com/problems/search-a-2d-matrix/">Search a 2D Matrix</a></h3>
+<h3 id="search-a-2d-matrix">Search a 2D Matrix</h3>
+
+<p><a href="https://leetcode.com/problems/search-a-2d-matrix/">Problem Link from Leetcode</a></p>
 
 <p>从左到右递增，下一行的开头一定比上一行的末尾大。那么就可以转化为一维的二分搜索。考点在二维矩阵到一维矩阵的变换。</p>
 
@@ -215,7 +236,9 @@ window.onload = ready;
 }
 </code></pre>
 
-<h3 id="search-a-2d-matrix-ii-https-leetcode-com-problems-search-a-2d-matrix-ii"><a href="https://leetcode.com/problems/search-a-2d-matrix-ii/">Search a 2D matrix II</a></h3>
+<h3 id="search-a-2d-matrix-ii">Search a 2D matrix II</h3>
+
+<p><a href="https://leetcode.com/problems/search-a-2d-matrix-ii/">Problem Link from Leetcode</a></p>
 
 <p>从左往右一定递增，从上到下一定递增。跟之前一题相比，这里的二维矩阵并不能保证转化成一维递增的矩阵。
 如果从左上角开始往右下角搜索，那么有多种可能，刚开始用的是分治法，把矩阵分成四块，由于这个矩形的性质，我们只能排除掉一块，然后往三块可能的继续搜。时间复杂度为$O(n^{1.58})$, 参考分治法时间复杂度分析公式.
@@ -237,6 +260,30 @@ window.onload = ready;
 	return false;
 }
 </code></pre>
+
+<h2 id="advanced-using-binary-search-to-solve-kth-problem">Advanced - using binary search to solve kth problem</h2>
+
+<p><a href="https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/">https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/</a></p>
+
+<p>Follow up:<a href="https://leetcode.com/problems/find-k-closest-elements/">https://leetcode.com/problems/find-k-closest-elements/</a></p>
+
+<p><a href="https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/">https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/</a></p>
+
+<p>Follow up: find kth smallest element in m sorted arrays</p>
+
+<h3 id="more-questions">More questions</h3>
+
+<p><a href="https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/description/">https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/description/</a></p>
+
+<p><a href="https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/">https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/</a></p>
+
+<p>Dynamic programming and binary search (TONY)</p>
+
+<p>LIS <a href="https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/">https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/</a>
+Russian Doll Envelopes</p>
+
+
+  <a href="/tags/binary-search/">Binary Search</a></a>&nbsp;&nbsp;&nbsp;
 
 </div>
 

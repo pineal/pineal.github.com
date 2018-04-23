@@ -21,97 +21,15 @@
 
 &lt;p&gt;假设这里的排序都是升序。&lt;/p&gt;
 
-&lt;h2 id=&#34;insertion-sort&#34;&gt;Insertion Sort:&lt;/h2&gt;
-
-&lt;p&gt;插入排序。假设一个长度为N的数组A[]，总体过程过程为，从index为1开始到N-1，使得A[0,index]是一个排好序的数组。&lt;/p&gt;
-
-&lt;p&gt;具体过程为，把A[index]从index到0逐一比较（这里的顺序一定要从后往前，因为已经是排好序的了），找到第一个比他小的数，然后插到这个数的后面，当然原来位置及以后的数都要往后挪一位。实际代码中是在for循环中加入找到这个小数的条件，每次都往后挪，循环完了才插入。&lt;/p&gt;
-
-&lt;p&gt;举个栗子：&lt;/p&gt;
-
-&lt;p&gt;| Original | 34  8  64  51  32  21 | Position Moved |
-| &amp;ndash; | &amp;ndash;  &amp;ndash;  &amp;ndash;  &amp;ndash;  &amp;ndash;  &amp;ndash; | &amp;ndash; |
-| after i = 1 | 8  34  64  51  32  21 | 1 |
-| after i = 2 | 8  34  64  51  32  21 | 0 |
-| after i = 3 | 8  34  51  64  32  21 | 1 |
-| after i = 4 | 8  32  34  51  64  21 | 3 |
-| after i = 5 | 8  21  32  34  51  64 | 4 |&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;template&amp;lt;typename T&amp;gt;
-void insertion_sort(T arr[], int len){
-  for (int i = 1; i &amp;lt; len; i++){
-    int temp = arr[i];
-      for (int j = i; j &amp;gt; 0 &amp;amp;&amp;amp; arr[j-1]&amp;gt;temp; j--){ //实际比较的是j-1
-        arr[j] = arr[j-1];  //全部往后移一位腾出位置等插入
-      }
-    arr[j] = temp;    //插入到腾出来的位置
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;复杂度分析：&lt;/p&gt;
-
-&lt;h2 id=&#34;selection-sort&#34;&gt;Selection Sort:&lt;/h2&gt;
-
-&lt;p&gt;选择排序。假设一个长度为N的数组A[]，总体过程过程为，从index为0开始到N-1，使得A[0,index]是一个排好序的数组。&lt;/p&gt;
-
-&lt;p&gt;怎么跟插入排序这么像呢？&lt;/p&gt;
-
-&lt;p&gt;是挺像的，但是具体的过程是有区别。这区别就是“插入”和“选择”的区别。&lt;/p&gt;
-
-&lt;p&gt;插入排序是每次往前面那些已经排序好的数里“插入”进去，而选择排序则是，每次从这个数后面那些没排好序的数里“选择”到最小的，和这个数交换。&lt;/p&gt;
-
-&lt;p&gt;举个栗子：&lt;/p&gt;
-
-&lt;p&gt;| Original | 34  8  64  51  32  21 | Position Moved |
-| &amp;ndash; | &amp;ndash;  &amp;ndash;  &amp;ndash;  &amp;ndash;  &amp;ndash;  &amp;ndash; | &amp;ndash; |
-| after i = 1 | 8  34  64  51  32  21 | 1 |
-| after i = 2 | 8  21  64  51  32  34 | 4 |
-| after i = 3 | 8  21  32  51  64  34 | 2 |
-| after i = 4 | 8  21  32  34  64  51 | 2 |
-| after i = 5 | 8  21  32  34  51  64 | 1 |&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;template&amp;lt;typename T&amp;gt;
-void selection_sort(T arr[], int len){
-  for (int i = 0; i &amp;lt; len - 1; i++){  //len - 1即可，最后一次交换在倒数第一个和倒数第二个之间进行
-    int min_index = i;
-    for (int j = i + 1; j &amp;lt; len; j++){
-      //找到未排序的数组中最小的数的index
-      if (arr[j]&amp;lt;arr[min_index]){
-          min_index = j;
-      }        
-    }
-    swap(arr[i], arr[min_index]);
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;附上冒泡排序代码。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void bubble_sort(int arr[], int n) {
-    int i, j;
-    for (i = 0; i &amp;lt; n - 1; i++) {
-        for (j = 0; j &amp;lt; n - 1 - i; j++) {
-            if (arr[j] &amp;gt; arr[j + 1]) {
-                swap(arr[j], arr[j + 1]);
-            }
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;复杂度分析：
-$O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时间复杂度上是一样的。&lt;/p&gt;
-
 &lt;h2 id=&#34;merge-sort&#34;&gt;Merge Sort:&lt;/h2&gt;
 
 &lt;p&gt;归并排序。分治法（divide and conquer）思想入门的算法。Recursively 递归入栈时将字符串分为左右两半，直到无法分割为止。出栈时再把这两半合并起来，在合并的过程中排序。最后所有的栈返回是一个排好序的数组。在用分治法的时候注意一下和纯递归求解的区别。&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;//Merge part
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;// merge part
   vector&amp;lt;int&amp;gt; merge(vector&amp;lt;int&amp;gt; A, vector&amp;lt;int&amp;gt; B) {
 	  vector&amp;lt;int&amp;gt; rst;
 	  std::vector&amp;lt;int&amp;gt;::iterator iter1 = A.begin(), iter2 = B.begin();
-//this is not elegant, may be &amp;amp;&amp;amp; and insert the rest may be better
+
 	  while (iter1 != A.end() || iter2 != B.end()) {
 	  	if (iter1 == A.end()) {
 		  	rst.insert(rst.end(), iter2, B.end());
@@ -133,7 +51,7 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 	  return rst;
   }
 
-//Key part of Merge sort, recursive function
+// key part of merge sort, recursive function
   vector&amp;lt;int&amp;gt; MSort(vector&amp;lt;int&amp;gt; array, int left, int right) {
 	  vector&amp;lt;int&amp;gt; rst;
 	  if (left == right) {
@@ -146,7 +64,7 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 	  rst = merge(leftArr, rightArr);
 	  return rst;
   }
-//Driver for Merge Sort
+// driver for merge sort
   vector&amp;lt;int&amp;gt; mergeSort(vector&amp;lt;int&amp;gt; array) {
     if (array.size() &amp;lt;= 1) return array;
 	  vector&amp;lt;int&amp;gt; rst;
@@ -155,11 +73,17 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
   }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;复杂度分析： $$O(nlog(n))$$：画出递归树，一共$$log(n)$$层, 每一层是$$O(n)$$的复杂度.&lt;/p&gt;
+&lt;p&gt;复杂度分析： $O(nlog(n))$&lt;/p&gt;
+
+&lt;p&gt;画出递归树，一共 $log(n)$ 层, 每一层是 $O(n)$ 的复杂度.&lt;/p&gt;
+
+&lt;p&gt;Demo: GeeksforGeeks&lt;/p&gt;
 
 &lt;h2 id=&#34;quick-sort&#34;&gt;Quick Sort:&lt;/h2&gt;
 
-&lt;p&gt;快速排序。快速排序是一个比较复杂的问题。基本的思想为：&lt;/p&gt;
+&lt;p&gt;快速排序的核心的思想为是 &lt;strong&gt;partition&lt;/strong&gt;. 这个思想在很多类型的问题中都会用到，会在后文举例说明。&lt;/p&gt;
+
+&lt;p&gt;快速排序的基本操作为：&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;选取一个pivot。&lt;/li&gt;
@@ -217,13 +141,13 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 &lt;p&gt;事实上根据上面这个general rule来分，两个挡板指向的两个数只有四种情况：&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;a[i] &amp;lt; pivot, a[j] &amp;gt; pivot&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;$$a[i] &amp;lt; pivot, a[j] &amp;gt; pivot$$&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;a[i] &amp;lt; pivot, a[j] &amp;lt; pivot&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;$$a[i] &amp;lt; pivot, a[j] &amp;lt; pivot$$&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;a[i] &amp;gt; pivot, a[j] &amp;gt; pivot&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;$$a[i] &amp;gt; pivot, a[j] &amp;gt; pivot$$&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;a[i] &amp;gt;= pivot, a[j] &amp;lt;= pivot&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;$$a[i] &amp;gt;= pivot, a[j] &amp;lt;= pivot$$&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;那么对应刚才的rule该做着么呢？&lt;/p&gt;
@@ -237,8 +161,6 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 
 &lt;li&gt;&lt;p&gt;不满足任何条件，但是一旦交换两个挡板上的数，即可让条件满足&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;来看下代码。&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;  void QuickSort(vector&amp;lt;int&amp;gt; &amp;amp; array, int left, int right){
     if (left &amp;gt; right) return;
@@ -282,7 +204,9 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 
 &lt;p&gt;这样的解法可以归结为一种类型。比如一堆数中只有两种，三种四种数，那么就可以对应个数的挡板将数分割成相应区域，每次检查条件是否满足。Eg: Sort colors。这样的做法复杂度只需要$O(n)$.&lt;/p&gt;
 
-&lt;h3 id=&#34;sort-colors&#34;&gt;Sort Colors&lt;/h3&gt;
+&lt;p&gt;Demo: GeeksforGeeks&lt;/p&gt;
+
+&lt;h3 id=&#34;partition-extension-i-sort-colors&#34;&gt;Partition Extension I: Sort Colors&lt;/h3&gt;
 
 &lt;p&gt;Given an array with n objects colored red, white or blue, sort them so that objects of the same color are adjacent, with the colors in the order red, white and blue. Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue respectively.&lt;/p&gt;
 
@@ -337,11 +261,16 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 
 &lt;h3 id=&#34;follow-up-ii-k-colors&#34;&gt;Follow up II: k colors&lt;/h3&gt;
 
-&lt;p&gt;TODO&lt;/p&gt;
+&lt;p&gt;TODO: couting sort.&lt;/p&gt;
+
+&lt;h3 id=&#34;partition-extension-ii-kth-smallest-largest-element-in-an-unsorted-array&#34;&gt;Partition Extension II: Kth smallest/largest element in an unsorted array&lt;/h3&gt;
+
+&lt;p&gt;quick sort partition 思想的另一经典应用。
+&lt;a href=&#34;https://www.geeksforgeeks.org/kth-smallestlargest-element-unsorted-array/&#34;&gt;https://www.geeksforgeeks.org/kth-smallestlargest-element-unsorted-array/&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;wiggle-sort&#34;&gt;Wiggle Sort&lt;/h2&gt;
 
-&lt;p&gt;nums[0] &amp;lt;= nums[1] &amp;gt;= nums[2] &amp;lt;= nums[3]&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;$nums[0] &amp;lt;= nums[1] &amp;gt;= nums[2] &amp;lt;= nums[3]&amp;hellip;.$&lt;/p&gt;
 
 &lt;p&gt;这个时间复杂度优化到了O(n)。下面那个做法是通用的。&lt;/p&gt;
 
@@ -359,7 +288,7 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 
 &lt;h3 id=&#34;follow-up-wiggle-sort-ii&#34;&gt;Follow up: Wiggle Sort II&lt;/h3&gt;
 
-&lt;p&gt;nums[0] &amp;lt; nums[1] &amp;gt; nums[2] &amp;lt; nums[3]&amp;hellip;&lt;/p&gt;
+&lt;p&gt;$nums[0] &amp;lt; nums[1] &amp;gt; nums[2] &amp;lt; nums[3]&amp;hellip;$&lt;/p&gt;
 
 &lt;p&gt;根据这个性质，我们可以确定一种排法一定可以成立：把小的那一半排在偶数位，把大的那一半排在奇数位。这个是通用的。
  时间复杂度 $ O(nlog(n)) $.&lt;/p&gt;
@@ -379,11 +308,15 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
 
 &lt;h2 id=&#34;sort-in-specified-order&#34;&gt;Sort In Specified Order&lt;/h2&gt;
 
-&lt;p&gt;A1 = {2, 1, 2, 5, 7, 1, 9, 3}, A2 = {2, 1, 3}, A1 is sorted to {2, 2, 1, 1, 3, 5, 7, 9}&lt;/p&gt;
+&lt;p&gt;A1 = {2, 1, 2, 5, 7, 1, 9, 3},&lt;/p&gt;
+
+&lt;p&gt;A2 = {2, 1, 3},&lt;/p&gt;
+
+&lt;p&gt;A1 is sorted to {2, 2, 1, 1, 3, 5, 7, 9}&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;vector&amp;lt;int&amp;gt; helper(vector&amp;lt;int&amp;gt; &amp;amp; A1, vector&amp;lt;int&amp;gt; &amp;amp; A2) {
    // Write your solution here.
-   if (A1.size() &amp;lt;= 1 || A2.size() == 0) {
+   if (A1.size() &amp;lt;= 1 |||| A2.size() == 0) {
        sort(A1.begin(), A1.end());
        return A1;
    }
@@ -425,6 +358,65 @@ $O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时
    sort(A1.begin() + k + 1, A1.end());
    return A1;
  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;insertion-sort&#34;&gt;Insertion Sort:&lt;/h2&gt;
+
+&lt;p&gt;插入排序。假设一个长度为N的数组$A[]$，总体过程为，从 index 为 1 开始到 N-1，使得 $A[0,index]$ 是一个排好序的数组。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;template&amp;lt;typename T&amp;gt;
+void insertion_sort(T arr[], int len){
+  for (int i = 1; i &amp;lt; len; i++){
+    int temp = arr[i];
+      for (int j = i; j &amp;gt; 0 &amp;amp;&amp;amp; arr[j-1]&amp;gt;temp; j--){ //实际比较的是j-1
+        arr[j] = arr[j-1];  //全部往后移一位腾出位置等插入
+      }
+    arr[j] = temp;    //插入到腾出来的位置
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;复杂度：
+$O(n^2)$&lt;/p&gt;
+
+&lt;h2 id=&#34;selection-sort&#34;&gt;Selection Sort:&lt;/h2&gt;
+
+&lt;p&gt;选择排序。假设一个长度为N的数组$A[]$，总体过程为，从index为0开始到N-1，使得$A[0,index]$是一个排好序的数组。&lt;/p&gt;
+
+&lt;p&gt;怎么跟插入排序这么像呢？是挺像的，但是具体的过程是有区别。这区别就是“插入”和“选择”的区别。&lt;/p&gt;
+
+&lt;p&gt;插入排序是每次往前面那些已经排序好的数里“插入”进去，而选择排序则是，每次从这个数后面那些没排好序的数里“选择”到最小的，和这个数交换。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;template&amp;lt;typename T&amp;gt;
+void selection_sort(T arr[], int len){
+  for (int i = 0; i &amp;lt; len - 1; i++){  //len - 1即可，最后一次交换在倒数第一个和倒数第二个之间进行
+    int min_index = i;
+    for (int j = i + 1; j &amp;lt; len; j++){
+      //找到未排序的数组中最小的数的index
+      if (arr[j]&amp;lt;arr[min_index]){
+          min_index = j;
+      }        
+    }
+    swap(arr[i], arr[min_index]);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;复杂度分析：
+$O(n^2)$的复杂度。实际上是冒泡排序的一个优化，虽然最坏时间复杂度上是一样的。&lt;/p&gt;
+
+&lt;p&gt;附上冒泡排序代码。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void bubble_sort(int arr[], int n) {
+    int i, j;
+    for (i = 0; i &amp;lt; n - 1; i++) {
+        for (j = 0; j &amp;lt; n - 1 - i; j++) {
+            if (arr[j] &amp;gt; arr[j + 1]) {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+}
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>

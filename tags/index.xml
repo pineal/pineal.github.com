@@ -41,7 +41,7 @@
     <item>
       <title>Backtracking</title>
       <link>https://pineal.github.com/tags/backtracking/</link>
-      <pubDate>Thu, 18 Feb 2016 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/tags/backtracking/</guid>
       <description></description>
@@ -93,15 +93,6 @@
     </item>
     
     <item>
-      <title>Combinations</title>
-      <link>https://pineal.github.com/tags/combinations/</link>
-      <pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/tags/combinations/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Control Theory</title>
       <link>https://pineal.github.com/tags/control-theory/</link>
       <pubDate>Sat, 26 Sep 2015 00:00:00 +0000</pubDate>
@@ -113,7 +104,7 @@
     <item>
       <title>Dfs</title>
       <link>https://pineal.github.com/tags/dfs/</link>
-      <pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/tags/dfs/</guid>
       <description></description>
@@ -183,24 +174,6 @@
     </item>
     
     <item>
-      <title>N Queens</title>
-      <link>https://pineal.github.com/tags/n-queens/</link>
-      <pubDate>Mon, 25 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/tags/n-queens/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Permutations</title>
-      <link>https://pineal.github.com/tags/permutations/</link>
-      <pubDate>Mon, 25 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/tags/permutations/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Priority Queue</title>
       <link>https://pineal.github.com/tags/priority-queue/</link>
       <pubDate>Thu, 13 Oct 2016 00:00:00 +0000</pubDate>
@@ -221,7 +194,7 @@
     <item>
       <title>Search</title>
       <link>https://pineal.github.com/tags/search/</link>
-      <pubDate>Thu, 18 Feb 2016 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/tags/search/</guid>
       <description></description>
@@ -242,24 +215,6 @@
       <pubDate>Mon, 14 Mar 2016 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/tags/sorting/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Stack</title>
-      <link>https://pineal.github.com/tags/stack/</link>
-      <pubDate>Sat, 10 Dec 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/tags/stack/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Subsets</title>
-      <link>https://pineal.github.com/tags/subsets/</link>
-      <pubDate>Sun, 17 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/tags/subsets/</guid>
       <description></description>
     </item>
     

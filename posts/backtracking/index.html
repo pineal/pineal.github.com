@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Basic Backtracking Problems</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="Basic Backtracking Problems">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="og:title" content="Basic Backtracking Problems">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="https://pineal.github.com/posts/backtracking/">
+	<meta name="og:site_name" content="Basic Backtracking Problems">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:tag" content="search DFS backtracking ">
+	<link rel="stylesheet" type="text/css" href="https://pineal.github.com/css/style.css">
+	
+	
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+	tex2jax: {
+	  inlineMath: [['$','$'], ['\\(','\\)']],
+	  displayMath: [['$$','$$'], ['\[','\]']],
+	  processEscapes: true,
+	  processEnvironments: true,
+	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+	  TeX: { equationNumbers: { autoNumber: "AMS" },
+		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	}
+  });
+  </script>
+</head>
+
+<body>
+
+<header>
+	
+	<a href="https://pineal.github.com/" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
+	
+	&nbsp;&nbsp;<a href="https://pineal.github.com/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.github.com/about/" style="color:#777;"><strong>About</strong></a>
+	
+	
+	
+	<a href="https://pineal.github.com/index.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
+</header>
+
+
+<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
+<script>
+function fadeOut(el) {
+  el.style.opacity = 1;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
+    last = +new Date();
+    
+
+    if (el.style.opacity > 0) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    } else {
+      el.style.display='none';
+    }
+  };
+
+  tick();
+}
+
+function ready(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+         el = document.getElementById('loadingMask');
+         fadeOut(el);
+        var elements = document.querySelectorAll("img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("alt")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("alt"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+window.onload = ready;
+</script>
+
+<div class="content">
+  <h1>Basic Backtracking Problems</h1>
+  <aside> <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#subsets">Subsets</a>
+<ul>
+<li><a href="#subsets-i-http-www-lintcode-com-en-problem-subsets"><a href="http://www.lintcode.com/en/problem/subsets/">Subsets I</a></a></li>
+<li><a href="#subsets-ii-dedup-http-www-lintcode-com-en-problem-subsets-ii"><a href="http://www.lintcode.com/en/problem/subsets-ii/">Subsets II - Dedup</a></a></li>
+<li><a href="#variant-i-combination">Variant I - Combination</a></li>
+<li><a href="#variant-ii-permutations-of-inserting-spaces-into-a-string">Variant II - Permutations of inserting spaces into a string</a></li>
+<li><a href="#others">Others</a></li>
+</ul></li>
+<li><a href="#permutations">Permutations</a>
+<ul>
+<li><a href="#permutations-i">Permutations I</a></li>
+<li><a href="#permutations-ii-dedup">Permutations II - Dedup</a></li>
+</ul></li>
+<li><a href="#parenthesis-problems">Parenthesis Problems</a></li>
+<li><a href="#coin-combinations">Coin Combinations</a>
+<ul>
+<li><a href="#99-cents">99 Cents</a></li>
+<li><a href="#find-all-valid-combinations-of-factors-that-form-an-integer">find all valid combinations of factors that form an integer</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav></aside>
+  
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Backtracking 类型的题目最重要的是想清楚每一层在做什么，以及到下一层一共有几个分叉。</p>
+
+<h2 id="subsets">Subsets</h2>
+
+<p>这一类的题目的框架为，在递归树中的第 i 层，代表正在处理 nums 里的第 i 个元素。 从该层的父节点一定会伸展出两个分叉： 第一个分叉代表着一层会放这个元素，第二个分叉代表不放这个元素。 这样出来的递归树非常平衡。</p>
+
+<h3 id="subsets-i-http-www-lintcode-com-en-problem-subsets"><a href="http://www.lintcode.com/en/problem/subsets/">Subsets I</a></h3>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    vector&lt;vector&lt;int&gt;&gt; subsets(vector&lt;int&gt;&amp; nums) {
+        vector&lt;vector&lt;int&gt;&gt; rst;
+        sort(nums.begin(), nums.end());
+        vector&lt;int&gt; cur;
+        dfs(rst, cur, nums, 0);
+        return rst;
+    }
+    void dfs(vector&lt;vector&lt;int&gt;&gt; &amp; rst, vector&lt;int&gt; &amp; cur, const vector&lt;int&gt;&amp; nums, int level) {
+        if (level == nums.size()) {
+            rst.emplace_back(cur);
+            return;
+        }
+        cur.emplace_back(nums[level]);
+        dfs(rst, cur, nums, level + 1);
+        cur.pop_back();
+        dfs(rst, cur, nums, level + 1);
+    }
+};
+</code></pre>
+
+<h3 id="subsets-ii-dedup-http-www-lintcode-com-en-problem-subsets-ii"><a href="http://www.lintcode.com/en/problem/subsets-ii/">Subsets II - Dedup</a></h3>
+
+<p>去重首先需要排序，要利用有序性。从递归树上看的话，放的那一个分支不变，因为我们是先做放元素，再走不放该元素的。如果不放该元素，那么此时的结果会跟父节点的是重复的。ab1 -&gt; ab1b2, ab1。  a -&gt; ab2, a。 ab1 和 ab2 不能同时出现。 所以这个分支就需要直接跳到跟当前层元素不同的那一层。在代码上体现就是level++。</p>
+
+<p>ab1 ab2 出发产生的分支都是完全一样的。那么我们可以去掉ab2。</p>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    vector&lt;vector&lt;int&gt;&gt; subsetsWithDup(vector&lt;int&gt;&amp; nums) {
+        vector&lt;vector&lt;int&gt;&gt; rst;
+        vector&lt;int&gt; cur;
+        sort(nums.begin(), nums.end());
+        dfs(rst, nums, 0, cur);
+        return rst;
+    }
+    void dfs(vector&lt;vector&lt;int&gt;&gt; &amp; result, vector&lt;int&gt; &amp; nums, int level, vector&lt;int&gt; &amp; cur) {
+        if (level == nums.size()) {
+            result.emplace_back(cur);
+            return;
+        }
+        
+        cur.emplace_back(nums[level]);
+        dfs(result, nums, level + 1, cur);
+        cur.pop_back();
+        //pruning techniques
+        while (level &lt; nums.size() - 1 &amp;&amp; nums[level] == nums[level+1]) {
+            level++;
+        }                
+        dfs(result, nums, level + 1, cur);
+    }
+};
+</code></pre>
+
+<h3 id="variant-i-combination">Variant I - Combination</h3>
+
+<p>整体框架跟 Subset I 一模一样， 唯一的区别是 base case return 的时候加上条件： 当前结果的长度为 k 才返回。
+原题链接：<a href="http://www.lintcode.com/en/problem/combinations/">Combinations</a></p>
+
+<p>去重的方法也应该和 Subset II 一样。</p>
+
+<h3 id="variant-ii-permutations-of-inserting-spaces-into-a-string">Variant II - Permutations of inserting spaces into a string</h3>
+
+<p><a href="https://www.geeksforgeeks.org/print-possible-strings-can-made-placing-spaces/">https://www.geeksforgeeks.org/print-possible-strings-can-made-placing-spaces/</a></p>
+
+<h3 id="others">Others</h3>
+
+<ul>
+<li>还有别的问法，比如如何分一个给定的数组成两部分，两部分的和相同。或者要在一串数组/字符串里面插入。</li>
+<li>时间复杂度是$O(2^n)$</li>
+<li>另一种常见做法：k层，每层的意义为最后的结果钟第几个元素应该是什么。</li>
+</ul>
+
+<h2 id="permutations">Permutations</h2>
+
+<p>因为全排列需要全部元素都出现，唯一不同的是他们的顺序，那么我们可以不停两两交换数组钟的元素，得到全排列。</p>
+
+<h3 id="permutations-i">Permutations I</h3>
+
+<pre><code class="language-cpp">class Solution {
+ public:
+  vector&lt;string&gt; solve(string input) {
+  if (input == &quot;&quot;) {
+    return {&quot;&quot;};
+  }
+  vector&lt;string&gt; result;
+  helper(result, input, 0);
+  return result;
+  }
+  
+private:
+  void swap(string &amp;s, int i, int j) {
+    auto temp = s[i];
+    s[i] = s[j];
+    s[j] = temp;
+  }
+
+  void helper(vector&lt;string&gt; &amp; result, string &amp; s, int index) {
+    if (index == s.size()){
+      result.emplace_back(s);
+      return;
+    }
+    for (int i = index; i &lt; s.size(); i++) {
+      swap(s, i, index);
+      helper(result, s, index + 1);
+      swap(s, i, index);
+    }
+  }
+};
+</code></pre>
+
+<h3 id="permutations-ii-dedup">Permutations II - Dedup</h3>
+
+<pre><code class="language-cpp">class Solution {
+ public:
+  vector&lt;string&gt; solve(string input) {
+    vector&lt;string&gt; result;
+    helper(input, result, 0);
+    return result;
+  }
+  
+private:
+  void helper(string &amp; input, vector&lt;string&gt; &amp; result, int level) {
+    if (level == input.size()) {
+        result.emplace_back(input);
+        return;
+    }
+    
+    set&lt;char&gt; charset;
+    for (int i = level; i &lt; input.size(); ++i) {
+      if (charset.find(input[i]) != charset.end()) {
+        continue;
+      }
+      charset.emplace(input[i]);
+      swap(input[i], input[level]);
+      helper(input, result, level + 1);
+      swap(input[i], input[level]);
+    }
+  }
+};
+</code></pre>
+
+<h2 id="parenthesis-problems">Parenthesis Problems</h2>
+
+<h2 id="coin-combinations">Coin Combinations</h2>
+
+<h3 id="99-cents">99 Cents</h3>
+
+<p><a href="https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/">https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/</a></p>
+
+<h3 id="find-all-valid-combinations-of-factors-that-form-an-integer">find all valid combinations of factors that form an integer</h3>
+
+<p><a href="https://www.geeksforgeeks.org/given-array-strings-find-strings-can-chained-form-circle/">https://www.geeksforgeeks.org/given-array-strings-find-strings-can-chained-form-circle/</a></p>
+
+
+  <a href="/tags/search/">search</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/dfs/">DFS</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/backtracking/">backtracking</a></a>&nbsp;&nbsp;&nbsp;
+
+</div>
+
+
+
+
+<footer>
+	<p>© 2017-2018, all rights reserved.</a>
+</footer>
+</body>
+</html>
