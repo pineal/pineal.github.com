@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://pineal.github.com/posts/quick_sort_and_partition/</loc>
+    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pineal.github.com/posts/graph_algorithms/</loc>
+    <lastmod>2018-04-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://pineal.github.com/posts/backtracking/</loc>
     <lastmod>2018-03-24T00:00:00+00:00</lastmod>
   </url>
@@ -30,11 +40,6 @@
   <url>
     <loc>https://pineal.github.com/posts/kth_problems/</loc>
     <lastmod>2016-10-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://pineal.github.com/posts/graph_practices/</loc>
-    <lastmod>2016-10-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -133,14 +138,14 @@
   </url>
   
   <url>
-    <loc>https://pineal.github.com/categories/algorithm/</loc>
-    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
+    <loc>https://pineal.github.com/tags/algorithm/</loc>
+    <lastmod>2016-04-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pineal.github.com/tags/algorithm/</loc>
-    <lastmod>2016-04-14T00:00:00+00:00</lastmod>
+    <loc>https://pineal.github.com/categories/algorithm/</loc>
+    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -162,7 +167,7 @@
   
   <url>
     <loc>https://pineal.github.com/tags/bfs/</loc>
-    <lastmod>2016-10-12T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -192,7 +197,7 @@
   
   <url>
     <loc>https://pineal.github.com/categories/</loc>
-    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -213,8 +218,14 @@
   </url>
   
   <url>
+    <loc>https://pineal.github.com/tags/devide-and-conquer/</loc>
+    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://pineal.github.com/tags/dfs/</loc>
-    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -232,7 +243,7 @@
   
   <url>
     <loc>https://pineal.github.com/tags/graph/</loc>
-    <lastmod>2016-10-12T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-23T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -268,13 +279,19 @@
   
   <url>
     <loc>https://pineal.github.com/</loc>
-    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pineal.github.com/tags/partition/</loc>
+    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pineal.github.com/posts/</loc>
-    <lastmod>2018-03-24T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -285,13 +302,13 @@
   </url>
   
   <url>
-    <loc>https://pineal.github.com/categories/robotics/</loc>
+    <loc>https://pineal.github.com/tags/robotics/</loc>
     <lastmod>2018-02-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pineal.github.com/tags/robotics/</loc>
+    <loc>https://pineal.github.com/categories/robotics/</loc>
     <lastmod>2018-02-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -309,6 +326,12 @@
   </url>
   
   <url>
+    <loc>https://pineal.github.com/tags/sort/</loc>
+    <lastmod>2018-05-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://pineal.github.com/tags/sorting/</loc>
     <lastmod>2016-03-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -322,6 +345,12 @@
   
   <url>
     <loc>https://pineal.github.com/tags/</loc>
+  </url>
+  
+  <url>
+    <loc>https://pineal.github.com/tags/topological-sorting/</loc>
+    <lastmod>2018-04-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>

@@ -6,10 +6,145 @@
     <description>Recent content on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 24 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 May 2018 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pineal.github.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Quick Sort and Partition</title>
+      <link>https://pineal.github.com/posts/quick_sort_and_partition/</link>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/posts/quick_sort_and_partition/</guid>
+      <description>
+
+&lt;h2 id=&#34;quick-sort&#34;&gt;Quick Sort&lt;/h2&gt;
+
+&lt;h2 id=&#34;quick-select&#34;&gt;Quick Select&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Kth Largest Element in an Array&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;rainbow-sort&#34;&gt;Rainbow Sort&lt;/h2&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Topics on Gragh Algorithm</title>
+      <link>https://pineal.github.com/posts/graph_algorithms/</link>
+      <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/posts/graph_algorithms/</guid>
+      <description>
+
+&lt;h1 id=&#34;graph&#34;&gt;Graph&lt;/h1&gt;
+
+&lt;h2 id=&#34;graph-representing&#34;&gt;Graph Representing&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/graph-and-its-representations/&#34;&gt;https://www.geeksforgeeks.org/graph-and-its-representations/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/representing-graphs&#34;&gt;https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/representing-graphs&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;adjacent-matrix&#34;&gt;Adjacent Matrix&lt;/h3&gt;
+
+&lt;h3 id=&#34;adjacent-list&#34;&gt;Adjacent List&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/graph-implementation-using-stl-for-competitive-programming-set-1-dfs-of-unweighted-and-undirected/&#34;&gt;https://www.geeksforgeeks.org/graph-implementation-using-stl-for-competitive-programming-set-1-dfs-of-unweighted-and-undirected/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/graph-implementation-using-stl-for-competitive-programming-set-2-weighted-graph/&#34;&gt;https://www.geeksforgeeks.org/graph-implementation-using-stl-for-competitive-programming-set-2-weighted-graph/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;edges&#34;&gt;Edges&lt;/h3&gt;
+
+&lt;h2 id=&#34;traversal&#34;&gt;Traversal&lt;/h2&gt;
+
+&lt;h3 id=&#34;bfs&#34;&gt;BFS&lt;/h3&gt;
+
+&lt;h3 id=&#34;dfs&#34;&gt;DFS&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Pacific Atlantic Water Flow&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;start from matrix&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;start from occean&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Clone Graph
+follow up: reverse if DAG&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;topological-sorting&#34;&gt;Topological Sorting&lt;/h2&gt;
+
+&lt;h3 id=&#34;dfs-method&#34;&gt;DFS method&lt;/h3&gt;
+
+&lt;p&gt;拓扑排序的常规方法是用DFS。DFS 有一个好处就是可以 backtracking 到所有的 solution。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/topological-sorting/&#34;&gt;https://www.geeksforgeeks.org/topological-sorting/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;bfs-1&#34;&gt;BFS&lt;/h3&gt;
+
+&lt;p&gt;另一个方法 Kahn’s algorithm 用记录入度/出度的方式进行BFS, 相对容易记忆和实现&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/&#34;&gt;https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;More questions&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/course-schedule&#34;&gt;Course Schedule&lt;/a&gt; | &lt;a href=&#34;https://github.com/pineal/Leetcode_OJ/blob/master/cpp/207_Course_Schedule.cpp&#34;&gt;Solution&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/course-schedule-ii&#34;&gt;Course Schedule II&lt;/a&gt; | &lt;a href=&#34;https://github.com/pineal/Leetcode_OJ/blob/master/cpp/210_Course_Schedule_II.cpp&#34;&gt;Solution&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/sequence-reconstruction&#34;&gt;Sequence Reconstruction&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/longest-increasing-path-in-a-matrix&#34;&gt;Longest Increasing Path in a Matrix&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/alien-dictionary&#34;&gt;Alien Dictionary&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/all-topological-sorts-of-a-directed-acyclic-graph/&#34;&gt;All Topological sorts of a DAG&lt;/a&gt; | should use DFS&lt;/p&gt;
+
+&lt;h2 id=&#34;connected-component&#34;&gt;Connected Component&lt;/h2&gt;
+
+&lt;h3 id=&#34;connected-components-for-undirected-graph&#34;&gt;Connected components for undirected graph&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description/&#34;&gt;Number of Connected Components&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;strongly-connected-components&#34;&gt;Strongly Connected Components&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/strongly-connected-components/&#34;&gt;https://www.geeksforgeeks.org/strongly-connected-components/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/tarjan-algorithm-find-strongly-connected-components/&#34;&gt;https://www.geeksforgeeks.org/tarjan-algorithm-find-strongly-connected-components/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/connectivity-in-a-directed-graph/&#34;&gt;https://www.geeksforgeeks.org/connectivity-in-a-directed-graph/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;shortest-path&#34;&gt;Shortest Path&lt;/h2&gt;
+
+&lt;h3 id=&#34;shortest-distance-in-adjacent-table-bfs&#34;&gt;Shortest distance in adjacent table - BFS&lt;/h3&gt;
+
+&lt;p&gt;Best Meeting Point&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/shortest-distance-from-all-buildings/description/&#34;&gt;Shortest Distance from All Buildings&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;dijkstra&#34;&gt;Dijkstra&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-using-set-in-stl/&#34;&gt;https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-using-set-in-stl/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/&#34;&gt;https://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/&#34;&gt;https://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;a-star&#34;&gt;A star&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/pineal/-O_O-/blob/master/A_Star_Search/A_Star_Search.cpp&#34;&gt;https://github.com/pineal/-O_O-/blob/master/A_Star_Search/A_Star_Search.cpp&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;iterative-deepening-search-ids-or-iterative-deepening-depth-first-search-iddfs&#34;&gt;Iterative Deepening Search(IDS) or Iterative Deepening Depth First Search(IDDFS)&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/iterative-deepening-searchids-iterative-deepening-depth-first-searchiddfs/&#34;&gt;https://www.geeksforgeeks.org/iterative-deepening-searchids-iterative-deepening-depth-first-searchiddfs/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;bipartite&#34;&gt;Bipartite&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/is-graph-bipartite&#34;&gt;Is Graph Bipartite&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Basic Backtracking Problems</title>
@@ -22,6 +157,10 @@
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 
 &lt;p&gt;Backtracking 类型的题目最重要的是想清楚每一层在做什么，以及到下一层一共有几个分叉。&lt;/p&gt;
+
+&lt;p&gt;时间复杂度： branch factor ^ level&lt;/p&gt;
+
+&lt;p&gt;时间复杂度： call stack -&amp;gt; level&lt;/p&gt;
 
 &lt;h2 id=&#34;subsets&#34;&gt;Subsets&lt;/h2&gt;
 
@@ -105,7 +244,13 @@ public:
 
 &lt;h2 id=&#34;permutations&#34;&gt;Permutations&lt;/h2&gt;
 
-&lt;p&gt;因为全排列需要全部元素都出现，唯一不同的是他们的顺序，那么我们可以不停两两交换数组钟的元素，得到全排列。&lt;/p&gt;
+&lt;p&gt;因为全排列需要全部元素都出现，唯一不同的是他们的顺序，那么我们可以不停两两交换数组中的元素，得到全排列。&lt;/p&gt;
+
+&lt;p&gt;Time n * (n-1) * (n - 2) = O(n!)&lt;/p&gt;
+
+&lt;p&gt;Space O(n)&lt;/p&gt;
+
+&lt;p&gt;如果要求 一个长度不变的array/string 的 permutation 只是 order 不一样，就可以考虑用 swap-swap 的方法。&lt;/p&gt;
 
 &lt;h3 id=&#34;permutations-i&#34;&gt;Permutations I&lt;/h3&gt;
 
@@ -174,15 +319,124 @@ private:
 
 &lt;h2 id=&#34;parenthesis-problems&#34;&gt;Parenthesis Problems&lt;/h2&gt;
 
+&lt;h3 id=&#34;valid&#34;&gt;Valid&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Given N pairs of parentheses “()”, return a list with all the valid permutations&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;分析：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void validParenthesisHelper(int l, int r, int n, string &amp;amp; cur, vector&amp;lt;string&amp;gt; &amp;amp; res) {
+    if (l + r ==  2 * n) {
+        res.emplace_back(cur);
+        return;
+    }
+    
+    if (l &amp;lt; n) {
+        cur += &amp;quot;(&amp;quot;;
+        validParenthesisHelper(l + 1, r, n, cur, res);
+        cur.pop_back();
+    }
+    
+    if (r &amp;lt; l) {
+        cur += &amp;quot;)&amp;quot;;
+        validParenthesisHelper(l, r + 1, n, cur, res);
+        cur.pop_back();
+    }
+}
+
+vector&amp;lt;string&amp;gt; validParenthesis(int n) {
+    vector&amp;lt;string&amp;gt; res;
+    string cur;
+    validParenthesisHelper(0, 0, n, cur, res);
+    return res;
+}
+
+void testvalidParenthesis() {
+    auto res = validParenthesis(3);
+    for (const auto &amp;amp; str : res) {
+        cout &amp;lt;&amp;lt; str &amp;lt;&amp;lt; endl;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Time: O(2^2n)
+Space: O(2n)&lt;/p&gt;
+
 &lt;h2 id=&#34;coin-combinations&#34;&gt;Coin Combinations&lt;/h2&gt;
 
 &lt;h3 id=&#34;99-cents&#34;&gt;99 Cents&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/&#34;&gt;https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/&lt;/a&gt;&lt;/p&gt;
 
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void coinCombinationHelper(const vector&amp;lt;int&amp;gt; &amp;amp; coins,
+                           vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; res,
+                           vector&amp;lt;int&amp;gt; &amp;amp; cur,
+                           int remaining,
+                           int level) {
+    if (level == coins.size()) {
+        if (remaining == 0) {
+            res.emplace_back(cur);
+        }
+        return;
+    }
+
+    int n = remaining/coins[level];
+    for (int i = 0; i &amp;lt;= n; i++) {
+        cur.emplace_back(i);
+        coinCombinationHelper(coins, res, cur, remaining - i * coins[level], level + 1);
+        cur.pop_back();
+    }
+}
+
+vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; coinCombination(const vector&amp;lt;int&amp;gt; &amp;amp; coins, int target) {
+    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; res;
+    vector&amp;lt;int&amp;gt; cur;
+    coinCombinationHelper(coins, res, cur, target, 0);
+    return res;
+}
+
+void testCoinsCombination() {
+    vector&amp;lt;int&amp;gt; coins = {25, 10, 5, 1};
+    auto res = coinCombination(coins, 99);
+    for (const auto &amp;amp; v : res) {
+        for (const auto &amp;amp; c : v) {
+            cout &amp;lt;&amp;lt; c &amp;lt;&amp;lt; &amp;quot; &amp;quot;;
+        }
+        cout &amp;lt;&amp;lt; endl;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
 &lt;h3 id=&#34;find-all-valid-combinations-of-factors-that-form-an-integer&#34;&gt;find all valid combinations of factors that form an integer&lt;/h3&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/given-array-strings-find-strings-can-chained-form-circle/&#34;&gt;https://www.geeksforgeeks.org/given-array-strings-find-strings-can-chained-form-circle/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;backtracking-on-tree&#34;&gt;Backtracking on Tree&lt;/h2&gt;
+
+&lt;h3 id=&#34;longest-consecutive-sequence&#34;&gt;Longest consecutive sequence&lt;/h3&gt;
+
+&lt;p&gt;int global_max = INT_MIN;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int helper(TreeNode* root) {
+  if (root == nullptr) {
+    return 0;
+  }
+
+  int left = 0;
+  int right = 0;
+
+  if (root-&amp;gt;left &amp;amp;&amp;amp; root-&amp;gt;left-&amp;gt;val -1 == root-&amp;gt;val) {
+    left = helper(root-&amp;gt;left);
+  } 
+  if (root-&amp;gt;right &amp;amp;&amp;amp; root-&amp;gt;right-&amp;gt;val -1 == root-&amp;gt;val) {
+    right = helper(root-&amp;gt;right);
+  } 
+  int local_max = max(left, right) + 1;
+  global_max = max(global_max, local_max)l
+  return local_max;
+
+} 
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
@@ -364,6 +618,8 @@ $$&lt;/p&gt;
       <description>
 
 &lt;h1 id=&#34;kth-problems&#34;&gt;Kth Problems&lt;/h1&gt;
+
+&lt;h2 id=&#34;solution-with-priority-queue&#34;&gt;Solution with priority queue&lt;/h2&gt;
 
 &lt;p&gt;套路：找第K个的问题，最常用的做法就是用优先队列来实现，根据题意用最大堆或者最小堆把时间复杂度优化到 O(nlogk).&lt;/p&gt;
 
@@ -615,386 +871,12 @@ class Solution {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;visited尽量用bool数组表示，二维三维都可。不要存放node类的class，地址不一样。&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Gragh practice</title>
-      <link>https://pineal.github.com/posts/graph_practices/</link>
-      <pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/posts/graph_practices/</guid>
-      <description>
 
-&lt;h1 id=&#34;graph&#34;&gt;Graph&lt;/h1&gt;
+&lt;h2 id=&#34;solution-with-binary-search&#34;&gt;Solution with binary search&lt;/h2&gt;
 
-&lt;p&gt;Leetcode 里现有的图论的题比较简单，都有套路。八个题七个BFS一个DFS。&lt;/p&gt;
+&lt;h2 id=&#34;solution-with-quick-sort-partition&#34;&gt;Solution with quick-sort partition&lt;/h2&gt;
 
-&lt;p&gt;后半部分把图里的搜索的题目也放了进来。&lt;/p&gt;
-
-&lt;p&gt;BFS Direct Graphs - Topological Sorting&lt;/p&gt;
-
-&lt;p&gt;Course Schedule&lt;/p&gt;
-
-&lt;p&gt;用两个个hashmap记录所有的入度和出度。&lt;/p&gt;
-
-&lt;p&gt;用一个zeroInDegree的队列做BFS，没有入度意味着起点&lt;/p&gt;
-
-&lt;p&gt;在BFS过程中，不断的删除孩子的入度，然后把父亲节点从出度中删掉，这样就把这个点和所有和他连接的孩子的边都删掉了。&lt;/p&gt;
-
-&lt;p&gt;最后判断如果出度中还有点，说明还有边存在着。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;//BFS
-class Solution {
-	public:
-		bool canFinish(int numCourses, vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt;&amp;amp; pres) {
-			queue&amp;lt;int&amp;gt; zeroInDegree;
-
-			unordered_map&amp;lt;int, unordered_set&amp;lt;int&amp;gt;&amp;gt; inDegree;
-			unordered_map&amp;lt;int, unordered_set&amp;lt;int&amp;gt;&amp;gt; outDegree;
-
-			for (int i = 0; i &amp;lt; pres.size(); i++) {
-				inDegree[pres[i].first].emplace(pres[i].second);
-				outDegree[pres[i].second].emplace(pres[i].first);
-			}
-
-			for (int i = 0; i &amp;lt; numCourses; i++) {
-				if (!inDegree.count(i)) {
-					zeroInDegree.push(i);
-				}
-			}
-
-			while (!zeroInDegree.empty()) {
-				int parent = zeroInDegree.front();
-				zeroInDegree.pop();
-				//for each child has a edge from parent
-				for (auto child : outDegree[parent]) {
-					//remove edge
-					inDegree[child].erase(parent);
-					//if this child has no edge, add to queue
-					if (inDegree[child].empty()) {
-						zeroInDegree.push(child);
-					}
-				}
-				outDegree.erase(parent);
-			}
-
-			//if still exist edges in the graph, return false
-			if (!outDegree.empty()) {
-				return false;
-			}
-			return true;   
-		}
-};
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Course Schedule II&lt;/p&gt;
-
-&lt;p&gt;BFS的过程中顺便记录弹出的顺序就行了。&lt;/p&gt;
-
-&lt;p&gt;Alien Dictionary&lt;/p&gt;
-
-&lt;p&gt;每个字母就是一个节点，根据排好序的词，找到第一个不想等的字母，找到关系，建立direct graph.&lt;/p&gt;
-
-&lt;p&gt;剩下的跟 Course Schedule ii 无异，BFS就行。&lt;/p&gt;
-
-&lt;p&gt;BFS Undirected Graphs&lt;/p&gt;
-
-&lt;p&gt;Clone Graph&lt;/p&gt;
-
-&lt;p&gt;用一个hashmap来记录orignal graph 与 copied graph 之间的节点的一一对应的关系。&lt;/p&gt;
-
-&lt;p&gt;用BFS遍历原图。做两件事：加没有遇到过的点到copied graph里，把coped graph里的节点按照 orignal graph 的连接关系连接－也就是加到neighbor里面。&lt;/p&gt;
-
-&lt;p&gt;Graph Valid Tree&lt;/p&gt;
-
-&lt;p&gt;給一堆边来表示graph，问是不是valid tree。区别就在于 树里面 不可能有环。 那么如何探测图里面的环？遍历一下就行，如果是树，那么每个点只会被访问一次，如果有环，则会被访问多次。&lt;/p&gt;
-
-&lt;p&gt;Undirected graph 没有入度和出度一说，所有的边都是度。第一步建图，只需一个map, 记录点和对应的边。&lt;/p&gt;
-
-&lt;p&gt;然后从任意点开始做bfs，要用一个set或者vector来记录访问过的点，再次访问的话就判断不是树。&lt;/p&gt;
-
-&lt;p&gt;弹出一个父亲：在孩子节点上删除父亲到孩子的边，将孩子压入队列，然后删除该父亲。&lt;/p&gt;
-
-&lt;p&gt;最后要加一个判断，看是否所有的点都访问过。不然有可能是两个不连接的图。那也不符合题意。&lt;/p&gt;
-
-&lt;p&gt;Number of Connected Components in an Undirected Graph&lt;/p&gt;
-
-&lt;p&gt;需要有一个visited 的数组来记录是否被访问过。遍历每一个点，对每一个没访问过的点(还存在在只由条件给的edge构造的graph中) 做BFS。BFS过程中删点和边，同时记录访问。BFS完 counter 加一。 最后要注意，因为条件给的是边，所以有的单个的点可以不在这个边的集合上，所以要再遍历一遍visited看看没有被访问过的就是单个的点。单个的点也是graph啊。这就是这个visited的意义所在。&lt;/p&gt;
-
-&lt;p&gt;Minimum Height Trees&lt;/p&gt;
-
-&lt;p&gt;最多最多只有两个 MHT 在图里。这道题才真正需要degree。首先需要明白，最大的MHT只能是两个node。证明的话用反证法，假设有3个，那么必然可以变到1个。&lt;/p&gt;
-
-&lt;p&gt;那么就可以用这么一个做法，每次把叶子都剥下来，直到剩下的节点数小于等于2。用degree来记录每个点的度数。那么度数为1就是叶子节点。把叶子剥下来就意味着度数为0，但是要区别最后剩下的点而不是不要的点，我们把这些剥下来的点度数设为-1。然后总数-1。对他们的父节点也要减掉度数。循环直到剩下的点小于等于2。&lt;/p&gt;
-
-&lt;p&gt;再用一次循环找到度数为0 或者 为 1的点，那么就是剩下来的结果。&lt;/p&gt;
-
-&lt;p&gt;DFS&lt;/p&gt;
-
-&lt;p&gt;Reconstruct Itinerary&lt;/p&gt;
-
-&lt;p&gt;一笔画问题。注意要用一个hashmap来表示graph，虽然这个graph是有向的，但是不需要入度出度。key是string, value需要一个multiset 因为同一个出发地可能有好几张同一个目的地的机票。&lt;/p&gt;
-
-&lt;p&gt;用一个while 循环对当前的点做DFS。每到一个点就往所有的孩子递归，每一次删除对应的边，直到当前节点已经没有出去的边。跳出循环后加入该点－意味着没边可以走了，就开始往回弹栈，把点压入答案中。&lt;/p&gt;
-
-&lt;p&gt;BFS Shortest distance&lt;/p&gt;
-
-&lt;p&gt;图给的是基本上邻接表，所以最短路径本来用dijkstra做的可以简化为BFS，因为路径间的权重都是1。&lt;/p&gt;
-
-&lt;p&gt;Walls and Gates&lt;/p&gt;
-
-&lt;p&gt;最基础的BFS找路径。&lt;/p&gt;
-
-&lt;p&gt;Word Ladder ／ Word Ladder II（TODO）&lt;/p&gt;
-
-&lt;p&gt;可以抽象成图的问题。难点在时间复杂度的优化上。&lt;/p&gt;
-
-&lt;p&gt;如何找到符合要求的neighbor？&lt;/p&gt;
-
-&lt;p&gt;遍历在dict里其余所有word，和当前的比较，那么是O(nk)的复杂度，算上BFS，总的复杂度能达到O(n^2k)。&lt;/p&gt;
-
-&lt;p&gt;k是word的长度。&lt;/p&gt;
-
-&lt;p&gt;依次替换当前word里的字母，找dict里是否存在，在替换回来。那么是O(26*k)的复杂度，总的复杂度可以优化到O(nk).&lt;/p&gt;
-
-&lt;p&gt;如何求出具体路径？用一个hashmap来记录每层的word，key是从头开始的距离，value是所有这些距离的词。然后做DFS即可。注意用一个visited去重。&lt;/p&gt;
-
-&lt;p&gt;还能优化吗？TODO：双端BFS。&lt;/p&gt;
-
-&lt;p&gt;Surrounded Regions&lt;/p&gt;
-
-&lt;p&gt;标记法。&lt;/p&gt;
-
-&lt;h2 id=&#34;search-in-gragh&#34;&gt;Search In Gragh&lt;/h2&gt;
-
-&lt;h3 id=&#34;leetcode-317-shortest-distance-from-all-buildings&#34;&gt;Leetcode 317: Shortest Distance from All Buildings&lt;/h3&gt;
-
-&lt;p&gt;找到一个点，从他开始到所有的buildings的距离最短的和，中间有障碍物。对每个点做BFS，然后加起来求一个最小值。这样的时间复杂度是 $O(m*n)[BFS] * O(m*n)[matrix] = O(m^2*n^2)$。优化：从building开始搜。那么时间复杂度为$O(k*m*n)$。 $k$ 是 building 的个数。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    int shortestDistance(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; grid) {
-        int res = INT_MAX;
-        
-        vector&amp;lt;vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt;&amp;gt; dis(grid.size(), vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt;(grid[0].size()));    
-        //dis[i][j].first =&amp;gt; total distance from k buildings to grid[i][j]
-        //dis[i][j].second =&amp;gt; num of times search from k buildings and visited to grid[i][j] successfully (avoid dead end)
-        int m = grid.size();
-        int n = grid[0].size();
-        int num_buildings = 0;
-        for (int i = 0; i &amp;lt; m; i++) {
-            for (int j = 0; j &amp;lt; n; j++) {
-                if (grid[i][j] == 1) {
-                    bfs(grid, dis, i, j);
-                    num_buildings++;
-                }
-            }
-        }
-        for (int i = 0; i &amp;lt; m; i++) {
-            for (int j = 0; j &amp;lt; n; j++) {
-                if (dis[i][j].second == num_buildings) {
-                    res = min(res, dis[i][j].first);
-                }
-            }
-        }
-        return res == INT_MAX? -1 : res;
-    }
-    
-    
-    void bfs(const vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; grid, vector&amp;lt;vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt;&amp;gt; &amp;amp; dis, int i, int j) {
-        queue&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; q;
-        q.emplace(i, j);
-        int m = grid.size();
-        int n = grid[0].size();
-        deque&amp;lt;deque&amp;lt;bool&amp;gt;&amp;gt; visited(m, deque&amp;lt;bool&amp;gt;(n, false));
-        
-        vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-        
-        int level = 0;      //distance to building in grid[i][j]
-        while (!q.empty()) {
-            int size = q.size();
-            for (int i = 0; i &amp;lt; size; i++) {
-                int x = q.front().first;
-                int y = q.front().second;
-                q.pop();
-                if (level != 0) {
-                    dis[x][y].first += level;
-                    dis[x][y].second++;
-                }
-                for (const auto &amp;amp; dir : dirs) {
-                    int x_prime = x + dir.first;
-                    int y_prime = y + dir.second;
-                    if (x_prime &amp;lt; m &amp;amp;&amp;amp; x_prime &amp;gt;= 0 &amp;amp;&amp;amp; y_prime &amp;lt; n &amp;amp;&amp;amp; y_prime &amp;gt;= 0 &amp;amp;&amp;amp; 
-                        grid[x_prime][y_prime] == 0 &amp;amp;&amp;amp;
-                        visited[x_prime][y_prime] == false) {
-                        q.emplace(x_prime, y_prime);
-                        visited[x_prime][y_prime] = true;
-                    }
-                }    
-            }            
-            level++;
-        }
-        
-    }
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Best Meeting Point&lt;/p&gt;
-
-&lt;p&gt;和上题一样的做法，只是可以在人所在的位置。做BFS标记visited的时候要注意。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    int minTotalDistance(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; grid) {
-        int res = INT_MAX;        
-        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; dis(grid.size(), vector&amp;lt;int&amp;gt;(grid[0].size()));    
-        int m = grid.size();
-        int n = grid[0].size();
-        for (int i = 0; i &amp;lt; m; i++) {
-            for (int j = 0; j &amp;lt; n; j++) {
-                if (grid[i][j] == 1) {
-                    bfs(grid, dis, i, j);
-                }
-            }
-        }
-        for (int i = 0; i &amp;lt; m; i++) {
-            for (int j = 0; j &amp;lt; n; j++) {
-                    res = min(res, dis[i][j]);
-            }
-        }
-        return res == INT_MAX? -1 : res;        
-    }
-    void bfs(const vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; grid, vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; dis, int i, int j) {
-        queue&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; q;
-        q.emplace(i, j);
-        int m = grid.size();
-        int n = grid[0].size();
-        deque&amp;lt;deque&amp;lt;bool&amp;gt;&amp;gt; visited(m, deque&amp;lt;bool&amp;gt;(n, false));
-        visited[i][j] = true;
-        vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-        
-        int level = 0;      //distance to grid[i][j]
-        while (!q.empty()) {
-            int size = q.size();
-            for (int i = 0; i &amp;lt; size; i++) {
-                int x = q.front().first;
-                int y = q.front().second;
-                q.pop();
-                if (level != 0) {
-                    dis[x][y] += level;
-                }
-                for (const auto &amp;amp; dir : dirs) {
-                    int x_prime = x + dir.first;
-                    int y_prime = y + dir.second;
-                    if (x_prime &amp;lt; m &amp;amp;&amp;amp; x_prime &amp;gt;= 0 &amp;amp;&amp;amp; y_prime &amp;lt; n &amp;amp;&amp;amp; y_prime &amp;gt;= 0 &amp;amp;&amp;amp; 
-                        visited[x_prime][y_prime] == false) {
-                        q.emplace(x_prime, y_prime);
-                        visited[x_prime][y_prime] = true;
-                    }
-                }    
-            }            
-            level++;
-        }
-    }    
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;但超时啦。
-答案里给的方法是算出median。并不适用有obstacle的情况（是嘛？）。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;// Time:  O(mn)
-// Space: O(m+n)
-
-class Solution {
-public:
-    int minTotalDistance(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; grid) {
-        vector&amp;lt;int&amp;gt; x, y;
-        for (int i = 0; i &amp;lt; grid.size(); ++i) {
-            for (int j = 0; j &amp;lt; grid[0].size(); ++j) {
-                if (grid[i][j]) {
-                    x.emplace_back(i);
-                    y.emplace_back(j);
-                }
-            }
-        }
-        nth_element(x.begin(), x.begin() + x.size() / 2, x.end());
-        nth_element(y.begin(), y.begin() + y.size() / 2, y.end());
-        const int mid_x = x[x.size() / 2];
-        const int mid_y = y[y.size() / 2];
-        int sum = 0;
-        for (int i = 0; i &amp;lt; grid.size(); ++i) {
-            for (int j = 0; j &amp;lt; grid[0].size(); ++j) {
-                if (grid[i][j]) {
-                    sum += abs(mid_x - i) + abs(mid_y - j);
-                }
-            }
-        }
-        return sum;
-    }
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://math.stackexchange.com/questions/113270/the-median-minimizes-the-sum-of-absolute-deviations&#34;&gt;数学证明参考链接&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;nth_element()
-把按 comparator 排序的有第n个数放在 n 的位置，前面的都比它“小”， 后面的都比它“大”。 但其他并不保证有序，时间复杂度 $O(n)$ 比 sort 好一些。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;leetcode-407-trapping-rain-water-ii&#34;&gt;Leetcode 407: Trapping Rain Water II&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
-public:
-    int trapRainWater(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; heightMap) {
-        if (heightMap.empty()) {
-            return 0;
-        }
-        int rst = 0;
-        int m = heightMap.size();
-        int n = heightMap[0].size();
-
-        auto cmp = [&amp;amp;heightMap](const pair&amp;lt;int, int&amp;gt; &amp;amp; a, const pair&amp;lt;int, int&amp;gt; &amp;amp; b) {
-            return heightMap[a.first][a.second] &amp;gt; heightMap[b.first][b.second]; 
-        };
-        
-        priority_queue&amp;lt;pair&amp;lt;int, int&amp;gt;, vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt;, decltype(cmp)&amp;gt; min_heap(cmp);
-        vector&amp;lt;vector&amp;lt;bool&amp;gt;&amp;gt; visited(m, vector&amp;lt;bool&amp;gt;(n, false));
-        vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-        
-        //start with boundary
-        for (int i = 0; i &amp;lt; m; i++) {
-            for (int j = 0; j &amp;lt; n; j++) {
-                if(!(i==0 || i==m-1 || j==0 || j==n-1)) continue;
-                min_heap.emplace(i, j);
-                visited[i][j] = 1;
-            }
-        }
-        
-        int max_h = 0;
-        int x, y;
-        while (!min_heap.empty()) {
-            x = min_heap.top().first;
-            y = min_heap.top().second;
-            max_h = max(heightMap[x][y], max_h);
-            min_heap.pop();
-            for (auto dir : dirs) {
-              int x_n = x + dir.first;
-              int y_n = y + dir.second;
-              if (x_n &amp;gt; 0 &amp;amp;&amp;amp; x_n &amp;lt; m - 1 &amp;amp;&amp;amp; y_n &amp;gt; 0 &amp;amp;&amp;amp; y_n &amp;lt; n - 1 &amp;amp;&amp;amp; !visited[x_n][y_n]) {
-                visited[x_n][y_n] = true;
-                rst += max(0, (max_h - heightMap[x_n][y_n]));
-                min_heap.emplace(x_n, y_n);
-              }              
-            }
-        }
-        return rst;
-    }
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Skyline&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/kth-largest-element-in-an-array/discuss/60309/4-C++-Solutions-using-Partition-Max-Heap-priority_queue-and-multiset-respectively&#34;&gt;solution&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -2600,50 +2482,34 @@ $$&lt;/p&gt;
       <guid>https://pineal.github.com/posts/binary_tree/</guid>
       <description>
 
-&lt;h2 id=&#34;definition-of-binary-tree&#34;&gt;Definition of Binary Tree&lt;/h2&gt;
+&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
+
+&lt;h3 id=&#34;concepts&#34;&gt;Concepts&lt;/h3&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Full Binary Tree
-全部都填满的树。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Full Binary Tree: 全部都填满的树。&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;Complete Binary Tree
-除了最后一行其他都填满，最后一行的最后一个之前（左边）全部是满的。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Complete Binary Tree: 除了最后一行其他都填满，最后一行的最后一个之前（左边）全部是满的。&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;Balanced Binary Tree
-左右子树的高度最多差1. Height of the tree: $$O(log(n))$$&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Balanced Binary Tree: 左右子树的高度最多差1. Height of the tree: $O(log(n))$&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;Binary Search Tree
-将二叉树按inorder方式遍历，是递增的。&lt;/p&gt;
-
-&lt;h2 id=&#34;three-different-ways-to-traverse-a-binary-tree&#34;&gt;Three different ways to traverse a binary Tree&lt;/h2&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Binary Search Tree: Recursively, Leftsubtree is smaller than root and righ subtree is larger than root. Inorder traverse is increasing.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
+&lt;h2 id=&#34;traverse&#34;&gt;Traverse&lt;/h2&gt;
+
+&lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Binary_search_tree.svg/300px-Binary_search_tree.svg.png&#34; alt=&#34;example&#34; /&gt;&lt;/p&gt;
+
 &lt;ul&gt;
-&lt;li&gt;DFS: 前序（pre-order, NLR）&lt;/li&gt;
-&lt;li&gt;DFS: 中序（in-order, LNR）&lt;/li&gt;
-&lt;li&gt;DFS: 后序（post-order, LRN）&lt;/li&gt;
-&lt;li&gt;BFS: 层序（level-order）&lt;/li&gt;
+&lt;li&gt;Preorder: 8-&amp;gt;3-&amp;gt;1-&amp;gt;6-&amp;gt;4-&amp;gt;7-&amp;gt;10-&amp;gt;14-&amp;gt;13&lt;/li&gt;
+&lt;li&gt;Inorder:  1-&amp;gt;3-&amp;gt;4-&amp;gt;6-&amp;gt;7-&amp;gt;8-&amp;gt;10-&amp;gt;13-&amp;gt;14&lt;/li&gt;
+&lt;li&gt;Postorder: 1-&amp;gt;4-&amp;gt;7-&amp;gt;6-&amp;gt;3-&amp;gt;13-&amp;gt;14-&amp;gt;10-&amp;gt;8&lt;/li&gt;
+&lt;li&gt;Levelorder: 8-&amp;gt;3-&amp;gt;10-&amp;gt;1-&amp;gt;6-&amp;gt;14-&amp;gt;4-&amp;gt;7-&amp;gt;13&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;traverse-binary-tree-example&#34;&gt;Traverse Binary Tree Example&lt;/h3&gt;
-
-&lt;p&gt;[A:B, C]
-[B:D]
-[D:None]
-[C:E,F]
-[E:G,H]
-[G:None]
-[H:None]
-[F:I]
-[I:None]&lt;/p&gt;
-
-&lt;p&gt;NLR: A B D C E G H F I&lt;/p&gt;
-
-&lt;p&gt;LNR: D B A G E H C F I&lt;/p&gt;
-
-&lt;p&gt;LRN: D B G H E I F C A&lt;/p&gt;
-
-&lt;h2 id=&#34;template-for-dfs-traverse-using-recursion-nlr-and-lnr&#34;&gt;Template For DFS Traverse Using Recursion(NLR and LNR)&lt;/h2&gt;
+&lt;h3 id=&#34;traverse-recursively&#34;&gt;Traverse Recursively&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void helper(TreeNode* node, vector&amp;lt;int&amp;gt; &amp;amp; rst){
     if (node != nullptr){
@@ -2662,52 +2528,120 @@ vector&amp;lt;int&amp;gt; DFS_Traversal(TreeNode* root) {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;template-for-dfs-traverse-using-none-recursion-nlr-and-lnr&#34;&gt;Template For DFS Traverse Using None-Recursion(NLR and LNR)&lt;/h2&gt;
+&lt;h3 id=&#34;preorder-iterative&#34;&gt;Preorder iterative&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;vector&amp;lt;int&amp;gt; DFS_Traversal(TreeNode *root) {
-    // write your code here
-    vector&amp;lt;int&amp;gt; rst;
-    if (root == nullptr) return rst;
-    stack&amp;lt;TreeNode*&amp;gt; s;
-
-    while (!s.empty() || root != nullptr){
-        if (root != nullptr){
-//          rst.emplace_back(root -&amp;gt; val);  If Pre-Order
-            s.push(root);
-            root = root -&amp;gt; left;
-        }
-        else{
-            root = s.top();
-            s.pop();
-//          rst.emplace_back(root -&amp;gt; val);  If In-Order
-            root = root -&amp;gt; right;
-        }            
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void pushleft(TreeNode* root, stack&amp;lt;TreeNode*&amp;gt; &amp;amp; s, vector&amp;lt;int&amp;gt; &amp;amp; res) {
+    while (root) {
+        res.emplace_back(root-&amp;gt;val);
+        s.push(root);
+        root = root-&amp;gt;left;
     }
-return rst;
+}
+
+vector&amp;lt;int&amp;gt; preorder(TreeNode* root) {
+    vector&amp;lt;int&amp;gt; res;
+    stack&amp;lt;TreeNode*&amp;gt; s;
+    pushleft(root, s, res);
+    while (!s.empty()) {
+        auto cur = s.top();
+        s.pop();
+        cur = cur-&amp;gt;right;
+        pushleft(cur, s, res);
+    }
+    return res;
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;template-for-dfs-traverse-using-none-recursion-lrn&#34;&gt;Template For DFS Traverse Using None-Recursion(LRN)&lt;/h2&gt;
+&lt;h3 id=&#34;inorder-iterative&#34;&gt;Inorder Iterative&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-py&#34;&gt;def DFS_Stack_LRN(root):
-  s = []
-  pre = None
-  while root or s:
-    if root:
-      s.append(root)
-      root = root.left
-    elif s[-1].right != pre:
-      root = s[-1].right
-      pre = None
-    else:
-      pre = s.pop()
-      print(pre.val)
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void pushleft(TreeNode* root, stack&amp;lt;TreeNode*&amp;gt; &amp;amp; s) {
+    while (root) {
+        s.push(root);
+        root = root-&amp;gt;left;
+    }
+}
+
+vector&amp;lt;int&amp;gt; inorder(TreeNode* root) {
+    vector&amp;lt;int&amp;gt; res;
+    stack&amp;lt;TreeNode*&amp;gt; s;
+    pushleft(root, s);
+    while (!s.empty()) {
+        auto cur = s.top();
+        s.pop();
+        res.emplace_back(cur-&amp;gt;val);
+        cur = cur-&amp;gt;right;
+        pushleft(cur, s);
+    }
+    return res;
+}
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;template-for-bfs-traverse-using-1-queue-best&#34;&gt;Template For BFS Traverse Using 1 Queue(Best)&lt;/h2&gt;
+&lt;h3 id=&#34;postorder-iterative-i&#34;&gt;Postorder iterative I&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;vector&amp;lt;int&amp;gt; postorder(TreeNode* root) {
+    vector&amp;lt;int&amp;gt; res;
+    stack&amp;lt;TreeNode*&amp;gt; s1, s2;
+    s1.push(root);
+    while (!s1.empty()) {
+        auto cur = s1.top();
+        s2.push(cur);
+        s1.pop();
+        if (cur-&amp;gt;left) {
+            s1.push(cur-&amp;gt;left);
+        }
+        if (cur-&amp;gt;right) {
+            s1.push(cur-&amp;gt;right);
+        }
+    }
+    while (!s2.empty()) {
+        auto cur = s2.top();
+        s2.pop();
+        res.emplace_back(cur-&amp;gt;val);
+    }
+    return res;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;postorder-iterative-ii&#34;&gt;Postorder iterative II&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;vector&amp;lt;int&amp;gt; postorderII(TreeNode* root) {
+    if (root == nullptr) {
+        return {};
+    }
+    vector&amp;lt;int&amp;gt; res;
+    stack&amp;lt;TreeNode*&amp;gt; s;
+    s.push(root);
+    TreeNode* prev = nullptr;
+    while (!s.empty()) {
+        auto cur = s.top();
+        if (prev == nullptr || cur == prev-&amp;gt;left || cur == prev-&amp;gt;right) {
+            if (cur-&amp;gt;left) {
+                s.push(cur-&amp;gt;left);
+            }
+            else if (cur-&amp;gt;right) {
+                s.push(cur-&amp;gt;right);
+            }
+            else {
+                s.pop();
+                res.emplace_back(cur-&amp;gt;val);
+            }
+        }
+        else if (prev == cur-&amp;gt;right || prev == cur-&amp;gt;left &amp;amp;&amp;amp; cur-&amp;gt;right == nullptr) {
+            s.pop();
+            res.emplace_back(cur-&amp;gt;val);
+        }
+        else {
+            s.push(cur-&amp;gt;right);
+        }
+        prev = cur;
+    }
+    return res;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;bfs-level-order&#34;&gt;BFS level order&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; levelOrder(TreeNode *root) {
-    // write your code here
     vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; rst;
     if (root == nullptr) return rst;
 
@@ -2730,15 +2664,590 @@ return rst;
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&#34;morris-traverse&#34;&gt;?Morris Traverse?&lt;/h2&gt;
+&lt;h3 id=&#34;morris-traverse-todo&#34;&gt;Morris Traverse(TODO)&lt;/h3&gt;
+
+&lt;h2 id=&#34;binary-tree-iterator&#34;&gt;Binary Tree Iterator&lt;/h2&gt;
+
+&lt;h3 id=&#34;implementation&#34;&gt;Implementation&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/pineal/-O_O-/blob/d600d536acf50c6d3299e99b200a4c247b79ece7/Binary_Tree/Binary_Tree_Iterator.cpp&#34;&gt;Link&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;bst-iterator&#34;&gt;BST iterator&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class BSTIterator {
+private:
+    stack&amp;lt;TreeNode*&amp;gt; s;
+public:
+    BSTIterator(TreeNode *root) {
+        while (root) {
+            s.push(root);
+            root = root -&amp;gt; left;
+        }
+    }
+
+    /** @return whether we have a next smallest number */
+    bool hasNext() {
+        return !s.empty();
+    }
+
+    /** @return the next smallest number */
+    //which means ascending order
+    //which means inoredr traversal
+    int next() {
+        if (s.empty()) {
+            return INT_MAX;
+        }
+        
+        TreeNode* parent = s.top();
+        s.pop();
+        TreeNode* cur = parent -&amp;gt; right;
+        while (cur) {
+            s.push(cur);
+            cur = cur -&amp;gt; left;
+        }
+        return parent -&amp;gt; val;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;different-views-of-tree&#34;&gt;Different views of tree&lt;/h2&gt;
+
+&lt;h3 id=&#34;boundary-of-binary-tree&#34;&gt;Boundary of Binary Tree&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector&amp;lt;int&amp;gt; boundaryOfBinaryTree(TreeNode* root) {
+        if (root == nullptr) {
+            return {};
+        }
+        vector&amp;lt;int&amp;gt; left, right, bottom, res;
+        res.emplace_back(root-&amp;gt;val);
+        getLeft(root-&amp;gt;left, left);
+        getBottom(root-&amp;gt;left, bottom);
+        getBottom(root-&amp;gt;right, bottom);
+        getRight(root-&amp;gt;right, right);
+        res.insert(res.end(), left.begin(), left.end());
+        res.insert(res.end(), bottom.begin(), bottom.end());
+        res.insert(res.end(), right.rbegin(), right.rend());
+        return res;
+    }
+private:    
+    void getLeft(TreeNode* root, vector&amp;lt;int&amp;gt; &amp;amp; res) {
+        if (root == nullptr) {
+            return;
+        }
+        if (!root-&amp;gt;left &amp;amp;&amp;amp; !root-&amp;gt;right) {
+            return;
+        }
+        
+        res.emplace_back(root-&amp;gt;val);
+        if (root-&amp;gt;left) {
+            getLeft(root-&amp;gt;left, res);
+        }
+        else {
+            getLeft(root-&amp;gt;right, res);    
+        }
+    }
+    
+    void getRight(TreeNode* root, vector&amp;lt;int&amp;gt; &amp;amp; res) {
+        if (root == nullptr) {
+            return;
+        }
+        if (!root-&amp;gt;left &amp;amp;&amp;amp; !root-&amp;gt;right) {
+            return;
+        }
+        res.emplace_back(root-&amp;gt;val);
+        if (root-&amp;gt;right) {
+            getRight(root-&amp;gt;right, res);
+        } 
+        else {
+            getRight(root-&amp;gt;left, res);
+        }
+    }
+    
+    void getBottom(TreeNode* root, vector&amp;lt;int&amp;gt; &amp;amp; res) {
+        if (root == nullptr) {
+            return;
+        }
+        if (!root-&amp;gt;left &amp;amp;&amp;amp; !root-&amp;gt;right) {
+            res.emplace_back(root-&amp;gt;val);
+        }
+        getBottom(root-&amp;gt;left, res);
+        getBottom(root-&amp;gt;right, res);
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;path-problems&#34;&gt;Path problems&lt;/h2&gt;
+
+&lt;h3 id=&#34;maximum-path-sum-binary-tree-i&#34;&gt;Maximum Path Sum Binary Tree I&lt;/h3&gt;
+
+&lt;p&gt;Given a binary tree in which each node contains an integer number. Find the maximum possible sum from one leaf node to another leaf node. If there is no such path available, return INT_MIN (C++).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+ public:
+ int global_max = INT_MIN;
+ 
+  int maxPathSum(TreeNode* root){
+    dfs(root);
+    return global_max;
+  }
+ 
+  int dfs(TreeNode* root) {
+    if (root == nullptr) {
+      return 0;
+    }
+  
+    int left =  dfs(root -&amp;gt; left);
+    int right = dfs(root -&amp;gt; right);
+
+    if (root -&amp;gt; left &amp;amp;&amp;amp; root -&amp;gt; right) {
+      int sum = left + right + root -&amp;gt; value;
+      global_max = max(sum, global_max);
+      return max(left, right) + root -&amp;gt; value;
+    } 
+      return (!root -&amp;gt; left)? right + root -&amp;gt; value : left + root -&amp;gt; value;
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;maximum-path-sum-binary-tree-ii&#34;&gt;Maximum Path Sum Binary Tree II&lt;/h3&gt;
+
+&lt;p&gt;Given a binary tree in which each node contains an integer number. Find the maximum possible sum from any node to any node &lt;strong&gt;(the start node and the end node can be the same)&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+ public:
+  int maxPathSum(TreeNode* root) {
+    int global_max = INT_MIN;
+    dfs(root, global_max);    
+    return global_max;
+  }
+  
+  int dfs(TreeNode* root, int&amp;amp; global_max) {
+    if (root == nullptr) {
+      return 0;
+    }
+    int left = dfs(root -&amp;gt; left, global_max);
+    int right = dfs(root -&amp;gt; right, global_max);
+    //left = (left &amp;lt; 0)? 0 : left;
+    //right = (right &amp;lt; 0)? 0 : right; 
+    global_max = max(global_max, left + right + root -&amp;gt; value);
+    return max(0, max(left, right) + root -&amp;gt; value); 
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;maximum-path-sum-binary-tree-iii&#34;&gt;Maximum Path Sum Binary Tree III&lt;/h3&gt;
+
+&lt;p&gt;Given a binary tree in which each node contains an integer number.
+Find the maximum possible subpath sum&lt;strong&gt;(both the starting and ending node of the subpath should be on the same path from root to one of the leaf nodes, and the subpath is allowed to contain only one node)&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+ public:
+  int maxPathSum(TreeNode* root) {
+    int global_max = INT_MIN;
+    dfs(root, global_max);
+    return global_max;
+  }
+  
+  int dfs(TreeNode* root, int&amp;amp; global_max) {
+    if (root == nullptr) {
+      return 0;
+    }
+    int left = dfs(root -&amp;gt; left, global_max);
+    int right = dfs(root -&amp;gt; right, global_max);
+    int sum = max(max(left, right) , 0) + root -&amp;gt; value;
+    global_max = max(global_max, sum);
+    return sum;
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;lca-problems&#34;&gt;LCA problems&lt;/h2&gt;
+
+&lt;h3 id=&#34;lca-i&#34;&gt;LCA I&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (root == nullptr || root == p || root == q) {
+            return root;
+        }
+        TreeNode* left = lowestCommonAncestor(root -&amp;gt; left, p, q);
+        TreeNode* right = lowestCommonAncestor(root -&amp;gt; right, p, q);
+        if (left &amp;amp;&amp;amp; right) {
+            return root;
+        }
+        return left? left : right;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;lca-of-bst&#34;&gt;LCA of BST&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if (root == nullptr) {
+            return root;
+        // p, q are in two sides or root is one of p, q
+        } else if ((root-&amp;gt;val - p-&amp;gt;val) * (root-&amp;gt;val - q-&amp;gt;val) &amp;lt;= 0) {
+            return root;
+        //p,q are smaller than root =&amp;gt; both in left side
+        } else if (root-&amp;gt;val &amp;gt; p-&amp;gt;val &amp;amp;&amp;amp; root -&amp;gt; val &amp;gt; q-&amp;gt;val) {
+            return lowestCommonAncestor(root-&amp;gt;left, p, q);
+        //both in right side
+        } else {
+            return lowestCommonAncestor(root-&amp;gt;right, p, q);            
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;lca-ii&#34;&gt;LCA II&lt;/h3&gt;
+
+&lt;p&gt;Give the treenode with parent pointer.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;//class TreeNodeP {
+// public:
+//  int value;
+//  TreeNodeP* left;
+//  TreeNodeP* right;
+//  TreeNodeP* parent;
+//  TreeNodeP(int v, TreeNodeP* p) 
+//      : value(v), left(NULL), right(NULL), parent(p) {}
+//};
+
+class Solution {
+private:
+ int path_length(TreeNodeP* node) {
+   int length = 0;
+   while (node) {
+     node = node -&amp;gt; parent;
+     length++;
+   }
+   return length;
+ }
+ 
+ TreeNodeP* llc(TreeNodeP* small, TreeNodeP* large, int diff) {
+   while (diff &amp;gt; 0) {
+     large = large -&amp;gt; parent;
+     diff--;
+   }
+   while (large != small) {
+     large = large -&amp;gt; parent;
+     small = small -&amp;gt; parent;
+   }
+   return large;
+ }
+ public:
+  TreeNodeP* LCA(TreeNodeP* one, TreeNodeP* two) {
+    int l1 = path_length(one);
+    int l2 = path_length(two);
+    if (l1 &amp;lt;= l2) {
+      return llc(one, two, l2 - l1);
+    } else {
+      return llc(two, one, l1 - l2);
+    }
+  }
+  
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;lca-iii&#34;&gt;LCA III&lt;/h3&gt;
+
+&lt;p&gt;Given two nodes in a binary tree, find their lowest common ancestor (the given two nodes are not guaranteed to be in the binary tree). Return null If any of the nodes is not in the tree. There is no parent pointer for the nodes in the binary tree. The given two nodes are not guaranteed to be in the binary tree.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+ public:
+  bool flag1 = false;
+  bool flag2 = false;
+  TreeNode* solve(TreeNode* root, TreeNode* one, TreeNode* two) {
+  
+    traversal(root, one, two);
+    if (flag1 &amp;amp;&amp;amp; flag2) {
+      return findLCA(root, one, two);
+    } 
+    return nullptr;
+  }
+  void traversal(TreeNode* root, TreeNode* one, TreeNode* two) {
+    if (root == nullptr) {
+      return;
+    }
+    if (root == one) {flag1 = true;}
+    if (root == two) {flag2 = true;}
+    traversal(root -&amp;gt; left, one, two);
+    traversal(root -&amp;gt; right, one, two);
+  }
+  TreeNode* findLCA(TreeNode* root, TreeNode* one, TreeNode* two) {
+   
+    if (root == nullptr) {
+      return nullptr;
+    }
+    
+    if (root == one) {
+      return root;
+    }
+    
+    if (root == two) {
+      return root;
+    }
+    
+    auto left =  findLCA(root -&amp;gt; left,  one, two);
+    auto right = findLCA(root -&amp;gt; right, one, two);
+    
+    if (left &amp;amp;&amp;amp; right) {
+      return root;
+    } else if (left) {
+      return left;
+    } else if (right) {
+      return right;
+    } else {
+      return nullptr;
+    }
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;lca-iv&#34;&gt;LCA IV&lt;/h3&gt;
+
+&lt;p&gt;Give k nodes, find their CLA.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+ public:
+  TreeNode* LCA(TreeNode* root, vector&amp;lt;TreeNode*&amp;gt; nodes) {
+    if (root == nullptr) {
+      return root;
+    }
+    
+    for (int i = 0; i &amp;lt; nodes.size(); i++) {
+      if (root == nodes[i]) {
+        return root;
+      }
+    }
+    
+    auto left = LCA(root -&amp;gt; left, nodes);
+    auto right = LCA(root -&amp;gt; right, nodes);
+    
+    if (left &amp;amp;&amp;amp; right) {
+      return root;
+    } else {
+      return left? left : right;
+    }
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;check-if-cousins&#34;&gt;Check if cousins&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/check-two-nodes-cousins-binary-tree/&#34;&gt;Geeksforgeeks source&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;bool checkIfCousins(TreeNode* root, TreeNode* one, TreeNode* two) {
+  
+  bool res = false;
+  helper(root, one, two, 0, res);
+  return res;
+}
+
+//return target&#39;node level
+//return -1 is not found
+int helper(TreeNode* root, TreeNode* one, TreeNode* Two, int level, bool &amp;amp; res) {
+
+  if (root == nullptr) {
+    return -1;
+  }
+
+  if (root == one || root == two) {
+    return level;
+  }
+
+  int left = helper(root-&amp;gt;left, one, two, level + 1, res);
+  int right = helper(root-&amp;gt;right, one, two, level + 1, res);
+
+  if (left == right &amp;amp;&amp;amp; left - 1 &amp;gt; level) {
+    res = true;
+  }
+  return max(left, right);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;serialize-and-deserialize-binary-tree&#34;&gt;Serialize and deserialize binary tree&lt;/h2&gt;
+
+&lt;h3 id=&#34;reconstruct-binary-tree-with-preorder-and-inorder&#34;&gt;Reconstruct Binary Tree With Preorder And Inorder&lt;/h3&gt;
+
+&lt;p&gt;一棵树需要什么信息？需要知道什么是根，左子树和右子树分别又是什么。&lt;/p&gt;
+
+&lt;p&gt;那么从这两种遍历之中可以获取什么信息？&lt;/p&gt;
+
+&lt;p&gt;先序遍历： root | left subtree | right subtree&lt;/p&gt;
+
+&lt;p&gt;中序遍历： left subtree | root | right subtree&lt;/p&gt;
+
+&lt;p&gt;先序遍历的最左边，一定是根，但是无法找到左子树和右子树的分界点；但是可以通过找到根，从而从中序遍历中找到这个分界。&lt;/p&gt;
+
+&lt;p&gt;解题步骤：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;leftmost of preOrder must be root&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;find position of root in inOrder =&amp;gt; need a hashtable to pre-store indices&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;in inorder: left side of root is left subtree&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;in inorder: right side of root is right subtree&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;recursively solve the problem on left subtree and right subtree&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code&gt;  TreeNode* reconstruct(vector&amp;lt;int&amp;gt; in, vector&amp;lt;int&amp;gt; pre) {
+    unordered_map&amp;lt;int, int&amp;gt; table;
+    for (int i = 0; i &amp;lt; in.size(); i++) {
+      table[in[i]] = i;
+    }
+    
+    return helper(in, 0, in.size() - 1, pre, 0, table);
+  }
+  
+  TreeNode* helper(const vector&amp;lt;int&amp;gt; &amp;amp; in, int in_left, int in_right, 
+                   const vector&amp;lt;int&amp;gt; &amp;amp; pre, int pre_left,
+                    unordered_map&amp;lt;int, int&amp;gt; table) {
+                      
+    if (in_left &amp;gt; in_right) {
+      return nullptr;
+    }
+    
+    TreeNode* root = new TreeNode(pre[pre_left]);
+    int index = table[root -&amp;gt; value];
+    root -&amp;gt; left = helper(in, in_left, index - 1, pre, pre_left + 1, table);
+    root -&amp;gt; right = helper(in, index + 1, in_right, pre, pre_left + index - in_left + 1, table);
+    return root;                  
+	}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;reconstruct-with-level-order&#34;&gt;Reconstruct with level order&lt;/h3&gt;
+
+&lt;p&gt;level order 的第一个元素，一定是root。通过inorder找到root的位置，然后根据index的关系，分割左右子树。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+ public:
+  TreeNode* reconstruct(vector&amp;lt;int&amp;gt; in, vector&amp;lt;int&amp;gt; level) {
+    map&amp;lt;int, int&amp;gt; table;
+    for (int i = 0; i &amp;lt; in.size(); i++) {
+      table[in[i]] = i;
+    }
+    return helper(level, table);
+  }
+  TreeNode* helper(vector&amp;lt;int&amp;gt; level, map&amp;lt;int, int&amp;gt; table) {
+    if (level.size() == 0) {
+      return nullptr;
+    }
+    TreeNode* root = new TreeNode(level[0]);
+    int index = table[root-&amp;gt;value];
+    vector&amp;lt;int&amp;gt; left;
+    vector&amp;lt;int&amp;gt; right;
+    
+    for (int i = 0; i &amp;lt; level.size(); i++) {
+      if (table[level[i]] &amp;lt; index) {
+        left.emplace_back(level[i]);
+      } else if (table[level[i]] &amp;gt; index) {
+        right.emplace_back(level[i]);
+      }
+    }
+    root -&amp;gt; left = helper(left, table);
+    root -&amp;gt; right = helper(right, table);
+    return root;
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;reconstruct-binary-search-tree-with-postorder-traversal&#34;&gt;Reconstruct Binary Search Tree With Postorder Traversal&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+ public:
+  TreeNode* reconstruct(vector&amp;lt;int&amp;gt; post) {
+    //Post order -&amp;gt; [leftsubtree][rightsubtree]root =&amp;gt; determine the position of root
+    //In   order -&amp;gt; [left]root[right] =&amp;gt;recursively find left and right parts
+    vector&amp;lt;int&amp;gt; in(post);
+    sort(in.begin(), in.end());
+    unordered_map&amp;lt;int, int&amp;gt; table;
+    for (int i = 0; i &amp;lt; in.size(); i++) {
+        table[in[i]] = i;
+    }
+    return helper(in, post, table, post.size() - 1, 0, in.size() - 1);
+  }
+  
+  TreeNode* helper(vector&amp;lt;int&amp;gt; in, vector&amp;lt;int&amp;gt; post, unordered_map&amp;lt;int, int&amp;gt; &amp;amp; table,
+                    int post_right, int in_left, int in_right) {
+  
+    if (in_left &amp;gt; in_right){
+      return nullptr;
+    }
+    
+    TreeNode* root = new TreeNode(post[post_right]);
+    int index = table[root -&amp;gt; value];
+    
+    root -&amp;gt; right = helper(in, post, table, post_right - 1, index + 1, in_right);
+    root -&amp;gt; left = helper(in, post, table, post_right - 1 - (in_right - index), in_left, index - 1);
+    return root;
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Codec {
+public:
+
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        string order;
+        inorderDFS(root, order);
+        return order;
+    }
+    
+    inline void inorderDFS(TreeNode* root, string&amp;amp; order) {
+        if (!root) return;
+        char buf[4];
+        memcpy(buf, &amp;amp;(root-&amp;gt;val), sizeof(int)); //burn the int into 4 chars
+        for (int i=0; i&amp;lt;4; i++) order.push_back(buf[i]);
+        inorderDFS(root-&amp;gt;left, order);
+        inorderDFS(root-&amp;gt;right, order);
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        int pos = 0;
+        return reconstruct(data, pos, INT_MIN, INT_MAX);
+    }
+    
+    inline TreeNode* reconstruct(const string&amp;amp; buffer, int&amp;amp; pos, int minValue, int maxValue) {
+        if (pos &amp;gt;= buffer.size()) return NULL; //using pos to check whether buffer ends is better than using char* directly.
+        
+        int value;
+        memcpy(&amp;amp;value, &amp;amp;buffer[pos], sizeof(int));
+        if (value &amp;lt; minValue || value &amp;gt; maxValue) return NULL;
+        
+        TreeNode* node = new TreeNode(value);
+        pos += sizeof(int);
+        node-&amp;gt;left = reconstruct(buffer, pos, minValue, value);
+        node-&amp;gt;right = reconstruct(buffer, pos, value, maxValue);
+        return node;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;create-a-doubly-linked-list-from-a-ternary-tree&#34;&gt;Create a Doubly Linked List from a Ternary Tree&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/create-doubly-linked-list-ternary-ree/&#34;&gt;Question source&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;faq&#34;&gt;FAQ&lt;/h2&gt;
 
-&lt;h3 id=&#34;difference-of-dfs-and-bfs&#34;&gt;Difference of DFS and BFS&lt;/h3&gt;
+&lt;h3 id=&#34;difference-between-dfs-and-bfs&#34;&gt;Difference between DFS and BFS&lt;/h3&gt;
 
 &lt;p&gt;DFS using stacks, and BFS using queues if Non-Recursion&lt;/p&gt;
 
-&lt;h3 id=&#34;difference-of-recursion-and-non-recursion&#34;&gt;Difference of Recursion and Non-Recursion&lt;/h3&gt;
+&lt;h3 id=&#34;difference-between-recursion-and-non-recursion&#34;&gt;Difference between Recursion and Non-Recursion&lt;/h3&gt;
 
 &lt;p&gt;Recursion is dangerous when memory resource is limited: stack may overflow;
 However Non-Recursion method occupies more space&lt;/p&gt;

@@ -50,7 +50,7 @@
     <item>
       <title>Bfs</title>
       <link>https://pineal.github.com/tags/bfs/</link>
-      <pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/tags/bfs/</guid>
       <description></description>
@@ -102,9 +102,18 @@
     </item>
     
     <item>
+      <title>Devide and Conquer</title>
+      <link>https://pineal.github.com/tags/devide-and-conquer/</link>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/tags/devide-and-conquer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Dfs</title>
       <link>https://pineal.github.com/tags/dfs/</link>
-      <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/tags/dfs/</guid>
       <description></description>
@@ -131,7 +140,7 @@
     <item>
       <title>Graph</title>
       <link>https://pineal.github.com/tags/graph/</link>
-      <pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/tags/graph/</guid>
       <description></description>
@@ -174,6 +183,15 @@
     </item>
     
     <item>
+      <title>Partition</title>
+      <link>https://pineal.github.com/tags/partition/</link>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/tags/partition/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Priority Queue</title>
       <link>https://pineal.github.com/tags/priority-queue/</link>
       <pubDate>Thu, 13 Oct 2016 00:00:00 +0000</pubDate>
@@ -210,11 +228,29 @@
     </item>
     
     <item>
+      <title>Sort</title>
+      <link>https://pineal.github.com/tags/sort/</link>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/tags/sort/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Sorting</title>
       <link>https://pineal.github.com/tags/sorting/</link>
       <pubDate>Mon, 14 Mar 2016 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/tags/sorting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Topological Sorting</title>
+      <link>https://pineal.github.com/tags/topological-sorting/</link>
+      <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/tags/topological-sorting/</guid>
       <description></description>
     </item>
     

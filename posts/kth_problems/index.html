@@ -114,7 +114,7 @@ window.onload = ready;
 <ul>
 <li><a href="#kth-problems">Kth Problems</a>
 <ul>
-<li>
+<li><a href="#solution-with-priority-queue">Solution with priority queue</a>
 <ul>
 <li><a href="#merge-k-sorted-lists">Merge k Sorted Lists</a></li>
 <li><a href="#kth-smallest-number-in-sorted-matrix">Kth Smallest Number In Sorted Matrix</a></li>
@@ -122,12 +122,16 @@ window.onload = ready;
 <li><a href="#kth-smallest-with-only-3-5-7-as-factors">Kth Smallest With Only 3, 5, 7 As Factors</a></li>
 <li><a href="#kth-closest-point">Kth Closest Point</a></li>
 </ul></li>
+<li><a href="#solution-with-binary-search">Solution with binary search</a></li>
+<li><a href="#solution-with-quick-sort-partition">Solution with quick-sort partition</a></li>
 </ul></li>
 </ul>
 </nav></aside>
   
 
 <h1 id="kth-problems">Kth Problems</h1>
+
+<h2 id="solution-with-priority-queue">Solution with priority queue</h2>
 
 <p>套路：找第K个的问题，最常用的做法就是用优先队列来实现，根据题意用最大堆或者最小堆把时间复杂度优化到 O(nlogk).</p>
 
@@ -379,6 +383,12 @@ class Solution {
 </code></pre>
 
 <p>visited尽量用bool数组表示，二维三维都可。不要存放node类的class，地址不一样。</p>
+
+<h2 id="solution-with-binary-search">Solution with binary search</h2>
+
+<h2 id="solution-with-quick-sort-partition">Solution with quick-sort partition</h2>
+
+<p><a href="https://leetcode.com/problems/kth-largest-element-in-an-array/discuss/60309/4-C++-Solutions-using-Partition-Max-Heap-priority_queue-and-multiset-respectively">solution</a></p>
 
 
   <a href="/tags/heap/">Heap</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/priority-queue/">priority Queue</a></a>&nbsp;&nbsp;&nbsp;

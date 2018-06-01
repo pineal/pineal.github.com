@@ -21,6 +21,8 @@
 
 &lt;h1 id=&#34;kth-problems&#34;&gt;Kth Problems&lt;/h1&gt;
 
+&lt;h2 id=&#34;solution-with-priority-queue&#34;&gt;Solution with priority queue&lt;/h2&gt;
+
 &lt;p&gt;套路：找第K个的问题，最常用的做法就是用优先队列来实现，根据题意用最大堆或者最小堆把时间复杂度优化到 O(nlogk).&lt;/p&gt;
 
 &lt;h3 id=&#34;merge-k-sorted-lists&#34;&gt;Merge k Sorted Lists&lt;/h3&gt;
@@ -271,6 +273,12 @@ class Solution {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;visited尽量用bool数组表示，二维三维都可。不要存放node类的class，地址不一样。&lt;/p&gt;
+
+&lt;h2 id=&#34;solution-with-binary-search&#34;&gt;Solution with binary search&lt;/h2&gt;
+
+&lt;h2 id=&#34;solution-with-quick-sort-partition&#34;&gt;Solution with quick-sort partition&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/kth-largest-element-in-an-array/discuss/60309/4-C++-Solutions-using-Partition-Max-Heap-priority_queue-and-multiset-respectively&#34;&gt;solution&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Topics on Gragh Algorithm</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="Topics on Gragh Algorithm">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="og:title" content="Topics on Gragh Algorithm">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="https://pineal.github.com/posts/graph_algorithms/">
+	<meta name="og:site_name" content="Topics on Gragh Algorithm">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:tag" content="bfs dfs topological sorting graph ">
+	<link rel="stylesheet" type="text/css" href="https://pineal.github.com/css/style.css">
+	
+	
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+	tex2jax: {
+	  inlineMath: [['$','$'], ['\\(','\\)']],
+	  displayMath: [['$$','$$'], ['\[','\]']],
+	  processEscapes: true,
+	  processEnvironments: true,
+	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+	  TeX: { equationNumbers: { autoNumber: "AMS" },
+		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	}
+  });
+  </script>
+</head>
+
+<body>
+
+<header>
+	
+	<a href="https://pineal.github.com/" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
+	
+	&nbsp;&nbsp;<a href="https://pineal.github.com/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.github.com/about/" style="color:#777;"><strong>About</strong></a>
+	
+	
+	
+	<a href="https://pineal.github.com/index.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
+</header>
+
+
+<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
+<script>
+function fadeOut(el) {
+  el.style.opacity = 1;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
+    last = +new Date();
+    
+
+    if (el.style.opacity > 0) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    } else {
+      el.style.display='none';
+    }
+  };
+
+  tick();
+}
+
+function ready(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+         el = document.getElementById('loadingMask');
+         fadeOut(el);
+        var elements = document.querySelectorAll("img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("alt")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("alt"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+window.onload = ready;
+</script>
+
+<div class="content">
+  <h1>Topics on Gragh Algorithm</h1>
+  <aside> <nav id="TableOfContents">
+<ul>
+<li><a href="#graph">Graph</a>
+<ul>
+<li><a href="#graph-representing">Graph Representing</a>
+<ul>
+<li><a href="#adjacent-matrix">Adjacent Matrix</a></li>
+<li><a href="#adjacent-list">Adjacent List</a></li>
+<li><a href="#edges">Edges</a></li>
+</ul></li>
+<li><a href="#traversal">Traversal</a>
+<ul>
+<li><a href="#bfs">BFS</a></li>
+<li><a href="#dfs">DFS</a></li>
+</ul></li>
+<li><a href="#topological-sorting">Topological Sorting</a>
+<ul>
+<li><a href="#dfs-method">DFS method</a></li>
+<li><a href="#bfs-1">BFS</a></li>
+</ul></li>
+<li><a href="#connected-component">Connected Component</a>
+<ul>
+<li><a href="#connected-components-for-undirected-graph">Connected components for undirected graph</a></li>
+<li><a href="#strongly-connected-components">Strongly Connected Components</a></li>
+</ul></li>
+<li><a href="#shortest-path">Shortest Path</a>
+<ul>
+<li><a href="#shortest-distance-in-adjacent-table-bfs">Shortest distance in adjacent table - BFS</a></li>
+<li><a href="#dijkstra">Dijkstra</a></li>
+<li><a href="#a-star">A star</a></li>
+<li><a href="#iterative-deepening-search-ids-or-iterative-deepening-depth-first-search-iddfs">Iterative Deepening Search(IDS) or Iterative Deepening Depth First Search(IDDFS)</a></li>
+</ul></li>
+<li><a href="#bipartite">Bipartite</a></li>
+</ul></li>
+</ul>
+</nav></aside>
+  
+
+<h1 id="graph">Graph</h1>
+
+<h2 id="graph-representing">Graph Representing</h2>
+
+<p><a href="https://www.geeksforgeeks.org/graph-and-its-representations/">https://www.geeksforgeeks.org/graph-and-its-representations/</a></p>
+
+<p><a href="https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/representing-graphs">https://www.khanacademy.org/computing/computer-science/algorithms/graph-representation/a/representing-graphs</a></p>
+
+<h3 id="adjacent-matrix">Adjacent Matrix</h3>
+
+<h3 id="adjacent-list">Adjacent List</h3>
+
+<p><a href="https://www.geeksforgeeks.org/graph-implementation-using-stl-for-competitive-programming-set-1-dfs-of-unweighted-and-undirected/">https://www.geeksforgeeks.org/graph-implementation-using-stl-for-competitive-programming-set-1-dfs-of-unweighted-and-undirected/</a></p>
+
+<p><a href="https://www.geeksforgeeks.org/graph-implementation-using-stl-for-competitive-programming-set-2-weighted-graph/">https://www.geeksforgeeks.org/graph-implementation-using-stl-for-competitive-programming-set-2-weighted-graph/</a></p>
+
+<h3 id="edges">Edges</h3>
+
+<h2 id="traversal">Traversal</h2>
+
+<h3 id="bfs">BFS</h3>
+
+<h3 id="dfs">DFS</h3>
+
+<ol>
+<li><p>Pacific Atlantic Water Flow</p></li>
+
+<li><p>start from matrix</p></li>
+
+<li><p>start from occean</p></li>
+
+<li><p>Clone Graph
+follow up: reverse if DAG</p></li>
+</ol>
+
+<h2 id="topological-sorting">Topological Sorting</h2>
+
+<h3 id="dfs-method">DFS method</h3>
+
+<p>拓扑排序的常规方法是用DFS。DFS 有一个好处就是可以 backtracking 到所有的 solution。</p>
+
+<p><a href="https://www.geeksforgeeks.org/topological-sorting/">https://www.geeksforgeeks.org/topological-sorting/</a></p>
+
+<h3 id="bfs-1">BFS</h3>
+
+<p>另一个方法 Kahn’s algorithm 用记录入度/出度的方式进行BFS, 相对容易记忆和实现</p>
+
+<p><a href="https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/">https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/</a></p>
+
+<p><strong>More questions</strong></p>
+
+<p><a href="https://leetcode.com/problems/course-schedule">Course Schedule</a> | <a href="https://github.com/pineal/Leetcode_OJ/blob/master/cpp/207_Course_Schedule.cpp">Solution</a></p>
+
+<p><a href="https://leetcode.com/problems/course-schedule-ii">Course Schedule II</a> | <a href="https://github.com/pineal/Leetcode_OJ/blob/master/cpp/210_Course_Schedule_II.cpp">Solution</a></p>
+
+<p><a href="https://leetcode.com/problems/sequence-reconstruction">Sequence Reconstruction</a></p>
+
+<p><a href="https://leetcode.com/problems/longest-increasing-path-in-a-matrix">Longest Increasing Path in a Matrix</a></p>
+
+<p><a href="https://leetcode.com/problems/alien-dictionary">Alien Dictionary</a></p>
+
+<p><a href="https://www.geeksforgeeks.org/all-topological-sorts-of-a-directed-acyclic-graph/">All Topological sorts of a DAG</a> | should use DFS</p>
+
+<h2 id="connected-component">Connected Component</h2>
+
+<h3 id="connected-components-for-undirected-graph">Connected components for undirected graph</h3>
+
+<p><a href="https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/description/">Number of Connected Components</a></p>
+
+<h3 id="strongly-connected-components">Strongly Connected Components</h3>
+
+<p><a href="https://www.geeksforgeeks.org/strongly-connected-components/">https://www.geeksforgeeks.org/strongly-connected-components/</a></p>
+
+<p><a href="https://www.geeksforgeeks.org/tarjan-algorithm-find-strongly-connected-components/">https://www.geeksforgeeks.org/tarjan-algorithm-find-strongly-connected-components/</a></p>
+
+<p><a href="https://www.geeksforgeeks.org/connectivity-in-a-directed-graph/">https://www.geeksforgeeks.org/connectivity-in-a-directed-graph/</a></p>
+
+<h2 id="shortest-path">Shortest Path</h2>
+
+<h3 id="shortest-distance-in-adjacent-table-bfs">Shortest distance in adjacent table - BFS</h3>
+
+<p>Best Meeting Point</p>
+
+<p><a href="https://leetcode.com/problems/shortest-distance-from-all-buildings/description/">Shortest Distance from All Buildings</a></p>
+
+<h3 id="dijkstra">Dijkstra</h3>
+
+<p><a href="https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-using-set-in-stl/">https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-using-set-in-stl/</a></p>
+
+<p><a href="https://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/">https://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/</a></p>
+
+<p><a href="https://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/">https://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/</a></p>
+
+<h3 id="a-star">A star</h3>
+
+<p><a href="https://github.com/pineal/-O_O-/blob/master/A_Star_Search/A_Star_Search.cpp">https://github.com/pineal/-O_O-/blob/master/A_Star_Search/A_Star_Search.cpp</a></p>
+
+<h3 id="iterative-deepening-search-ids-or-iterative-deepening-depth-first-search-iddfs">Iterative Deepening Search(IDS) or Iterative Deepening Depth First Search(IDDFS)</h3>
+
+<p><a href="https://www.geeksforgeeks.org/iterative-deepening-searchids-iterative-deepening-depth-first-searchiddfs/">https://www.geeksforgeeks.org/iterative-deepening-searchids-iterative-deepening-depth-first-searchiddfs/</a></p>
+
+<h2 id="bipartite">Bipartite</h2>
+
+<p><a href="https://leetcode.com/problems/is-graph-bipartite">Is Graph Bipartite</a></p>
+
+
+  <a href="/tags/bfs/">bfs</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/dfs/">dfs</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/topological-sorting/">topological sorting</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/graph/">graph</a></a>&nbsp;&nbsp;&nbsp;
+
+</div>
+
+
+
+
+<footer>
+	<p>© 2017-2018, all rights reserved.</a>
+</footer>
+</body>
+</html>

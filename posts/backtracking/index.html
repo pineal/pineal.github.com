@@ -128,11 +128,18 @@ window.onload = ready;
 <li><a href="#permutations-i">Permutations I</a></li>
 <li><a href="#permutations-ii-dedup">Permutations II - Dedup</a></li>
 </ul></li>
-<li><a href="#parenthesis-problems">Parenthesis Problems</a></li>
+<li><a href="#parenthesis-problems">Parenthesis Problems</a>
+<ul>
+<li><a href="#valid">Valid</a></li>
+</ul></li>
 <li><a href="#coin-combinations">Coin Combinations</a>
 <ul>
 <li><a href="#99-cents">99 Cents</a></li>
 <li><a href="#find-all-valid-combinations-of-factors-that-form-an-integer">find all valid combinations of factors that form an integer</a></li>
+</ul></li>
+<li><a href="#backtracking-on-tree">Backtracking on Tree</a>
+<ul>
+<li><a href="#longest-consecutive-sequence">Longest consecutive sequence</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -142,6 +149,10 @@ window.onload = ready;
 <h2 id="introduction">Introduction</h2>
 
 <p>Backtracking 类型的题目最重要的是想清楚每一层在做什么，以及到下一层一共有几个分叉。</p>
+
+<p>时间复杂度： branch factor ^ level</p>
+
+<p>时间复杂度： call stack -&gt; level</p>
 
 <h2 id="subsets">Subsets</h2>
 
@@ -225,7 +236,13 @@ public:
 
 <h2 id="permutations">Permutations</h2>
 
-<p>因为全排列需要全部元素都出现，唯一不同的是他们的顺序，那么我们可以不停两两交换数组钟的元素，得到全排列。</p>
+<p>因为全排列需要全部元素都出现，唯一不同的是他们的顺序，那么我们可以不停两两交换数组中的元素，得到全排列。</p>
+
+<p>Time n * (n-1) * (n - 2) = O(n!)</p>
+
+<p>Space O(n)</p>
+
+<p>如果要求 一个长度不变的array/string 的 permutation 只是 order 不一样，就可以考虑用 swap-swap 的方法。</p>
 
 <h3 id="permutations-i">Permutations I</h3>
 
@@ -294,15 +311,124 @@ private:
 
 <h2 id="parenthesis-problems">Parenthesis Problems</h2>
 
+<h3 id="valid">Valid</h3>
+
+<p><strong>Given N pairs of parentheses “()”, return a list with all the valid permutations</strong>.</p>
+
+<p>分析：</p>
+
+<pre><code class="language-cpp">void validParenthesisHelper(int l, int r, int n, string &amp; cur, vector&lt;string&gt; &amp; res) {
+    if (l + r ==  2 * n) {
+        res.emplace_back(cur);
+        return;
+    }
+    
+    if (l &lt; n) {
+        cur += &quot;(&quot;;
+        validParenthesisHelper(l + 1, r, n, cur, res);
+        cur.pop_back();
+    }
+    
+    if (r &lt; l) {
+        cur += &quot;)&quot;;
+        validParenthesisHelper(l, r + 1, n, cur, res);
+        cur.pop_back();
+    }
+}
+
+vector&lt;string&gt; validParenthesis(int n) {
+    vector&lt;string&gt; res;
+    string cur;
+    validParenthesisHelper(0, 0, n, cur, res);
+    return res;
+}
+
+void testvalidParenthesis() {
+    auto res = validParenthesis(3);
+    for (const auto &amp; str : res) {
+        cout &lt;&lt; str &lt;&lt; endl;
+    }
+}
+</code></pre>
+
+<p>Time: O(2^2n)
+Space: O(2n)</p>
+
 <h2 id="coin-combinations">Coin Combinations</h2>
 
 <h3 id="99-cents">99 Cents</h3>
 
 <p><a href="https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/">https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/</a></p>
 
+<pre><code class="language-cpp">void coinCombinationHelper(const vector&lt;int&gt; &amp; coins,
+                           vector&lt;vector&lt;int&gt;&gt; &amp; res,
+                           vector&lt;int&gt; &amp; cur,
+                           int remaining,
+                           int level) {
+    if (level == coins.size()) {
+        if (remaining == 0) {
+            res.emplace_back(cur);
+        }
+        return;
+    }
+
+    int n = remaining/coins[level];
+    for (int i = 0; i &lt;= n; i++) {
+        cur.emplace_back(i);
+        coinCombinationHelper(coins, res, cur, remaining - i * coins[level], level + 1);
+        cur.pop_back();
+    }
+}
+
+vector&lt;vector&lt;int&gt;&gt; coinCombination(const vector&lt;int&gt; &amp; coins, int target) {
+    vector&lt;vector&lt;int&gt;&gt; res;
+    vector&lt;int&gt; cur;
+    coinCombinationHelper(coins, res, cur, target, 0);
+    return res;
+}
+
+void testCoinsCombination() {
+    vector&lt;int&gt; coins = {25, 10, 5, 1};
+    auto res = coinCombination(coins, 99);
+    for (const auto &amp; v : res) {
+        for (const auto &amp; c : v) {
+            cout &lt;&lt; c &lt;&lt; &quot; &quot;;
+        }
+        cout &lt;&lt; endl;
+    }
+}
+</code></pre>
+
 <h3 id="find-all-valid-combinations-of-factors-that-form-an-integer">find all valid combinations of factors that form an integer</h3>
 
 <p><a href="https://www.geeksforgeeks.org/given-array-strings-find-strings-can-chained-form-circle/">https://www.geeksforgeeks.org/given-array-strings-find-strings-can-chained-form-circle/</a></p>
+
+<h2 id="backtracking-on-tree">Backtracking on Tree</h2>
+
+<h3 id="longest-consecutive-sequence">Longest consecutive sequence</h3>
+
+<p>int global_max = INT_MIN;</p>
+
+<pre><code class="language-cpp">int helper(TreeNode* root) {
+  if (root == nullptr) {
+    return 0;
+  }
+
+  int left = 0;
+  int right = 0;
+
+  if (root-&gt;left &amp;&amp; root-&gt;left-&gt;val -1 == root-&gt;val) {
+    left = helper(root-&gt;left);
+  } 
+  if (root-&gt;right &amp;&amp; root-&gt;right-&gt;val -1 == root-&gt;val) {
+    right = helper(root-&gt;right);
+  } 
+  int local_max = max(left, right) + 1;
+  global_max = max(global_max, local_max)l
+  return local_max;
+
+} 
+</code></pre>
 
 
   <a href="/tags/search/">search</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/dfs/">DFS</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/backtracking/">backtracking</a></a>&nbsp;&nbsp;&nbsp;

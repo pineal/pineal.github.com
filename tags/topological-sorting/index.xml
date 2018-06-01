@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Bfs on PINEAL.ME</title>
-    <link>https://pineal.github.com/tags/bfs/</link>
-    <description>Recent content in Bfs on PINEAL.ME</description>
+    <title>Topological Sorting on PINEAL.ME</title>
+    <link>https://pineal.github.com/tags/topological-sorting/</link>
+    <description>Recent content in Topological Sorting on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 23 Apr 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.github.com/tags/bfs/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://pineal.github.com/tags/topological-sorting/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
