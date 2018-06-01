@@ -30,15 +30,6 @@
     </item>
     
     <item>
-      <title>Array</title>
-      <link>https://pineal.github.com/tags/array/</link>
-      <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/tags/array/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Backtracking</title>
       <link>https://pineal.github.com/tags/backtracking/</link>
       <pubDate>Sat, 24 Mar 2018 00:00:00 +0000</pubDate>
@@ -102,15 +93,6 @@
     </item>
     
     <item>
-      <title>Devide and Conquer</title>
-      <link>https://pineal.github.com/tags/devide-and-conquer/</link>
-      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/tags/devide-and-conquer/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Dfs</title>
       <link>https://pineal.github.com/tags/dfs/</link>
       <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
@@ -129,29 +111,11 @@
     </item>
     
     <item>
-      <title>Dynamic Programming</title>
-      <link>https://pineal.github.com/tags/dynamic-programming/</link>
-      <pubDate>Fri, 19 Feb 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/tags/dynamic-programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Graph</title>
       <link>https://pineal.github.com/tags/graph/</link>
       <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/tags/graph/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Greedy</title>
-      <link>https://pineal.github.com/tags/greedy/</link>
-      <pubDate>Fri, 19 Feb 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/tags/greedy/</guid>
       <description></description>
     </item>
     
@@ -179,15 +143,6 @@
       <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/tags/math/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Partition</title>
-      <link>https://pineal.github.com/tags/partition/</link>
-      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/tags/partition/</guid>
       <description></description>
     </item>
     
@@ -224,15 +179,6 @@
       <pubDate>Tue, 24 Mar 2015 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/tags/signal-processing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sort</title>
-      <link>https://pineal.github.com/tags/sort/</link>
-      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/tags/sort/</guid>
       <description></description>
     </item>
     

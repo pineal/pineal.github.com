@@ -276,6 +276,8 @@ class Solution {
 
 &lt;h2 id=&#34;solution-with-binary-search&#34;&gt;Solution with binary search&lt;/h2&gt;
 
+&lt;p&gt;&lt;a href=&#34;http://pineal.github.io/posts/binary_search/#advanced-using-binary-search-to-solve-kth-problem&#34;&gt;post about binary search&lt;/a&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;solution-with-quick-sort-partition&#34;&gt;Solution with quick-sort partition&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/kth-largest-element-in-an-array/discuss/60309/4-C++-Solutions-using-Partition-Max-Heap-priority_queue-and-multiset-respectively&#34;&gt;solution&lt;/a&gt;&lt;/p&gt;
