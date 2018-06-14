@@ -115,15 +115,18 @@ window.onload = ready;
 <li><a href="#disjoint-sets">Disjoint Sets</a>
 <ul>
 <li><a href="#基本操作">基本操作</a></li>
-<li><a href="#简单的应用">简单的应用</a></li>
-<li><a href="#并查集森林-disjoint-set-forest">并查集森林 (Disjoint-Set Forest)</a>
+<li><a href="#basic-implementation">Basic implementation</a></li>
+<li><a href="#example">Example</a>
+<ul>
+<li><a href="#number-of-connected-components-in-an-undirected-graph">Number of Connected Components in an Undirected Graph</a></li>
+</ul></li>
+<li><a href="#optimization-disjoint-set-forest">Optimization - Disjoint-Set Forest</a>
 <ul>
 <li><a href="#union-by-rank">Union By Rank</a></li>
 <li><a href="#path-compression">Path compression</a></li>
 <li><a href="#实现">实现</a></li>
 <li><a href="#时间复杂度">时间复杂度</a></li>
 </ul></li>
-<li><a href="#example">Example</a></li>
 <li><a href="#detect-cycle-in-a-undirected-graph">Detect Cycle in a undirected graph</a></li>
 <li><a href="#leetcode-305-number-of-islands-ii">LeetCode 305 Number of Islands II</a></li>
 </ul></li>
@@ -146,7 +149,7 @@ window.onload = ready;
 返回一个指针，指向包含这个vertex 的唯一的 set</p></li>
 </ol>
 
-<h2 id="简单的应用">简单的应用</h2>
+<h2 id="basic-implementation">Basic implementation</h2>
 
 <p>最基本的应用是来确定一个 undirected graph 中的 connected components.</p>
 
@@ -169,10 +172,48 @@ window.onload = ready;
         return false
 </code></pre>
 
-<h2 id="并查集森林-disjoint-set-forest">并查集森林 (Disjoint-Set Forest)</h2>
+<h2 id="example">Example</h2>
 
-<p>除了可以用链表来实现 disjoint-set， disjoint-set forest是一种比链表实现更快的实现。我们将sets表示为rooted trees。 每一个 node 包括一个 vertex，每一棵树代表一个set. 所有的node都指向各自的parent. 在树中那个指向自己的显然就是tree root。这种数据结构高效的原因是用了
-以下两种技巧：&rdquo;union by rank&rdquo;, &ldquo;path compression&rdquo;.</p>
+<h3 id="number-of-connected-components-in-an-undirected-graph">Number of Connected Components in an Undirected Graph</h3>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    //compress the path and return the root of the union set
+    int find_set(vector&lt;int&gt; &amp; allsets, int node) {
+        if (node != allsets[node]) {
+            allsets[node] = find_set(allsets, allsets[node]);
+        }
+        return allsets[node];
+    }
+    
+    void union_set(vector&lt;int&gt; &amp; allsets, int x, int y) {
+        int xroot = find_set(allsets, x);
+        int yroot = find_set(allsets, y);
+        allsets[yroot] = xroot;
+    }
+    int countComponents(int n, vector&lt;pair&lt;int, int&gt;&gt;&amp; edges) {
+        //allsets[x] : get the parent of set include x
+        vector&lt;int&gt; allsets(n);
+        int count = 0;
+        for (int i = 0; i &lt; n; i++) {
+            allsets[i] = i;
+        }
+        for (auto edge : edges) {
+            int x = find_set(allsets, edge.first);
+            int y = find_set(allsets, edge.second);
+            if (x != y) {
+                union_set(allsets, edge.first, edge.second);
+                count++;
+            }
+        }
+        return n - count;
+    }
+};
+</code></pre>
+
+<h2 id="optimization-disjoint-set-forest">Optimization - Disjoint-Set Forest</h2>
+
+<p>除了可以用链表/数组来实现 disjoint-set， disjoint-set forest是一种比链表实现更快的实现。我们将sets表示为rooted trees。 每一个 node 包括一个 vertex，每一棵树代表一个set. 所有的node都指向各自的parent. 在树中那个指向自己的显然就是tree root。这种数据结构高效的原因是用了以下两种技巧：&rdquo;union by rank&rdquo; and &ldquo;path compression&rdquo;.</p>
 
 <h3 id="union-by-rank">Union By Rank</h3>
 
@@ -211,109 +252,115 @@ x.rank = 0
 
 <h3 id="时间复杂度">时间复杂度</h3>
 
-<p>时间复杂度为 O(m alpha(n))
-TODO: 分析</p>
+<p>时间复杂度为 $O(m \alpha(n))$, union_set takes amortized n time complexity.</p>
 
-<h2 id="example">Example</h2>
+<p>空间复杂度为 O(n)</p>
+
+<p>TODO: 分析</p>
 
 <h2 id="detect-cycle-in-a-undirected-graph">Detect Cycle in a undirected graph</h2>
 
-<p>图的相关数据结构表示和函数：</p>
+<pre><code class="language-cpp">class Edge {
+public:
+    int src;
+    int dest;
+    Edge() {;}
+    Edge(int s, int d);
+};
 
-<pre><code class="language-cpp">typedef struct Edge_t {
-	int src;
-	int dest;
-} Edge;
-
-typedef struct Graph_t {
-	int V, E;
-	Edge* edges;
-} Graph;
-
-Graph* build_graph(int V, int E) {
-	Graph* graph = (Graph*)malloc(sizeof(Graph));
-	graph-&gt;V = V;
-	graph-&gt;E = E;
-	graph-&gt;edges = (Edge*)malloc(E * sizeof(Edge));
-	return graph;
-}
-</code></pre>
-
-<p>Disjoint-Set的相关数据结构和函数：</p>
-
-<pre><code class="language-cpp">typedef struct disjoint_set_t {
-	int parent;
-	int rank;
-}Disjoint_Set;
-
-int find_set(Disjoint_Set allsets[], int x) {
-	if (allsets[x].parent != x) {
-		allsets[x].parent = find_set(allsets, allsets[x].parent);
-	}
-	return allsets[x].parent;
+Edge::Edge(int s, int d) {
+    src = s;
+    dest = d;
 }
 
-void union_set(Disjoint_Set allsets[], int x, int y) {
+class Graph {
+public:
+    int V;
+    int E;
+    vector&lt;Edge&gt; edges;
+    Graph(int V, int E);
+    void addEdge(int start, int end);
+};
 
-	int xroot = find_set(allsets, x);
-	int yroot = find_set(allsets, y);
-
-	if (allsets[xroot].rank &gt; allsets[yroot].rank) {
-		allsets[yroot].parent = xroot;
-	} else if (allsets[xroot].rank &lt; allsets[yroot].rank) {
-		allsets[xroot].parent = yroot;
-	} else {
-		allsets[xroot].parent = yroot;
-		allsets[yroot].rank++;
-	}
+Graph::Graph(int V, int E) {
+    this-&gt;V = V;
+    this-&gt;E = E;
+    this-&gt;edges.resize(E);
 }
 
-bool is_cycle(Graph* graph) {
-	int V = graph-&gt;V;
-	int E = graph-&gt;E;
-
-	Disjoint_Set* allsets = (Disjoint_Set*)malloc(V * sizeof(Disjoint_Set));
-	for (int v = 0;  v &lt; V; v++) {
-		allsets[v].parent = v;
-		allsets[v].rank = 0;
-	}
-
-	for (int e = 0; e &lt; E; e++) {
-		int x = find_set(allsets, graph-&gt;edges[e].src);
-		int y = find_set(allsets, graph-&gt;edges[e].dest);
-
-	if(x == y) {
-	return true;
-	}
-	union_set(allsets, x, y);
-	}
-	return false;
-}
-</code></pre>
-
-<p>main函数测试：</p>
-
-<pre><code class="language-cpp">int main () {
-
-	int V = 3;
-	int E = 3;
-
-	Graph* graph = build_graph(V, E);
-	graph-&gt;edges[0].src = 0;
-	graph-&gt;edges[0].dest = 1;
-	graph-&gt;edges[1].src = 1;
-	graph-&gt;edges[1].dest = 2;
-	graph-&gt;edges[2].src = 0;
-	graph-&gt;edges[2].dest = 2;
-	if (is_cycle(graph)) {
-		printf(&quot;Cycle detected.&quot;);
-	} else {
-		printf(&quot;No cycle detected.&quot;);
-	}
-	return 0;
+void Graph::addEdge(int start, int end) {
+    Edge e(start, end);
+    edges.emplace_back(e);
 }
 
 
+class DisjointSet {
+public:
+    int parent;
+    int rank;
+    DisjointSet(int parent);
+};
+
+DisjointSet::DisjointSet(int p) {
+    this-&gt;parent = p;
+    this-&gt;rank = 0;
+}
+
+//given a node, find it's parent in its disjoint_set
+int find_set(vector&lt;DisjointSet&gt; &amp; allsets, int node) {
+    if (allsets[node].parent != node) {
+        allsets[node].parent = find_set(allsets, allsets[node].parent);
+    }
+    return allsets[node].parent;
+}
+
+void union_set(vector&lt;DisjointSet&gt; &amp; allsets, int x, int y) {
+    int xp = find_set(allsets, x);
+    int yp = find_set(allsets, y);
+    if (allsets[xp].rank &gt; allsets[yp].rank) {
+        allsets[yp].parent = xp;
+    }
+    else if (allsets[xp].rank &lt; allsets[yp].rank) {
+        allsets[xp].parent = yp;
+    }
+    else {
+        allsets[xp].parent = yp;
+        allsets[yp].rank++;
+    }
+}
+
+bool is_cycle(const Graph &amp; graph) {
+    int V = graph.V;
+    int E = graph.E;
+    vector&lt;DisjointSet&gt; allsets;
+    for (int v = 0; v &lt; V; v++) {
+        allsets.emplace_back(v);
+    }
+    for (int e = 0; e &lt; E; e++) {
+        int x = find_set(allsets, graph.edges[e].src);
+        int y = find_set(allsets, graph.edges[e].dest);
+        if (x == y) {
+            return true;
+        }
+        else {
+            union_set(allsets, x, y);
+        }
+    }
+    return false;
+}
+
+void test_is_cycle() {
+    Graph graph(3, 3);
+    graph.addEdge(0, 1);
+    graph.addEdge(1, 2);
+    graph.addEdge(0, 2);
+    if (is_cycle(graph)) {
+    	cout &lt;&lt;  &quot;has a cycle&quot;;
+    }
+    else {
+        cout &lt;&lt; &quot;does not have a cycle&quot;;
+    }    
+}
 </code></pre>
 
 <h2 id="leetcode-305-number-of-islands-ii">LeetCode 305 Number of Islands II</h2>
