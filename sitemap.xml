@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://pineal.github.com/posts/dynamic_programming_i/</loc>
+    <lastmod>2018-07-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://pineal.github.com/posts/graph_algorithms/</loc>
     <lastmod>2018-04-23T00:00:00+00:00</lastmod>
   </url>
@@ -103,14 +108,14 @@
   </url>
   
   <url>
-    <loc>https://pineal.github.com/categories/algorithm/</loc>
-    <lastmod>2018-04-23T00:00:00+00:00</lastmod>
+    <loc>https://pineal.github.com/tags/algorithm/</loc>
+    <lastmod>2016-04-14T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pineal.github.com/tags/algorithm/</loc>
-    <lastmod>2016-04-14T00:00:00+00:00</lastmod>
+    <loc>https://pineal.github.com/categories/algorithm/</loc>
+    <lastmod>2018-07-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -156,7 +161,7 @@
   
   <url>
     <loc>https://pineal.github.com/categories/</loc>
-    <lastmod>2018-04-23T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -185,6 +190,12 @@
   <url>
     <loc>https://pineal.github.com/tags/disjoint-sets/</loc>
     <lastmod>2016-10-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pineal.github.com/tags/dynamic-programming/</loc>
+    <lastmod>2018-07-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -220,13 +231,13 @@
   
   <url>
     <loc>https://pineal.github.com/</loc>
-    <lastmod>2018-04-23T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pineal.github.com/posts/</loc>
-    <lastmod>2018-04-23T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -237,13 +248,13 @@
   </url>
   
   <url>
-    <loc>https://pineal.github.com/categories/robotics/</loc>
+    <loc>https://pineal.github.com/tags/robotics/</loc>
     <lastmod>2018-02-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://pineal.github.com/tags/robotics/</loc>
+    <loc>https://pineal.github.com/categories/robotics/</loc>
     <lastmod>2018-02-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

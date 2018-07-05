@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Dynamic Programming I</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="Dynamic Programming I">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="og:title" content="Dynamic Programming I">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="https://pineal.github.com/posts/dynamic_programming_i/">
+	<meta name="og:site_name" content="Dynamic Programming I">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:tag" content="Dynamic Programming ">
+	<link rel="stylesheet" type="text/css" href="https://pineal.github.com/css/style.css">
+	
+	
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+	tex2jax: {
+	  inlineMath: [['$','$'], ['\\(','\\)']],
+	  displayMath: [['$$','$$'], ['\[','\]']],
+	  processEscapes: true,
+	  processEnvironments: true,
+	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+	  TeX: { equationNumbers: { autoNumber: "AMS" },
+		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	}
+  });
+  </script>
+</head>
+
+<body>
+
+<header>
+	
+	<a href="https://pineal.github.com/" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
+	
+	&nbsp;&nbsp;<a href="https://pineal.github.com/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.github.com/about/" style="color:#777;"><strong>About</strong></a>
+	
+	
+	
+	<a href="https://pineal.github.com/index.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
+</header>
+
+
+<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
+<script>
+function fadeOut(el) {
+  el.style.opacity = 1;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
+    last = +new Date();
+    
+
+    if (el.style.opacity > 0) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    } else {
+      el.style.display='none';
+    }
+  };
+
+  tick();
+}
+
+function ready(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+         el = document.getElementById('loadingMask');
+         fadeOut(el);
+        var elements = document.querySelectorAll("img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("alt")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("alt"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+window.onload = ready;
+</script>
+
+<div class="content">
+  <h1>Dynamic Programming I</h1>
+  <aside> <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#max-product-of-cutting-rope">Max Product Of Cutting Rope</a>
+<ul>
+<li><a href="#top-down-recursion">Top-Down Recursion</a></li>
+<li><a href="#top-down-recursion-memorization">Top-Down Recursion + Memorization</a></li>
+<li><a href="#bottom-up-dp-solution">Bottom-up DP Solution</a></li>
+</ul></li>
+<li><a href="#cut-rope-ii">Cut rope II</a>
+<ul>
+<li><a href="#top-down-recursion-1">Top-Down Recursion</a></li>
+<li><a href="#top-down-recursion-memorization-1">Top-Down Recursion + Memorization</a></li>
+</ul></li>
+<li><a href="#merge-stone">Merge Stone</a>
+<ul>
+<li><a href="#recursion-memo">Recursion + memo</a></li>
+<li><a href="#dynamic-programming">Dynamic Programming</a></li>
+</ul></li>
+<li><a href="#burst-bsllons">Burst Bsllons</a>
+<ul>
+<li><a href="#recursion">Recursion</a></li>
+<li><a href="#recursion-memo-1">Recursion + Memo</a></li>
+<li><a href="#dynamic-programming-1">Dynamic Programming</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav></aside>
+  
+
+<h2 id="max-product-of-cutting-rope">Max Product Of Cutting Rope</h2>
+
+<p>Given a rope with positive integer-length n, how to cut the rope into m integer-length parts with length p[0], p[1], &hellip;,p[m-1], in order to get the maximal product of p[0]p[1] &hellip; p[m-1]? m is determined by you and must be greater than 0 (at least one cut must be made). Return the max product you can have.</p>
+
+<p>n = 12, the max product is 3 * 3 * 3 * 3 = 81 (cut the rope into 4 pieces with length of each is 3).</p>
+
+<h3 id="top-down-recursion">Top-Down Recursion</h3>
+
+<pre><code class="language-cpp">int maxProduct(int length) {
+    if (length &lt;= 2) {
+      return 1;
+    }
+    int res = 0;
+    for (int i = 1; i &lt; length - 1; i++) {
+      res = max(res, max(length - i, maxProduct(length - i)) * i);
+    }
+    return res;
+  }
+</code></pre>
+
+<h3 id="top-down-recursion-memorization">Top-Down Recursion + Memorization</h3>
+
+<pre><code class="language-cpp">int maxProduct(int length) {
+    if (length &lt;= 2) {
+      return 1;
+    }
+    vector&lt;int&gt; M(length + 1, 0);
+    return maxProductHelper(length, M);
+  }
+  
+  int maxProductHelper(int length, vector&lt;int&gt; &amp; M) {
+    if (M[length]) {
+      return M[length];
+    }
+    int res = 0;
+    for (int i = 1; i &lt; length - 1; i++) {
+      res = max(res, max(length - i, maxProductHelper(length - i, M)) * i);
+    }
+    M[length] = res;
+    return res;
+  }
+</code></pre>
+
+<h3 id="bottom-up-dp-solution">Bottom-up DP Solution</h3>
+
+<pre><code class="language-cpp">int maxProduct(int length) {
+    vector&lt;int&gt; M(length + 1, 0);
+    //M[i] =&gt; max product of first i length rope
+    for (int i = 1; i &lt; length + 1; i++) {
+      for (int j = 0; j &lt; i; j++) {
+        M[i] = max(M[i], max(j, M[j])/*take care of corner case*/ * (i - j));
+      }
+    }
+    return M.back();
+}
+</code></pre>
+
+<h2 id="cut-rope-ii">Cut rope II</h2>
+
+<p>There is a wooden stick with length L &gt;= 1, we need to cut it into pieces, where the cutting positions are defined in an int array A. The positions are guaranteed to be in ascending order in the range of [1, L - 1]. The cost of each cut is the length of the stick segment being cut. Determine the minimum total cost to cut the stick into the defined pieces.</p>
+
+<h3 id="top-down-recursion-1">Top-Down Recursion</h3>
+
+<pre><code class="language-cpp">int minCost(vector&lt;int&gt; cuts, int length) {
+    cuts.insert(cuts.begin(),0);
+    cuts.emplace_back(length);
+    return helper(0, cuts.size() - 1, cuts);
+  }
+  
+  int helper(int start, int end, const vector&lt;int&gt; &amp; cuts) {
+    if (start + 1 == end) {
+      return 0;
+    }
+ 
+    int res = INT_MAX;
+    for (int k = start + 1; k &lt; end; k++) {
+      res = min(res, helper(start, k, cuts) + 
+                cuts[end] - cuts [start] + 
+                helper(k, end, cuts));
+    }
+    return res;
+  }
+</code></pre>
+
+<h3 id="top-down-recursion-memorization-1">Top-Down Recursion + Memorization</h3>
+
+<pre><code class="language-cpp">  int minCost(vector&lt;int&gt; cuts, int length) {
+    cuts.insert(cuts.begin(),0);
+    cuts.emplace_back(length);
+    int n = cuts.size();
+    vector&lt;vector&lt;int&gt;&gt; M(n, vector&lt;int&gt;(n, INT_MAX));
+    return helper(0, n - 1, cuts, M);
+  }
+
+  int helper(int start, int end, const vector&lt;int&gt; &amp; cuts, vector&lt;vector&lt;int&gt;&gt; &amp; M) {
+    if (start + 1 == end) {
+      return 0;
+    }
+    if (M[start][end] != INT_MAX) {
+      return M[start][end];
+    } 
+    int res = INT_MAX;
+    for (int k = start + 1; k &lt; end; k++) {
+      res = min(res, helper(start, k, cuts, M) + 
+                cuts[end] - cuts [start] + 
+                helper(k, end, cuts, M));
+    }
+    M[start][end] = res;
+    return res;
+  }
+</code></pre>
+
+<p>### Dynamic Programming</p>
+
+<pre><code class="language-cpp">  int minCost(vector&lt;int&gt; cuts, int length) {
+    cuts.insert(cuts.begin(),0);
+    cuts.emplace_back(length);
+    int n = cuts.size();
+    vector&lt;vector&lt;int&gt;&gt; M(n, vector&lt;int&gt;(n, INT_MAX));
+    for (int right = 1; right &lt; n; right++) {
+      for (int left = right - 1; left &gt;= 0; left--) {
+        if (left + 1 == right) {
+          M[left][right] = 0;
+        }
+        else {
+          for (int k = left + 1; k &lt;= right - 1; k++) {
+            M[left][right] = min(M[left][right],
+                          M[left][k] + M[k][right] + cuts[right] - cuts[left]);            
+          }
+        }
+      }
+    }
+    return M.front().back();
+  }
+</code></pre>
+
+<h2 id="merge-stone">Merge Stone</h2>
+
+<h3 id="recursion-memo">Recursion + memo</h3>
+
+<pre><code class="language-cpp">int minCost(vector&lt;int&gt; stones) {
+    return helper(0, stones.size() - 1, stones);
+  }
+  
+  int helper(int left, int right, const vector&lt;int&gt; &amp; stones) {
+    if (left == right) {
+      return 0;
+    }
+    if (left + 1 == right) {
+      return stones[left] + stones[right];
+    }
+    
+    int sum = 0;
+    for (int i = left; i &lt;= right; i++) {
+      sum += stones[i];
+    }
+    
+    int res = INT_MAX;
+    for (int k = left; k &lt;= right - 1; k++) {
+      res = min(res, 
+                helper(left, k, stones) + helper(k + 1, right, stones) + sum);
+    }
+    return res;
+  }
+</code></pre>
+
+<h3 id="dynamic-programming">Dynamic Programming</h3>
+
+<pre><code class="language-cpp">int minCost(vector&lt;int&gt; stones) {
+    int n = stones.size();
+    //sum[i] ==&gt; sum from stones[0] to stones[i]
+    vector&lt;int&gt; sums(n);
+    for (int i = 0; i &lt; stones.size(); i++) {
+      if (i == 0) {
+        sums[i] = stones[i];
+      }
+      else {
+        sums[i] = sums[i - 1] + stones[i];
+      }
+    }
+    //M[i][j] =&gt; min cost from stones[i] to stones[j]
+    vector&lt;vector&lt;int&gt;&gt; M(n, vector&lt;int&gt;(n, INT_MAX));
+    for (int right = 0; right &lt; n; right++) {
+      for (int left = right; left &gt;= 0; left--) {
+        int sum = left == 0? sums[right] : sums[right] - sums[left - 1];
+        if (left == right) {
+          M[left][right] = 0;
+          continue;
+        }
+        //k =&gt; last stone to merge
+        for (int k = left; k &lt;= right; k++) {
+          int rightsub = k == right? 0 : M[k + 1][right];
+          M[left][right] = min(M[left][right], 
+                               M[left][k] + sum + (k == right? 0 : M[k + 1][right]));
+        }
+      }    
+    }
+    return M.front().back();
+  }
+</code></pre>
+
+<h2 id="burst-bsllons">Burst Bsllons</h2>
+
+<p>We have a list of piles of stones, each pile of stones has a certain weight, represented by an array of integers. In each move, we can merge two adjacent piles into one larger pile, the cost is the sum of the weights of the two piles. We merge the piles of stones until we have only one pile left. Determine the minimum total cost.</p>
+
+<p>stones is not null and is length of at least 1</p>
+
+<p>{4, 3, 3, 4}, the minimum cost is 28</p>
+
+<ul>
+<li>merge first 4 and first 3, cost 7</li>
+<li>merge second 3 and second 4, cost 7</li>
+<li>merge two 7s, cost 14</li>
+<li>total cost = 7 + 7 + 14 = 28</li>
+</ul>
+
+<h3 id="recursion">Recursion</h3>
+
+<pre><code class="language-cpp">  int maxCoins(vector&lt;int&gt;&amp; nums) {
+        nums.insert(nums.begin(), 1);
+        nums.push_back(1);
+        return helper(0, nums.size() - 1, nums);
+    }
+    
+    int helper(int start, int end, vector&lt;int&gt; &amp; nums) {
+        if (start + 1 == end) {
+            return 0;
+        }
+        int res = 0;
+        for (int i = start + 1; i &lt; end; i++) {
+            res = max(res, 
+                      helper(start, i, nums) + 
+                      nums[start] * nums[i] * nums[end] + 
+                      helper(i, end, nums));
+        }
+        return res;
+    }
+</code></pre>
+
+<h3 id="recursion-memo-1">Recursion + Memo</h3>
+
+<pre><code class="language-cpp">  int maxCoins(vector&lt;int&gt;&amp; nums) {
+        nums.insert(nums.begin(), 1);
+        nums.push_back(1);
+        int n = nums.size();
+        vector&lt;vector&lt;int&gt;&gt; M(n, vector&lt;int&gt;(n, 0));
+        return helper(0, nums.size() - 1, nums, M);
+    }
+    
+    int helper(int start, int end, const vector&lt;int&gt; &amp; nums, vector&lt;vector&lt;int&gt;&gt; &amp; M) {
+        if (start + 1 == end) {
+            return 0;
+        }
+        if (M[start][end]) {
+            return M[start][end];
+        }
+        int res = 0;
+        for (int i = start + 1; i &lt; end; i++) {
+            res = max(res, 
+                      helper(start, i, nums, M) + 
+                      nums[start] * nums[i] * nums[end] + 
+                      helper(i, end, nums, M));
+        }
+        M[start][end] = res;
+        return res;
+    }
+</code></pre>
+
+<h3 id="dynamic-programming-1">Dynamic Programming</h3>
+
+<pre><code class="language-cpp">  int maxCoins(vector&lt;int&gt;&amp; nums) {
+        nums.insert(nums.begin(), 1);
+        nums.push_back(1);
+        int n = nums.size();
+        vector&lt;vector&lt;int&gt;&gt; M(n, vector&lt;int&gt;(n, 0));
+
+        for (int right = 2; right &lt; n; right++) {
+            for (int left = right - 2; left &gt;= 0; left--) {
+                for (int k = left + 1; k &lt; right; k++) {
+                    M[left][right] = max(M[left][right],
+                                        M[left][k] + nums[left] * nums[k] * nums[right] + M[k][right]);
+                }
+            }
+        }
+        return M[0][n - 1];
+    }
+</code></pre>
+
+
+  <a href="/tags/dynamic-programming/">Dynamic Programming</a></a>&nbsp;&nbsp;&nbsp;
+
+</div>
+
+
+
+
+<footer>
+	<p>© 2017-2018, all rights reserved.</a>
+</footer>
+</body>
+</html>

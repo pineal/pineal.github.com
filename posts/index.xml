@@ -6,10 +6,308 @@
     <description>Recent content in Posts on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 04 Jul 2018 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pineal.github.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Dynamic Programming I</title>
+      <link>https://pineal.github.com/posts/dynamic_programming_i/</link>
+      <pubDate>Wed, 04 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/posts/dynamic_programming_i/</guid>
+      <description>
+
+&lt;h2 id=&#34;max-product-of-cutting-rope&#34;&gt;Max Product Of Cutting Rope&lt;/h2&gt;
+
+&lt;p&gt;Given a rope with positive integer-length n, how to cut the rope into m integer-length parts with length p[0], p[1], &amp;hellip;,p[m-1], in order to get the maximal product of p[0]p[1] &amp;hellip; p[m-1]? m is determined by you and must be greater than 0 (at least one cut must be made). Return the max product you can have.&lt;/p&gt;
+
+&lt;p&gt;n = 12, the max product is 3 * 3 * 3 * 3 = 81 (cut the rope into 4 pieces with length of each is 3).&lt;/p&gt;
+
+&lt;h3 id=&#34;top-down-recursion&#34;&gt;Top-Down Recursion&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int maxProduct(int length) {
+    if (length &amp;lt;= 2) {
+      return 1;
+    }
+    int res = 0;
+    for (int i = 1; i &amp;lt; length - 1; i++) {
+      res = max(res, max(length - i, maxProduct(length - i)) * i);
+    }
+    return res;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;top-down-recursion-memorization&#34;&gt;Top-Down Recursion + Memorization&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int maxProduct(int length) {
+    if (length &amp;lt;= 2) {
+      return 1;
+    }
+    vector&amp;lt;int&amp;gt; M(length + 1, 0);
+    return maxProductHelper(length, M);
+  }
+  
+  int maxProductHelper(int length, vector&amp;lt;int&amp;gt; &amp;amp; M) {
+    if (M[length]) {
+      return M[length];
+    }
+    int res = 0;
+    for (int i = 1; i &amp;lt; length - 1; i++) {
+      res = max(res, max(length - i, maxProductHelper(length - i, M)) * i);
+    }
+    M[length] = res;
+    return res;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;bottom-up-dp-solution&#34;&gt;Bottom-up DP Solution&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int maxProduct(int length) {
+    vector&amp;lt;int&amp;gt; M(length + 1, 0);
+    //M[i] =&amp;gt; max product of first i length rope
+    for (int i = 1; i &amp;lt; length + 1; i++) {
+      for (int j = 0; j &amp;lt; i; j++) {
+        M[i] = max(M[i], max(j, M[j])/*take care of corner case*/ * (i - j));
+      }
+    }
+    return M.back();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;cut-rope-ii&#34;&gt;Cut rope II&lt;/h2&gt;
+
+&lt;p&gt;There is a wooden stick with length L &amp;gt;= 1, we need to cut it into pieces, where the cutting positions are defined in an int array A. The positions are guaranteed to be in ascending order in the range of [1, L - 1]. The cost of each cut is the length of the stick segment being cut. Determine the minimum total cost to cut the stick into the defined pieces.&lt;/p&gt;
+
+&lt;h3 id=&#34;top-down-recursion-1&#34;&gt;Top-Down Recursion&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int minCost(vector&amp;lt;int&amp;gt; cuts, int length) {
+    cuts.insert(cuts.begin(),0);
+    cuts.emplace_back(length);
+    return helper(0, cuts.size() - 1, cuts);
+  }
+  
+  int helper(int start, int end, const vector&amp;lt;int&amp;gt; &amp;amp; cuts) {
+    if (start + 1 == end) {
+      return 0;
+    }
+ 
+    int res = INT_MAX;
+    for (int k = start + 1; k &amp;lt; end; k++) {
+      res = min(res, helper(start, k, cuts) + 
+                cuts[end] - cuts [start] + 
+                helper(k, end, cuts));
+    }
+    return res;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;top-down-recursion-memorization-1&#34;&gt;Top-Down Recursion + Memorization&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;  int minCost(vector&amp;lt;int&amp;gt; cuts, int length) {
+    cuts.insert(cuts.begin(),0);
+    cuts.emplace_back(length);
+    int n = cuts.size();
+    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; M(n, vector&amp;lt;int&amp;gt;(n, INT_MAX));
+    return helper(0, n - 1, cuts, M);
+  }
+
+  int helper(int start, int end, const vector&amp;lt;int&amp;gt; &amp;amp; cuts, vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; M) {
+    if (start + 1 == end) {
+      return 0;
+    }
+    if (M[start][end] != INT_MAX) {
+      return M[start][end];
+    } 
+    int res = INT_MAX;
+    for (int k = start + 1; k &amp;lt; end; k++) {
+      res = min(res, helper(start, k, cuts, M) + 
+                cuts[end] - cuts [start] + 
+                helper(k, end, cuts, M));
+    }
+    M[start][end] = res;
+    return res;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;### Dynamic Programming&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;  int minCost(vector&amp;lt;int&amp;gt; cuts, int length) {
+    cuts.insert(cuts.begin(),0);
+    cuts.emplace_back(length);
+    int n = cuts.size();
+    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; M(n, vector&amp;lt;int&amp;gt;(n, INT_MAX));
+    for (int right = 1; right &amp;lt; n; right++) {
+      for (int left = right - 1; left &amp;gt;= 0; left--) {
+        if (left + 1 == right) {
+          M[left][right] = 0;
+        }
+        else {
+          for (int k = left + 1; k &amp;lt;= right - 1; k++) {
+            M[left][right] = min(M[left][right],
+                          M[left][k] + M[k][right] + cuts[right] - cuts[left]);            
+          }
+        }
+      }
+    }
+    return M.front().back();
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;merge-stone&#34;&gt;Merge Stone&lt;/h2&gt;
+
+&lt;h3 id=&#34;recursion-memo&#34;&gt;Recursion + memo&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int minCost(vector&amp;lt;int&amp;gt; stones) {
+    return helper(0, stones.size() - 1, stones);
+  }
+  
+  int helper(int left, int right, const vector&amp;lt;int&amp;gt; &amp;amp; stones) {
+    if (left == right) {
+      return 0;
+    }
+    if (left + 1 == right) {
+      return stones[left] + stones[right];
+    }
+    
+    int sum = 0;
+    for (int i = left; i &amp;lt;= right; i++) {
+      sum += stones[i];
+    }
+    
+    int res = INT_MAX;
+    for (int k = left; k &amp;lt;= right - 1; k++) {
+      res = min(res, 
+                helper(left, k, stones) + helper(k + 1, right, stones) + sum);
+    }
+    return res;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;dynamic-programming&#34;&gt;Dynamic Programming&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int minCost(vector&amp;lt;int&amp;gt; stones) {
+    int n = stones.size();
+    //sum[i] ==&amp;gt; sum from stones[0] to stones[i]
+    vector&amp;lt;int&amp;gt; sums(n);
+    for (int i = 0; i &amp;lt; stones.size(); i++) {
+      if (i == 0) {
+        sums[i] = stones[i];
+      }
+      else {
+        sums[i] = sums[i - 1] + stones[i];
+      }
+    }
+    //M[i][j] =&amp;gt; min cost from stones[i] to stones[j]
+    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; M(n, vector&amp;lt;int&amp;gt;(n, INT_MAX));
+    for (int right = 0; right &amp;lt; n; right++) {
+      for (int left = right; left &amp;gt;= 0; left--) {
+        int sum = left == 0? sums[right] : sums[right] - sums[left - 1];
+        if (left == right) {
+          M[left][right] = 0;
+          continue;
+        }
+        //k =&amp;gt; last stone to merge
+        for (int k = left; k &amp;lt;= right; k++) {
+          int rightsub = k == right? 0 : M[k + 1][right];
+          M[left][right] = min(M[left][right], 
+                               M[left][k] + sum + (k == right? 0 : M[k + 1][right]));
+        }
+      }    
+    }
+    return M.front().back();
+  }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;burst-bsllons&#34;&gt;Burst Bsllons&lt;/h2&gt;
+
+&lt;p&gt;We have a list of piles of stones, each pile of stones has a certain weight, represented by an array of integers. In each move, we can merge two adjacent piles into one larger pile, the cost is the sum of the weights of the two piles. We merge the piles of stones until we have only one pile left. Determine the minimum total cost.&lt;/p&gt;
+
+&lt;p&gt;stones is not null and is length of at least 1&lt;/p&gt;
+
+&lt;p&gt;{4, 3, 3, 4}, the minimum cost is 28&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;merge first 4 and first 3, cost 7&lt;/li&gt;
+&lt;li&gt;merge second 3 and second 4, cost 7&lt;/li&gt;
+&lt;li&gt;merge two 7s, cost 14&lt;/li&gt;
+&lt;li&gt;total cost = 7 + 7 + 14 = 28&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;recursion&#34;&gt;Recursion&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;  int maxCoins(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        nums.insert(nums.begin(), 1);
+        nums.push_back(1);
+        return helper(0, nums.size() - 1, nums);
+    }
+    
+    int helper(int start, int end, vector&amp;lt;int&amp;gt; &amp;amp; nums) {
+        if (start + 1 == end) {
+            return 0;
+        }
+        int res = 0;
+        for (int i = start + 1; i &amp;lt; end; i++) {
+            res = max(res, 
+                      helper(start, i, nums) + 
+                      nums[start] * nums[i] * nums[end] + 
+                      helper(i, end, nums));
+        }
+        return res;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;recursion-memo-1&#34;&gt;Recursion + Memo&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;  int maxCoins(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        nums.insert(nums.begin(), 1);
+        nums.push_back(1);
+        int n = nums.size();
+        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; M(n, vector&amp;lt;int&amp;gt;(n, 0));
+        return helper(0, nums.size() - 1, nums, M);
+    }
+    
+    int helper(int start, int end, const vector&amp;lt;int&amp;gt; &amp;amp; nums, vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; M) {
+        if (start + 1 == end) {
+            return 0;
+        }
+        if (M[start][end]) {
+            return M[start][end];
+        }
+        int res = 0;
+        for (int i = start + 1; i &amp;lt; end; i++) {
+            res = max(res, 
+                      helper(start, i, nums, M) + 
+                      nums[start] * nums[i] * nums[end] + 
+                      helper(i, end, nums, M));
+        }
+        M[start][end] = res;
+        return res;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;dynamic-programming-1&#34;&gt;Dynamic Programming&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;  int maxCoins(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        nums.insert(nums.begin(), 1);
+        nums.push_back(1);
+        int n = nums.size();
+        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; M(n, vector&amp;lt;int&amp;gt;(n, 0));
+
+        for (int right = 2; right &amp;lt; n; right++) {
+            for (int left = right - 2; left &amp;gt;= 0; left--) {
+                for (int k = left + 1; k &amp;lt; right; k++) {
+                    M[left][right] = max(M[left][right],
+                                        M[left][k] + nums[left] * nums[k] * nums[right] + M[k][right]);
+                }
+            }
+        }
+        return M[0][n - 1];
+    }
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Topics on Gragh Algorithm</title>
