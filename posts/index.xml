@@ -21,7 +21,9 @@
 
 &lt;h2 id=&#34;max-product-of-cutting-rope&#34;&gt;Max Product Of Cutting Rope&lt;/h2&gt;
 
-&lt;p&gt;Given a rope with positive integer-length n, how to cut the rope into m integer-length parts with length p[0], p[1], &amp;hellip;,p[m-1], in order to get the maximal product of p[0]p[1] &amp;hellip; p[m-1]? m is determined by you and must be greater than 0 (at least one cut must be made). Return the max product you can have.&lt;/p&gt;
+&lt;p&gt;Given a rope with positive integer-length n, how to cut the rope into m integer-length parts with length $p[0], p[1], &amp;hellip;,p[m-1]$, in order to get the maximal product of $p[0]p[1] &amp;hellip; p[m-1]$? m is determined by you and must be greater than 0 (at least one cut must be made). Return the max product you can have.&lt;/p&gt;
+
+&lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;
 
 &lt;p&gt;n = 12, the max product is 3 * 3 * 3 * 3 = 81 (cut the rope into 4 pieces with length of each is 3).&lt;/p&gt;
 
@@ -78,7 +80,7 @@
 
 &lt;h2 id=&#34;cut-rope-ii&#34;&gt;Cut rope II&lt;/h2&gt;
 
-&lt;p&gt;There is a wooden stick with length L &amp;gt;= 1, we need to cut it into pieces, where the cutting positions are defined in an int array A. The positions are guaranteed to be in ascending order in the range of [1, L - 1]. The cost of each cut is the length of the stick segment being cut. Determine the minimum total cost to cut the stick into the defined pieces.&lt;/p&gt;
+&lt;p&gt;There is a wooden stick with length L &amp;gt;= 1, we need to cut it into pieces, where the cutting positions are defined in an int array A. The positions are guaranteed to be in ascending order in the range of $[1, L - 1]$. The cost of each cut is the length of the stick segment being cut. Determine the minimum total cost to cut the stick into the defined pieces.&lt;/p&gt;
 
 &lt;h3 id=&#34;top-down-recursion-1&#34;&gt;Top-Down Recursion&lt;/h3&gt;
 
@@ -131,7 +133,7 @@
   }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;### Dynamic Programming&lt;/p&gt;
+&lt;h3 id=&#34;dynamic-programming&#34;&gt;Dynamic Programming&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;  int minCost(vector&amp;lt;int&amp;gt; cuts, int length) {
     cuts.insert(cuts.begin(),0);
@@ -156,6 +158,21 @@
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&#34;merge-stone&#34;&gt;Merge Stone&lt;/h2&gt;
+
+&lt;p&gt;We have a list of piles of stones, each pile of stones has a certain weight, represented by an array of integers. In each move, we can merge two adjacent piles into one larger pile, the cost is the sum of the weights of the two piles. We merge the piles of stones until we have only one pile left. Determine the minimum total cost.&lt;/p&gt;
+
+&lt;p&gt;stones is not null and is length of at least 1&lt;/p&gt;
+
+&lt;h3 id=&#34;example-1&#34;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;{4, 3, 3, 4}, the minimum cost is 28&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;merge first 4 and first 3, cost 7&lt;/li&gt;
+&lt;li&gt;merge second 3 and second 4, cost 7&lt;/li&gt;
+&lt;li&gt;merge two 7s, cost 14&lt;/li&gt;
+&lt;li&gt;total cost = 7 + 7 + 14 = 28&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&#34;recursion-memo&#34;&gt;Recursion + memo&lt;/h3&gt;
 
@@ -185,7 +202,7 @@
   }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;dynamic-programming&#34;&gt;Dynamic Programming&lt;/h3&gt;
+&lt;h3 id=&#34;dynamic-programming-1&#34;&gt;Dynamic Programming&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int minCost(vector&amp;lt;int&amp;gt; stones) {
     int n = stones.size();
@@ -222,17 +239,21 @@
 
 &lt;h2 id=&#34;burst-bsllons&#34;&gt;Burst Bsllons&lt;/h2&gt;
 
-&lt;p&gt;We have a list of piles of stones, each pile of stones has a certain weight, represented by an array of integers. In each move, we can merge two adjacent piles into one larger pile, the cost is the sum of the weights of the two piles. We merge the piles of stones until we have only one pile left. Determine the minimum total cost.&lt;/p&gt;
+&lt;p&gt;Given n balloons, indexed from 0 to n-1. Each balloon is painted with a number on it represented by array nums. You are asked to burst all the balloons. If the you burst balloon i you will get $nums[left] * nums[i] * nums[right]$ coins. Here left and right are adjacent indices of i. After the burst, the left and right then becomes adjacent.&lt;/p&gt;
 
-&lt;p&gt;stones is not null and is length of at least 1&lt;/p&gt;
+&lt;p&gt;Find the maximum coins you can collect by bursting the balloons wisely.&lt;/p&gt;
 
-&lt;p&gt;{4, 3, 3, 4}, the minimum cost is 28&lt;/p&gt;
+&lt;p&gt;Note:&lt;/p&gt;
+
+&lt;p&gt;You may imagine $nums[-1] = nums[n] = 1$. They are not real therefore you can not burst them.&lt;/p&gt;
+
+&lt;h3 id=&#34;example-2&#34;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;Input: {3,1,5,8}&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;merge first 4 and first 3, cost 7&lt;/li&gt;
-&lt;li&gt;merge second 3 and second 4, cost 7&lt;/li&gt;
-&lt;li&gt;merge two 7s, cost 14&lt;/li&gt;
-&lt;li&gt;total cost = 7 + 7 + 14 = 28&lt;/li&gt;
+&lt;li&gt;nums = {3,1,5,8} &amp;ndash;&amp;gt; {3,5,8} &amp;ndash;&amp;gt;   {3,8}   &amp;ndash;&amp;gt;  {8}  &amp;ndash;&amp;gt; {}&lt;/li&gt;
+&lt;li&gt;coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;recursion&#34;&gt;Recursion&lt;/h3&gt;
@@ -287,7 +308,7 @@
     }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&#34;dynamic-programming-1&#34;&gt;Dynamic Programming&lt;/h3&gt;
+&lt;h3 id=&#34;dynamic-programming-2&#34;&gt;Dynamic Programming&lt;/h3&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;  int maxCoins(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
         nums.insert(nums.begin(), 1);
