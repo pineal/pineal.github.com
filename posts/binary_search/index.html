@@ -114,15 +114,32 @@ window.onload = ready;
 <ul>
 <li>
 <ul>
-<li><a href="#经典二分搜索及其变种">经典二分搜索及其变种</a></li>
+<li><a href="#经典二分搜索及其变种">经典二分搜索及其变种</a>
+<ul>
+<li><a href="#classic-binary-search">Classic binary search</a></li>
+<li><a href="#find-last-first-index-of-target">find last/first index of target</a></li>
+<li><a href="#search-in-a-sorted-array-of-unknown-size">Search in a sorted array of unknown size</a></li>
+</ul></li>
 <li><a href="#二维二分搜索">二维二分搜索</a>
 <ul>
 <li><a href="#search-a-2d-matrix">Search a 2D Matrix</a></li>
 <li><a href="#search-a-2d-matrix-ii">Search a 2D matrix II</a></li>
 </ul></li>
-<li><a href="#advanced-using-binary-search-to-solve-kth-problem">Advanced - using binary search to solve kth problem</a>
+<li><a href="#binary-search-in-rotated-array">Binary search in rotated array</a>
 <ul>
+<li><a href="#find-minimum-in-rotated-sorted-array">Find Minimum in Rotated Sorted Array</a></li>
+</ul></li>
+<li><a href="#binary-search-to-solve-kth-problem">Binary search to solve Kth problem</a>
+<ul>
+<li><a href="#find-kth-smallest-largest-number-in-two-sorted-array">Find Kth smallest/largest number in two sorted array</a></li>
+<li><a href="#find-kth-smallest-element-in-a-sorted-matrix">Find Kth smallest element in a sorted matrix</a></li>
 <li><a href="#more-questions">More questions</a></li>
+</ul></li>
+<li><a href="#dynamic-programming-and-binary-search">Dynamic programming and binary search</a></li>
+<li><a href="#浮点类型">浮点类型</a>
+<ul>
+<li><a href="#calculate-square-root">Calculate Square Root</a></li>
+<li><a href="#calculate-pow-x-n">Calculate pow(x, n)</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -131,7 +148,9 @@ window.onload = ready;
 
 <h2 id="经典二分搜索及其变种">经典二分搜索及其变种</h2>
 
-<p>二分搜索的核心思想是，在给定的搜索空间内，排除掉一定不对的那一部分。应用场景往往是有序的，或者局部有序的。这样从n可以优化到logn。</p>
+<p>二分搜索的核心思想是，在给定的搜索空间内，排除掉一定不对的那一部分。应用场景往往是有序的，或者局部有序的。这样从 $O(n)$ 可以优化到 $O(logn)$. 搜索空间的定义可以是具体的值，也可以是数组的索引，需要具体问题具体分析。</p>
+
+<h3 id="classic-binary-search">Classic binary search</h3>
 
 <pre><code class="language-cpp">  int classic_binary_search(vector&lt;int&gt; input, int target) {
     if (input.empty()) {
@@ -156,8 +175,9 @@ window.onload = ready;
 };
 </code></pre>
 
+<h3 id="find-last-first-index-of-target">find last/first index of target</h3>
+
 <pre><code class="language-cpp">  int find_first_index(vector&lt;int&gt; input, int target) {
-    // Write your solution here
     if (input.size() == 0) return -1;
     int left = 0, right = input.size() - 1;
     while (left &lt; right - 1){
@@ -207,6 +227,53 @@ window.onload = ready;
       return -1;
     }
   }
+</code></pre>
+
+<h3 id="search-in-a-sorted-array-of-unknown-size">Search in a sorted array of unknown size</h3>
+
+<p>Given an integer array sorted in ascending order,
+write a function to search target in nums.
+If target exists, then return its index, otherwise return -1.
+However, the array size is unknown to you.
+You may only access the array using an ArrayReader interface,
+where ArrayReader.get(k) returns the element of the array at index k (0-indexed).</p>
+
+<p>You may assume all integers in the array are less than 10000,
+and if you access the array out of bounds, ArrayReader.get will return 2147483647.</p>
+
+<p>Example 1:
+Input: array = [-1,0,3,5,9,12], target = 9
+Output: 4
+Explanation: 9 exists in nums and its index is 4</p>
+
+<p>Example 2:
+Input: array = [-1,0,3,5,9,12], target = 2
+Output: -1
+Explanation: 2 does not exist in nums so return -1
+Note:</p>
+
+<p>You may assume that all elements in the array are unique.
+The value of each element in the array will be in the range [-9999, 9999].</p>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    int search(const ArrayReader&amp; reader, int target) {
+        int prev = 0, cur = 1;
+        while (prev &lt; cur) {
+            long k = reader.get(cur);
+            if (k == target) {
+               return cur; 
+            }
+            else if (k &lt; target) {
+                prev = cur;
+                cur = cur * 2;
+            } else {
+                cur = (prev + cur) / 2;                 
+            }
+        }
+        return reader.get(0) == target? 0 : -1;
+    }
+};
 </code></pre>
 
 <h2 id="二维二分搜索">二维二分搜索</h2>
@@ -261,26 +328,252 @@ window.onload = ready;
 }
 </code></pre>
 
-<h2 id="advanced-using-binary-search-to-solve-kth-problem">Advanced - using binary search to solve kth problem</h2>
+<h2 id="binary-search-in-rotated-array">Binary search in rotated array</h2>
 
-<p><a href="https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/">https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/</a></p>
+<h3 id="find-minimum-in-rotated-sorted-array">Find Minimum in Rotated Sorted Array</h3>
 
-<p>Follow up:<a href="https://leetcode.com/problems/find-k-closest-elements/">https://leetcode.com/problems/find-k-closest-elements/</a></p>
+<p>Duplication allowed</p>
+
+<pre><code class="language-cpp">// 5 1 1 2 2 2 3 4
+class Solution {
+public:
+    int findMin(vector&lt;int&gt;&amp; nums) {
+        int left = 0;
+        int right = nums.size() - 1;
+        while (left &lt; right - 1) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] &lt; nums[right]) {
+                right = mid;
+            } else if (nums[mid] &gt; nums[right]) {
+                left = mid + 1;
+            } else {
+                right--;
+            }
+        }
+        return min(nums[left], nums[right]);
+    }
+};
+</code></pre>
+
+<ul>
+<li><a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/">Find Minimum in Rotated Sorted Array</a></li>
+<li><a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/description/">Find Minimum in Rotated Sorted Array II</a></li>
+
+<li><p><a href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/">Search in Rotated Sorted Array II</a></p>
+
+<h2 id="binary-search-to-solve-kth-problem">Binary search to solve Kth problem</h2></li>
+</ul>
+
+<h3 id="find-kth-smallest-largest-number-in-two-sorted-array">Find Kth smallest/largest number in two sorted array</h3>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    double findMedianSortedArrays(vector&lt;int&gt;&amp; a, vector&lt;int&gt;&amp; b) {
+        int N = a.size() + b.size();
+        //return (findKthSmallest(a, b, 0, 0, (N + 1)/2) + findKthSmallest(a, b, 0, 0, (N + 2)/2)) / 2.0;
+        return (findKthLargest(a, b, a.size() - 1, b.size() - 1, (N + 1)/2) + findKthLargest(a, b, a.size() - 1, b.size() - 1, (N + 2)/2)) / 2.0;
+
+    }
+    
+    int findKthLargest(const vector&lt;int&gt; &amp; a, const vector&lt;int&gt; &amp; b, int a_right, int b_right, int k) {        
+        if (a_right &lt; 0) {
+            return b[b_right - k + 1];
+        }
+        if (b_right &lt; 0) {
+            return a[a_right - k + 1];
+        }
+        if (k == 1) {
+            return max(a[a_right], b[b_right]);
+        }        
+        int p = (a_right - k/2 + 1 &gt;= 0) ? a[a_right - k/2 + 1] : INT_MIN;
+        int q = (b_right - k/2 + 1 &gt;= 0) ? b[b_right - k/2 + 1] : INT_MIN;
+
+        if (p &gt;= q) {
+            return findKthLargest(a, b, a_right - k/2, b_right, k - k/2);
+        }
+        else {
+            return findKthLargest(a, b, a_right, b_right - k/2, k - k/2);
+        }
+    }
+    
+    int findKthSmallest(const vector&lt;int&gt; &amp; a, const vector&lt;int&gt; &amp; b, int a_left, int b_left, int k) {
+        if (a_left == a.size()) {
+            return b[b_left + k - 1];
+        } 
+        if (b_left == b.size()) {
+            return a[a_left + k - 1];
+        }
+        if (k == 1) {
+            return min(a[a_left], b[b_left]);
+        }
+        // p: half kth smallest in array a
+        int p = (a_left + k/2 - 1) &lt; a.size()? a[a_left + k/2 - 1] : INT_MAX;
+        // q: half kth smallest in array a
+        int q = (b_left + k/2 - 1) &lt; b.size()? b[b_left + k/2 - 1] : INT_MAX;
+        
+        //discard 
+        if (p &lt; q) {    
+            return findKthSmallest(a, b, a_left + k/2, b_left, k - k/2);
+        } else {
+            return findKthSmallest(a, b, a_left, b_left + k/2, k - k/2);
+        }
+    }
+};
+</code></pre>
+
+<p>Reference: <a href="https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/">https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/</a></p>
+
+<p>Follow up: find Kth smallest element in m sorted arrays</p>
+
+<h3 id="find-kth-smallest-element-in-a-sorted-matrix">Find Kth smallest element in a sorted matrix</h3>
 
 <p><a href="https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/">https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/</a></p>
 
-<p>Follow up: find kth smallest element in m sorted arrays</p>
+<pre><code class="language-cpp">class Solution {
+public:
+    int kthSmallest(vector&lt;vector&lt;int&gt;&gt;&amp; matrix, int k) {
+        return helper(matrix, k, matrix.front().front(), matrix.back().back());   
+    }
+    
+    int helper(const vector&lt;vector&lt;int&gt;&gt;&amp; matrix, int k, int left, int right) {
+        if (left &gt;= right) {
+            return left;
+        }
+        //pick a reference value
+        int mid = left + (right - left)/2;
+        int n = matrix.size(); 
+        int m = 0;
+        //counts number of elements smaller than or equal to mid
+        for (int i = 0; i &lt; n; i++) {
+                          
+            /* 
+             * 
+             *The upper bound idea if optimized from:
+              for (int j = 0; j &lt; matrix[i].size(); j++) {
+                  if (matrix[i][j] &lt;= mid) {
+                      m++;
+                  }
+              }
+             * using for loop is the basic idea to help understand,
+             * actually we can use binary search again to find the smallest element that larger than mid
+             */            
+
+            int num = upper_bound(matrix[i].begin(), matrix[i].end(), mid) - matrix[i].begin();
+            m += num;
+        }
+        // now we know that there are m elements &lt;= mid[include mid]
+        // thus mid is m th smallest element in the matrix
+        // if m == k, actually mid is the kth 
+        // if m &lt; k, then kth smallest element must appear after mid
+        // otherwise, kth element must appear before mid
+
+        if (m &lt; k) {
+            return helper(matrix, k, mid + 1, right);
+        } else {
+            return helper(matrix, k, left, mid);
+        }
+    }
+};
+</code></pre>
 
 <h3 id="more-questions">More questions</h3>
 
-<p><a href="https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/description/">https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/description/</a></p>
+<ul>
+<li><p><a href="https://leetcode.com/problems/kth-smallest-number-in-multiplication-table/description/">Kth smallest number in multiplication table</a></p></li>
 
-<p><a href="https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/">https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/</a></p>
+<li><p><a href="https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/">Find kth smallest pair distance</a></p></li>
 
-<p>Dynamic programming and binary search (TONY)</p>
+<li><p><a href="https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/">Kth element two sorted arrays</a></p></li>
 
-<p>LIS <a href="https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/">https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/</a>
-Russian Doll Envelopes</p>
+<li><p><a href="https://leetcode.com/problems/find-k-closest-elements/">Find K closest elements</a></p></li>
+
+<li><p><a href="https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/">Kth smallest element in a sorted matrix</a></p></li>
+</ul>
+
+<h2 id="dynamic-programming-and-binary-search">Dynamic programming and binary search</h2>
+
+<p><a href="https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/">Longest Increasing Subsequence</a></p>
+
+<p><a href="https://leetcode.com/problems/russian-doll-envelopes/description/">Russian Doll Envelopes</a></p>
+
+<h2 id="浮点类型">浮点类型</h2>
+
+<p>浮点类型往往需要引入最小收敛精度，当搜索空间越来越小知道逼近到这个精度的时候停止搜索。不要乱加这个精度，不要乱加这个精度，不要乱加这个精度。</p>
+
+<h3 id="calculate-square-root">Calculate Square Root</h3>
+
+<p>Here is a very intuitive binary search solution.</p>
+
+<pre><code class="language-cpp">double sqrt(const double number) {
+    const double e = 1.0e-7;
+    double left, right, guess;
+    
+    if (number &lt; 1) {
+        left = number;
+        right = 1;
+    }
+    else {
+        left = 1;
+        right = number;
+    }
+    
+    while ((right - left) &gt; e) {
+        guess = left + (right - left) / 2;
+        if (guess &gt; number / guess) {
+            right = guess;
+        }
+        else {
+            left = guess;
+        }
+    }
+    return left + (right - left) / 2;
+}
+</code></pre>
+
+<p>According to Newton–Raphson method,</p>
+
+<p>$$ x_{n+1} = x_n - \frac{f(x_n)}{f&rsquo;(x_n)}$$</p>
+
+<p>Here $f(x_n) = {x_n}^2 - S = 0$, so we can deduce that，</p>
+
+<p>$$x_{n+1} = x_n -  \frac{f(x_n)}{f&rsquo;(x_n)} =  x_n - \frac{{x_n}^2 - S}{2x_n} = \frac{1}{2}(x_n + \frac{S}{x_n})$$</p>
+
+<p>Based on this induction rule, we can do a binary search in the space.</p>
+
+<pre><code class="language-cpp">double sqrt(const double num) {
+    const double e = 1.0e-7;
+    double guess = num / 2;
+    while (abs(guess * guess - num) &gt; e) {
+        guess = (guess + num / guess) / 2;
+    }
+    return guess;
+}
+</code></pre>
+
+<h3 id="calculate-pow-x-n">Calculate pow(x, n)</h3>
+
+<pre><code class="language-cpp">class Solution {
+public:
+    double myPow(double x, int n) {
+        if (n &lt; 0) {
+            return 1.0 / helper(x, -n);
+        } else {
+            return helper(x , n); 
+        }
+    }
+    
+    double helper(double x, int n) {
+        if (n == 0) {
+            return 1;
+        }
+        double v = helper(x, n / 2);
+        //return (n % 2 == 0)? helper(x, n / 2) * helper(x, n / 2) : helper(x, n / 2) * helper(x, n / 2) * x;
+        return (n % 2 == 0)? v * v : v * v * x;
+    }
+};
+</code></pre>
+
+<p>Reference: <a href="https://www.codeproject.com/Articles/69941/Best-Square-Root-Method-Algorithm-Function-Precisi">Best Square Root Method</a></p>
 
 
   <a href="/tags/binary-search/">Binary Search</a></a>&nbsp;&nbsp;&nbsp;

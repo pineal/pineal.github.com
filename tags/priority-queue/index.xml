@@ -72,49 +72,84 @@ public:
 
 &lt;h3 id=&#34;kth-smallest-number-in-sorted-matrix&#34;&gt;Kth Smallest Number In Sorted Matrix&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;
-class Cell {
+&lt;p&gt;Solution 1: use priority queue&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;//O(klogk)
+class Solution {
 public:
-    int row;
-    int col;
-    int value;
-    Cell(int _row, int _column, int _value) {
-        row = _row;
-        col = _column;
-        value = _value;
-    }
-
-    bool operator &amp;lt; (const Cell &amp;amp; c) const {
-        return value &amp;lt;= c.value;
-    }
-
-    bool operator &amp;gt; (const Cell &amp;amp; c) const {
-        return value &amp;gt; c.value;
+    int kthSmallest(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; matrix, int k) {
+        int n = matrix.size();
+        auto cmp = [&amp;amp;matrix](const pair&amp;lt;int, int&amp;gt; &amp;amp; p1, const pair&amp;lt;int, int&amp;gt; &amp;amp; p2) {
+            return matrix[p1.first][p1.second] &amp;gt; matrix[p2.first][p2.second];
+        };
+        priority_queue&amp;lt;pair&amp;lt;int, int&amp;gt;, vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt;, decltype(cmp)&amp;gt; min_heap(cmp);
+        deque&amp;lt;deque&amp;lt;bool&amp;gt;&amp;gt; visited(n, deque&amp;lt;bool&amp;gt;(n, false));
+        min_heap.emplace(0, 0);
+        visited[0][0] = true;
+        while (k &amp;gt; 1) {
+            auto p = min_heap.top();
+            min_heap.pop();
+            int x = p.first;
+            int y = p.second;
+            if (x + 1 &amp;lt; n &amp;amp;&amp;amp; visited[x+1][y] == false) {
+                visited[x+1][y] = true;
+                min_heap.emplace(x+1, y);
+            }
+            if (y + 1 &amp;lt; n &amp;amp;&amp;amp; visited[x][y+1] == false) {
+                visited[x][y+1] = true;
+                min_heap.emplace(x, y+1);
+            }
+            k--;
+        }
+        return matrix[min_heap.top().first][min_heap.top().second];
     }
 };
+&lt;/code&gt;&lt;/pre&gt;
 
-int kthSmallest(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; m, int k) {
-    priority_queue&amp;lt;Cell, vector&amp;lt;Cell&amp;gt;, greater&amp;lt;Cell&amp;gt;&amp;gt; min_heap;
-    min_heap.emplace(Cell(0, 0, m[0][0]));
-    size_t num_row = m.size();
-    size_t num_col = m[0].size();
-    vector&amp;lt;vector&amp;lt;bool&amp;gt;&amp;gt; visited(num_row, vector&amp;lt;bool&amp;gt;(num_col, false));
-    visited[0][0] = true;
-    for (int i = 0; i &amp;lt; k - 1; i++) {
-        Cell c = min_heap.top();
-        min_heap.pop();
-        if (c.row + 1 &amp;lt; num_row &amp;amp;&amp;amp; visited[c.row + 1][c.col] == false) {
-                min_heap.emplace(Cell(c.row + 1, c.col, m[c.row + 1][c.col]));
-                visited[c.row + 1][c.col] = true;
+&lt;p&gt;Sulution 2: use binary search&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int kthSmallest(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; matrix, int k) {
+        return helper(matrix, k, matrix.front().front(), matrix.back().back());   
+    }
+    
+    int helper(const vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; matrix, int k, int left, int right) {
+        if (left &amp;gt;= right) {
+            return left;
         }
+        //pick a reference value
+        int mid = left + (right - left)/2;
+        int n = matrix.size(); 
+        int m = 0;
+        //counts number of elements smaller than or equal to mid
+        for (int i = 0; i &amp;lt; n; i++) {
+                          
+            /* 
+             * 
+             *The upper bound idea if optimized from:
+              for (int j = 0; j &amp;lt; matrix[i].size(); j++) {
+                  if (matrix[i][j] &amp;lt;= mid) {
+                      m++;
+                  }
+              }
+             * using for loop is the basic idea to help understand,
+             * actually we can use binary search again to find the smallest element that larger than mid
+             */            
 
-        if (c.col + 1 &amp;lt; num_col &amp;amp;&amp;amp; visited[c.row][c.col + 1] == false) {
-                min_heap.emplace(Cell(c.row, c.col + 1, m[c.row][c.col + 1]));
-                visited[c.row][c.col + 1] = true;
+            int num = upper_bound(matrix[i].begin(), matrix[i].end(), mid) - matrix[i].begin();
+            m += num;
+        }
+        // now we know that there are m elements &amp;lt;= mid[include mid]
+        // thus mid is m th smallest element in the matrix
+        // if m == k, actually mid is the kth 
+        // if m &amp;lt; k, then kth smallest element must appear after mid
+        // otherwise, kth element must appear before mid
+
+        if (m &amp;lt; k) {
+            return helper(matrix, k, mid + 1, right);
+        } else {
+            return helper(matrix, k, left, mid);
         }
     }
-    return min_heap.top().value;
-}
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;kth-smallest-sum-in-two-sorted-arrays&#34;&gt;Kth Smallest Sum In Two Sorted Arrays&lt;/h3&gt;
@@ -196,7 +231,6 @@ class Solution {
 
     return min_heap.top();
   }
-
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;kth-closest-point&#34;&gt;Kth Closest Point&lt;/h3&gt;
@@ -280,7 +314,51 @@ class Solution {
 
 &lt;h2 id=&#34;solution-with-quick-sort-partition&#34;&gt;Solution with quick-sort partition&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/kth-largest-element-in-an-array/discuss/60309/4-C++-Solutions-using-Partition-Max-Heap-priority_queue-and-multiset-respectively&#34;&gt;solution&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Kth Largest Element in an Array&lt;/p&gt;
+
+&lt;p&gt;Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:    
+    int partition(vector&amp;lt;int&amp;gt; &amp;amp; nums, int left, int right) {        
+        int pivot_index = left + rand() % (right - left + 1); 
+        int pivot = nums[pivot_index];
+        swap(nums[left], nums[pivot_index]);
+        int left_bound = left + 1;
+        int right_bound = right;
+        while (left_bound &amp;lt;= right_bound) {
+            if (nums[right_bound] &amp;lt;= pivot) {
+                right_bound--;
+            } 
+            else if (nums[left_bound] &amp;gt;= pivot) {
+                left_bound++;
+            } 
+            else {
+                swap(nums[left_bound++], nums[right_bound--]);
+            }
+        }
+        swap(nums[left], nums[right_bound]);
+        return right_bound;
+    }
+    
+    int findKthLargest(vector&amp;lt;int&amp;gt;&amp;amp; nums, int k) {
+        int left = 0;
+        int right = nums.size() - 1;
+        while (true) {
+            int pos = partition(nums, left, right); 
+            if (pos == k - 1) {
+                return nums[pos];
+            } 
+            else if (pos &amp;gt; k - 1) {
+                right = pos - 1;
+            } 
+            else {
+                left = pos + 1;
+            }
+        }
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
