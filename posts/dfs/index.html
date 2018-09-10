@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Depth first search in matrix</title>
+	
+	<meta name="description" content="">
+	<meta name="image" content="">
+	
+	<meta itemprop="name" content="Depth first search in matrix">
+	<meta itemprop="description" content="">
+	<meta itemprop="image" content="">
+	
+	<meta name="og:title" content="Depth first search in matrix">
+	<meta name="og:description" content="">
+	
+	<meta name="og:url" content="https://pineal.github.com/posts/dfs/">
+	<meta name="og:site_name" content="Depth first search in matrix">
+	<meta name="og:type" content="article">
+	
+	<meta name="article:tag" content="DFS ">
+	<link rel="stylesheet" type="text/css" href="https://pineal.github.com/css/style.css">
+	
+	
+	
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	<script type="text/javascript" async
+	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+	tex2jax: {
+	  inlineMath: [['$','$'], ['\\(','\\)']],
+	  displayMath: [['$$','$$'], ['\[','\]']],
+	  processEscapes: true,
+	  processEnvironments: true,
+	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
+	  TeX: { equationNumbers: { autoNumber: "AMS" },
+		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
+	}
+  });
+  </script>
+</head>
+
+<body>
+
+<header>
+	
+	<a href="https://pineal.github.com/" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
+	
+	&nbsp;&nbsp;<a href="https://pineal.github.com/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.github.com/about/" style="color:#777;"><strong>About</strong></a>
+	
+	
+	
+	<a href="https://pineal.github.com/index.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
+</header>
+
+
+<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
+<script>
+function fadeOut(el) {
+  el.style.opacity = 1;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
+    last = +new Date();
+    
+
+    if (el.style.opacity > 0) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    } else {
+      el.style.display='none';
+    }
+  };
+
+  tick();
+}
+
+function ready(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+         el = document.getElementById('loadingMask');
+         fadeOut(el);
+        var elements = document.querySelectorAll("img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("alt")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("alt"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+
+    } else {
+        document.addEventListener('DOMContentLoaded', fn);
+    }
+}
+window.onload = ready;
+</script>
+
+<div class="content">
+  <h1>Depth first search in matrix</h1>
+  <aside> <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#robot-room-cleaner">Robot Room Cleaner</a></li>
+<li><a href="#generate-random-maze">Generate Random Maze</a></li>
+</ul></li>
+</ul>
+</nav></aside>
+  
+
+<h2 id="robot-room-cleaner">Robot Room Cleaner</h2>
+
+<p>Given a robot cleaner in a room modeled as a grid.</p>
+
+<p>Each cell in the grid can be empty or blocked.</p>
+
+<p>The robot cleaner with 4 given APIs can move forward, turn left or turn right. Each turn it made is 90 degrees.</p>
+
+<p>When it tries to move into a blocked cell, its bumper sensor detects the obstacle and it stays on the current cell.</p>
+
+<p>Design an algorithm to clean the entire room using only the 4 given APIs shown below.</p>
+
+<pre><code>interface Robot {
+  // returns true if next cell is open and robot moves into the cell.
+  // returns false if next cell is obstacle and robot stays on the current cell.
+  boolean move();
+
+  // Robot will stay on the same cell after calling turnLeft/turnRight.
+  // Each turn will be 90 degrees.
+  void turnLeft();
+  void turnRight();
+
+  // Clean the current cell.
+  void clean();
+}
+</code></pre>
+
+<p>reference: <a href="https://leetcode.com/problems/robot-room-cleaner/description/">Leetcode</a></p>
+
+<pre><code class="language-cpp">/**
+ * // This is the robot's control interface.
+ * // You should not implement it, or speculate about its implementation
+ * class Robot {
+ *   public:
+ *     // Returns true if the cell in front is open and robot moves into the cell.
+ *     // Returns false if the cell in front is blocked and robot stays in the current cell.
+ *     bool move();
+ *
+ *     // Robot will stay in the same cell after calling turnLeft/turnRight.
+ *     // Each turn will be 90 degrees.
+ *     void turnLeft();
+ *     void turnRight();
+ *
+ *     // Clean the current cell.
+ *     void clean();
+ * };
+ */
+class Solution {
+public:
+    int x = 0;
+    int y = 0;
+    int dir = 0;
+    
+    unordered_set&lt;string&gt; cleaned;
+    int dx[4]={0, -1, 0, 1};    //define it anti-clockwisely
+    int dy[4]={1, 0, -1, 0};    //N -&gt; W -&gt; S -&gt; E
+    
+    void turnAround(Robot &amp; r) {
+        r.turnRight();
+        r.turnRight();
+    }
+    
+    void cleanRoom(Robot&amp; robot) {
+        string state = to_string(x) + &quot; &quot; + to_string(y);
+        if (cleaned.count(state)) {
+            return;
+        }    
+        
+        cleaned.emplace(state);        
+        robot.clean();
+    
+        //try 
+        for (int i = 0; i &lt; 4; i++) {
+            if (robot.move()) {
+                //record the current location
+                x += dx[dir];
+                y += dy[dir];
+                //dfs goto next state
+                cleanRoom(robot);
+                //reset old location
+                turnAround(robot);
+                robot.move();
+                x -= dx[dir];
+                y -= dy[dir];                
+                //reset old direction 
+                turnAround(robot);
+            }
+            //make turn anti-clockwisely 
+            // - we are going to try next direction 
+            robot.turnLeft();
+            //record the current direction
+            dir = (dir + 1) % 4;
+        }
+    }
+};
+</code></pre>
+
+<h2 id="generate-random-maze">Generate Random Maze</h2>
+
+<p><strong>Question</strong></p>
+
+<p>Randomly generate a maze of size N * N (where N = 2K + 1) whose corridor and wall’s width are both 1 cell. For each pair of cells on the corridor, there must exist one and only one path between them. (Randomly means that the solution is generated randomly, and whenever the program is executed, the solution can be different.). The wall is denoted by 1 in the matrix and corridor is denoted by 0.</p>
+
+<p><strong>Assumptions</strong></p>
+
+<p>N = 2K + 1 and K &gt;= 0
+the top left corner must be corridor
+there should be as many corridor cells as possible
+for each pair of cells on the corridor, there must exist one and only one path between them</p>
+
+<p><strong>Examples</strong></p>
+
+<p>N = 5, one possible maze generated is</p>
+
+<pre><code>    0  0  0  1  0
+
+    1  1  0  1  0
+
+    0  1  0  0  0
+
+    0  1  1  1  0
+
+    0  0  0  0  0
+</code></pre>
+
+<p><strong>Solution</strong></p>
+
+<pre><code class="language-cpp">void dfs(vector&lt;vector&lt;int&gt;&gt; &amp; res, int x, int y) {
+    int n = res.size();
+    vector&lt;pair&lt;int, int&gt;&gt; dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    random_shuffle(dirs.begin(), dirs.end());
+    int xx, xxx, yy, yyy;
+    xx = xxx = x;
+    yy = yyy = y;
+    for (const auto &amp; dir : dirs) {
+        int dx =dir.first;
+        int dy = dir.second;
+        xx = x + dx;
+        xxx = x + dx * 2;
+        yy = y + dy;
+        yyy = y + dy * 2;
+
+        if (xxx &gt;= 0 &amp;&amp; xxx &lt; n &amp;&amp; yyy &gt;= 0 &amp;&amp; yyy &lt; n &amp;&amp; res[xxx][yyy] != 0) {
+            res[xxx][yyy] = 0;
+            res[xx][yy] = 0;
+            dfs(res, xxx, yyy);
+        }
+    }
+}
+
+vector&lt;vector&lt;int&gt; &gt; generateRandomMaze(int n) {
+    vector&lt;vector&lt;int&gt;&gt; res(n, vector&lt;int&gt;(n, 1));
+    dfs(res, 0, 0);
+    return res;
+}
+</code></pre>
+
+
+  <a href="/tags/dfs/">DFS</a></a>&nbsp;&nbsp;&nbsp;
+
+</div>
+
+
+
+
+<footer>
+	<p>© 2017-2018, all rights reserved.</a>
+</footer>
+</body>
+</html>

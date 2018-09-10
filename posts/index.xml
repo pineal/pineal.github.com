@@ -6,10 +6,556 @@
     <description>Recent content in Posts on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 04 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 08 Sep 2018 09:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pineal.github.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>DP III - Knapsack Problems</title>
+      <link>https://pineal.github.com/posts/dynamic_programming_iii/</link>
+      <pubDate>Sat, 08 Sep 2018 09:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/posts/dynamic_programming_iii/</guid>
+      <description>
+
+&lt;h1 id=&#34;背包问题&#34;&gt;背包问题&lt;/h1&gt;
+
+&lt;h2 id=&#34;0-1-背包问题&#34;&gt;0-1 背包问题&lt;/h2&gt;
+
+&lt;h3 id=&#34;question&#34;&gt;Question&lt;/h3&gt;
+
+&lt;p&gt;Given weights and values of n items, put these items in a knapsack of capacity W to get the maximum total value in the knapsack. In other words, given two integer arrays $values[0..n-1]$ and $weights[0..n-1]$ which represent values and weights associated with n items respectively. Also given an integer W which represents knapsack capacity, &lt;strong&gt;find out the maximum value subset of $values[0..n-1]$ such that sum of the weights of this subset is smaller than or equal to W&lt;/strong&gt;. You cannot break an item, either pick the complete item, or don’t pick it (0-1 property).&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;From: &lt;a href=&#34;https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/&#34;&gt;GeekforGeeks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;analyze&#34;&gt;Analyze&lt;/h3&gt;
+
+&lt;p&gt;每件物品只有一个，那么考虑最后一个物品 $i$ ，一共就放或者不放两种状态选择。如果不放第 $i$ 件物品，那么问题转化为 前 $i-1$ 件物品放入到容量为 $j$ 的背包中, 即为 $M[i, j] = M[i-1, j]$。如果放第 $i$ 件物品，那么就是 前 $i-1$ 件物品放到容量为 $j-W_i$ 的背包中的 $value$ 加上把第 $i$ 件物品放入背包中的价值，即为 $M[i, j] = M[i-1, j - weights_i + values_i]$.&lt;/p&gt;
+
+&lt;p&gt;此外，这个问题问得是得到的结果尽可能大，并不要求背包正好装满，初始化的时候都是 0。 如果要求恰好装满背包，那么除了 $M[0, 0]$ 初始化为 0 之外，其他都初始化为负无穷大。这样就可以保证最终的到的结果是一种恰好装满背包的最优解。&lt;/p&gt;
+
+&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int knapsack(int W, vector&amp;lt;int&amp;gt; weights, vector&amp;lt;int&amp;gt; values) {
+    int n = weights.size();
+    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; M(n + 1, vector&amp;lt;int&amp;gt;(W + 1, 0));
+    for (int i = 1; i &amp;lt;= n; i++) {
+        for (int j = 1; j &amp;lt;= W; j++) {
+            if (weights[i - 1] &amp;lt;= j) {
+                M[i][j] = max(values[i-1] + M[i-1][j - weights[i - 1]], M[i-1][j]);
+            }
+            else {
+                M[i][j] = M[i-1][j];
+            }
+        }
+    }
+    return M.back().back();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;space-optimization&#34;&gt;Space Optimization&lt;/h3&gt;
+
+&lt;p&gt;如果对以上代码填表，可以更直观的显示出当前状态只跟上一行的状态有关。所以空间复杂度可以优化到 $O(n)$.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int knapsack(int W, vector&amp;lt;int&amp;gt; weights, vector&amp;lt;int&amp;gt; values) {
+    int n = weights.size();
+    vector&amp;lt;int&amp;gt; M(W + 1, 0);
+    for (int i = 0; i &amp;lt; n; i++) {
+        for (int j = W; j &amp;gt;= weights[i]; j--) {
+            M[j] = max(M[j], values[i] + M[j - weights[i]]);
+        }
+    }
+    return M.back();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;print-all-items&#34;&gt;Print all items&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;int knapsack(int W, vector&amp;lt;int&amp;gt; weights, vector&amp;lt;int&amp;gt; values) {
+    int n = weights.size();
+    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; M(n + 1, vector&amp;lt;int&amp;gt;(W + 1, 0));
+    //M[0][0] = 0;
+    for (int i = 0; i &amp;lt;= n; i++) {
+        for (int j = 0; j &amp;lt;= W; j++) {
+            if (weights[i - 1] &amp;lt;= j) {
+                M[i][j] = max(values[i-1] + M[i-1][j - weights[i - 1]], M[i-1][j]);
+            }
+            else {
+                M[i][j] = M[i-1][j];
+            }
+        }
+    }
+    int res =  M.back().back();
+    for (int i = n; i &amp;gt; 0 &amp;amp;&amp;amp; res &amp;gt; 0; i--) {
+        if (res == M[i-1][W])
+            continue;
+        else {
+            cout &amp;lt;&amp;lt; weights[i-1] &amp;lt;&amp;lt; &amp;quot; &amp;quot;;
+        }
+        res -= values[i-1];
+        W = W - weights[i-1];
+    }
+    return res;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;house-robber&#34;&gt;House Robber&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    int rob(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        if (nums.empty()) {
+            return 0;
+        }
+        if (nums.size() &amp;lt;= 2) {
+            return max(nums[0], nums.back());
+        }
+        vector&amp;lt;int&amp;gt; M(nums.size(), 0);
+        M[0] = nums[0];
+        M[1] = max(nums[0], nums[1]);
+        for (int i = 2; i &amp;lt; M.size(); i++) {
+            M[i] = max(M[i - 2] + nums[i], M[i - 1]);
+        }
+        return M.back();
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;完全背包问题&#34;&gt;完全背包问题&lt;/h2&gt;
+
+&lt;p&gt;由于每个物品的数量变成了无限，那么从0-1背包问题转变过来，从取或者不取两种状态转换到了取0个，取1个到最多取 $k = \frac{Capacity}{weights[i]}$ 个。&lt;/p&gt;
+
+&lt;h3 id=&#34;example-coin-change-ii&#34;&gt;Example - Coin Change II&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;//O(n*amount*amount)
+//O(mn)
+class Solution {
+public:
+    int change(int amount, vector&amp;lt;int&amp;gt;&amp;amp; coins) {
+        int n = coins.size();
+        /*
+        M[i][j] =&amp;gt; the number of combinations to make up amount j with the first i types of coins
+        M[i][j] =   M[i-1][j],                   use coins[i-1] 0 times
+                  + M[i-1][j - coins[i-1]]       use coins[i-1] 1 time
+                  + M[i-1][j- coins[i-1] * 2]    use coins[i-1] 2 times
+                  + M[i-1][j- coins[i-1] * 3]    use coins[i-1] 3 times
+                  ...
+        */
+        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; M(n + 1, vector&amp;lt;int&amp;gt;(amount + 1, 0));
+        M[0][0] = 1;
+        for (int i = 1; i &amp;lt;= n; i++) {
+            for (int j = 0; j &amp;lt;= amount; j++) {
+                M[i][j] = 0;
+                for (int k = 0; k * coins[i - 1] &amp;lt;= j; k++) {
+                    M[i][j] += M[i - 1][j - k * coins[i - 1]];
+                }
+            }
+        }
+        return M.back().back();
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;time-optimization&#34;&gt;Time Optimization&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;//O(n*amount)
+//O(mn)
+class Solution {
+public:
+    /*
+        1.
+        f[i][j] = f[i-1][j]
+                + f[i-1][j - coins[i-1]]
+                + f[i-1][j - coins[i-1] * 2]
+                + f[i-1][j - coins[i-1] * 3]
+                ...
+        2.
+        f[i][j - coins[i-1]]
+                = f[i-1][j-coins[i-1]]
+                + f[i-1][j-coins[i-1] * 2]
+                + f[i-1][j-coins[i-1] * 3]
+                ...
+        3.
+        f[i][j] = f[i-1][j]
+                + f[i][j - coins[i-1]]
+    */
+    
+    int change(int amount, vector&amp;lt;int&amp;gt;&amp;amp; coins) {
+        int n = coins.size();
+        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; M(n + 1, vector&amp;lt;int&amp;gt;(amount + 1, 0));
+        M[0][0] = 1;
+        for (int i = 1; i &amp;lt;= n; i++) {
+            for (int j = 0; j &amp;lt;= amount; j++) {
+                M[i][j] = M[i-1][j] + (coins[i-1] &amp;lt;= j? M[i][j - coins[i - 1]] : 0);
+            }
+        }
+        return M.back().back();
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;space-optimization-1&#34;&gt;Space Optimization&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;//O(n*amount)
+//O(amount)
+class Solution {
+public:
+    int change(int amount, vector&amp;lt;int&amp;gt;&amp;amp; coins) {
+        int n = coins.size();
+        vector&amp;lt;int&amp;gt; M(amount + 1, 0);
+        M[0] = 1;
+        for (int i = 1; i &amp;lt;= n; i++) {
+            for (int j = 0; j &amp;lt;= amount; j++) {
+                if (coins[i-1] &amp;lt;= j) {
+                    M[j] += M[j - coins[i -1]];
+                }
+            }
+        }
+        return M.back();
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;minimum-number-of-refueling-stops&#34;&gt;Minimum Number of Refueling Stops&lt;/h3&gt;
+
+&lt;p&gt;Recursive - LTE&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    int minRefuelStops(int target, int startFuel, vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; stations) {
+        if (stations.empty()) return startFuel &amp;gt;= target? 0 : -1;
+        stations.insert(stations.begin(), {0, startFuel});
+        int res = INT_MAX;
+        helper(0, res, 0, startFuel, stations, target);
+        return res == INT_MAX? -1 : res;
+    }
+    
+    
+    void helper(int level, int &amp;amp; res, int num, int remain, const vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; stations, int target) {
+        if (remain &amp;lt; 0) {
+            return;
+        }
+        if (level == stations.size()) {            
+            res = min(res, num);
+            return;
+        }
+        int cost = (level == stations.size() - 1)? target - stations[level][0] : stations[level + 1][0] - stations[level][0];
+        int refuel = (level == stations.size() - 1)? 0 : stations[level+1][1];
+        if (cost &amp;lt;= remain) {
+            helper(level + 1, res, num, remain - cost, stations, target);
+            helper(level + 1, res, num + 1, remain - cost + refuel, stations, target);        
+        }
+
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;DP knapsack solution&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    // dp[i][j]: pick j stops to refill from [0, i] stops, how far away can we go
+    // dp[i][j] = max {dp[i-1][j] &amp;gt;= stations[i-1][0] ? dp[i-1][j] : 0
+    //          =      dp[i-1][j-1] &amp;gt;= stations[i-1][0] ? dp[i-1][j-1] + stations[i-1][1] : 0 }
+    // 
+    int minRefuelStops(int target, int startFuel, vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; stations) {
+        int n = stations.size();
+        vector&amp;lt;vector&amp;lt;long&amp;gt;&amp;gt; M(n+1, vector&amp;lt;long&amp;gt;(n+1, 0));
+        
+        M[0][0] = startFuel;
+        for (int i = 1; i &amp;lt;= n; i++) {
+            if (startFuel &amp;gt;= stations[i-1][0])
+                M[i][0] = startFuel;
+        }
+        
+        for (int i = 1; i &amp;lt;= n; i++) {
+            for (int j = 1; j &amp;lt;= i; j++) {
+                if (M[i-1][j] &amp;gt;= stations[i-1][0]) {
+                    M[i][j] = M[i-1][j];
+                }
+                if (M[i-1][j-1] &amp;gt;= stations[i-1][0]) {
+                    M[i][j] = max(M[i][j], M[i-1][j-1] + stations[i-1][1]);
+                }
+                    
+            }
+        }
+        for (int t = 0; t &amp;lt;= n; ++t)
+            if (M[n][t] &amp;gt;= target) return t;
+        return -1;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;TODO: space optimization&lt;/p&gt;
+
+&lt;h2 id=&#34;reference&#34;&gt;Reference&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://raw.githubusercontent.com/tianyicui/pack/master/V2.pdf&#34;&gt;背包九讲&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=ZKAILBWl08g&#34;&gt;https://www.youtube.com/watch?v=ZKAILBWl08g&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Depth first search in matrix</title>
+      <link>https://pineal.github.com/posts/dfs/</link>
+      <pubDate>Wed, 05 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/posts/dfs/</guid>
+      <description>
+
+&lt;h2 id=&#34;robot-room-cleaner&#34;&gt;Robot Room Cleaner&lt;/h2&gt;
+
+&lt;p&gt;Given a robot cleaner in a room modeled as a grid.&lt;/p&gt;
+
+&lt;p&gt;Each cell in the grid can be empty or blocked.&lt;/p&gt;
+
+&lt;p&gt;The robot cleaner with 4 given APIs can move forward, turn left or turn right. Each turn it made is 90 degrees.&lt;/p&gt;
+
+&lt;p&gt;When it tries to move into a blocked cell, its bumper sensor detects the obstacle and it stays on the current cell.&lt;/p&gt;
+
+&lt;p&gt;Design an algorithm to clean the entire room using only the 4 given APIs shown below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;interface Robot {
+  // returns true if next cell is open and robot moves into the cell.
+  // returns false if next cell is obstacle and robot stays on the current cell.
+  boolean move();
+
+  // Robot will stay on the same cell after calling turnLeft/turnRight.
+  // Each turn will be 90 degrees.
+  void turnLeft();
+  void turnRight();
+
+  // Clean the current cell.
+  void clean();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;reference: &lt;a href=&#34;https://leetcode.com/problems/robot-room-cleaner/description/&#34;&gt;Leetcode&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;/**
+ * // This is the robot&#39;s control interface.
+ * // You should not implement it, or speculate about its implementation
+ * class Robot {
+ *   public:
+ *     // Returns true if the cell in front is open and robot moves into the cell.
+ *     // Returns false if the cell in front is blocked and robot stays in the current cell.
+ *     bool move();
+ *
+ *     // Robot will stay in the same cell after calling turnLeft/turnRight.
+ *     // Each turn will be 90 degrees.
+ *     void turnLeft();
+ *     void turnRight();
+ *
+ *     // Clean the current cell.
+ *     void clean();
+ * };
+ */
+class Solution {
+public:
+    int x = 0;
+    int y = 0;
+    int dir = 0;
+    
+    unordered_set&amp;lt;string&amp;gt; cleaned;
+    int dx[4]={0, -1, 0, 1};    //define it anti-clockwisely
+    int dy[4]={1, 0, -1, 0};    //N -&amp;gt; W -&amp;gt; S -&amp;gt; E
+    
+    void turnAround(Robot &amp;amp; r) {
+        r.turnRight();
+        r.turnRight();
+    }
+    
+    void cleanRoom(Robot&amp;amp; robot) {
+        string state = to_string(x) + &amp;quot; &amp;quot; + to_string(y);
+        if (cleaned.count(state)) {
+            return;
+        }    
+        
+        cleaned.emplace(state);        
+        robot.clean();
+    
+        //try 
+        for (int i = 0; i &amp;lt; 4; i++) {
+            if (robot.move()) {
+                //record the current location
+                x += dx[dir];
+                y += dy[dir];
+                //dfs goto next state
+                cleanRoom(robot);
+                //reset old location
+                turnAround(robot);
+                robot.move();
+                x -= dx[dir];
+                y -= dy[dir];                
+                //reset old direction 
+                turnAround(robot);
+            }
+            //make turn anti-clockwisely 
+            // - we are going to try next direction 
+            robot.turnLeft();
+            //record the current direction
+            dir = (dir + 1) % 4;
+        }
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;generate-random-maze&#34;&gt;Generate Random Maze&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Question&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Randomly generate a maze of size N * N (where N = 2K + 1) whose corridor and wall’s width are both 1 cell. For each pair of cells on the corridor, there must exist one and only one path between them. (Randomly means that the solution is generated randomly, and whenever the program is executed, the solution can be different.). The wall is denoted by 1 in the matrix and corridor is denoted by 0.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Assumptions&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;N = 2K + 1 and K &amp;gt;= 0
+the top left corner must be corridor
+there should be as many corridor cells as possible
+for each pair of cells on the corridor, there must exist one and only one path between them&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Examples&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;N = 5, one possible maze generated is&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    0  0  0  1  0
+
+    1  1  0  1  0
+
+    0  1  0  0  0
+
+    0  1  1  1  0
+
+    0  0  0  0  0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Solution&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void dfs(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; res, int x, int y) {
+    int n = res.size();
+    vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    random_shuffle(dirs.begin(), dirs.end());
+    int xx, xxx, yy, yyy;
+    xx = xxx = x;
+    yy = yyy = y;
+    for (const auto &amp;amp; dir : dirs) {
+        int dx =dir.first;
+        int dy = dir.second;
+        xx = x + dx;
+        xxx = x + dx * 2;
+        yy = y + dy;
+        yyy = y + dy * 2;
+
+        if (xxx &amp;gt;= 0 &amp;amp;&amp;amp; xxx &amp;lt; n &amp;amp;&amp;amp; yyy &amp;gt;= 0 &amp;amp;&amp;amp; yyy &amp;lt; n &amp;amp;&amp;amp; res[xxx][yyy] != 0) {
+            res[xxx][yyy] = 0;
+            res[xx][yy] = 0;
+            dfs(res, xxx, yyy);
+        }
+    }
+}
+
+vector&amp;lt;vector&amp;lt;int&amp;gt; &amp;gt; generateRandomMaze(int n) {
+    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; res(n, vector&amp;lt;int&amp;gt;(n, 1));
+    dfs(res, 0, 0);
+    return res;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Voting Algorithm</title>
+      <link>https://pineal.github.com/posts/voting_algorithm/</link>
+      <pubDate>Wed, 05 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/posts/voting_algorithm/</guid>
+      <description>
+
+&lt;h2 id=&#34;majority-element&#34;&gt;Majority Element&lt;/h2&gt;
+
+&lt;p&gt;俄罗斯方块的消除方式。出现两个不一样的消除：counter 减一。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A&lt;/li&gt;
+&lt;li&gt;A B -&amp;gt; 消除&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    int majorityElement(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        int major;
+        int count = 0;
+        for (int i = 0; i &amp;lt; nums.size(); i++) {
+            if (count == 0) {
+                major = nums[i];
+                count++;
+            } else {
+                count += (nums[i] == major)? 1 : -1;
+            }
+        }
+        return major;        
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;majority-element-ii&#34;&gt;Majority Element II&lt;/h2&gt;
+
+&lt;p&gt;同理：俄罗斯方块的消除方式，当出现三个不一样的时候消除。
+要注意的是，最后得到的candidate，需要再过一遍数组来确定是不是最后的答案。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    vector&amp;lt;int&amp;gt; majorityElement(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        int x = 0;
+        int y = 1;
+        //just need to be different test with case [0,0,0,0,0,0]
+        int cnt1 = 0;
+        int cnt2 = 0;
+        for (int i = 0; i &amp;lt; nums.size(); i++) {
+            if (nums[i] == x) {
+                cnt1++;
+            } else if (nums[i] == y) {
+                cnt2++;
+            } else if (cnt1 == 0) {
+                x = nums[i];
+                cnt1++;
+            } else if (cnt2 == 0) {
+                y = nums[i];
+                cnt2++;
+            }  else {
+                cnt1--;
+                cnt2--;
+            }
+        }
+        cnt1 = 0, cnt2 = 0;
+        for (int i = 0; i &amp;lt; nums.size(); i++) {
+            if (nums[i] == x) {
+                cnt1++;
+            } else if (nums[i] == y) {
+                cnt2++;
+            }
+        }
+        vector&amp;lt;int&amp;gt; rst;
+        if (cnt1 &amp;gt; nums.size() / 3) {
+            rst.emplace_back(x);
+        }
+        if (cnt2 &amp;gt; nums.size() / 3) {
+            rst.emplace_back(y);
+        }
+        return rst;
+    } 
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;majority-element-iii&#34;&gt;Majority Element III&lt;/h2&gt;
+
+&lt;p&gt;More than 1/k&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Dynamic Programming I</title>

@@ -6,10 +6,177 @@
     <description>Recent content in Dfs on PINEAL.ME</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Sep 2018 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://pineal.github.com/tags/dfs/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Depth first search in matrix</title>
+      <link>https://pineal.github.com/posts/dfs/</link>
+      <pubDate>Wed, 05 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/posts/dfs/</guid>
+      <description>
+
+&lt;h2 id=&#34;robot-room-cleaner&#34;&gt;Robot Room Cleaner&lt;/h2&gt;
+
+&lt;p&gt;Given a robot cleaner in a room modeled as a grid.&lt;/p&gt;
+
+&lt;p&gt;Each cell in the grid can be empty or blocked.&lt;/p&gt;
+
+&lt;p&gt;The robot cleaner with 4 given APIs can move forward, turn left or turn right. Each turn it made is 90 degrees.&lt;/p&gt;
+
+&lt;p&gt;When it tries to move into a blocked cell, its bumper sensor detects the obstacle and it stays on the current cell.&lt;/p&gt;
+
+&lt;p&gt;Design an algorithm to clean the entire room using only the 4 given APIs shown below.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;interface Robot {
+  // returns true if next cell is open and robot moves into the cell.
+  // returns false if next cell is obstacle and robot stays on the current cell.
+  boolean move();
+
+  // Robot will stay on the same cell after calling turnLeft/turnRight.
+  // Each turn will be 90 degrees.
+  void turnLeft();
+  void turnRight();
+
+  // Clean the current cell.
+  void clean();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;reference: &lt;a href=&#34;https://leetcode.com/problems/robot-room-cleaner/description/&#34;&gt;Leetcode&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;/**
+ * // This is the robot&#39;s control interface.
+ * // You should not implement it, or speculate about its implementation
+ * class Robot {
+ *   public:
+ *     // Returns true if the cell in front is open and robot moves into the cell.
+ *     // Returns false if the cell in front is blocked and robot stays in the current cell.
+ *     bool move();
+ *
+ *     // Robot will stay in the same cell after calling turnLeft/turnRight.
+ *     // Each turn will be 90 degrees.
+ *     void turnLeft();
+ *     void turnRight();
+ *
+ *     // Clean the current cell.
+ *     void clean();
+ * };
+ */
+class Solution {
+public:
+    int x = 0;
+    int y = 0;
+    int dir = 0;
+    
+    unordered_set&amp;lt;string&amp;gt; cleaned;
+    int dx[4]={0, -1, 0, 1};    //define it anti-clockwisely
+    int dy[4]={1, 0, -1, 0};    //N -&amp;gt; W -&amp;gt; S -&amp;gt; E
+    
+    void turnAround(Robot &amp;amp; r) {
+        r.turnRight();
+        r.turnRight();
+    }
+    
+    void cleanRoom(Robot&amp;amp; robot) {
+        string state = to_string(x) + &amp;quot; &amp;quot; + to_string(y);
+        if (cleaned.count(state)) {
+            return;
+        }    
+        
+        cleaned.emplace(state);        
+        robot.clean();
+    
+        //try 
+        for (int i = 0; i &amp;lt; 4; i++) {
+            if (robot.move()) {
+                //record the current location
+                x += dx[dir];
+                y += dy[dir];
+                //dfs goto next state
+                cleanRoom(robot);
+                //reset old location
+                turnAround(robot);
+                robot.move();
+                x -= dx[dir];
+                y -= dy[dir];                
+                //reset old direction 
+                turnAround(robot);
+            }
+            //make turn anti-clockwisely 
+            // - we are going to try next direction 
+            robot.turnLeft();
+            //record the current direction
+            dir = (dir + 1) % 4;
+        }
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;generate-random-maze&#34;&gt;Generate Random Maze&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Question&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Randomly generate a maze of size N * N (where N = 2K + 1) whose corridor and wall’s width are both 1 cell. For each pair of cells on the corridor, there must exist one and only one path between them. (Randomly means that the solution is generated randomly, and whenever the program is executed, the solution can be different.). The wall is denoted by 1 in the matrix and corridor is denoted by 0.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Assumptions&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;N = 2K + 1 and K &amp;gt;= 0
+the top left corner must be corridor
+there should be as many corridor cells as possible
+for each pair of cells on the corridor, there must exist one and only one path between them&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Examples&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;N = 5, one possible maze generated is&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    0  0  0  1  0
+
+    1  1  0  1  0
+
+    0  1  0  0  0
+
+    0  1  1  1  0
+
+    0  0  0  0  0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Solution&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;void dfs(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; res, int x, int y) {
+    int n = res.size();
+    vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    random_shuffle(dirs.begin(), dirs.end());
+    int xx, xxx, yy, yyy;
+    xx = xxx = x;
+    yy = yyy = y;
+    for (const auto &amp;amp; dir : dirs) {
+        int dx =dir.first;
+        int dy = dir.second;
+        xx = x + dx;
+        xxx = x + dx * 2;
+        yy = y + dy;
+        yyy = y + dy * 2;
+
+        if (xxx &amp;gt;= 0 &amp;amp;&amp;amp; xxx &amp;lt; n &amp;amp;&amp;amp; yyy &amp;gt;= 0 &amp;amp;&amp;amp; yyy &amp;lt; n &amp;amp;&amp;amp; res[xxx][yyy] != 0) {
+            res[xxx][yyy] = 0;
+            res[xx][yy] = 0;
+            dfs(res, xxx, yyy);
+        }
+    }
+}
+
+vector&amp;lt;vector&amp;lt;int&amp;gt; &amp;gt; generateRandomMaze(int n) {
+    vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; res(n, vector&amp;lt;int&amp;gt;(n, 1));
+    dfs(res, 0, 0);
+    return res;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Topics on Gragh Algorithm</title>
