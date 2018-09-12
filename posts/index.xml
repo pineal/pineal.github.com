@@ -301,6 +301,143 @@ public:
     </item>
     
     <item>
+      <title>Dynamic Programming II</title>
+      <link>https://pineal.github.com/posts/dynamic_programming_ii/</link>
+      <pubDate>Sat, 08 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/posts/dynamic_programming_ii/</guid>
+      <description>
+
+&lt;h2 id=&#34;coin-game-winner&#34;&gt;Coin game winner&lt;/h2&gt;
+
+&lt;p&gt;A and B are playing a game. At the beginning there are n coins. Given two more numbers x and y. In each move a player can pick x or y or 1 coins. A always starts the game. The player who picks the last coin wins the game. For a given value of n, find whether A will win the game or not if both are playing optimally.&lt;/p&gt;
+
+&lt;p&gt;Examples:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Input :  n = 5, x = 3, y = 4&lt;/li&gt;
+&lt;li&gt;Output : A&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There are 5 coins, every player can pick 1 or
+3 or 4 coins on his/her turn.
+A can win by picking 3 coins in first chance.
+Now 2 coins will be left so B will pick one
+coin and now A can win by picking the last coin.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Input : 2 3 4&lt;/li&gt;
+&lt;li&gt;Output : B&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let us take few example values of n for x = 3, y = 4.
+n = 0 A can not pick any coin so he losses
+n = 1 A can pick 1 coin and win the game
+n = 2 A can pick only 1 coin. Now B will pick 1 coin and win the game
+n = 3 4 A will win the game by picking 3 or 4 coins
+n = 5, 6 A will choose 3 or 4 coins. Now B will have to choose from 2 coins so A will win.&lt;/p&gt;
+
+&lt;p&gt;We can observe that A wins game for n coins only when it loses for coins n-1, n-x and n-y.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;bool findWinner(int x, int y, int n) {
+    vector&amp;lt;bool&amp;gt; M(n + 1, false);
+    M[1] = true;
+    for (int i = 2; i &amp;lt;= n; i++) {
+        if (i - 1 &amp;gt;= 0 &amp;amp;&amp;amp; M[i - 1] == false) {
+            M[i] = true;
+        }
+        else if (i - x &amp;gt;= 0 &amp;amp;&amp;amp; M[i - x] == false) {
+            M[i] = true;
+        }
+        else if (i - y &amp;gt;= 0 &amp;amp;&amp;amp; M[i - y] == false) {
+            M[i] = true;
+        }
+        cout &amp;lt;&amp;lt; M[i] &amp;lt;&amp;lt; endl;
+    }
+    return M.back();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;coin-up-probablity&#34;&gt;Coin up probablity&lt;/h2&gt;
+
+&lt;p&gt;有 $n$ 枚硬币，每个硬币掷一次正面朝上的概率各不相同，假定第$i$个概率为$p_i$。如果把所有硬币都掷一次，求 $k$ 个硬币正面朝上的概率。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;$M[i][j]$  抛 j 个硬币有 i 个正面朝上的概率&lt;/li&gt;
+&lt;li&gt;$M[i][j] = M[i][j-1] *(1 - P[i]) + M[i-1][j-1] * P[i]$&lt;/li&gt;
+&lt;li&gt;求 $M[n][k]$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;predict-the-winner&#34;&gt;Predict the Winner&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/predict-the-winner/description/&#34;&gt;Leetcode&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;$M[i][j]$ 表示从index i 到 index j，player 1 比 player 2 取的数的总和多多少。
+每次取的时候，要么取首个，即为$nums[i]$，那么对手的结果就可以用子问题 $M[i+1][j]$ 来表示，同理取最后一个数。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    bool PredictTheWinner(vector&amp;lt;int&amp;gt;&amp;amp; nums) {
+        int n = nums.size();
+        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; M(n, vector&amp;lt;int&amp;gt;(n, 0));
+        for (int i = 0; i &amp;lt; n; i++) {
+            M[i][i] = nums[i];
+        }
+        for (int offset = 1; offset &amp;lt; n; offset++) {
+            for (int i = 0; i &amp;lt; n - offset; i++) {
+                int j = i + offset;
+                M[i][j] = max(nums[i] - M[i+1][j], nums[j] - M[i][j-1]);    
+            }   
+        }
+        return M.front().back() &amp;gt;= 0;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;can-i-win&#34;&gt;Can I Win&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://leetcode.com/problems/can-i-win/description/&#34;&gt;https://leetcode.com/problems/can-i-win/description/&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    bool canIWin(int maxChoosableInteger, int desiredTotal) {
+        if (maxChoosableInteger &amp;gt;= desiredTotal) return true;
+        if (maxChoosableInteger * (maxChoosableInteger + 1) / 2 &amp;lt; desiredTotal) return false;
+        //from 1 to maxChoosableInteger -&amp;gt; ignore position 0
+        //state[i] represent the chosen Integer i has been used in the game? t/f 
+        string state(maxChoosableInteger + 1, &#39;f&#39;); 
+        unordered_map&amp;lt;string, bool&amp;gt; memo;   //dfs memorization 
+        return dfs(maxChoosableInteger, 0, desiredTotal, memo, state);
+    }
+    
+    
+    bool dfs(int max, int cur , int target, unordered_map&amp;lt;string, bool&amp;gt; &amp;amp; table, string &amp;amp; state) {
+        if (table.count(state)) {
+            return table[state];
+        }
+        for (int i = 1; i &amp;lt;= max; i++) {
+            if (state[i] == &#39;f&#39;) {
+                state[i] = &#39;t&#39;;
+                //only if opponent is lost or current chosen number is bigger than target
+                //the player win
+                if (cur + i &amp;gt;= target || dfs(max, cur + i, target, table, state) == false) {
+                    //recover visited state
+                    state[i] = &#39;f&#39;;
+                    table[state] = true;
+                    return true;
+                }
+                state[i] = &#39;f&#39;;    
+            }
+        }
+        table[state] = false;
+        return false;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Depth first search in matrix</title>
       <link>https://pineal.github.com/posts/dfs/</link>
       <pubDate>Wed, 05 Sep 2018 00:00:00 +0000</pubDate>
