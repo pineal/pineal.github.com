@@ -438,6 +438,367 @@ public:
     </item>
     
     <item>
+      <title>Shortest Path</title>
+      <link>https://pineal.github.com/posts/shortest_path_problems/</link>
+      <pubDate>Thu, 06 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://pineal.github.com/posts/shortest_path_problems/</guid>
+      <description>
+
+&lt;h2 id=&#34;maze-i&#34;&gt;Maze I&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;bool hasPath(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; maze, vector&amp;lt;int&amp;gt; &amp;amp; start, vector&amp;lt;int&amp;gt; &amp;amp; dest) {
+    const vector&amp;lt;int&amp;gt; dx = {0, -1, 1, 0};
+    const vector&amp;lt;int&amp;gt; dy = {1, 0, 0, -1};
+    queue&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; q;
+    q.emplace(start[0], start[1]);
+    maze[start[0]][start[1]] = 2;
+    int m = maze.size();
+    int n = maze.front().size();
+    while (!q.empty()) {
+        auto cur = q.front();
+        q.pop();
+        int x = cur.first;
+        int y = cur.second;
+        if (x == dest[0] &amp;amp;&amp;amp; y == dest[1]) {
+            return true;
+        }
+
+        for (int i = 0; i &amp;lt; 4; i++) {
+            int xx = x;
+            int yy = y;
+            while (xx &amp;gt;= 0 &amp;amp;&amp;amp; xx &amp;lt; m &amp;amp;&amp;amp; yy &amp;gt;= 0 &amp;amp;&amp;amp; yy &amp;lt; n &amp;amp;&amp;amp; maze[xx][yy] != 1) {
+                xx += dx[i];
+                yy += dy[i];
+            }
+            xx -= dx[i];
+            yy -= dy[i];
+            if (maze[xx][yy] == 0) {
+                maze[xx][yy] = 2;
+                q.emplace(xx, yy);
+            }
+        }
+    }
+    return false;
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;maze-ii&#34;&gt;Maze II&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;struct Position {
+    int x, y, d;
+    Position(int x, int y, int d): x(x), y(y), d(d) {}
+};
+
+class Solution {
+public:
+    int shortestDistance(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; maze, vector&amp;lt;int&amp;gt;&amp;amp; start, vector&amp;lt;int&amp;gt;&amp;amp; dest) {
+        if (maze.empty()) {
+            return -1;
+        }
+        auto cmp = [](Position &amp;amp; p1, Position &amp;amp; p2) {return p1.d &amp;gt; p2.d;};
+        priority_queue&amp;lt;Position, vector&amp;lt;Position&amp;gt;, decltype(cmp)&amp;gt; pq(cmp);
+        pq.emplace(Position(start[0], start[1], 0));
+        
+        int m = maze.size();
+        int n = maze.front().size();
+        
+        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; dis(m, vector&amp;lt;int&amp;gt;(n, INT_MAX));
+        const vector&amp;lt;int&amp;gt; dx = {0, 1, -1, 0};
+        const vector&amp;lt;int&amp;gt; dy = {1, 0, 0, -1};
+        while (!pq.empty()) {
+            auto p = pq.top();
+            pq.pop();
+            int x = p.x;
+            int y = p.y;
+            int d = p.d;
+            if (x == dest[0] &amp;amp;&amp;amp; y == dest[1]) {
+                return d;
+            }
+            dis[x][y] = d;
+            for (int i = 0; i &amp;lt; 4; i++) {
+                int nx = x;
+                int ny = y;
+                int nd = d;
+                while (nx + dx[i] &amp;lt; m &amp;amp;&amp;amp; nx + dx[i] &amp;gt;= 0 &amp;amp;&amp;amp; ny + dy[i] &amp;lt; n &amp;amp;&amp;amp; ny + dy[i] &amp;gt;= 0 
+                       &amp;amp;&amp;amp; maze[nx + dx[i]][ny + dy[i]] == 0) {
+                    nx += dx[i];
+                    ny += dy[i];
+                    nd++;
+                }
+                if (dis[nx][ny] &amp;gt; nd) {
+                        dis[nx][ny] = nd;
+                        pq.emplace(Position(nx, ny, nd));
+                }
+            }
+        }
+        return -1;   
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;maze-iii&#34;&gt;Maze III&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;struct State
+{
+    int x;
+    int y;
+    int d;
+    State (int x, int y, int d) : x(x), y(y), d(d) {}
+};
+
+const vector&amp;lt;int&amp;gt; dx = {1, -1, 0, 0};
+const vector&amp;lt;int&amp;gt; dy = {0, 0, -1, 1};
+const string dirs = &amp;quot;dulr&amp;quot;;
+    
+class Solution {
+public:
+    string findShortestWay(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; maze, vector&amp;lt;int&amp;gt;&amp;amp; ball, vector&amp;lt;int&amp;gt;&amp;amp; hole) {
+        auto cmp = [](State &amp;amp; s1, State &amp;amp; s2) {
+            return s1.d &amp;gt; s2.d;  
+        };
+        priority_queue&amp;lt;State, vector&amp;lt;State&amp;gt;, decltype(cmp)&amp;gt; pq(cmp);
+        pq.emplace(ball[0], ball[1], 0);
+        int m = maze.size();
+        int n = maze.front().size();
+        //dis[x][y]=&amp;gt;maintain the shortest distance to the source so far
+        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; dis(m, vector&amp;lt;int&amp;gt;(n, INT_MAX));
+        //dir[x][y]=&amp;gt;maintain the lexicographically smallest way from the source so far
+        vector&amp;lt;vector&amp;lt;string&amp;gt;&amp;gt; way(m, vector&amp;lt;string&amp;gt;(n));
+        while(!pq.empty()) {
+            auto state = pq.top();
+            pq.pop();
+            int x = state.x;
+            int y = state.y;
+            int d = state.d;
+            if (d &amp;gt; dis[x][y]) {
+                continue;
+            }
+            string path = way[x][y];
+            dis[x][y] = d;
+            if (x == hole[0] &amp;amp;&amp;amp; y == hole[1]) {
+                return way[x][y];
+            }
+            for (int i = 0; i &amp;lt; 4; i++) {
+                int nx = x;
+                int ny = y;
+                int nd = d;
+                string path = way[x][y] + dirs[i]; 
+                while (nx + dx[i] &amp;lt; m &amp;amp;&amp;amp; nx + dx[i] &amp;gt;= 0 &amp;amp;&amp;amp; ny + dy[i] &amp;lt; n &amp;amp;&amp;amp; ny + dy[i] &amp;gt;= 0 
+                       &amp;amp;&amp;amp; maze[nx + dx[i]][ny + dy[i]] == 0) {
+                    nx += dx[i];
+                    ny += dy[i];
+                    nd++;
+                    if (nx == hole[0] &amp;amp;&amp;amp; ny == hole[1]) {
+                        break;
+                    }
+                }
+                if (nd &amp;lt; dis[nx][ny]) {
+                    dis[nx][ny] = nd;
+                    way[nx][ny] = path;
+                    pq.emplace(nx, ny, nd);
+                }
+                if (nd == dis[nx][ny]) {
+                    if (path &amp;lt; way[nx][ny]) {
+                        way[nx][ny] = path;
+                    }
+                }
+            }
+        }
+        return &amp;quot;impossible&amp;quot;;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;leetcode-317-shortest-distance-from-all-buildings&#34;&gt;Leetcode 317: Shortest Distance from All Buildings&lt;/h2&gt;
+
+&lt;p&gt;找到一个点，从他开始到所有的buildings的距离最短的和，中间有障碍物。对每个点做BFS，然后加起来求一个最小值。这样的时间复杂度是 $O(m*n)[BFS] * O(m*n)[matrix] = O(m^2*n^2)$。优化：从building开始搜。那么时间复杂度为$O(k*m*n)$。 $k$ 是 building 的个数。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    int shortestDistance(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; grid) {
+        int res = INT_MAX;
+        
+        vector&amp;lt;vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt;&amp;gt; dis(grid.size(), vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt;(grid[0].size()));    
+        //dis[i][j].first =&amp;gt; total distance from k buildings to grid[i][j]
+        //dis[i][j].second =&amp;gt; num of times search from k buildings and visited to grid[i][j] successfully (avoid dead end)
+        int m = grid.size();
+        int n = grid[0].size();
+        int num_buildings = 0;
+        for (int i = 0; i &amp;lt; m; i++) {
+            for (int j = 0; j &amp;lt; n; j++) {
+                if (grid[i][j] == 1) {
+                    bfs(grid, dis, i, j);
+                    num_buildings++;
+                }
+            }
+        }
+        for (int i = 0; i &amp;lt; m; i++) {
+            for (int j = 0; j &amp;lt; n; j++) {
+                if (dis[i][j].second == num_buildings) {
+                    res = min(res, dis[i][j].first);
+                }
+            }
+        }
+        return res == INT_MAX? -1 : res;
+    }
+    
+    
+    void bfs(const vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; grid, vector&amp;lt;vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt;&amp;gt; &amp;amp; dis, int i, int j) {
+        queue&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; q;
+        q.emplace(i, j);
+        int m = grid.size();
+        int n = grid[0].size();
+        deque&amp;lt;deque&amp;lt;bool&amp;gt;&amp;gt; visited(m, deque&amp;lt;bool&amp;gt;(n, false));
+        
+        vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        
+        int level = 0;      //distance to building in grid[i][j]
+        while (!q.empty()) {
+            int size = q.size();
+            for (int i = 0; i &amp;lt; size; i++) {
+                int x = q.front().first;
+                int y = q.front().second;
+                q.pop();
+                if (level != 0) {
+                    dis[x][y].first += level;
+                    dis[x][y].second++;
+                }
+                for (const auto &amp;amp; dir : dirs) {
+                    int x_prime = x + dir.first;
+                    int y_prime = y + dir.second;
+                    if (x_prime &amp;lt; m &amp;amp;&amp;amp; x_prime &amp;gt;= 0 &amp;amp;&amp;amp; y_prime &amp;lt; n &amp;amp;&amp;amp; y_prime &amp;gt;= 0 &amp;amp;&amp;amp; 
+                        grid[x_prime][y_prime] == 0 &amp;amp;&amp;amp;
+                        visited[x_prime][y_prime] == false) {
+                        q.emplace(x_prime, y_prime);
+                        visited[x_prime][y_prime] = true;
+                    }
+                }    
+            }            
+            level++;
+        }
+        
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;best-meeting-point&#34;&gt;Best Meeting Point&lt;/h2&gt;
+
+&lt;p&gt;和上题一样的做法，只是可以在人所在的位置。做BFS标记visited的时候要注意。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;class Solution {
+public:
+    int minTotalDistance(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; grid) {
+        int res = INT_MAX;        
+        vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; dis(grid.size(), vector&amp;lt;int&amp;gt;(grid[0].size()));    
+        int m = grid.size();
+        int n = grid[0].size();
+        for (int i = 0; i &amp;lt; m; i++) {
+            for (int j = 0; j &amp;lt; n; j++) {
+                if (grid[i][j] == 1) {
+                    bfs(grid, dis, i, j);
+                }
+            }
+        }
+        for (int i = 0; i &amp;lt; m; i++) {
+            for (int j = 0; j &amp;lt; n; j++) {
+                    res = min(res, dis[i][j]);
+            }
+        }
+        return res == INT_MAX? -1 : res;        
+    }
+    void bfs(const vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; grid, vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; &amp;amp; dis, int i, int j) {
+        queue&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; q;
+        q.emplace(i, j);
+        int m = grid.size();
+        int n = grid[0].size();
+        deque&amp;lt;deque&amp;lt;bool&amp;gt;&amp;gt; visited(m, deque&amp;lt;bool&amp;gt;(n, false));
+        visited[i][j] = true;
+        vector&amp;lt;pair&amp;lt;int, int&amp;gt;&amp;gt; dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        
+        int level = 0;      //distance to grid[i][j]
+        while (!q.empty()) {
+            int size = q.size();
+            for (int i = 0; i &amp;lt; size; i++) {
+                int x = q.front().first;
+                int y = q.front().second;
+                q.pop();
+                if (level != 0) {
+                    dis[x][y] += level;
+                }
+                for (const auto &amp;amp; dir : dirs) {
+                    int x_prime = x + dir.first;
+                    int y_prime = y + dir.second;
+                    if (x_prime &amp;lt; m &amp;amp;&amp;amp; x_prime &amp;gt;= 0 &amp;amp;&amp;amp; y_prime &amp;lt; n &amp;amp;&amp;amp; y_prime &amp;gt;= 0 &amp;amp;&amp;amp; 
+                        visited[x_prime][y_prime] == false) {
+                        q.emplace(x_prime, y_prime);
+                        visited[x_prime][y_prime] = true;
+                    }
+                }    
+            }            
+            level++;
+        }
+    }    
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但超时啦。
+答案里给的方法是算出median。并不适用有obstacle的情况（是嘛？）。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-cpp&#34;&gt;// Time:  O(mn)
+// Space: O(m+n)
+class Solution {
+public:
+    int minTotalDistance(vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt;&amp;amp; grid) {
+        vector&amp;lt;int&amp;gt; x, y;
+        for (int i = 0; i &amp;lt; grid.size(); ++i) {
+            for (int j = 0; j &amp;lt; grid[0].size(); ++j) {
+                if (grid[i][j]) {
+                    x.emplace_back(i);
+                    y.emplace_back(j);
+                }
+            }
+        }
+        nth_element(x.begin(), x.begin() + x.size() / 2, x.end());
+        nth_element(y.begin(), y.begin() + y.size() / 2, y.end());
+        const int mid_x = x[x.size() / 2];
+        const int mid_y = y[y.size() / 2];
+        int sum = 0;
+        for (int i = 0; i &amp;lt; grid.size(); ++i) {
+            for (int j = 0; j &amp;lt; grid[0].size(); ++j) {
+                if (grid[i][j]) {
+                    sum += abs(mid_x - i) + abs(mid_y - j);
+                }
+            }
+        }
+        return sum;
+    }
+};
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://math.stackexchange.com/questions/113270/the-median-minimizes-the-sum-of-absolute-deviations&#34;&gt;数学证明参考链接&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;nth_element()
+把按 comparator 排序的有第n个数放在 n 的位置，前面的都比它“小”， 后面的都比它“大”。 但其他并不保证有序，时间复杂度 $O(n)$ 比 sort 好一些。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;dijkstra&#34;&gt;Dijkstra&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-using-set-in-stl/&#34;&gt;https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-using-set-in-stl/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/&#34;&gt;https://www.geeksforgeeks.org/greedy-algorithms-set-6-dijkstras-shortest-path-algorithm/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/&#34;&gt;https://www.geeksforgeeks.org/greedy-algorithms-set-7-dijkstras-algorithm-for-adjacency-list-representation/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;a-star&#34;&gt;A star&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/pineal/-O_O-/blob/master/A_Star_Search/A_Star_Search.cpp&#34;&gt;https://github.com/pineal/-O_O-/blob/master/A_Star_Search/A_Star_Search.cpp&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Depth first search in matrix</title>
       <link>https://pineal.github.com/posts/dfs/</link>
       <pubDate>Wed, 05 Sep 2018 00:00:00 +0000</pubDate>
