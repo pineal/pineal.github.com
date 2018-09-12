@@ -120,15 +120,6 @@
     </item>
     
     <item>
-      <title>Graph</title>
-      <link>https://pineal.github.com/tags/graph/</link>
-      <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/tags/graph/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Heap</title>
       <link>https://pineal.github.com/tags/heap/</link>
       <pubDate>Thu, 13 Oct 2016 00:00:00 +0000</pubDate>
@@ -197,15 +188,6 @@
       <pubDate>Mon, 14 Mar 2016 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/tags/sorting/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Topological Sorting</title>
-      <link>https://pineal.github.com/tags/topological-sorting/</link>
-      <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/tags/topological-sorting/</guid>
       <description></description>
     </item>
     
