@@ -1,129 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title>Bit Manipulation</title>
-	
-	<meta name="description" content="">
-	<meta name="image" content="">
-	
-	<meta itemprop="name" content="Bit Manipulation">
-	<meta itemprop="description" content="">
-	<meta itemprop="image" content="">
-	
-	<meta name="og:title" content="Bit Manipulation">
-	<meta name="og:description" content="">
-	
-	<meta name="og:url" content="https://pineal.github.com/posts/bit_manipulation/">
-	<meta name="og:site_name" content="Bit Manipulation">
-	<meta name="og:type" content="article">
-	
-	<meta name="article:tag" content="Algorithm Bit Manipulation ">
-	<link rel="stylesheet" type="text/css" href="https://pineal.github.com/css/style.css">
-	
-	
-	
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
-	<script type="text/javascript" async
-	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Bit Manipulation - PINEAL.ME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-	tex2jax: {
-	  inlineMath: [['$','$'], ['\\(','\\)']],
-	  displayMath: [['$$','$$'], ['\[','\]']],
-	  processEscapes: true,
-	  processEnvironments: true,
-	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
-	  TeX: { equationNumbers: { autoNumber: "AMS" },
-		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	}
-  });
-  </script>
+  <link rel="icon" href="https://pineal.github.com/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.51f9758ebedaebb8122900b7464b612d113097d9e170af8375c7cb311bb6a003.css">
+  
+
+  
+
 </head>
 
-<body>
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
 
-<header>
-	
-	<a href="https://pineal.github.com/" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
-	
-	&nbsp;&nbsp;<a href="https://pineal.github.com/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.github.com/about/" style="color:#777;"><strong>About</strong></a>
-	
-	
-	
-	<a href="https://pineal.github.com/index.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
-</header>
 
 
-<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
-<script>
-function fadeOut(el) {
-  el.style.opacity = 1;
-
-  var last = +new Date();
-  var tick = function() {
-    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
-    last = +new Date();
+    
+    
+    
+    
+    
     
 
-    if (el.style.opacity > 0) {
-      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-    } else {
-      el.style.display='none';
-    }
-  };
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  
+</div>
 
-  tick();
-}
-
-function ready(fn) {
-    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-         el = document.getElementById('loadingMask');
-         fadeOut(el);
-        var elements = document.querySelectorAll("img");
-        Array.prototype.forEach.call(elements, function(el, i) {
-            if (el.getAttribute("alt")) {
-                const caption = document.createElement('figcaption');
-                var node = document.createTextNode(el.getAttribute("alt"));
-                caption.appendChild(node);
-                const wrapper = document.createElement('figure');
-                wrapper.className = 'image';
-                el.parentNode.insertBefore(wrapper, el);
-                el.parentNode.removeChild(el);
-                wrapper.appendChild(el);
-                wrapper.appendChild(caption);
-            }
-        });
-
-    } else {
-        document.addEventListener('DOMContentLoaded', fn);
-    }
-}
-window.onload = ready;
-</script>
-
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Bit Manipulation</h1>
 <div class="content">
-  <h1>Bit Manipulation</h1>
-  <aside> <nav id="TableOfContents">
-<ul>
-<li><a href="#summary-of-basic-bit-manipulation">Summary of Basic Bit Manipulation</a>
-<ul>
-<li><a href="#count-1-in-binary">Count 1 in Binary</a></li>
-<li><a href="#flip-bits">Flip Bits</a></li>
-<li><a href="#a-b-problem">A + B problem</a></li>
-<li><a href="#update-bits">Update Bits</a></li>
-<li><a href="#swap-two-variables">swap two variables</a></li>
-<li><a href="#abs">abs</a></li>
-<li><a href="#number-complement">Number Complement</a></li>
-</ul></li>
-</ul>
-</nav></aside>
   
 
 <h1 id="summary-of-basic-bit-manipulation">Summary of Basic Bit Manipulation</h1>
@@ -135,78 +102,70 @@ window.onload = ready;
 <ol>
 <li>每次把各位的数和 1 做 &amp; 运算，然后计数，右移进行下一位。</li>
 </ol>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    /**
-     * @param num: an integer
-     * @return: an integer, the number of ones in num
-     */
-    int countOnes(int num) {
-        // write your code here
-        int counter = 0;
-        for (int i = 0; i &lt; sizeof(int)*8; i++) {
-            counter += num &amp; 1;
-            num &gt;&gt;= 1;
-        }
-        return counter;
-    }
-};
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="cm">/**
+</span><span class="cm">     * @param num: an integer
+</span><span class="cm">     * @return: an integer, the number of ones in num
+</span><span class="cm">     */</span>
+    <span class="kt">int</span> <span class="n">countOnes</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// write your code here
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">*</span><span class="mi">8</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="n">num</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">num</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">counter</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <ol>
 <li>把 num 和 num - 1 做 &amp; 运算， 直到num为0，有多少次运算就有多少个1. 因为每次“&amp;”都会去掉num最右边的1.</li>
 </ol>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    /**
-     * @param num: an integer
-     * @return: an integer, the number of ones in num
-     */
-    int countOnes(int num) {
-        // write your code here
-        int counter = 0;
-        while (num) {
-            num &amp;= num - 1;
-            counter++;
-        }
-        return counter;
-    }
-};
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="cm">/**
+</span><span class="cm">     * @param num: an integer
+</span><span class="cm">     * @return: an integer, the number of ones in num
+</span><span class="cm">     */</span>
+    <span class="kt">int</span> <span class="n">countOnes</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// write your code here
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">num</span> <span class="o">&amp;=</span> <span class="n">num</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">counter</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">counter</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <p>这个用法判断是不是2的整数次幂很容易，因为2的整数次幂必然只有1个bit的1。</p>
-
-<pre><code class="language-cpp">bool checkPowerOf2(int n) {
-    // write your code here
-    return n &gt; 0 &amp;&amp; ((n &amp; (n - 1)) == 0);
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">checkPowerOf2</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// write your code here
+</span><span class="c1"></span>    <span class="k">return</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">((</span><span class="n">n</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="flip-bits">Flip Bits</h2>
 
 <p>用到了xor的性质。</p>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    /**
-     *@param a, b: Two integer
-     *return: An integer
-     */
-    int bitSwapRequired(int a, int b) {
-        // write your code here
-        int counter = 0;
-        int c = a^b;
-        for (int i = 0; i &lt; 32; i++) {
-            counter += c &amp; 1;
-            c &gt;&gt;= 1;
-        }
-        return counter;
-    }
-};
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="cm">/**
+</span><span class="cm">     *@param a, b: Two integer
+</span><span class="cm">     *return: An integer
+</span><span class="cm">     */</span>
+    <span class="kt">int</span> <span class="n">bitSwapRequired</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// write your code here
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="o">^</span><span class="n">b</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="n">c</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">c</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">counter</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h2 id="a-b-problem">A + B problem</h2>
 
 <p>这题。
@@ -220,49 +179,45 @@ public:
          可以知道，这个过程是在模拟加法的运算过程，进位不可能
          一直持续，所以b最终会变为0。因此重复做上述操作就可以
          求得a + b的值。</p>
-
-<pre><code class="language-cpp">class Solution {
-    /*
-     * param a: The first integer
-     * param b: The second integer
-     * return: The sum of a and b
-     */
-    public int aplusb(int a, int b) {
-       while (b != 0) {
-            int _a = a ^ b;
-            int _b = (a &amp; b) &lt;&lt; 1;
-            a = _a;
-            b = _b;
-        }
-        return a;
-    }
-};
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+    <span class="cm">/*
+</span><span class="cm">     * param a: The first integer
+</span><span class="cm">     * param b: The second integer
+</span><span class="cm">     * return: The sum of a and b
+</span><span class="cm">     */</span>
+    <span class="k">public</span> <span class="kt">int</span> <span class="n">aplusb</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">while</span> <span class="p">(</span><span class="n">b</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">^</span> <span class="n">b</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">_b</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">_a</span><span class="p">;</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">_b</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h2 id="update-bits">Update Bits</h2>
 
 <p>Given two 32-bit numbers, N and M, and two bit positions, i and j. Write a method to set all bits between i and j in N equal to M (e g , M becomes a substring of N located at i and starting at j)
 You can assume that the bits j through i have enough space to fit all of M. That is, if M=10011， you can assume that there are at least 5 bits between j and i. You would not, for example, have j=3 and i=2, because M could not fully fit between bit 3 and bit 2.</p>
 
 <p>把一个数的 ［j， i］ 之间的bits 用另一个数去填充。</p>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    /**
-     *@param n, m: Two integer
-     *@param i, j: Two bit positions
-     *return: An integer
-     */
-    int updateBits(int n, int m, int i, int j) {
-        // write your code here
-        int right_part = n &amp; ((1 &lt;&lt; i) - 1);
-        // The behavior of right shift &gt;= 32 is undefined in C++.
-        int left_part = j &gt;= 31 ? 0 : (n &gt;&gt; (j + 1)) &lt;&lt; (j + 1);
-        return left_part | (m &lt;&lt; i) | right_part;
-    }
-};
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="cm">/**
+</span><span class="cm">     *@param n, m: Two integer
+</span><span class="cm">     *@param i, j: Two bit positions
+</span><span class="cm">     *return: An integer
+</span><span class="cm">     */</span>
+    <span class="kt">int</span> <span class="n">updateBits</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// write your code here
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">right_part</span> <span class="o">=</span> <span class="n">n</span> <span class="o">&amp;</span> <span class="p">((</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="c1">// The behavior of right shift &gt;= 32 is undefined in C++.
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">left_part</span> <span class="o">=</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">31</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">left_part</span> <span class="o">|</span> <span class="p">(</span><span class="n">m</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">|</span> <span class="n">right_part</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <p>先用一个 mask 把 i 右边的数给取出来。
 左边的数要这么取：先把bits右移 j + 1位，然后再左移 j + 1位，这样右边的数就都清空了。
 最后一步把 m 左移后再把左边部分和右边部分用 ｜ 粘起来。
@@ -271,53 +226,117 @@ public:
 <h2 id="swap-two-variables">swap two variables</h2>
 
 <p>如何不用第三个临时变量来交换两个数。</p>
-
-<pre><code class="language-cpp">void swap(int &amp;a, int &amp;b){
-	if (a != b){
-		  a ^= b;
-      b ^= a;
-      a ^= b;
-	}
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">){</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">!=</span> <span class="n">b</span><span class="p">){</span>
+		  <span class="n">a</span> <span class="o">^=</span> <span class="n">b</span><span class="p">;</span>
+      <span class="n">b</span> <span class="o">^=</span> <span class="n">a</span><span class="p">;</span>
+      <span class="n">a</span> <span class="o">^=</span> <span class="n">b</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="abs">abs</h2>
-
-<pre><code class="language-cpp">//取符号位
-	int a = -100;
-	int i = a &gt;&gt; 31;
-	//i = 0 正数
-	if(i == 0){
-		printf(&quot;%d\n&quot;,a);
-	}
-	//i = 1 负数
-	else{
-		printf(&quot;%d\n&quot;,~a + 1);
-	}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//取符号位
+</span><span class="c1"></span>	<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">100</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="mi">31</span><span class="p">;</span>
+	<span class="c1">//i = 0 正数
+</span><span class="c1"></span>	<span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="c1">//i = 1 负数
+</span><span class="c1"></span>	<span class="k">else</span><span class="p">{</span>
+		<span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="o">~</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+</code></pre></div>
 <h2 id="number-complement">Number Complement</h2>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    int findComplement(int num) {
-        unsigned mask = ~0;
-        while (num &amp; mask) mask &lt;&lt;= 1;
-        return ~mask &amp; ~num;
-    }
-};
-</code></pre>
-
-
-  <a href="/tags/algorithm/">Algorithm</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/bit-manipulation/">Bit Manipulation</a></a>&nbsp;&nbsp;&nbsp;
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">findComplement</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">unsigned</span> <span class="n">mask</span> <span class="o">=</span> <span class="o">~</span><span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">num</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">)</span> <span class="n">mask</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">return</span> <span class="o">~</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">num</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+</div>
 </div>
 
 
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/hesenzhang//">about me</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
 
 
-<footer>
-	<p>© 2017-2018, all rights reserved.</a>
-</footer>
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.bf1e1f7ae8e03db5f012356e825843facdff51c0a559cb0d27fe2bbe1db405c2.js"></script>
+  
+
+  
+  
+  
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141209571-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141209571-1');
+</script>
+    
+  
+
+
 </body>
+
 </html>

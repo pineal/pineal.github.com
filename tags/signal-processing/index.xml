@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Tue, 24 Mar 2015 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.github.com/tags/signal-processing/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://pineal.github.com/tags/signal-processing/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,87 +17,8 @@
       <pubDate>Tue, 24 Mar 2015 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/posts/kalman_filter/</guid>
-      <description>
-
-&lt;h2 id=&#34;purpose-and-usage&#34;&gt;Purpose and Usage&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Eliminate noise in measurements&lt;/li&gt;
-&lt;li&gt;Generate non-observable states(e.g., Velocity from position signals)&lt;/li&gt;
-&lt;li&gt;For prediction of future state&lt;/li&gt;
-&lt;li&gt;Optimal filtering&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;framework-and-model&#34;&gt;Framework and Model&lt;/h2&gt;
-
-&lt;h3 id=&#34;given&#34;&gt;Given:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A discrete stochastic linear controlled dynamical system:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;$$x_k = Ax_{k-1} + Bu_{k-1} + w_{k-1}$$&lt;/p&gt;
-
-&lt;p&gt;Each current signal value $x^k$ is a combination of previous signal value $x_{k-1}$ times a constant, a control signal $u_{k}$ and a process noise and a process noise signal $w_{k-1}$ (which usually considered as zero).&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A measurement function, where $v_{k}$ is the measurement noise.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;$$ y_{k} = Hx_{k} + v_{k} $$&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Assume the process noise and the measurement noise are both considered to be normal distribution that&lt;/p&gt;
-
-&lt;p&gt;$$ p(w) \sim N (0, Q), $$&lt;/p&gt;
-
-&lt;p&gt;$$ p(v) \sim N (0, R). $$&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In reality, covariance matrix $Q$ and $R$ may change in every iteration. We assume they are constant here however.&lt;/p&gt;
-
-&lt;h3 id=&#34;goal&#34;&gt;Goal:&lt;/h3&gt;
-
-&lt;p&gt;Find the best (recursive) estimate of the state $x$ of the system.&lt;/p&gt;
-
-&lt;h3 id=&#34;computational-origins&#34;&gt;Computational Origins&lt;/h3&gt;
-
-&lt;p&gt;Define $e_{k}^{-}$ to be a priori state estimate at step k given knowledge of the process prior to step $k$, and define $e_{k}$  to be a posteriori state estimate at step $k$ given measurement $z_{k}$. Then a priori and a posteriori estimate errors can be defined as:&lt;/p&gt;
-
-&lt;p&gt;$$e_{k}^{-} \equiv x_{k} - \hat{x}_{k}^{-}$$&lt;/p&gt;
-
-&lt;p&gt;$$e_{k} \equiv x_{k} - \hat{x}_{k}$$&lt;/p&gt;
-
-&lt;p&gt;The a priori estimate error covariance is then&lt;/p&gt;
-
-&lt;p&gt;$$P_{k}^{-} = E[e_{k}^{-}e_{k}^{-T}]$$&lt;/p&gt;
-
-&lt;p&gt;The a posteriori estimate error covariance is then&lt;/p&gt;
-
-&lt;p&gt;$$P_{k} = E[e_{k}e_{k}^{T}]$$&lt;/p&gt;
-
-&lt;p&gt;Then How can we optimally (linearly) combine the estimate and measurement to obtain the best reconstruction of ￼the true x?&lt;/p&gt;
-
-&lt;p&gt;The answer given in “The Probabilistic Origins of the Filter” found.&lt;/p&gt;
-
-&lt;p&gt;$$
-   \hat{x} = \hat{x}_{k}^{-} - K \times residual
-$$&lt;/p&gt;
-
-&lt;p&gt;Where &lt;em&gt;residual&lt;/em&gt; is $z_k - H \hat{x}_{k}^{-}$. It also can be called as measurement innovation.&lt;/p&gt;
-
-&lt;p&gt;The Kalman filter gains are derived by minimizing the posterior error covariance, resulting in&lt;/p&gt;
-
-&lt;p&gt;$$K_k = \frac{P_k^-H^T}{(HP_k^-H^T + R)^{-1}}$$&lt;/p&gt;
-
-&lt;p&gt;If the a priori estimate of the process noise is zero, Then&lt;/p&gt;
-
-&lt;p&gt;$$K = 0$$&lt;/p&gt;
-
-&lt;p&gt;If the measurement noise is zero&lt;/p&gt;
-
-&lt;p&gt;$$K = H^{-1}$$&lt;/p&gt;
-</description>
+      <description>Purpose and Usage  Eliminate noise in measurements Generate non-observable states(e.g., Velocity from position signals) For prediction of future state Optimal filtering  Framework and Model Given:  A discrete stochastic linear controlled dynamical system:  $$x_k = Ax_{k-1} + Bu_{k-1} + w_{k-1}$$
+Each current signal value $x^k$ is a combination of previous signal value $x_{k-1}$ times a constant, a control signal $u_{k}$ and a process noise and a process noise signal $w_{k-1}$ (which usually considered as zero).</description>
     </item>
     
   </channel>

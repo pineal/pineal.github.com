@@ -1,173 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title>Binary Tree</title>
-	
-	<meta name="description" content="">
-	<meta name="image" content="">
-	
-	<meta itemprop="name" content="Binary Tree">
-	<meta itemprop="description" content="">
-	<meta itemprop="image" content="">
-	
-	<meta name="og:title" content="Binary Tree">
-	<meta name="og:description" content="">
-	
-	<meta name="og:url" content="https://pineal.github.com/posts/binary_tree/">
-	<meta name="og:site_name" content="Binary Tree">
-	<meta name="og:type" content="article">
-	
-	<meta name="article:tag" content="Binary Tree ">
-	<link rel="stylesheet" type="text/css" href="https://pineal.github.com/css/style.css">
-	
-	
-	
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
-	<script type="text/javascript" async
-	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Binary Tree - PINEAL.ME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-	tex2jax: {
-	  inlineMath: [['$','$'], ['\\(','\\)']],
-	  displayMath: [['$$','$$'], ['\[','\]']],
-	  processEscapes: true,
-	  processEnvironments: true,
-	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
-	  TeX: { equationNumbers: { autoNumber: "AMS" },
-		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	}
-  });
-  </script>
+  <link rel="icon" href="https://pineal.github.com/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.51f9758ebedaebb8122900b7464b612d113097d9e170af8375c7cb311bb6a003.css">
+  
+
+  
+
 </head>
 
-<body>
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
 
-<header>
-	
-	<a href="https://pineal.github.com/" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
-	
-	&nbsp;&nbsp;<a href="https://pineal.github.com/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.github.com/about/" style="color:#777;"><strong>About</strong></a>
-	
-	
-	
-	<a href="https://pineal.github.com/index.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
-</header>
 
 
-<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
-<script>
-function fadeOut(el) {
-  el.style.opacity = 1;
-
-  var last = +new Date();
-  var tick = function() {
-    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
-    last = +new Date();
+    
+    
+    
+    
+    
     
 
-    if (el.style.opacity > 0) {
-      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-    } else {
-      el.style.display='none';
-    }
-  };
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  
+</div>
 
-  tick();
-}
-
-function ready(fn) {
-    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-         el = document.getElementById('loadingMask');
-         fadeOut(el);
-        var elements = document.querySelectorAll("img");
-        Array.prototype.forEach.call(elements, function(el, i) {
-            if (el.getAttribute("alt")) {
-                const caption = document.createElement('figcaption');
-                var node = document.createTextNode(el.getAttribute("alt"));
-                caption.appendChild(node);
-                const wrapper = document.createElement('figure');
-                wrapper.className = 'image';
-                el.parentNode.insertBefore(wrapper, el);
-                el.parentNode.removeChild(el);
-                wrapper.appendChild(el);
-                wrapper.appendChild(caption);
-            }
-        });
-
-    } else {
-        document.addEventListener('DOMContentLoaded', fn);
-    }
-}
-window.onload = ready;
-</script>
-
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Binary Tree</h1>
 <div class="content">
-  <h1>Binary Tree</h1>
-  <aside> <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#intro">Intro</a>
-<ul>
-<li><a href="#concepts">Concepts</a></li>
-</ul></li>
-<li><a href="#traverse">Traverse</a>
-<ul>
-<li><a href="#example">Example</a></li>
-<li><a href="#traverse-recursively">Traverse Recursively</a></li>
-<li><a href="#preorder-iterative">Preorder iterative</a></li>
-<li><a href="#inorder-iterative">Inorder Iterative</a></li>
-<li><a href="#postorder-iterative-i">Postorder iterative I</a></li>
-<li><a href="#postorder-iterative-ii">Postorder iterative II</a></li>
-<li><a href="#bfs-level-order">BFS level order</a></li>
-<li><a href="#morris-traverse-todo">Morris Traverse(TODO)</a></li>
-</ul></li>
-<li><a href="#binary-tree-iterator">Binary Tree Iterator</a>
-<ul>
-<li><a href="#implementation">Implementation</a></li>
-<li><a href="#bst-iterator">BST iterator</a></li>
-</ul></li>
-<li><a href="#different-views-of-tree">Different views of tree</a>
-<ul>
-<li><a href="#boundary-of-binary-tree">Boundary of Binary Tree</a></li>
-</ul></li>
-<li><a href="#path-problems">Path problems</a>
-<ul>
-<li><a href="#maximum-path-sum-binary-tree-i">Maximum Path Sum Binary Tree I</a></li>
-<li><a href="#maximum-path-sum-binary-tree-ii">Maximum Path Sum Binary Tree II</a></li>
-<li><a href="#maximum-path-sum-binary-tree-iii">Maximum Path Sum Binary Tree III</a></li>
-</ul></li>
-<li><a href="#lca-problems">LCA problems</a>
-<ul>
-<li><a href="#lca-i">LCA I</a></li>
-<li><a href="#lca-of-bst">LCA of BST</a></li>
-<li><a href="#lca-ii">LCA II</a></li>
-<li><a href="#lca-iii">LCA III</a></li>
-<li><a href="#lca-iv">LCA IV</a></li>
-<li><a href="#check-if-cousins">Check if cousins</a></li>
-</ul></li>
-<li><a href="#serialize-and-deserialize-binary-tree">Serialize and deserialize binary tree</a>
-<ul>
-<li><a href="#reconstruct-binary-tree-with-preorder-and-inorder">Reconstruct Binary Tree With Preorder And Inorder</a></li>
-<li><a href="#reconstruct-with-level-order">Reconstruct with level order</a></li>
-<li><a href="#reconstruct-binary-search-tree-with-postorder-traversal">Reconstruct Binary Search Tree With Postorder Traversal</a></li>
-<li><a href="#create-a-doubly-linked-list-from-a-ternary-tree">Create a Doubly Linked List from a Ternary Tree</a></li>
-</ul></li>
-<li><a href="#faq">FAQ</a>
-<ul>
-<li><a href="#difference-between-dfs-and-bfs">Difference between DFS and BFS</a></li>
-<li><a href="#difference-between-recursion-and-non-recursion">Difference between Recursion and Non-Recursion</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav></aside>
   
 
 <h2 id="intro">Intro</h2>
@@ -198,160 +121,148 @@ window.onload = ready;
 </ul>
 
 <h3 id="traverse-recursively">Traverse Recursively</h3>
-
-<pre><code class="language-cpp">void helper(TreeNode* node, vector&lt;int&gt; &amp; rst){
-    if (node != nullptr){
-//      rst.emplace_back(root -&gt; val);  If it is PreOder
-        helper(node -&gt; left, rst);
-//      rst.emplace_back(root -&gt; val);  If it is InOrder
-        helper(node -&gt; right, rst);
-//      rst.emplace_back(root -&gt; val);  If it is PostOrder
-    }
-}
-vector&lt;int&gt; DFS_Traversal(TreeNode* root) {
-    // write your code here
-    vector&lt;int&gt; rst;
-    helper(root, rst);
-    return rst;
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">helper</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">rst</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">){</span>
+<span class="c1">//      rst.emplace_back(root -&gt; val);  If it is PreOder
+</span><span class="c1"></span>        <span class="n">helper</span><span class="p">(</span><span class="n">node</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
+<span class="c1">//      rst.emplace_back(root -&gt; val);  If it is InOrder
+</span><span class="c1"></span>        <span class="n">helper</span><span class="p">(</span><span class="n">node</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
+<span class="c1">//      rst.emplace_back(root -&gt; val);  If it is PostOrder
+</span><span class="c1"></span>    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">DFS_Traversal</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// write your code here
+</span><span class="c1"></span>    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">rst</span><span class="p">;</span>
+    <span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="preorder-iterative">Preorder iterative</h3>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">pushleft</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="o">&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-<pre><code class="language-cpp">void pushleft(TreeNode* root, stack&lt;TreeNode*&gt; &amp; s, vector&lt;int&gt; &amp; res) {
-    while (root) {
-        res.emplace_back(root-&gt;val);
-        s.push(root);
-        root = root-&gt;left;
-    }
-}
-
-vector&lt;int&gt; preorder(TreeNode* root) {
-    vector&lt;int&gt; res;
-    stack&lt;TreeNode*&gt; s;
-    pushleft(root, s, res);
-    while (!s.empty()) {
-        auto cur = s.top();
-        s.pop();
-        cur = cur-&gt;right;
-        pushleft(cur, s, res);
-    }
-    return res;
-}
-</code></pre>
-
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">preorder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+    <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
+    <span class="n">pushleft</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+        <span class="n">pushleft</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="inorder-iterative">Inorder Iterative</h3>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">pushleft</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-<pre><code class="language-cpp">void pushleft(TreeNode* root, stack&lt;TreeNode*&gt; &amp; s) {
-    while (root) {
-        s.push(root);
-        root = root-&gt;left;
-    }
-}
-
-vector&lt;int&gt; inorder(TreeNode* root) {
-    vector&lt;int&gt; res;
-    stack&lt;TreeNode*&gt; s;
-    pushleft(root, s);
-    while (!s.empty()) {
-        auto cur = s.top();
-        s.pop();
-        res.emplace_back(cur-&gt;val);
-        cur = cur-&gt;right;
-        pushleft(cur, s);
-    }
-    return res;
-}
-</code></pre>
-
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">inorder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+    <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
+    <span class="n">pushleft</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+        <span class="n">pushleft</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="postorder-iterative-i">Postorder iterative I</h3>
-
-<pre><code class="language-cpp">vector&lt;int&gt; postorder(TreeNode* root) {
-    vector&lt;int&gt; res;
-    stack&lt;TreeNode*&gt; s1, s2;
-    s1.push(root);
-    while (!s1.empty()) {
-        auto cur = s1.top();
-        s2.push(cur);
-        s1.pop();
-        if (cur-&gt;left) {
-            s1.push(cur-&gt;left);
-        }
-        if (cur-&gt;right) {
-            s1.push(cur-&gt;right);
-        }
-    }
-    while (!s2.empty()) {
-        auto cur = s2.top();
-        s2.pop();
-        res.emplace_back(cur-&gt;val);
-    }
-    return res;
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">postorder</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+    <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">;</span>
+    <span class="n">s1</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">s1</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+        <span class="n">s2</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
+        <span class="n">s1</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">s1</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">s1</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">s2</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">s2</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+        <span class="n">s2</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="postorder-iterative-ii">Postorder iterative II</h3>
-
-<pre><code class="language-cpp">vector&lt;int&gt; postorderII(TreeNode* root) {
-    if (root == nullptr) {
-        return {};
-    }
-    vector&lt;int&gt; res;
-    stack&lt;TreeNode*&gt; s;
-    s.push(root);
-    TreeNode* prev = nullptr;
-    while (!s.empty()) {
-        auto cur = s.top();
-        if (prev == nullptr || cur == prev-&gt;left || cur == prev-&gt;right) {
-            if (cur-&gt;left) {
-                s.push(cur-&gt;left);
-            }
-            else if (cur-&gt;right) {
-                s.push(cur-&gt;right);
-            }
-            else {
-                s.pop();
-                res.emplace_back(cur-&gt;val);
-            }
-        }
-        else if (prev == cur-&gt;right || prev == cur-&gt;left &amp;&amp; cur-&gt;right == nullptr) {
-            s.pop();
-            res.emplace_back(cur-&gt;val);
-        }
-        else {
-            s.push(cur-&gt;right);
-        }
-        prev = cur;
-    }
-    return res;
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">postorderII</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{};</span>
+    <span class="p">}</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+    <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
+    <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">prev</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">prev</span> <span class="o">==</span> <span class="k">nullptr</span> <span class="o">||</span> <span class="n">cur</span> <span class="o">==</span> <span class="n">prev</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">||</span> <span class="n">cur</span> <span class="o">==</span> <span class="n">prev</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="n">res</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">prev</span> <span class="o">==</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">||</span> <span class="n">prev</span> <span class="o">==</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="n">res</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">prev</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="bfs-level-order">BFS level order</h3>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">levelOrder</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">rst</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
 
-<pre><code class="language-cpp">vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode *root) {
-    vector&lt;vector&lt;int&gt;&gt; rst;
-    if (root == nullptr) return rst;
+    <span class="n">queue</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">nodes</span><span class="p">;</span>
+    <span class="n">nodes</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
 
-    queue&lt;TreeNode*&gt; nodes;
-    nodes.push(root);
-
-    while(!nodes.empty()){
-        vector&lt;int&gt; level;
-        int size = nodes.size();
-        for (int i = 0; i &lt; size; i++){
-            TreeNode* node = nodes.front();
-            nodes.pop();
-            level.emplace_back(node -&gt; val);
-            if (node -&gt; left != nullptr) nodes.push(node -&gt; left);
-            if (node -&gt; right != nullptr) nodes.push(node -&gt; right);    
-        }
-        rst.emplace_back(level);
-    }
-return rst;    
-}
-</code></pre>
-
+    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">nodes</span><span class="p">.</span><span class="n">empty</span><span class="p">()){</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">level</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+            <span class="n">nodes</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="n">level</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">node</span> <span class="o">-&gt;</span> <span class="n">val</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">-&gt;</span> <span class="n">left</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="n">nodes</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">-&gt;</span> <span class="n">right</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">)</span> <span class="n">nodes</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">node</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">);</span>    
+        <span class="p">}</span>
+        <span class="n">rst</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">level</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="k">return</span> <span class="n">rst</span><span class="p">;</span>    
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="morris-traverse-todo">Morris Traverse(TODO)</h3>
 
 <h2 id="binary-tree-iterator">Binary Tree Iterator</h2>
@@ -361,407 +272,385 @@ return rst;
 <p><a href="https://github.com/pineal/-O_O-/blob/d600d536acf50c6d3299e99b200a4c247b79ece7/Binary_Tree/Binary_Tree_Iterator.cpp">Link</a></p>
 
 <h3 id="bst-iterator">BST iterator</h3>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">BSTIterator</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">BSTIterator</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-<pre><code class="language-cpp">class BSTIterator {
-private:
-    stack&lt;TreeNode*&gt; s;
-public:
-    BSTIterator(TreeNode *root) {
-        while (root) {
-            s.push(root);
-            root = root -&gt; left;
-        }
-    }
+    <span class="cm">/** @return whether we have a next smallest number */</span>
+    <span class="kt">bool</span> <span class="n">hasNext</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span>
+    <span class="p">}</span>
 
-    /** @return whether we have a next smallest number */
-    bool hasNext() {
-        return !s.empty();
-    }
-
-    /** @return the next smallest number */
-    //which means ascending order
-    //which means inoredr traversal
-    int next() {
-        if (s.empty()) {
-            return INT_MAX;
-        }
+    <span class="cm">/** @return the next smallest number */</span>
+    <span class="c1">//which means ascending order
+</span><span class="c1"></span>    <span class="c1">//which means inoredr traversal
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">next</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">INT_MAX</span><span class="p">;</span>
+        <span class="p">}</span>
         
-        TreeNode* parent = s.top();
-        s.pop();
-        TreeNode* cur = parent -&gt; right;
-        while (cur) {
-            s.push(cur);
-            cur = cur -&gt; left;
-        }
-        return parent -&gt; val;
-    }
-};
-</code></pre>
-
+        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">parent</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">parent</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
+            <span class="n">cur</span> <span class="o">=</span> <span class="n">cur</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">parent</span> <span class="o">-&gt;</span> <span class="n">val</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h2 id="different-views-of-tree">Different views of tree</h2>
 
 <h3 id="boundary-of-binary-tree">Boundary of Binary Tree</h3>
-
-<pre><code class="language-cpp">/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
-class Solution {
-public:
-    vector&lt;int&gt; boundaryOfBinaryTree(TreeNode* root) {
-        if (root == nullptr) {
-            return {};
-        }
-        vector&lt;int&gt; left, right, bottom, res;
-        res.emplace_back(root-&gt;val);
-        getLeft(root-&gt;left, left);
-        getBottom(root-&gt;left, bottom);
-        getBottom(root-&gt;right, bottom);
-        getRight(root-&gt;right, right);
-        res.insert(res.end(), left.begin(), left.end());
-        res.insert(res.end(), bottom.begin(), bottom.end());
-        res.insert(res.end(), right.rbegin(), right.rend());
-        return res;
-    }
-private:    
-    void getLeft(TreeNode* root, vector&lt;int&gt; &amp; res) {
-        if (root == nullptr) {
-            return;
-        }
-        if (!root-&gt;left &amp;&amp; !root-&gt;right) {
-            return;
-        }
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cm">/**
+</span><span class="cm"> * Definition for a binary tree node.
+</span><span class="cm"> * struct TreeNode {
+</span><span class="cm"> *     int val;
+</span><span class="cm"> *     TreeNode *left;
+</span><span class="cm"> *     TreeNode *right;
+</span><span class="cm"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+</span><span class="cm"> * };
+</span><span class="cm"> */</span>
+<span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">boundaryOfBinaryTree</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">{};</span>
+        <span class="p">}</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">res</span><span class="p">;</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+        <span class="n">getLeft</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">left</span><span class="p">);</span>
+        <span class="n">getBottom</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">bottom</span><span class="p">);</span>
+        <span class="n">getBottom</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">bottom</span><span class="p">);</span>
+        <span class="n">getRight</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">left</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">left</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">bottom</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">bottom</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">right</span><span class="p">.</span><span class="n">rbegin</span><span class="p">(),</span> <span class="n">right</span><span class="p">.</span><span class="n">rend</span><span class="p">());</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="k">private</span><span class="o">:</span>    
+    <span class="kt">void</span> <span class="n">getLeft</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
         
-        res.emplace_back(root-&gt;val);
-        if (root-&gt;left) {
-            getLeft(root-&gt;left, res);
-        }
-        else {
-            getLeft(root-&gt;right, res);    
-        }
-    }
+        <span class="n">res</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">getLeft</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">getLeft</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>    
+        <span class="p">}</span>
+    <span class="p">}</span>
     
-    void getRight(TreeNode* root, vector&lt;int&gt; &amp; res) {
-        if (root == nullptr) {
-            return;
-        }
-        if (!root-&gt;left &amp;&amp; !root-&gt;right) {
-            return;
-        }
-        res.emplace_back(root-&gt;val);
-        if (root-&gt;right) {
-            getRight(root-&gt;right, res);
-        } 
-        else {
-            getRight(root-&gt;left, res);
-        }
-    }
+    <span class="kt">void</span> <span class="n">getRight</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">getRight</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+        <span class="p">}</span> 
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">getRight</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
     
-    void getBottom(TreeNode* root, vector&lt;int&gt; &amp; res) {
-        if (root == nullptr) {
-            return;
-        }
-        if (!root-&gt;left &amp;&amp; !root-&gt;right) {
-            res.emplace_back(root-&gt;val);
-        }
-        getBottom(root-&gt;left, res);
-        getBottom(root-&gt;right, res);
-    }
-};
-</code></pre>
-
+    <span class="kt">void</span> <span class="n">getBottom</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">res</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">getBottom</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+        <span class="n">getBottom</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h2 id="path-problems">Path problems</h2>
 
 <h3 id="maximum-path-sum-binary-tree-i">Maximum Path Sum Binary Tree I</h3>
 
 <p>Given a binary tree in which each node contains an integer number. Find the maximum possible sum from one leaf node to another leaf node. If there is no such path available, return INT_MIN (C++).</p>
-
-<pre><code class="language-cpp">class Solution {
- public:
- int global_max = INT_MIN;
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+ <span class="kt">int</span> <span class="n">global_max</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">;</span>
  
-  int maxPathSum(TreeNode* root){
-    dfs(root);
-    return global_max;
-  }
+  <span class="kt">int</span> <span class="nf">maxPathSum</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">){</span>
+    <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">global_max</span><span class="p">;</span>
+  <span class="p">}</span>
  
-  int dfs(TreeNode* root) {
-    if (root == nullptr) {
-      return 0;
-    }
+  <span class="kt">int</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
   
-    int left =  dfs(root -&gt; left);
-    int right = dfs(root -&gt; right);
+    <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span>  <span class="n">dfs</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">);</span>
 
-    if (root -&gt; left &amp;&amp; root -&gt; right) {
-      int sum = left + right + root -&gt; value;
-      global_max = max(sum, global_max);
-      return max(left, right) + root -&gt; value;
-    } 
-      return (!root -&gt; left)? right + root -&gt; value : left + root -&gt; value;
-  }
-};
-</code></pre>
-
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="n">right</span> <span class="o">+</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="p">;</span>
+      <span class="n">global_max</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">sum</span><span class="p">,</span> <span class="n">global_max</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">max</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span> <span class="o">+</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="p">;</span>
+    <span class="p">}</span> 
+      <span class="k">return</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">)</span><span class="o">?</span> <span class="n">right</span> <span class="o">+</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="nl">value</span> <span class="p">:</span> <span class="n">left</span> <span class="o">+</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h3 id="maximum-path-sum-binary-tree-ii">Maximum Path Sum Binary Tree II</h3>
 
 <p>Given a binary tree in which each node contains an integer number. Find the maximum possible sum from any node to any node <strong>(the start node and the end node can be the same)</strong>.</p>
-
-<pre><code class="language-cpp">class Solution {
- public:
-  int maxPathSum(TreeNode* root) {
-    int global_max = INT_MIN;
-    dfs(root, global_max);    
-    return global_max;
-  }
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">int</span> <span class="n">maxPathSum</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">global_max</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">;</span>
+    <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">global_max</span><span class="p">);</span>    
+    <span class="k">return</span> <span class="n">global_max</span><span class="p">;</span>
+  <span class="p">}</span>
   
-  int dfs(TreeNode* root, int&amp; global_max) {
-    if (root == nullptr) {
-      return 0;
-    }
-    int left = dfs(root -&gt; left, global_max);
-    int right = dfs(root -&gt; right, global_max);
-    //left = (left &lt; 0)? 0 : left;
-    //right = (right &lt; 0)? 0 : right; 
-    global_max = max(global_max, left + right + root -&gt; value);
-    return max(0, max(left, right) + root -&gt; value); 
-  }
-};
-</code></pre>
-
+  <span class="kt">int</span> <span class="n">dfs</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">global_max</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">,</span> <span class="n">global_max</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">,</span> <span class="n">global_max</span><span class="p">);</span>
+    <span class="c1">//left = (left &lt; 0)? 0 : left;
+</span><span class="c1"></span>    <span class="c1">//right = (right &lt; 0)? 0 : right; 
+</span><span class="c1"></span>    <span class="n">global_max</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">global_max</span><span class="p">,</span> <span class="n">left</span> <span class="o">+</span> <span class="n">right</span> <span class="o">+</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nf">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span> <span class="o">+</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="p">);</span> 
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h3 id="maximum-path-sum-binary-tree-iii">Maximum Path Sum Binary Tree III</h3>
 
 <p>Given a binary tree in which each node contains an integer number.
 Find the maximum possible subpath sum<strong>(both the starting and ending node of the subpath should be on the same path from root to one of the leaf nodes, and the subpath is allowed to contain only one node)</strong>.</p>
-
-<pre><code class="language-cpp">class Solution {
- public:
-  int maxPathSum(TreeNode* root) {
-    int global_max = INT_MIN;
-    dfs(root, global_max);
-    return global_max;
-  }
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">int</span> <span class="n">maxPathSum</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">global_max</span> <span class="o">=</span> <span class="n">INT_MIN</span><span class="p">;</span>
+    <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">global_max</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">global_max</span><span class="p">;</span>
+  <span class="p">}</span>
   
-  int dfs(TreeNode* root, int&amp; global_max) {
-    if (root == nullptr) {
-      return 0;
-    }
-    int left = dfs(root -&gt; left, global_max);
-    int right = dfs(root -&gt; right, global_max);
-    int sum = max(max(left, right) , 0) + root -&gt; value;
-    global_max = max(global_max, sum);
-    return sum;
-  }
-};
-</code></pre>
-
+  <span class="kt">int</span> <span class="n">dfs</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">global_max</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">,</span> <span class="n">global_max</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">,</span> <span class="n">global_max</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">max</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span> <span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="p">;</span>
+    <span class="n">global_max</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">global_max</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h2 id="lca-problems">LCA problems</h2>
 
 <h3 id="lca-i">LCA I</h3>
-
-<pre><code class="language-cpp">    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if (root == nullptr || root == p || root == q) {
-            return root;
-        }
-        TreeNode* left = lowestCommonAncestor(root -&gt; left, p, q);
-        TreeNode* right = lowestCommonAncestor(root -&gt; right, p, q);
-        if (left &amp;&amp; right) {
-            return root;
-        }
-        return left? left : right;
-    }
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp">    <span class="n">TreeNode</span><span class="o">*</span> <span class="nf">lowestCommonAncestor</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span> <span class="o">||</span> <span class="n">root</span> <span class="o">==</span> <span class="n">p</span> <span class="o">||</span> <span class="n">root</span> <span class="o">==</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">left</span> <span class="o">=</span> <span class="n">lowestCommonAncestor</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
+        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">right</span> <span class="o">=</span> <span class="n">lowestCommonAncestor</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">left</span><span class="o">?</span> <span class="nl">left</span> <span class="p">:</span> <span class="n">right</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
 <h3 id="lca-of-bst">LCA of BST</h3>
-
-<pre><code class="language-cpp">    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if (root == nullptr) {
-            return root;
-        // p, q are in two sides or root is one of p, q
-        } else if ((root-&gt;val - p-&gt;val) * (root-&gt;val - q-&gt;val) &lt;= 0) {
-            return root;
-        //p,q are smaller than root =&gt; both in left side
-        } else if (root-&gt;val &gt; p-&gt;val &amp;&amp; root -&gt; val &gt; q-&gt;val) {
-            return lowestCommonAncestor(root-&gt;left, p, q);
-        //both in right side
-        } else {
-            return lowestCommonAncestor(root-&gt;right, p, q);            
-        }
-    }
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp">    <span class="n">TreeNode</span><span class="o">*</span> <span class="nf">lowestCommonAncestor</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">q</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+        <span class="c1">// p, q are in two sides or root is one of p, q
+</span><span class="c1"></span>        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">-</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">-</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+        <span class="c1">//p,q are smaller than root =&gt; both in left side
+</span><span class="c1"></span>        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&gt;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&amp;&amp;</span> <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">lowestCommonAncestor</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
+        <span class="c1">//both in right side
+</span><span class="c1"></span>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">lowestCommonAncestor</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>            
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div>
 <h3 id="lca-ii">LCA II</h3>
 
 <p>Give the treenode with parent pointer.</p>
-
-<pre><code class="language-cpp">//class TreeNodeP {
-// public:
-//  int value;
-//  TreeNodeP* left;
-//  TreeNodeP* right;
-//  TreeNodeP* parent;
-//  TreeNodeP(int v, TreeNodeP* p) 
-//      : value(v), left(NULL), right(NULL), parent(p) {}
-//};
-
-class Solution {
-private:
- int path_length(TreeNodeP* node) {
-   int length = 0;
-   while (node) {
-     node = node -&gt; parent;
-     length++;
-   }
-   return length;
- }
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">//class TreeNodeP {
+</span><span class="c1">// public:
+</span><span class="c1">//  int value;
+</span><span class="c1">//  TreeNodeP* left;
+</span><span class="c1">//  TreeNodeP* right;
+</span><span class="c1">//  TreeNodeP* parent;
+</span><span class="c1">//  TreeNodeP(int v, TreeNodeP* p) 
+</span><span class="c1">//      : value(v), left(NULL), right(NULL), parent(p) {}
+</span><span class="c1">//};
+</span><span class="c1"></span>
+<span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+ <span class="kt">int</span> <span class="n">path_length</span><span class="p">(</span><span class="n">TreeNodeP</span><span class="o">*</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+   <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="k">while</span> <span class="p">(</span><span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">node</span> <span class="o">=</span> <span class="n">node</span> <span class="o">-&gt;</span> <span class="n">parent</span><span class="p">;</span>
+     <span class="n">length</span><span class="o">++</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="n">length</span><span class="p">;</span>
+ <span class="p">}</span>
  
- TreeNodeP* llc(TreeNodeP* small, TreeNodeP* large, int diff) {
-   while (diff &gt; 0) {
-     large = large -&gt; parent;
-     diff--;
-   }
-   while (large != small) {
-     large = large -&gt; parent;
-     small = small -&gt; parent;
-   }
-   return large;
- }
- public:
-  TreeNodeP* LCA(TreeNodeP* one, TreeNodeP* two) {
-    int l1 = path_length(one);
-    int l2 = path_length(two);
-    if (l1 &lt;= l2) {
-      return llc(one, two, l2 - l1);
-    } else {
-      return llc(two, one, l1 - l2);
-    }
-  }
+ <span class="n">TreeNodeP</span><span class="o">*</span> <span class="n">llc</span><span class="p">(</span><span class="n">TreeNodeP</span><span class="o">*</span> <span class="n">small</span><span class="p">,</span> <span class="n">TreeNodeP</span><span class="o">*</span> <span class="n">large</span><span class="p">,</span> <span class="kt">int</span> <span class="n">diff</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">while</span> <span class="p">(</span><span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">large</span> <span class="o">=</span> <span class="n">large</span> <span class="o">-&gt;</span> <span class="n">parent</span><span class="p">;</span>
+     <span class="n">diff</span><span class="o">--</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="k">while</span> <span class="p">(</span><span class="n">large</span> <span class="o">!=</span> <span class="n">small</span><span class="p">)</span> <span class="p">{</span>
+     <span class="n">large</span> <span class="o">=</span> <span class="n">large</span> <span class="o">-&gt;</span> <span class="n">parent</span><span class="p">;</span>
+     <span class="n">small</span> <span class="o">=</span> <span class="n">small</span> <span class="o">-&gt;</span> <span class="n">parent</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="k">return</span> <span class="n">large</span><span class="p">;</span>
+ <span class="p">}</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">TreeNodeP</span><span class="o">*</span> <span class="n">LCA</span><span class="p">(</span><span class="n">TreeNodeP</span><span class="o">*</span> <span class="n">one</span><span class="p">,</span> <span class="n">TreeNodeP</span><span class="o">*</span> <span class="n">two</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">l1</span> <span class="o">=</span> <span class="n">path_length</span><span class="p">(</span><span class="n">one</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">l2</span> <span class="o">=</span> <span class="n">path_length</span><span class="p">(</span><span class="n">two</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">l1</span> <span class="o">&lt;=</span> <span class="n">l2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">llc</span><span class="p">(</span><span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">l2</span> <span class="o">-</span> <span class="n">l1</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">llc</span><span class="p">(</span><span class="n">two</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">l1</span> <span class="o">-</span> <span class="n">l2</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
   
-};
-</code></pre>
-
+<span class="p">};</span>
+</code></pre></div>
 <h3 id="lca-iii">LCA III</h3>
 
 <p>Given two nodes in a binary tree, find their lowest common ancestor (the given two nodes are not guaranteed to be in the binary tree). Return null If any of the nodes is not in the tree. There is no parent pointer for the nodes in the binary tree. The given two nodes are not guaranteed to be in the binary tree.</p>
-
-<pre><code class="language-cpp">class Solution {
- public:
-  bool flag1 = false;
-  bool flag2 = false;
-  TreeNode* solve(TreeNode* root, TreeNode* one, TreeNode* two) {
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="kt">bool</span> <span class="n">flag1</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="kt">bool</span> <span class="n">flag2</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">TreeNode</span><span class="o">*</span> <span class="nf">solve</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">one</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">two</span><span class="p">)</span> <span class="p">{</span>
   
-    traversal(root, one, two);
-    if (flag1 &amp;&amp; flag2) {
-      return findLCA(root, one, two);
-    } 
-    return nullptr;
-  }
-  void traversal(TreeNode* root, TreeNode* one, TreeNode* two) {
-    if (root == nullptr) {
-      return;
-    }
-    if (root == one) {flag1 = true;}
-    if (root == two) {flag2 = true;}
-    traversal(root -&gt; left, one, two);
-    traversal(root -&gt; right, one, two);
-  }
-  TreeNode* findLCA(TreeNode* root, TreeNode* one, TreeNode* two) {
+    <span class="n">traversal</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">flag1</span> <span class="o">&amp;&amp;</span> <span class="n">flag2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">findLCA</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">);</span>
+    <span class="p">}</span> 
+    <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kt">void</span> <span class="nf">traversal</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">one</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">two</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="n">one</span><span class="p">)</span> <span class="p">{</span><span class="n">flag1</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="n">two</span><span class="p">)</span> <span class="p">{</span><span class="n">flag2</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;}</span>
+    <span class="n">traversal</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">);</span>
+    <span class="n">traversal</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">TreeNode</span><span class="o">*</span> <span class="nf">findLCA</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">one</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">two</span><span class="p">)</span> <span class="p">{</span>
    
-    if (root == nullptr) {
-      return nullptr;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    if (root == one) {
-      return root;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="n">one</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    if (root == two) {
-      return root;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="n">two</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    auto left =  findLCA(root -&gt; left,  one, two);
-    auto right = findLCA(root -&gt; right, one, two);
+    <span class="k">auto</span> <span class="n">left</span> <span class="o">=</span>  <span class="n">findLCA</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">,</span>  <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">right</span> <span class="o">=</span> <span class="n">findLCA</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">);</span>
     
-    if (left &amp;&amp; right) {
-      return root;
-    } else if (left) {
-      return left;
-    } else if (right) {
-      return right;
-    } else {
-      return nullptr;
-    }
-  }
-};
-</code></pre>
-
+    <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">left</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">left</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">right</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h3 id="lca-iv">LCA IV</h3>
 
 <p>Give k nodes, find their CLA.</p>
-
-<pre><code class="language-cpp">class Solution {
- public:
-  TreeNode* LCA(TreeNode* root, vector&lt;TreeNode*&gt; nodes) {
-    if (root == nullptr) {
-      return root;
-    }
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">TreeNode</span><span class="o">*</span> <span class="n">LCA</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">nodes</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    for (int i = 0; i &lt; nodes.size(); i++) {
-      if (root == nodes[i]) {
-        return root;
-      }
-    }
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nodes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="n">nodes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
     
-    auto left = LCA(root -&gt; left, nodes);
-    auto right = LCA(root -&gt; right, nodes);
+    <span class="k">auto</span> <span class="n">left</span> <span class="o">=</span> <span class="n">LCA</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span><span class="p">,</span> <span class="n">nodes</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">right</span> <span class="o">=</span> <span class="n">LCA</span><span class="p">(</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span><span class="p">,</span> <span class="n">nodes</span><span class="p">);</span>
     
-    if (left &amp;&amp; right) {
-      return root;
-    } else {
-      return left? left : right;
-    }
-  }
-};
-</code></pre>
-
+    <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">left</span><span class="o">?</span> <span class="nl">left</span> <span class="p">:</span> <span class="n">right</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h3 id="check-if-cousins">Check if cousins</h3>
 
 <p><a href="https://www.geeksforgeeks.org/check-two-nodes-cousins-binary-tree/">Geeksforgeeks source</a></p>
-
-<pre><code class="language-cpp">bool checkIfCousins(TreeNode* root, TreeNode* one, TreeNode* two) {
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">checkIfCousins</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">one</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">two</span><span class="p">)</span> <span class="p">{</span>
   
-  bool res = false;
-  helper(root, one, two, 0, res);
-  return res;
-}
+  <span class="kt">bool</span> <span class="n">res</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+  <span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
 
-//return target'node level
-//return -1 is not found
-int helper(TreeNode* root, TreeNode* one, TreeNode* Two, int level, bool &amp; res) {
+<span class="c1">//return target&#39;node level
+</span><span class="c1">//return -1 is not found
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">helper</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">one</span><span class="p">,</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">Two</span><span class="p">,</span> <span class="kt">int</span> <span class="n">level</span><span class="p">,</span> <span class="kt">bool</span> <span class="o">&amp;</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
 
-  if (root == nullptr) {
-    return -1;
-  }
+  <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
 
-  if (root == one || root == two) {
-    return level;
-  }
+  <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="n">one</span> <span class="o">||</span> <span class="n">root</span> <span class="o">==</span> <span class="n">two</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">level</span><span class="p">;</span>
+  <span class="p">}</span>
 
-  int left = helper(root-&gt;left, one, two, level + 1, res);
-  int right = helper(root-&gt;right, one, two, level + 1, res);
+  <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
 
-  if (left == right &amp;&amp; left - 1 &gt; level) {
-    res = true;
-  }
-  return max(left, right);
-}
-</code></pre>
-
+  <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">==</span> <span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">left</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="n">level</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">max</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="serialize-and-deserialize-binary-tree">Serialize and deserialize binary tree</h2>
 
 <h3 id="reconstruct-binary-tree-with-preorder-and-inorder">Reconstruct Binary Tree With Preorder And Inorder</h3>
@@ -789,8 +678,7 @@ int helper(TreeNode* root, TreeNode* one, TreeNode* Two, int level, bool &amp; r
 
 <li><p>recursively solve the problem on left subtree and right subtree</p></li>
 </ol>
-
-<pre><code>  TreeNode* reconstruct(vector&lt;int&gt; in, vector&lt;int&gt; pre) {
+<div class="highlight"><pre class="chroma">  TreeNode* reconstruct(vector&lt;int&gt; in, vector&lt;int&gt; pre) {
     unordered_map&lt;int, int&gt; table;
     for (int i = 0; i &lt; in.size(); i++) {
       table[in[i]] = i;
@@ -812,119 +700,111 @@ int helper(TreeNode* root, TreeNode* one, TreeNode* Two, int level, bool &amp; r
     root -&gt; left = helper(in, in_left, index - 1, pre, pre_left + 1, table);
     root -&gt; right = helper(in, index + 1, in_right, pre, pre_left + index - in_left + 1, table);
     return root;                  
-	}
-</code></pre>
-
+	}</pre></div>
 <h3 id="reconstruct-with-level-order">Reconstruct with level order</h3>
 
 <p>level order 的第一个元素，一定是root。通过inorder找到root的位置，然后根据index的关系，分割左右子树。</p>
-
-<pre><code class="language-cpp">class Solution {
- public:
-  TreeNode* reconstruct(vector&lt;int&gt; in, vector&lt;int&gt; level) {
-    map&lt;int, int&gt; table;
-    for (int i = 0; i &lt; in.size(); i++) {
-      table[in[i]] = i;
-    }
-    return helper(level, table);
-  }
-  TreeNode* helper(vector&lt;int&gt; level, map&lt;int, int&gt; table) {
-    if (level.size() == 0) {
-      return nullptr;
-    }
-    TreeNode* root = new TreeNode(level[0]);
-    int index = table[root-&gt;value];
-    vector&lt;int&gt; left;
-    vector&lt;int&gt; right;
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">TreeNode</span><span class="o">*</span> <span class="n">reconstruct</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">in</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">level</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">table</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">in</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">table</span><span class="p">[</span><span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">helper</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">table</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="n">TreeNode</span><span class="o">*</span> <span class="n">helper</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">level</span><span class="p">,</span> <span class="n">map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">table</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">level</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">level</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">];</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">left</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">right</span><span class="p">;</span>
     
-    for (int i = 0; i &lt; level.size(); i++) {
-      if (table[level[i]] &lt; index) {
-        left.emplace_back(level[i]);
-      } else if (table[level[i]] &gt; index) {
-        right.emplace_back(level[i]);
-      }
-    }
-    root -&gt; left = helper(left, table);
-    root -&gt; right = helper(right, table);
-    return root;
-  }
-};
-</code></pre>
-
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">level</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&lt;</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">left</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">&gt;</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">right</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">level</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">table</span><span class="p">);</span>
+    <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">right</span><span class="p">,</span> <span class="n">table</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h3 id="reconstruct-binary-search-tree-with-postorder-traversal">Reconstruct Binary Search Tree With Postorder Traversal</h3>
-
-<pre><code class="language-cpp">class Solution {
- public:
-  TreeNode* reconstruct(vector&lt;int&gt; post) {
-    //Post order -&gt; [leftsubtree][rightsubtree]root =&gt; determine the position of root
-    //In   order -&gt; [left]root[right] =&gt;recursively find left and right parts
-    vector&lt;int&gt; in(post);
-    sort(in.begin(), in.end());
-    unordered_map&lt;int, int&gt; table;
-    for (int i = 0; i &lt; in.size(); i++) {
-        table[in[i]] = i;
-    }
-    return helper(in, post, table, post.size() - 1, 0, in.size() - 1);
-  }
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">TreeNode</span><span class="o">*</span> <span class="n">reconstruct</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">post</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//Post order -&gt; [leftsubtree][rightsubtree]root =&gt; determine the position of root
+</span><span class="c1"></span>    <span class="c1">//In   order -&gt; [left]root[right] =&gt;recursively find left and right parts
+</span><span class="c1"></span>    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">in</span><span class="p">(</span><span class="n">post</span><span class="p">);</span>
+    <span class="n">sort</span><span class="p">(</span><span class="n">in</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">in</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+    <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">table</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">in</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">table</span><span class="p">[</span><span class="n">in</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">helper</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">post</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">in</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">}</span>
   
-  TreeNode* helper(vector&lt;int&gt; in, vector&lt;int&gt; post, unordered_map&lt;int, int&gt; &amp; table,
-                    int post_right, int in_left, int in_right) {
+  <span class="n">TreeNode</span><span class="o">*</span> <span class="n">helper</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">in</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">post</span><span class="p">,</span> <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">table</span><span class="p">,</span>
+                    <span class="kt">int</span> <span class="n">post_right</span><span class="p">,</span> <span class="kt">int</span> <span class="n">in_left</span><span class="p">,</span> <span class="kt">int</span> <span class="n">in_right</span><span class="p">)</span> <span class="p">{</span>
   
-    if (in_left &gt; in_right){
-      return nullptr;
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">in_left</span> <span class="o">&gt;</span> <span class="n">in_right</span><span class="p">){</span>
+      <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    TreeNode* root = new TreeNode(post[post_right]);
-    int index = table[root -&gt; value];
+    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">post</span><span class="p">[</span><span class="n">post_right</span><span class="p">]);</span>
+    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">root</span> <span class="o">-&gt;</span> <span class="n">value</span><span class="p">];</span>
     
-    root -&gt; right = helper(in, post, table, post_right - 1, index + 1, in_right);
-    root -&gt; left = helper(in, post, table, post_right - 1 - (in_right - index), in_left, index - 1);
-    return root;
-  }
-};
-</code></pre>
+    <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">right</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">post_right</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">in_right</span><span class="p">);</span>
+    <span class="n">root</span> <span class="o">-&gt;</span> <span class="n">left</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">in</span><span class="p">,</span> <span class="n">post</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">post_right</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">in_right</span> <span class="o">-</span> <span class="n">index</span><span class="p">),</span> <span class="n">in_left</span><span class="p">,</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Codec</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
 
-<pre><code class="language-cpp">class Codec {
-public:
-
-    // Encodes a tree to a single string.
-    string serialize(TreeNode* root) {
-        string order;
-        inorderDFS(root, order);
-        return order;
-    }
+    <span class="c1">// Encodes a tree to a single string.
+</span><span class="c1"></span>    <span class="n">string</span> <span class="n">serialize</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">string</span> <span class="n">order</span><span class="p">;</span>
+        <span class="n">inorderDFS</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">order</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">order</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    inline void inorderDFS(TreeNode* root, string&amp; order) {
-        if (!root) return;
-        char buf[4];
-        memcpy(buf, &amp;(root-&gt;val), sizeof(int)); //burn the int into 4 chars
-        for (int i=0; i&lt;4; i++) order.push_back(buf[i]);
-        inorderDFS(root-&gt;left, order);
-        inorderDFS(root-&gt;right, order);
-    }
+    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">inorderDFS</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">,</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">order</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">root</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+        <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">4</span><span class="p">];</span>
+        <span class="n">memcpy</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">),</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span> <span class="c1">//burn the int into 4 chars
+</span><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">order</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">inorderDFS</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">order</span><span class="p">);</span>
+        <span class="n">inorderDFS</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">order</span><span class="p">);</span>
+    <span class="p">}</span>
 
-    // Decodes your encoded data to tree.
-    TreeNode* deserialize(string data) {
-        int pos = 0;
-        return reconstruct(data, pos, INT_MIN, INT_MAX);
-    }
+    <span class="c1">// Decodes your encoded data to tree.
+</span><span class="c1"></span>    <span class="n">TreeNode</span><span class="o">*</span> <span class="n">deserialize</span><span class="p">(</span><span class="n">string</span> <span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nf">reconstruct</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">INT_MIN</span><span class="p">,</span> <span class="n">INT_MAX</span><span class="p">);</span>
+    <span class="p">}</span>
     
-    inline TreeNode* reconstruct(const string&amp; buffer, int&amp; pos, int minValue, int maxValue) {
-        if (pos &gt;= buffer.size()) return NULL; //using pos to check whether buffer ends is better than using char* directly.
+    <span class="kr">inline</span> <span class="n">TreeNode</span><span class="o">*</span> <span class="n">reconstruct</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">buffer</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">pos</span><span class="p">,</span> <span class="kt">int</span> <span class="n">minValue</span><span class="p">,</span> <span class="kt">int</span> <span class="n">maxValue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pos</span> <span class="o">&gt;=</span> <span class="n">buffer</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span> <span class="c1">//using pos to check whether buffer ends is better than using char* directly.
+</span><span class="c1"></span>        
+        <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+        <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">value</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">buffer</span><span class="p">[</span><span class="n">pos</span><span class="p">],</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">minValue</span> <span class="o">||</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">maxValue</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
         
-        int value;
-        memcpy(&amp;value, &amp;buffer[pos], sizeof(int));
-        if (value &lt; minValue || value &gt; maxValue) return NULL;
-        
-        TreeNode* node = new TreeNode(value);
-        pos += sizeof(int);
-        node-&gt;left = reconstruct(buffer, pos, minValue, value);
-        node-&gt;right = reconstruct(buffer, pos, value, maxValue);
-        return node;
-    }
-};
-</code></pre>
-
+        <span class="n">TreeNode</span><span class="o">*</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+        <span class="n">pos</span> <span class="o">+=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
+        <span class="n">node</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">=</span> <span class="n">reconstruct</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">minValue</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+        <span class="n">node</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">=</span> <span class="n">reconstruct</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">maxValue</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">node</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h3 id="create-a-doubly-linked-list-from-a-ternary-tree">Create a Doubly Linked List from a Ternary Tree</h3>
 
 <p><a href="https://www.geeksforgeeks.org/create-doubly-linked-list-ternary-ree/">Question source</a></p>
@@ -940,16 +820,86 @@ public:
 <p>Recursion is dangerous when memory resource is limited: stack may overflow;
 However Non-Recursion method occupies more space</p>
 
-
-  <a href="/tags/binary-tree/">Binary Tree</a></a>&nbsp;&nbsp;&nbsp;
-
+</div>
 </div>
 
 
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/hesenzhang//">about me</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
 
 
-<footer>
-	<p>© 2017-2018, all rights reserved.</a>
-</footer>
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.bf1e1f7ae8e03db5f012356e825843facdff51c0a559cb0d27fe2bbe1db405c2.js"></script>
+  
+
+  
+  
+  
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141209571-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141209571-1');
+</script>
+    
+  
+
+
 </body>
+
 </html>

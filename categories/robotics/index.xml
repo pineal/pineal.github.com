@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Thu, 01 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.github.com/categories/robotics/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://pineal.github.com/categories/robotics/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,82 +17,11 @@
       <pubDate>Thu, 01 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/posts/extended_kalman_filter/</guid>
-      <description>
-
-&lt;h2 id=&#34;review-of-kalman-filter&#34;&gt;Review of Kalman filter&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://pineal.github.io/2015/03/Kalman-Filter/]&#34;&gt;Previous post on basic kalman filter&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.ilectureonline.com/lectures/subject/SPECIAL%20TOPICS/26/190&#34;&gt;iLecture lessons&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Distribution of Gausion is not Gaussian, it becomes non-linear&lt;/p&gt;
-
-&lt;p&gt;Extented Kalman filter uses a linear approximation of h(x)
-Here we use first order taylor expansion to&lt;/p&gt;
-
-&lt;p&gt;Given a function f(x), a taylor series expansion could be expressed:&lt;/p&gt;
-
-&lt;p&gt;$$f(x) \approx \frac{\partial{f(\mu)} }{\partial{x}}(x - \mu)$$&lt;/p&gt;
-
-&lt;h2 id=&#34;multivariate-taylor-series&#34;&gt;Multivariate Taylor Series&lt;/h2&gt;
-
-&lt;h2 id=&#34;design-kalman-filter-for-1d-tracking-problem&#34;&gt;Design Kalman Filter for 1D tracking problem&lt;/h2&gt;
-
-&lt;p&gt;We need to define two linear functions:
-1. state transition function
-2. measurement function&lt;/p&gt;
-
-&lt;h3 id=&#34;state-transition-function&#34;&gt;State transition function&lt;/h3&gt;
-
-&lt;p&gt;$$ x&amp;rsquo; = F * x + noise $$&lt;/p&gt;
-
-&lt;p&gt;where,&lt;/p&gt;
-
-&lt;p&gt;$$F = \begin{pmatrix}
-        1 &amp;amp; \Delta{t}  \\ 0 &amp;amp; 1
-      \end{pmatrix}$$&lt;/p&gt;
-
-&lt;p&gt;$$x = \begin{pmatrix} p \\ v\end{pmatrix}$$&lt;/p&gt;
-
-&lt;p&gt;postion $p$ is linear motion model, calculation is:&lt;/p&gt;
-
-&lt;p&gt;$$p&amp;rsquo; = p + v * \Delta{t}$$&lt;/p&gt;
-
-&lt;p&gt;Thus We can express it in a matrix form:&lt;/p&gt;
-
-&lt;p&gt;$$&lt;/p&gt;
-
-&lt;h1 id=&#34;begin-pmatrix-p-v-end-pmatrix&#34;&gt;\begin{pmatrix} p&amp;rsquo; \\ v&amp;rsquo; \end{pmatrix}&lt;/h1&gt;
-
-&lt;p&gt;\begin{pmatrix}
-        1 &amp;amp; \Delta{t} \\ 0 &amp;amp; 1
-\end{pmatrix}
-\begin{pmatrix} p \\ v\end{pmatrix}
-$$&lt;/p&gt;
-
-&lt;h3 id=&#34;measurement-update-function&#34;&gt;Measurement Update function&lt;/h3&gt;
-
-&lt;p&gt;At time $t$, the belief is represented by the mean $\mu_t$ and the covariance $\Sigma_t$.&lt;/p&gt;
-
-&lt;h4 id=&#34;process-model&#34;&gt;Process Model&lt;/h4&gt;
-
-&lt;p&gt;The state transition probability $p(x_t \mid u&lt;em&gt;t, x&lt;/em&gt;{t-1})$ must be a linear functoin in its arguments with added Gaussian noise. This is expressed by the following equation:&lt;/p&gt;
-
-&lt;p&gt;$$x_t = A&lt;em&gt;tx&lt;/em&gt;{t-1} + B_tu_t + \epsilon_t$$&lt;/p&gt;
-
-&lt;h4 id=&#34;measurement-model&#34;&gt;Measurement Model&lt;/h4&gt;
-
-&lt;p&gt;The measurement probability $p(z_t \mid x_t)$ must also be linear in its arguments, with added Gaussian noise:&lt;/p&gt;
-
-&lt;p&gt;$$z_t = C_tx_t + \delta_t$$&lt;/p&gt;
-
-&lt;h4 id=&#34;kalman-filter-algorithm&#34;&gt;Kalman Filter Algorithm&lt;/h4&gt;
-
-&lt;p&gt;$$\bar\mu_t  = A&lt;em&gt;t\mu&lt;/em&gt;{t-1} + B_tu_t$$&lt;/p&gt;
-
-&lt;p&gt;$$\bar\Sigma_t = A&lt;em&gt;t\Sigma&lt;/em&gt;{t-1} + R_t $$&lt;/p&gt;
-</description>
+      <description>Review of Kalman filter  Previous post on basic kalman filter iLecture lessons  Distribution of Gausion is not Gaussian, it becomes non-linear
+Extented Kalman filter uses a linear approximation of h(x) Here we use first order taylor expansion to
+Given a function f(x), a taylor series expansion could be expressed:
+$$f(x) \approx \frac{\partial{f(\mu)} }{\partial{x}}(x - \mu)$$
+Multivariate Taylor Series Design Kalman Filter for 1D tracking problem We need to define two linear functions: 1.</description>
     </item>
     
     <item>
@@ -101,83 +30,12 @@ $$&lt;/p&gt;
       <pubDate>Sat, 26 Sep 2015 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/posts/optimal_control/</guid>
-      <description>
-
-&lt;h1 id=&#34;optimal-control&#34;&gt;Optimal Control&lt;/h1&gt;
-
-&lt;h2 id=&#34;optimal-control-framework&#34;&gt;Optimal Control Framework&lt;/h2&gt;
-
-&lt;p&gt;Given:
-A controlled dynamical system：$ x^{n+1} = f(x^n, u^n)$&lt;/p&gt;
-
-&lt;p&gt;A cost function：$V = \phi(x^N, \alpha) + \sum^{N-1}_{i=0}L(x^i, u^i, \alpha)$&lt;/p&gt;
-
-&lt;p&gt;Goal: Find the sequence of commands that minimizes(maximizes) the cost function&lt;/p&gt;
-
-&lt;h2 id=&#34;bellman-s-principle-of-optimality&#34;&gt;Bellman&amp;rsquo;s Principle of Optimality&lt;/h2&gt;
-
-&lt;p&gt;Optimize it using dynamic programming:&lt;/p&gt;
-
-&lt;p&gt;$$
-J_i(X&lt;em&gt;i) = \mathop{arg min}&lt;/em&gt;{u_i\in u(x&lt;em&gt;i)}{{L(x^i, u^i, \alpha) + V^*&lt;/em&gt;{i+1}x_{(i+1)}}}
-$$&lt;/p&gt;
-
-&lt;h2 id=&#34;linear-quadratic-regulator&#34;&gt;Linear quadratic regulator&lt;/h2&gt;
-
-&lt;p&gt;Special Assumption: Linear System Dynamics
- $$
-  x^{n+1} = Ax^n + Bu^n
- $$&lt;/p&gt;
-
-&lt;p&gt;Quadratic cost function
- $$
- L(x^i, u^i, \alpha) ＝ x^{i^T}Qx^i + u^{i^T}Ru^{i^T}
- $$&lt;/p&gt;
-
-&lt;p&gt;Goal:
-    - Bring the system to a setpoint and keep it there
-    - Note: this an also be did with a nonlinear system by a local linearization&lt;/p&gt;
-
-&lt;p&gt;$$
-  \begin{aligned}
- V^&lt;em&gt;_i(X&lt;em&gt;i) &amp;amp; = \mathop{arg min}&lt;/em&gt;{u_i\in u(x_i)}{{L(x^i, u^i, \alpha) + V^&lt;/em&gt;&lt;em&gt;{i+1}x&lt;/em&gt;{(i+1)}}} &lt;br /&gt;
-   &amp;amp; = \mathop{arg min}_{u_i\in u(x&lt;em&gt;i)}{{x^{i^T}Qx^i + u^{i^T}Ru^{i^T} + V^*&lt;/em&gt;{i+1}x&lt;em&gt;{(i+1)}}} &lt;br /&gt;
-   &amp;amp; = \mathop{arg min}&lt;/em&gt;{u_i\in u(x&lt;em&gt;i)}{{x^{i^T}Qx^i + u^{i^T}Ru^{i^T} + V^*&lt;/em&gt;{i+1}(Ax^n + Bu^n)}} &lt;br /&gt;
-  \end{aligned}
-$$&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;As A linear control law expressed as:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;$$
-    u^{i^*} = -K^ix^i
-$$&lt;/p&gt;
-
-&lt;p&gt;Rewrite the optimal cost at stage i as a quadratic form:&lt;/p&gt;
-
-&lt;p&gt;$$
-    {V^i}^* = {x^i}^TP^ix^i
-$$&lt;/p&gt;
-
-&lt;p&gt;Thus,&lt;/p&gt;
-
-&lt;p&gt;$$
-   V^&lt;em&gt;_i(X&lt;em&gt;i) = \mathop{arg min}&lt;/em&gt;{u_i\in u(x_i)}{ {x^{i^T}Qx^i + u^{i^T}Ru^{i^T} + V^&lt;/em&gt;_{i+1}(Ax^n + Bu^n)} } &lt;br /&gt;
-$$&lt;/p&gt;
-
-&lt;h2 id=&#34;finite-horizon-approximation&#34;&gt;Finite horizon approximation&lt;/h2&gt;
-
-&lt;p&gt;To be continued&amp;hellip;&lt;/p&gt;
-
-&lt;h2 id=&#34;motion-predictive-control&#34;&gt;Motion Predictive Control&lt;/h2&gt;
-
-&lt;p&gt;To be continued&amp;hellip;&lt;/p&gt;
-
-&lt;h2 id=&#34;fast-mpc&#34;&gt;Fast MPC&lt;/h2&gt;
-
-&lt;p&gt;To be continued&amp;hellip;&lt;/p&gt;
-</description>
+      <description>Optimal Control Optimal Control Framework Given: A controlled dynamical system：$ x^{n+1} = f(x^n, u^n)$
+A cost function：$V = \phi(x^N, \alpha) + \sum^{N-1}_{i=0}L(x^i, u^i, \alpha)$
+Goal: Find the sequence of commands that minimizes(maximizes) the cost function
+Bellman&amp;rsquo;s Principle of Optimality Optimize it using dynamic programming:
+$$ J_i(Xi) = \mathop{arg min}{u_i\in u(xi)}{{L(x^i, u^i, \alpha) + V^*{i+1}x_{(i+1)}}} $$
+Linear quadratic regulator Special Assumption: Linear System Dynamics $$ x^{n+1} = Ax^n + Bu^n $$</description>
     </item>
     
     <item>
@@ -186,87 +44,8 @@ $$&lt;/p&gt;
       <pubDate>Tue, 24 Mar 2015 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/posts/kalman_filter/</guid>
-      <description>
-
-&lt;h2 id=&#34;purpose-and-usage&#34;&gt;Purpose and Usage&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Eliminate noise in measurements&lt;/li&gt;
-&lt;li&gt;Generate non-observable states(e.g., Velocity from position signals)&lt;/li&gt;
-&lt;li&gt;For prediction of future state&lt;/li&gt;
-&lt;li&gt;Optimal filtering&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;framework-and-model&#34;&gt;Framework and Model&lt;/h2&gt;
-
-&lt;h3 id=&#34;given&#34;&gt;Given:&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A discrete stochastic linear controlled dynamical system:&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;$$x_k = Ax_{k-1} + Bu_{k-1} + w_{k-1}$$&lt;/p&gt;
-
-&lt;p&gt;Each current signal value $x^k$ is a combination of previous signal value $x_{k-1}$ times a constant, a control signal $u_{k}$ and a process noise and a process noise signal $w_{k-1}$ (which usually considered as zero).&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;A measurement function, where $v_{k}$ is the measurement noise.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;$$ y_{k} = Hx_{k} + v_{k} $$&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Assume the process noise and the measurement noise are both considered to be normal distribution that&lt;/p&gt;
-
-&lt;p&gt;$$ p(w) \sim N (0, Q), $$&lt;/p&gt;
-
-&lt;p&gt;$$ p(v) \sim N (0, R). $$&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In reality, covariance matrix $Q$ and $R$ may change in every iteration. We assume they are constant here however.&lt;/p&gt;
-
-&lt;h3 id=&#34;goal&#34;&gt;Goal:&lt;/h3&gt;
-
-&lt;p&gt;Find the best (recursive) estimate of the state $x$ of the system.&lt;/p&gt;
-
-&lt;h3 id=&#34;computational-origins&#34;&gt;Computational Origins&lt;/h3&gt;
-
-&lt;p&gt;Define $e_{k}^{-}$ to be a priori state estimate at step k given knowledge of the process prior to step $k$, and define $e_{k}$  to be a posteriori state estimate at step $k$ given measurement $z_{k}$. Then a priori and a posteriori estimate errors can be defined as:&lt;/p&gt;
-
-&lt;p&gt;$$e_{k}^{-} \equiv x_{k} - \hat{x}_{k}^{-}$$&lt;/p&gt;
-
-&lt;p&gt;$$e_{k} \equiv x_{k} - \hat{x}_{k}$$&lt;/p&gt;
-
-&lt;p&gt;The a priori estimate error covariance is then&lt;/p&gt;
-
-&lt;p&gt;$$P_{k}^{-} = E[e_{k}^{-}e_{k}^{-T}]$$&lt;/p&gt;
-
-&lt;p&gt;The a posteriori estimate error covariance is then&lt;/p&gt;
-
-&lt;p&gt;$$P_{k} = E[e_{k}e_{k}^{T}]$$&lt;/p&gt;
-
-&lt;p&gt;Then How can we optimally (linearly) combine the estimate and measurement to obtain the best reconstruction of ￼the true x?&lt;/p&gt;
-
-&lt;p&gt;The answer given in “The Probabilistic Origins of the Filter” found.&lt;/p&gt;
-
-&lt;p&gt;$$
-   \hat{x} = \hat{x}_{k}^{-} - K \times residual
-$$&lt;/p&gt;
-
-&lt;p&gt;Where &lt;em&gt;residual&lt;/em&gt; is $z_k - H \hat{x}_{k}^{-}$. It also can be called as measurement innovation.&lt;/p&gt;
-
-&lt;p&gt;The Kalman filter gains are derived by minimizing the posterior error covariance, resulting in&lt;/p&gt;
-
-&lt;p&gt;$$K_k = \frac{P_k^-H^T}{(HP_k^-H^T + R)^{-1}}$$&lt;/p&gt;
-
-&lt;p&gt;If the a priori estimate of the process noise is zero, Then&lt;/p&gt;
-
-&lt;p&gt;$$K = 0$$&lt;/p&gt;
-
-&lt;p&gt;If the measurement noise is zero&lt;/p&gt;
-
-&lt;p&gt;$$K = H^{-1}$$&lt;/p&gt;
-</description>
+      <description>Purpose and Usage  Eliminate noise in measurements Generate non-observable states(e.g., Velocity from position signals) For prediction of future state Optimal filtering  Framework and Model Given:  A discrete stochastic linear controlled dynamical system:  $$x_k = Ax_{k-1} + Bu_{k-1} + w_{k-1}$$
+Each current signal value $x^k$ is a combination of previous signal value $x_{k-1}$ times a constant, a control signal $u_{k}$ and a process noise and a process noise signal $w_{k-1}$ (which usually considered as zero).</description>
     </item>
     
   </channel>

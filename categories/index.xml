@@ -8,7 +8,7 @@
     <language>en-us</language>
     <lastBuildDate>Sat, 08 Sep 2018 09:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://pineal.github.com/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://pineal.github.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -26,15 +26,6 @@
       <pubDate>Tue, 04 Oct 2016 00:00:00 +0000</pubDate>
       
       <guid>https://pineal.github.com/categories/data-structure/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gutter</title>
-      <link>https://pineal.github.com/categories/gutter/</link>
-      <pubDate>Sun, 18 Dec 2016 00:00:00 +0000</pubDate>
-      
-      <guid>https://pineal.github.com/categories/gutter/</guid>
       <description></description>
     </item>
     

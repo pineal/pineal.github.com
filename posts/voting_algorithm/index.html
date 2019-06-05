@@ -1,125 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title>Voting Algorithm</title>
-	
-	<meta name="description" content="">
-	<meta name="image" content="">
-	
-	<meta itemprop="name" content="Voting Algorithm">
-	<meta itemprop="description" content="">
-	<meta itemprop="image" content="">
-	
-	<meta name="og:title" content="Voting Algorithm">
-	<meta name="og:description" content="">
-	
-	<meta name="og:url" content="https://pineal.github.com/posts/voting_algorithm/">
-	<meta name="og:site_name" content="Voting Algorithm">
-	<meta name="og:type" content="article">
-	
-	<meta name="article:tag" content="">
-	<link rel="stylesheet" type="text/css" href="https://pineal.github.com/css/style.css">
-	
-	
-	
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
-	<script type="text/javascript" async
-	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Voting Algorithm - PINEAL.ME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-	tex2jax: {
-	  inlineMath: [['$','$'], ['\\(','\\)']],
-	  displayMath: [['$$','$$'], ['\[','\]']],
-	  processEscapes: true,
-	  processEnvironments: true,
-	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
-	  TeX: { equationNumbers: { autoNumber: "AMS" },
-		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	}
-  });
-  </script>
+  <link rel="icon" href="https://pineal.github.com/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.51f9758ebedaebb8122900b7464b612d113097d9e170af8375c7cb311bb6a003.css">
+  
+
+  
+
 </head>
 
-<body>
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
 
-<header>
-	
-	<a href="https://pineal.github.com/" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
-	
-	&nbsp;&nbsp;<a href="https://pineal.github.com/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.github.com/about/" style="color:#777;"><strong>About</strong></a>
-	
-	
-	
-	<a href="https://pineal.github.com/index.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
-</header>
 
 
-<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
-<script>
-function fadeOut(el) {
-  el.style.opacity = 1;
-
-  var last = +new Date();
-  var tick = function() {
-    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
-    last = +new Date();
+    
+    
+    
+    
+    
     
 
-    if (el.style.opacity > 0) {
-      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-    } else {
-      el.style.display='none';
-    }
-  };
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  
+</div>
 
-  tick();
-}
-
-function ready(fn) {
-    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-         el = document.getElementById('loadingMask');
-         fadeOut(el);
-        var elements = document.querySelectorAll("img");
-        Array.prototype.forEach.call(elements, function(el, i) {
-            if (el.getAttribute("alt")) {
-                const caption = document.createElement('figcaption');
-                var node = document.createTextNode(el.getAttribute("alt"));
-                caption.appendChild(node);
-                const wrapper = document.createElement('figure');
-                wrapper.className = 'image';
-                el.parentNode.insertBefore(wrapper, el);
-                el.parentNode.removeChild(el);
-                wrapper.appendChild(el);
-                wrapper.appendChild(caption);
-            }
-        });
-
-    } else {
-        document.addEventListener('DOMContentLoaded', fn);
-    }
-}
-window.onload = ready;
-</script>
-
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Voting Algorithm</h1>
 <div class="content">
-  <h1>Voting Algorithm</h1>
-  <aside> <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#majority-element">Majority Element</a></li>
-<li><a href="#majority-element-ii">Majority Element II</a></li>
-<li><a href="#majority-element-iii">Majority Element III</a></li>
-</ul></li>
-</ul>
-</nav></aside>
   
 
 <h2 id="majority-element">Majority Element</h2>
@@ -130,88 +101,154 @@ window.onload = ready;
 <li>A</li>
 <li>A B -&gt; 消除</li>
 </ul>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    int majorityElement(vector&lt;int&gt;&amp; nums) {
-        int major;
-        int count = 0;
-        for (int i = 0; i &lt; nums.size(); i++) {
-            if (count == 0) {
-                major = nums[i];
-                count++;
-            } else {
-                count += (nums[i] == major)? 1 : -1;
-            }
-        }
-        return major;        
-    }
-};
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">majorityElement</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">major</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">major</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">major</span><span class="p">)</span><span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">major</span><span class="p">;</span>        
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h2 id="majority-element-ii">Majority Element II</h2>
 
 <p>同理：俄罗斯方块的消除方式，当出现三个不一样的时候消除。
 要注意的是，最后得到的candidate，需要再过一遍数组来确定是不是最后的答案。</p>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    vector&lt;int&gt; majorityElement(vector&lt;int&gt;&amp; nums) {
-        int x = 0;
-        int y = 1;
-        //just need to be different test with case [0,0,0,0,0,0]
-        int cnt1 = 0;
-        int cnt2 = 0;
-        for (int i = 0; i &lt; nums.size(); i++) {
-            if (nums[i] == x) {
-                cnt1++;
-            } else if (nums[i] == y) {
-                cnt2++;
-            } else if (cnt1 == 0) {
-                x = nums[i];
-                cnt1++;
-            } else if (cnt2 == 0) {
-                y = nums[i];
-                cnt2++;
-            }  else {
-                cnt1--;
-                cnt2--;
-            }
-        }
-        cnt1 = 0, cnt2 = 0;
-        for (int i = 0; i &lt; nums.size(); i++) {
-            if (nums[i] == x) {
-                cnt1++;
-            } else if (nums[i] == y) {
-                cnt2++;
-            }
-        }
-        vector&lt;int&gt; rst;
-        if (cnt1 &gt; nums.size() / 3) {
-            rst.emplace_back(x);
-        }
-        if (cnt2 &gt; nums.size() / 3) {
-            rst.emplace_back(y);
-        }
-        return rst;
-    } 
-};
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">majorityElement</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="c1">//just need to be different test with case [0,0,0,0,0,0]
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">cnt1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">cnt2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">cnt1</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">cnt2</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">cnt1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                <span class="n">cnt1</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">cnt2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                <span class="n">cnt2</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>  <span class="k">else</span> <span class="p">{</span>
+                <span class="n">cnt1</span><span class="o">--</span><span class="p">;</span>
+                <span class="n">cnt2</span><span class="o">--</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">cnt1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cnt2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">cnt1</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">cnt2</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">rst</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cnt1</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rst</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cnt2</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rst</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+    <span class="p">}</span> 
+<span class="p">};</span>
+</code></pre></div>
 <h2 id="majority-element-iii">Majority Element III</h2>
 
 <p>More than 1/k</p>
 
-
-  
-
+</div>
 </div>
 
 
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/hesenzhang//">about me</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
 
 
-<footer>
-	<p>© 2017-2018, all rights reserved.</a>
-</footer>
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.bf1e1f7ae8e03db5f012356e825843facdff51c0a559cb0d27fe2bbe1db405c2.js"></script>
+  
+
+  
+  
+  
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141209571-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141209571-1');
+</script>
+    
+  
+
+
 </body>
+
 </html>

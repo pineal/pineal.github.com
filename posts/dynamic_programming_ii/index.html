@@ -1,126 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title>Dynamic Programming II</title>
-	
-	<meta name="description" content="">
-	<meta name="image" content="">
-	
-	<meta itemprop="name" content="Dynamic Programming II">
-	<meta itemprop="description" content="">
-	<meta itemprop="image" content="">
-	
-	<meta name="og:title" content="Dynamic Programming II">
-	<meta name="og:description" content="">
-	
-	<meta name="og:url" content="https://pineal.github.com/posts/dynamic_programming_ii/">
-	<meta name="og:site_name" content="Dynamic Programming II">
-	<meta name="og:type" content="article">
-	
-	<meta name="article:tag" content="Dynamic Programming ">
-	<link rel="stylesheet" type="text/css" href="https://pineal.github.com/css/style.css">
-	
-	
-	
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
-	<script type="text/javascript" async
-	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Dynamic Programming II - PINEAL.ME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-	tex2jax: {
-	  inlineMath: [['$','$'], ['\\(','\\)']],
-	  displayMath: [['$$','$$'], ['\[','\]']],
-	  processEscapes: true,
-	  processEnvironments: true,
-	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
-	  TeX: { equationNumbers: { autoNumber: "AMS" },
-		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	}
-  });
-  </script>
+  <link rel="icon" href="https://pineal.github.com/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.51f9758ebedaebb8122900b7464b612d113097d9e170af8375c7cb311bb6a003.css">
+  
+
+  
+
 </head>
 
-<body>
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
 
-<header>
-	
-	<a href="https://pineal.github.com/" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
-	
-	&nbsp;&nbsp;<a href="https://pineal.github.com/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.github.com/about/" style="color:#777;"><strong>About</strong></a>
-	
-	
-	
-	<a href="https://pineal.github.com/index.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
-</header>
 
 
-<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
-<script>
-function fadeOut(el) {
-  el.style.opacity = 1;
-
-  var last = +new Date();
-  var tick = function() {
-    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
-    last = +new Date();
+    
+    
+    
+    
+    
     
 
-    if (el.style.opacity > 0) {
-      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-    } else {
-      el.style.display='none';
-    }
-  };
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  
+</div>
 
-  tick();
-}
-
-function ready(fn) {
-    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-         el = document.getElementById('loadingMask');
-         fadeOut(el);
-        var elements = document.querySelectorAll("img");
-        Array.prototype.forEach.call(elements, function(el, i) {
-            if (el.getAttribute("alt")) {
-                const caption = document.createElement('figcaption');
-                var node = document.createTextNode(el.getAttribute("alt"));
-                caption.appendChild(node);
-                const wrapper = document.createElement('figure');
-                wrapper.className = 'image';
-                el.parentNode.insertBefore(wrapper, el);
-                el.parentNode.removeChild(el);
-                wrapper.appendChild(el);
-                wrapper.appendChild(caption);
-            }
-        });
-
-    } else {
-        document.addEventListener('DOMContentLoaded', fn);
-    }
-}
-window.onload = ready;
-</script>
-
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Dynamic Programming II</h1>
 <div class="content">
-  <h1>Dynamic Programming II</h1>
-  <aside> <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#coin-game-winner">Coin game winner</a></li>
-<li><a href="#coin-up-probablity">Coin up probablity</a></li>
-<li><a href="#predict-the-winner">Predict the Winner</a></li>
-<li><a href="#can-i-win">Can I Win</a></li>
-</ul></li>
-</ul>
-</nav></aside>
   
 
 <h2 id="coin-game-winner">Coin game winner</h2>
@@ -153,26 +123,24 @@ n = 3 4 A will win the game by picking 3 or 4 coins
 n = 5, 6 A will choose 3 or 4 coins. Now B will have to choose from 2 coins so A will win.</p>
 
 <p>We can observe that A wins game for n coins only when it loses for coins n-1, n-x and n-y.</p>
-
-<pre><code class="language-cpp">bool findWinner(int x, int y, int n) {
-    vector&lt;bool&gt; M(n + 1, false);
-    M[1] = true;
-    for (int i = 2; i &lt;= n; i++) {
-        if (i - 1 &gt;= 0 &amp;&amp; M[i - 1] == false) {
-            M[i] = true;
-        }
-        else if (i - x &gt;= 0 &amp;&amp; M[i - x] == false) {
-            M[i] = true;
-        }
-        else if (i - y &gt;= 0 &amp;&amp; M[i - y] == false) {
-            M[i] = true;
-        }
-        cout &lt;&lt; M[i] &lt;&lt; endl;
-    }
-    return M.back();
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">findWinner</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">M</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">M</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="coin-up-probablity">Coin up probablity</h2>
 
 <p>有 $n$ 枚硬币，每个硬币掷一次正面朝上的概率各不相同，假定第$i$个概率为$p_i$。如果把所有硬币都掷一次，求 $k$ 个硬币正面朝上的概率。</p>
@@ -189,77 +157,143 @@ n = 5, 6 A will choose 3 or 4 coins. Now B will have to choose from 2 coins so A
 
 <p>$M[i][j]$ 表示从index i 到 index j，player 1 比 player 2 取的数的总和多多少。
 每次取的时候，要么取首个，即为$nums[i]$，那么对手的结果就可以用子问题 $M[i+1][j]$ 来表示，同理取最后一个数。</p>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    bool PredictTheWinner(vector&lt;int&gt;&amp; nums) {
-        int n = nums.size();
-        vector&lt;vector&lt;int&gt;&gt; M(n, vector&lt;int&gt;(n, 0));
-        for (int i = 0; i &lt; n; i++) {
-            M[i][i] = nums[i];
-        }
-        for (int offset = 1; offset &lt; n; offset++) {
-            for (int i = 0; i &lt; n - offset; i++) {
-                int j = i + offset;
-                M[i][j] = max(nums[i] - M[i+1][j], nums[j] - M[i][j-1]);    
-            }   
-        }
-        return M.front().back() &gt;= 0;
-    }
-};
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">bool</span> <span class="n">PredictTheWinner</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">M</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">offset</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">offset</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">offset</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">-</span> <span class="n">offset</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">offset</span><span class="p">;</span>
+                <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>    
+            <span class="p">}</span>   
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">M</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">back</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h2 id="can-i-win">Can I Win</h2>
 
 <p><a href="https://leetcode.com/problems/can-i-win/description/">https://leetcode.com/problems/can-i-win/description/</a></p>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    bool canIWin(int maxChoosableInteger, int desiredTotal) {
-        if (maxChoosableInteger &gt;= desiredTotal) return true;
-        if (maxChoosableInteger * (maxChoosableInteger + 1) / 2 &lt; desiredTotal) return false;
-        //from 1 to maxChoosableInteger -&gt; ignore position 0
-        //state[i] represent the chosen Integer i has been used in the game? t/f 
-        string state(maxChoosableInteger + 1, 'f'); 
-        unordered_map&lt;string, bool&gt; memo;   //dfs memorization 
-        return dfs(maxChoosableInteger, 0, desiredTotal, memo, state);
-    }
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">bool</span> <span class="n">canIWin</span><span class="p">(</span><span class="kt">int</span> <span class="n">maxChoosableInteger</span><span class="p">,</span> <span class="kt">int</span> <span class="n">desiredTotal</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">maxChoosableInteger</span> <span class="o">&gt;=</span> <span class="n">desiredTotal</span><span class="p">)</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">maxChoosableInteger</span> <span class="o">*</span> <span class="p">(</span><span class="n">maxChoosableInteger</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">desiredTotal</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="c1">//from 1 to maxChoosableInteger -&gt; ignore position 0
+</span><span class="c1"></span>        <span class="c1">//state[i] represent the chosen Integer i has been used in the game? t/f 
+</span><span class="c1"></span>        <span class="n">string</span> <span class="nf">state</span><span class="p">(</span><span class="n">maxChoosableInteger</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="sc">&#39;f&#39;</span><span class="p">);</span> 
+        <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&gt;</span> <span class="n">memo</span><span class="p">;</span>   <span class="c1">//dfs memorization 
+</span><span class="c1"></span>        <span class="k">return</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">maxChoosableInteger</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">desiredTotal</span><span class="p">,</span> <span class="n">memo</span><span class="p">,</span> <span class="n">state</span><span class="p">);</span>
+    <span class="p">}</span>
     
     
-    bool dfs(int max, int cur , int target, unordered_map&lt;string, bool&gt; &amp; table, string &amp; state) {
-        if (table.count(state)) {
-            return table[state];
-        }
-        for (int i = 1; i &lt;= max; i++) {
-            if (state[i] == 'f') {
-                state[i] = 't';
-                //only if opponent is lost or current chosen number is bigger than target
-                //the player win
-                if (cur + i &gt;= target || dfs(max, cur + i, target, table, state) == false) {
-                    //recover visited state
-                    state[i] = 'f';
-                    table[state] = true;
-                    return true;
-                }
-                state[i] = 'f';    
-            }
-        }
-        table[state] = false;
-        return false;
-    }
-};
-</code></pre>
-
-
-  <a href="/tags/dynamic-programming/">Dynamic Programming</a></a>&nbsp;&nbsp;&nbsp;
-
+    <span class="kt">bool</span> <span class="n">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">max</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cur</span> <span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">,</span> <span class="n">unordered_map</span><span class="o">&lt;</span><span class="n">string</span><span class="p">,</span> <span class="kt">bool</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">table</span><span class="p">,</span> <span class="n">string</span> <span class="o">&amp;</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">table</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">state</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">table</span><span class="p">[</span><span class="n">state</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">max</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;f&#39;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;t&#39;</span><span class="p">;</span>
+                <span class="c1">//only if opponent is lost or current chosen number is bigger than target
+</span><span class="c1"></span>                <span class="c1">//the player win
+</span><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">cur</span> <span class="o">+</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">target</span> <span class="o">||</span> <span class="n">dfs</span><span class="p">(</span><span class="n">max</span><span class="p">,</span> <span class="n">cur</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">//recover visited state
+</span><span class="c1"></span>                    <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;f&#39;</span><span class="p">;</span>
+                    <span class="n">table</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">state</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;f&#39;</span><span class="p">;</span>    
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">table</span><span class="p">[</span><span class="n">state</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
+</div>
 </div>
 
 
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/hesenzhang//">about me</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
 
 
-<footer>
-	<p>© 2017-2018, all rights reserved.</a>
-</footer>
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.bf1e1f7ae8e03db5f012356e825843facdff51c0a559cb0d27fe2bbe1db405c2.js"></script>
+  
+
+  
+  
+  
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141209571-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141209571-1');
+</script>
+    
+  
+
+
 </body>
+
 </html>

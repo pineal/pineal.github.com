@@ -1,137 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title>Data Structures for Disjoint Sets</title>
-	
-	<meta name="description" content="">
-	<meta name="image" content="">
-	
-	<meta itemprop="name" content="Data Structures for Disjoint Sets">
-	<meta itemprop="description" content="">
-	<meta itemprop="image" content="">
-	
-	<meta name="og:title" content="Data Structures for Disjoint Sets">
-	<meta name="og:description" content="">
-	
-	<meta name="og:url" content="https://pineal.github.com/posts/data_structures_for_disjoint_sets/">
-	<meta name="og:site_name" content="Data Structures for Disjoint Sets">
-	<meta name="og:type" content="article">
-	
-	<meta name="article:tag" content="Disjoint Sets Union Find ">
-	<link rel="stylesheet" type="text/css" href="https://pineal.github.com/css/style.css">
-	
-	
-	
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
-	<script type="text/javascript" async
-	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Data Structures for Disjoint Sets - PINEAL.ME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-	tex2jax: {
-	  inlineMath: [['$','$'], ['\\(','\\)']],
-	  displayMath: [['$$','$$'], ['\[','\]']],
-	  processEscapes: true,
-	  processEnvironments: true,
-	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
-	  TeX: { equationNumbers: { autoNumber: "AMS" },
-		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	}
-  });
-  </script>
+  <link rel="icon" href="https://pineal.github.com/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.51f9758ebedaebb8122900b7464b612d113097d9e170af8375c7cb311bb6a003.css">
+  
+
+  
+
 </head>
 
-<body>
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
 
-<header>
-	
-	<a href="https://pineal.github.com/" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
-	
-	&nbsp;&nbsp;<a href="https://pineal.github.com/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.github.com/about/" style="color:#777;"><strong>About</strong></a>
-	
-	
-	
-	<a href="https://pineal.github.com/index.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
-</header>
 
 
-<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
-<script>
-function fadeOut(el) {
-  el.style.opacity = 1;
-
-  var last = +new Date();
-  var tick = function() {
-    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
-    last = +new Date();
+    
+    
+    
+    
+    
     
 
-    if (el.style.opacity > 0) {
-      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-    } else {
-      el.style.display='none';
-    }
-  };
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  
+</div>
 
-  tick();
-}
-
-function ready(fn) {
-    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-         el = document.getElementById('loadingMask');
-         fadeOut(el);
-        var elements = document.querySelectorAll("img");
-        Array.prototype.forEach.call(elements, function(el, i) {
-            if (el.getAttribute("alt")) {
-                const caption = document.createElement('figcaption');
-                var node = document.createTextNode(el.getAttribute("alt"));
-                caption.appendChild(node);
-                const wrapper = document.createElement('figure');
-                wrapper.className = 'image';
-                el.parentNode.insertBefore(wrapper, el);
-                el.parentNode.removeChild(el);
-                wrapper.appendChild(el);
-                wrapper.appendChild(caption);
-            }
-        });
-
-    } else {
-        document.addEventListener('DOMContentLoaded', fn);
-    }
-}
-window.onload = ready;
-</script>
-
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Data Structures for Disjoint Sets</h1>
 <div class="content">
-  <h1>Data Structures for Disjoint Sets</h1>
-  <aside> <nav id="TableOfContents">
-<ul>
-<li><a href="#disjoint-sets">Disjoint Sets</a>
-<ul>
-<li><a href="#基本操作">基本操作</a></li>
-<li><a href="#basic-implementation">Basic implementation</a></li>
-<li><a href="#example">Example</a>
-<ul>
-<li><a href="#number-of-connected-components-in-an-undirected-graph">Number of Connected Components in an Undirected Graph</a></li>
-</ul></li>
-<li><a href="#optimization-disjoint-set-forest">Optimization - Disjoint-Set Forest</a>
-<ul>
-<li><a href="#union-by-rank">Union By Rank</a></li>
-<li><a href="#path-compression">Path compression</a></li>
-<li><a href="#实现">实现</a></li>
-<li><a href="#时间复杂度">时间复杂度</a></li>
-</ul></li>
-<li><a href="#detect-cycle-in-a-undirected-graph">Detect Cycle in a undirected graph</a></li>
-<li><a href="#leetcode-305-number-of-islands-ii">LeetCode 305 Number of Islands II</a></li>
-</ul></li>
-</ul>
-</nav></aside>
   
 
 <h1 id="disjoint-sets">Disjoint Sets</h1>
@@ -154,63 +113,55 @@ window.onload = ready;
 <p>最基本的应用是来确定一个 undirected graph 中的 connected components.</p>
 
 <p>连接components:</p>
-
-<pre><code>connected_component(G)
+<div class="highlight"><pre class="chroma">connected_component(G)
     for each vertex v in G
         make_set(v)
     for each edge(u, v) e in G
         if (find_set(u) != find_set(v))
-            union(u, v)
-</code></pre>
-
+            union(u, v)</pre></div>
 <p>判断两个vertices是否连接在同一component中:</p>
-
-<pre><code>same_component(u, v)
+<div class="highlight"><pre class="chroma">same_component(u, v)
     if find_set(u) == find_set(v)
         return true
     else
-        return false
-</code></pre>
-
+        return false</pre></div>
 <h2 id="example">Example</h2>
 
 <h3 id="number-of-connected-components-in-an-undirected-graph">Number of Connected Components in an Undirected Graph</h3>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    //compress the path and return the root of the union set
-    int find_set(vector&lt;int&gt; &amp; allsets, int node) {
-        if (node != allsets[node]) {
-            allsets[node] = find_set(allsets, allsets[node]);
-        }
-        return allsets[node];
-    }
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">//compress the path and return the root of the union set
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">find_set</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">allsets</span><span class="p">,</span> <span class="kt">int</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="n">allsets</span><span class="p">[</span><span class="n">node</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">allsets</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">=</span> <span class="n">find_set</span><span class="p">(</span><span class="n">allsets</span><span class="p">,</span> <span class="n">allsets</span><span class="p">[</span><span class="n">node</span><span class="p">]);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">allsets</span><span class="p">[</span><span class="n">node</span><span class="p">];</span>
+    <span class="p">}</span>
     
-    void union_set(vector&lt;int&gt; &amp; allsets, int x, int y) {
-        int xroot = find_set(allsets, x);
-        int yroot = find_set(allsets, y);
-        allsets[yroot] = xroot;
-    }
-    int countComponents(int n, vector&lt;pair&lt;int, int&gt;&gt;&amp; edges) {
-        //allsets[x] : get the parent of set include x
-        vector&lt;int&gt; allsets(n);
-        int count = 0;
-        for (int i = 0; i &lt; n; i++) {
-            allsets[i] = i;
-        }
-        for (auto edge : edges) {
-            int x = find_set(allsets, edge.first);
-            int y = find_set(allsets, edge.second);
-            if (x != y) {
-                union_set(allsets, edge.first, edge.second);
-                count++;
-            }
-        }
-        return n - count;
-    }
-};
-</code></pre>
-
+    <span class="kt">void</span> <span class="n">union_set</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">allsets</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">xroot</span> <span class="o">=</span> <span class="n">find_set</span><span class="p">(</span><span class="n">allsets</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">yroot</span> <span class="o">=</span> <span class="n">find_set</span><span class="p">(</span><span class="n">allsets</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+        <span class="n">allsets</span><span class="p">[</span><span class="n">yroot</span><span class="p">]</span> <span class="o">=</span> <span class="n">xroot</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">countComponents</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">edges</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//allsets[x] : get the parent of set include x
+</span><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">allsets</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">allsets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">edge</span> <span class="p">:</span> <span class="n">edges</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">find_set</span><span class="p">(</span><span class="n">allsets</span><span class="p">,</span> <span class="n">edge</span><span class="p">.</span><span class="n">first</span><span class="p">);</span>
+            <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">find_set</span><span class="p">(</span><span class="n">allsets</span><span class="p">,</span> <span class="n">edge</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">union_set</span><span class="p">(</span><span class="n">allsets</span><span class="p">,</span> <span class="n">edge</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">edge</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">-</span> <span class="n">count</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h2 id="optimization-disjoint-set-forest">Optimization - Disjoint-Set Forest</h2>
 
 <p>除了可以用链表/数组来实现 disjoint-set， disjoint-set forest是一种比链表实现更快的实现。我们将sets表示为rooted trees。 每一个 node 包括一个 vertex，每一棵树代表一个set. 所有的node都指向各自的parent. 在树中那个指向自己的显然就是tree root。这种数据结构高效的原因是用了以下两种技巧：&rdquo;union by rank&rdquo; and &ldquo;path compression&rdquo;.</p>
@@ -224,32 +175,20 @@ public:
 <p>路径压缩并不改变任何rank，只是把tree中的所有node都指向这颗树的root。这个过程在find_set这个操作中实现。</p>
 
 <h3 id="实现">实现</h3>
-
-<pre><code>make_set(x)
+<div class="highlight"><pre class="chroma">make_set(x)
 x.p = x
-x.rank = 0
-</code></pre>
-
-<pre><code>union(x, y)
-    link(find_set(x), find_set(y))
-</code></pre>
-
-<pre><code>link(x,y)
+x.rank = 0</pre></div><div class="highlight"><pre class="chroma">union(x, y)
+    link(find_set(x), find_set(y))</pre></div><div class="highlight"><pre class="chroma">link(x,y)
     if x.rank &gt; y.rank
         y.p = x
     else if x.rank &lt; y.rank
         x.p = y
     else
         x.p = y
-        y.rank = y.rank + 1
-</code></pre>
-
-<pre><code>find_set(x)
+        y.rank = y.rank + 1</pre></div><div class="highlight"><pre class="chroma">find_set(x)
     if x != x.p
         x.p = find_set(x.p)
-    return x.p
-</code></pre>
-
+    return x.p</pre></div>
 <h3 id="时间复杂度">时间复杂度</h3>
 
 <p>时间复杂度为 $O(m \alpha(n))$, union_set takes amortized n time complexity.</p>
@@ -259,122 +198,190 @@ x.rank = 0
 <p>TODO: 分析</p>
 
 <h2 id="detect-cycle-in-a-undirected-graph">Detect Cycle in a undirected graph</h2>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Edge</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">src</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">dest</span><span class="p">;</span>
+    <span class="n">Edge</span><span class="p">()</span> <span class="p">{;}</span>
+    <span class="n">Edge</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">d</span><span class="p">);</span>
+<span class="p">};</span>
 
-<pre><code class="language-cpp">class Edge {
-public:
-    int src;
-    int dest;
-    Edge() {;}
-    Edge(int s, int d);
-};
+<span class="n">Edge</span><span class="o">::</span><span class="n">Edge</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">src</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+    <span class="n">dest</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+<span class="p">}</span>
 
-Edge::Edge(int s, int d) {
-    src = s;
-    dest = d;
-}
+<span class="k">class</span><span class="err"> </span><span class="nc">Graph</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">V</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">E</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&gt;</span> <span class="n">edges</span><span class="p">;</span>
+    <span class="n">Graph</span><span class="p">(</span><span class="kt">int</span> <span class="n">V</span><span class="p">,</span> <span class="kt">int</span> <span class="n">E</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">addEdge</span><span class="p">(</span><span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">);</span>
+<span class="p">};</span>
 
-class Graph {
-public:
-    int V;
-    int E;
-    vector&lt;Edge&gt; edges;
-    Graph(int V, int E);
-    void addEdge(int start, int end);
-};
+<span class="n">Graph</span><span class="o">::</span><span class="n">Graph</span><span class="p">(</span><span class="kt">int</span> <span class="n">V</span><span class="p">,</span> <span class="kt">int</span> <span class="n">E</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">V</span> <span class="o">=</span> <span class="n">V</span><span class="p">;</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">E</span> <span class="o">=</span> <span class="n">E</span><span class="p">;</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">edges</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">E</span><span class="p">);</span>
+<span class="p">}</span>
 
-Graph::Graph(int V, int E) {
-    this-&gt;V = V;
-    this-&gt;E = E;
-    this-&gt;edges.resize(E);
-}
-
-void Graph::addEdge(int start, int end) {
-    Edge e(start, end);
-    edges.emplace_back(e);
-}
+<span class="kt">void</span> <span class="n">Graph</span><span class="o">::</span><span class="n">addEdge</span><span class="p">(</span><span class="kt">int</span> <span class="n">start</span><span class="p">,</span> <span class="kt">int</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Edge</span> <span class="n">e</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">);</span>
+    <span class="n">edges</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+<span class="p">}</span>
 
 
-class DisjointSet {
-public:
-    int parent;
-    int rank;
-    DisjointSet(int parent);
-};
+<span class="k">class</span><span class="err"> </span><span class="nc">DisjointSet</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">parent</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">rank</span><span class="p">;</span>
+    <span class="n">DisjointSet</span><span class="p">(</span><span class="kt">int</span> <span class="n">parent</span><span class="p">);</span>
+<span class="p">};</span>
 
-DisjointSet::DisjointSet(int p) {
-    this-&gt;parent = p;
-    this-&gt;rank = 0;
-}
+<span class="n">DisjointSet</span><span class="o">::</span><span class="n">DisjointSet</span><span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">parent</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+    <span class="k">this</span><span class="o">-&gt;</span><span class="n">rank</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
-//given a node, find it's parent in its disjoint_set
-int find_set(vector&lt;DisjointSet&gt; &amp; allsets, int node) {
-    if (allsets[node].parent != node) {
-        allsets[node].parent = find_set(allsets, allsets[node].parent);
-    }
-    return allsets[node].parent;
-}
+<span class="c1">//given a node, find it&#39;s parent in its disjoint_set
+</span><span class="c1"></span><span class="kt">int</span> <span class="n">find_set</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DisjointSet</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">allsets</span><span class="p">,</span> <span class="kt">int</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">allsets</span><span class="p">[</span><span class="n">node</span><span class="p">].</span><span class="n">parent</span> <span class="o">!=</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">allsets</span><span class="p">[</span><span class="n">node</span><span class="p">].</span><span class="n">parent</span> <span class="o">=</span> <span class="n">find_set</span><span class="p">(</span><span class="n">allsets</span><span class="p">,</span> <span class="n">allsets</span><span class="p">[</span><span class="n">node</span><span class="p">].</span><span class="n">parent</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">allsets</span><span class="p">[</span><span class="n">node</span><span class="p">].</span><span class="n">parent</span><span class="p">;</span>
+<span class="p">}</span>
 
-void union_set(vector&lt;DisjointSet&gt; &amp; allsets, int x, int y) {
-    int xp = find_set(allsets, x);
-    int yp = find_set(allsets, y);
-    if (allsets[xp].rank &gt; allsets[yp].rank) {
-        allsets[yp].parent = xp;
-    }
-    else if (allsets[xp].rank &lt; allsets[yp].rank) {
-        allsets[xp].parent = yp;
-    }
-    else {
-        allsets[xp].parent = yp;
-        allsets[yp].rank++;
-    }
-}
+<span class="kt">void</span> <span class="n">union_set</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">DisjointSet</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">allsets</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">xp</span> <span class="o">=</span> <span class="n">find_set</span><span class="p">(</span><span class="n">allsets</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">yp</span> <span class="o">=</span> <span class="n">find_set</span><span class="p">(</span><span class="n">allsets</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">allsets</span><span class="p">[</span><span class="n">xp</span><span class="p">].</span><span class="n">rank</span> <span class="o">&gt;</span> <span class="n">allsets</span><span class="p">[</span><span class="n">yp</span><span class="p">].</span><span class="n">rank</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">allsets</span><span class="p">[</span><span class="n">yp</span><span class="p">].</span><span class="n">parent</span> <span class="o">=</span> <span class="n">xp</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">allsets</span><span class="p">[</span><span class="n">xp</span><span class="p">].</span><span class="n">rank</span> <span class="o">&lt;</span> <span class="n">allsets</span><span class="p">[</span><span class="n">yp</span><span class="p">].</span><span class="n">rank</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">allsets</span><span class="p">[</span><span class="n">xp</span><span class="p">].</span><span class="n">parent</span> <span class="o">=</span> <span class="n">yp</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="n">allsets</span><span class="p">[</span><span class="n">xp</span><span class="p">].</span><span class="n">parent</span> <span class="o">=</span> <span class="n">yp</span><span class="p">;</span>
+        <span class="n">allsets</span><span class="p">[</span><span class="n">yp</span><span class="p">].</span><span class="n">rank</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-bool is_cycle(const Graph &amp; graph) {
-    int V = graph.V;
-    int E = graph.E;
-    vector&lt;DisjointSet&gt; allsets;
-    for (int v = 0; v &lt; V; v++) {
-        allsets.emplace_back(v);
-    }
-    for (int e = 0; e &lt; E; e++) {
-        int x = find_set(allsets, graph.edges[e].src);
-        int y = find_set(allsets, graph.edges[e].dest);
-        if (x == y) {
-            return true;
-        }
-        else {
-            union_set(allsets, x, y);
-        }
-    }
-    return false;
-}
+<span class="kt">bool</span> <span class="n">is_cycle</span><span class="p">(</span><span class="k">const</span> <span class="n">Graph</span> <span class="o">&amp;</span> <span class="n">graph</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">V</span> <span class="o">=</span> <span class="n">graph</span><span class="p">.</span><span class="n">V</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">E</span> <span class="o">=</span> <span class="n">graph</span><span class="p">.</span><span class="n">E</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">DisjointSet</span><span class="o">&gt;</span> <span class="n">allsets</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="n">V</span><span class="p">;</span> <span class="n">v</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">allsets</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">e</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">e</span> <span class="o">&lt;</span> <span class="n">E</span><span class="p">;</span> <span class="n">e</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">find_set</span><span class="p">(</span><span class="n">allsets</span><span class="p">,</span> <span class="n">graph</span><span class="p">.</span><span class="n">edges</span><span class="p">[</span><span class="n">e</span><span class="p">].</span><span class="n">src</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">find_set</span><span class="p">(</span><span class="n">allsets</span><span class="p">,</span> <span class="n">graph</span><span class="p">.</span><span class="n">edges</span><span class="p">[</span><span class="n">e</span><span class="p">].</span><span class="n">dest</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">union_set</span><span class="p">(</span><span class="n">allsets</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
 
-void test_is_cycle() {
-    Graph graph(3, 3);
-    graph.addEdge(0, 1);
-    graph.addEdge(1, 2);
-    graph.addEdge(0, 2);
-    if (is_cycle(graph)) {
-    	cout &lt;&lt;  &quot;has a cycle&quot;;
-    }
-    else {
-        cout &lt;&lt; &quot;does not have a cycle&quot;;
-    }    
-}
-</code></pre>
-
+<span class="kt">void</span> <span class="n">test_is_cycle</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Graph</span> <span class="n">graph</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">addEdge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">addEdge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">graph</span><span class="p">.</span><span class="n">addEdge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">is_cycle</span><span class="p">(</span><span class="n">graph</span><span class="p">))</span> <span class="p">{</span>
+    	<span class="n">cout</span> <span class="o">&lt;&lt;</span>  <span class="s">&#34;has a cycle&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;does not have a cycle&#34;</span><span class="p">;</span>
+    <span class="p">}</span>    
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="leetcode-305-number-of-islands-ii">LeetCode 305 Number of Islands II</h2>
 
-
-  <a href="/tags/disjoint-sets/">Disjoint Sets</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/union-find/">Union Find</a></a>&nbsp;&nbsp;&nbsp;
-
+</div>
 </div>
 
 
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/hesenzhang//">about me</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
 
 
-<footer>
-	<p>© 2017-2018, all rights reserved.</a>
-</footer>
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.bf1e1f7ae8e03db5f012356e825843facdff51c0a559cb0d27fe2bbe1db405c2.js"></script>
+  
+
+  
+  
+  
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141209571-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141209571-1');
+</script>
+    
+  
+
+
 </body>
+
 </html>

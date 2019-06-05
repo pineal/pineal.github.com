@@ -1,463 +1,417 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title>Shortest Path</title>
-	
-	<meta name="description" content="">
-	<meta name="image" content="">
-	
-	<meta itemprop="name" content="Shortest Path">
-	<meta itemprop="description" content="">
-	<meta itemprop="image" content="">
-	
-	<meta name="og:title" content="Shortest Path">
-	<meta name="og:description" content="">
-	
-	<meta name="og:url" content="https://pineal.github.com/posts/shortest_path_problems/">
-	<meta name="og:site_name" content="Shortest Path">
-	<meta name="og:type" content="article">
-	
-	<meta name="article:tag" content="BFS ">
-	<link rel="stylesheet" type="text/css" href="https://pineal.github.com/css/style.css">
-	
-	
-	
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
-	<script type="text/javascript" async
-	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Shortest Path - PINEAL.ME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-	tex2jax: {
-	  inlineMath: [['$','$'], ['\\(','\\)']],
-	  displayMath: [['$$','$$'], ['\[','\]']],
-	  processEscapes: true,
-	  processEnvironments: true,
-	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
-	  TeX: { equationNumbers: { autoNumber: "AMS" },
-		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	}
-  });
-  </script>
+  <link rel="icon" href="https://pineal.github.com/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.51f9758ebedaebb8122900b7464b612d113097d9e170af8375c7cb311bb6a003.css">
+  
+
+  
+
 </head>
 
-<body>
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
 
-<header>
-	
-	<a href="https://pineal.github.com/" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
-	
-	&nbsp;&nbsp;<a href="https://pineal.github.com/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.github.com/about/" style="color:#777;"><strong>About</strong></a>
-	
-	
-	
-	<a href="https://pineal.github.com/index.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
-</header>
 
 
-<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
-<script>
-function fadeOut(el) {
-  el.style.opacity = 1;
-
-  var last = +new Date();
-  var tick = function() {
-    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
-    last = +new Date();
+    
+    
+    
+    
+    
     
 
-    if (el.style.opacity > 0) {
-      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-    } else {
-      el.style.display='none';
-    }
-  };
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  
+</div>
 
-  tick();
-}
-
-function ready(fn) {
-    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-         el = document.getElementById('loadingMask');
-         fadeOut(el);
-        var elements = document.querySelectorAll("img");
-        Array.prototype.forEach.call(elements, function(el, i) {
-            if (el.getAttribute("alt")) {
-                const caption = document.createElement('figcaption');
-                var node = document.createTextNode(el.getAttribute("alt"));
-                caption.appendChild(node);
-                const wrapper = document.createElement('figure');
-                wrapper.className = 'image';
-                el.parentNode.insertBefore(wrapper, el);
-                el.parentNode.removeChild(el);
-                wrapper.appendChild(el);
-                wrapper.appendChild(caption);
-            }
-        });
-
-    } else {
-        document.addEventListener('DOMContentLoaded', fn);
-    }
-}
-window.onload = ready;
-</script>
-
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Shortest Path</h1>
 <div class="content">
-  <h1>Shortest Path</h1>
-  <aside> <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#maze-i">Maze I</a></li>
-<li><a href="#maze-ii">Maze II</a></li>
-<li><a href="#maze-iii">Maze III</a></li>
-<li><a href="#leetcode-317-shortest-distance-from-all-buildings">Leetcode 317: Shortest Distance from All Buildings</a></li>
-<li><a href="#best-meeting-point">Best Meeting Point</a></li>
-<li><a href="#dijkstra">Dijkstra</a></li>
-<li><a href="#a-star">A star</a></li>
-</ul></li>
-</ul>
-</nav></aside>
   
 
 <h2 id="maze-i">Maze I</h2>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">bool</span> <span class="nf">hasPath</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span> <span class="n">maze</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">start</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">dest</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dx</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+    <span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dy</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">};</span>
+    <span class="n">queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">q</span><span class="p">;</span>
+    <span class="n">q</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">start</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">start</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="n">maze</span><span class="p">[</span><span class="n">start</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">start</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">maze</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">maze</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">size</span><span class="p">();</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">dest</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">==</span> <span class="n">dest</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
 
-<pre><code class="language-cpp">bool hasPath(vector&lt;vector&lt;int&gt;&gt; &amp; maze, vector&lt;int&gt; &amp; start, vector&lt;int&gt; &amp; dest) {
-    const vector&lt;int&gt; dx = {0, -1, 1, 0};
-    const vector&lt;int&gt; dy = {1, 0, 0, -1};
-    queue&lt;pair&lt;int, int&gt;&gt; q;
-    q.emplace(start[0], start[1]);
-    maze[start[0]][start[1]] = 2;
-    int m = maze.size();
-    int n = maze.front().size();
-    while (!q.empty()) {
-        auto cur = q.front();
-        q.pop();
-        int x = cur.first;
-        int y = cur.second;
-        if (x == dest[0] &amp;&amp; y == dest[1]) {
-            return true;
-        }
-
-        for (int i = 0; i &lt; 4; i++) {
-            int xx = x;
-            int yy = y;
-            while (xx &gt;= 0 &amp;&amp; xx &lt; m &amp;&amp; yy &gt;= 0 &amp;&amp; yy &lt; n &amp;&amp; maze[xx][yy] != 1) {
-                xx += dx[i];
-                yy += dy[i];
-            }
-            xx -= dx[i];
-            yy -= dy[i];
-            if (maze[xx][yy] == 0) {
-                maze[xx][yy] = 2;
-                q.emplace(xx, yy);
-            }
-        }
-    }
-    return false;
-}
-
-</code></pre>
-
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">xx</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">xx</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">xx</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="o">&amp;&amp;</span> <span class="n">yy</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">yy</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">maze</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">xx</span> <span class="o">+=</span> <span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                <span class="n">yy</span> <span class="o">+=</span> <span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="p">}</span>
+            <span class="n">xx</span> <span class="o">-=</span> <span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="n">yy</span> <span class="o">-=</span> <span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">maze</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">maze</span><span class="p">[</span><span class="n">xx</span><span class="p">][</span><span class="n">yy</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+                <span class="n">q</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="maze-ii">Maze II</h2>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="n">Position</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">d</span><span class="p">;</span>
+    <span class="n">Position</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">d</span><span class="p">)</span><span class="o">:</span> <span class="n">x</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">d</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">};</span>
 
-<pre><code class="language-cpp">struct Position {
-    int x, y, d;
-    Position(int x, int y, int d): x(x), y(y), d(d) {}
-};
-
-class Solution {
-public:
-    int shortestDistance(vector&lt;vector&lt;int&gt;&gt;&amp; maze, vector&lt;int&gt;&amp; start, vector&lt;int&gt;&amp; dest) {
-        if (maze.empty()) {
-            return -1;
-        }
-        auto cmp = [](Position &amp; p1, Position &amp; p2) {return p1.d &gt; p2.d;};
-        priority_queue&lt;Position, vector&lt;Position&gt;, decltype(cmp)&gt; pq(cmp);
-        pq.emplace(Position(start[0], start[1], 0));
+<span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">shortestDistance</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">maze</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">start</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">dest</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">maze</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">auto</span> <span class="n">cmp</span> <span class="o">=</span> <span class="p">[](</span><span class="n">Position</span> <span class="o">&amp;</span> <span class="n">p1</span><span class="p">,</span> <span class="n">Position</span> <span class="o">&amp;</span> <span class="n">p2</span><span class="p">)</span> <span class="p">{</span><span class="k">return</span> <span class="n">p1</span><span class="p">.</span><span class="n">d</span> <span class="o">&gt;</span> <span class="n">p2</span><span class="p">.</span><span class="n">d</span><span class="p">;};</span>
+        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">Position</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">Position</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">decltype</span><span class="p">(</span><span class="n">cmp</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">pq</span><span class="p">(</span><span class="n">cmp</span><span class="p">);</span>
+        <span class="n">pq</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">Position</span><span class="p">(</span><span class="n">start</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">start</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">));</span>
         
-        int m = maze.size();
-        int n = maze.front().size();
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">maze</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">maze</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">size</span><span class="p">();</span>
         
-        vector&lt;vector&lt;int&gt;&gt; dis(m, vector&lt;int&gt;(n, INT_MAX));
-        const vector&lt;int&gt; dx = {0, 1, -1, 0};
-        const vector&lt;int&gt; dy = {1, 0, 0, -1};
-        while (!pq.empty()) {
-            auto p = pq.top();
-            pq.pop();
-            int x = p.x;
-            int y = p.y;
-            int d = p.d;
-            if (x == dest[0] &amp;&amp; y == dest[1]) {
-                return d;
-            }
-            dis[x][y] = d;
-            for (int i = 0; i &lt; 4; i++) {
-                int nx = x;
-                int ny = y;
-                int nd = d;
-                while (nx + dx[i] &lt; m &amp;&amp; nx + dx[i] &gt;= 0 &amp;&amp; ny + dy[i] &lt; n &amp;&amp; ny + dy[i] &gt;= 0 
-                       &amp;&amp; maze[nx + dx[i]][ny + dy[i]] == 0) {
-                    nx += dx[i];
-                    ny += dy[i];
-                    nd++;
-                }
-                if (dis[nx][ny] &gt; nd) {
-                        dis[nx][ny] = nd;
-                        pq.emplace(Position(nx, ny, nd));
-                }
-            }
-        }
-        return -1;   
-    }
-};
-</code></pre>
-
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">dis</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">INT_MAX</span><span class="p">));</span>
+        <span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dx</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+        <span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dy</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">};</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">d</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">dest</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">==</span> <span class="n">dest</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">d</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">dis</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kt">int</span> <span class="n">nx</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+                <span class="kt">int</span> <span class="n">ny</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+                <span class="kt">int</span> <span class="n">nd</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+                <span class="k">while</span> <span class="p">(</span><span class="n">nx</span> <span class="o">+</span> <span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="o">&amp;&amp;</span> <span class="n">nx</span> <span class="o">+</span> <span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">ny</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">ny</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span> 
+                       <span class="o">&amp;&amp;</span> <span class="n">maze</span><span class="p">[</span><span class="n">nx</span> <span class="o">+</span> <span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">ny</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">nx</span> <span class="o">+=</span> <span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                    <span class="n">ny</span> <span class="o">+=</span> <span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                    <span class="n">nd</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nd</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">dis</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">=</span> <span class="n">nd</span><span class="p">;</span>
+                        <span class="n">pq</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">Position</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nd</span><span class="p">));</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>   
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h2 id="maze-iii">Maze III</h2>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="n">State</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">d</span><span class="p">;</span>
+    <span class="n">State</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">d</span><span class="p">)</span> <span class="o">:</span> <span class="n">x</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">d</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">};</span>
 
-<pre><code class="language-cpp">struct State
-{
-    int x;
-    int y;
-    int d;
-    State (int x, int y, int d) : x(x), y(y), d(d) {}
-};
-
-const vector&lt;int&gt; dx = {1, -1, 0, 0};
-const vector&lt;int&gt; dy = {0, 0, -1, 1};
-const string dirs = &quot;dulr&quot;;
+<span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dx</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+<span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">dy</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+<span class="k">const</span> <span class="n">string</span> <span class="n">dirs</span> <span class="o">=</span> <span class="s">&#34;dulr&#34;</span><span class="p">;</span>
     
-class Solution {
-public:
-    string findShortestWay(vector&lt;vector&lt;int&gt;&gt;&amp; maze, vector&lt;int&gt;&amp; ball, vector&lt;int&gt;&amp; hole) {
-        auto cmp = [](State &amp; s1, State &amp; s2) {
-            return s1.d &gt; s2.d;  
-        };
-        priority_queue&lt;State, vector&lt;State&gt;, decltype(cmp)&gt; pq(cmp);
-        pq.emplace(ball[0], ball[1], 0);
-        int m = maze.size();
-        int n = maze.front().size();
-        //dis[x][y]=&gt;maintain the shortest distance to the source so far
-        vector&lt;vector&lt;int&gt;&gt; dis(m, vector&lt;int&gt;(n, INT_MAX));
-        //dir[x][y]=&gt;maintain the lexicographically smallest way from the source so far
-        vector&lt;vector&lt;string&gt;&gt; way(m, vector&lt;string&gt;(n));
-        while(!pq.empty()) {
-            auto state = pq.top();
-            pq.pop();
-            int x = state.x;
-            int y = state.y;
-            int d = state.d;
-            if (d &gt; dis[x][y]) {
-                continue;
-            }
-            string path = way[x][y];
-            dis[x][y] = d;
-            if (x == hole[0] &amp;&amp; y == hole[1]) {
-                return way[x][y];
-            }
-            for (int i = 0; i &lt; 4; i++) {
-                int nx = x;
-                int ny = y;
-                int nd = d;
-                string path = way[x][y] + dirs[i]; 
-                while (nx + dx[i] &lt; m &amp;&amp; nx + dx[i] &gt;= 0 &amp;&amp; ny + dy[i] &lt; n &amp;&amp; ny + dy[i] &gt;= 0 
-                       &amp;&amp; maze[nx + dx[i]][ny + dy[i]] == 0) {
-                    nx += dx[i];
-                    ny += dy[i];
-                    nd++;
-                    if (nx == hole[0] &amp;&amp; ny == hole[1]) {
-                        break;
-                    }
-                }
-                if (nd &lt; dis[nx][ny]) {
-                    dis[nx][ny] = nd;
-                    way[nx][ny] = path;
-                    pq.emplace(nx, ny, nd);
-                }
-                if (nd == dis[nx][ny]) {
-                    if (path &lt; way[nx][ny]) {
-                        way[nx][ny] = path;
-                    }
-                }
-            }
-        }
-        return &quot;impossible&quot;;
-    }
-};
-</code></pre>
-
+<span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">string</span> <span class="n">findShortestWay</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">maze</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">ball</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">hole</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">cmp</span> <span class="o">=</span> <span class="p">[](</span><span class="n">State</span> <span class="o">&amp;</span> <span class="n">s1</span><span class="p">,</span> <span class="n">State</span> <span class="o">&amp;</span> <span class="n">s2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">s1</span><span class="p">.</span><span class="n">d</span> <span class="o">&gt;</span> <span class="n">s2</span><span class="p">.</span><span class="n">d</span><span class="p">;</span>  
+        <span class="p">};</span>
+        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">State</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">State</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">decltype</span><span class="p">(</span><span class="n">cmp</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">pq</span><span class="p">(</span><span class="n">cmp</span><span class="p">);</span>
+        <span class="n">pq</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">ball</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ball</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">maze</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">maze</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">size</span><span class="p">();</span>
+        <span class="c1">//dis[x][y]=&gt;maintain the shortest distance to the source so far
+</span><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">dis</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">INT_MAX</span><span class="p">));</span>
+        <span class="c1">//dir[x][y]=&gt;maintain the lexicographically smallest way from the source so far
+</span><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&gt;</span> <span class="n">way</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="n">state</span> <span class="o">=</span> <span class="n">pq</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="n">pq</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">state</span><span class="p">.</span><span class="n">d</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">d</span> <span class="o">&gt;</span> <span class="n">dis</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span> <span class="p">{</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">string</span> <span class="n">path</span> <span class="o">=</span> <span class="n">way</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
+            <span class="n">dis</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">hole</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">==</span> <span class="n">hole</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="n">way</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kt">int</span> <span class="n">nx</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+                <span class="kt">int</span> <span class="n">ny</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+                <span class="kt">int</span> <span class="n">nd</span> <span class="o">=</span> <span class="n">d</span><span class="p">;</span>
+                <span class="n">string</span> <span class="n">path</span> <span class="o">=</span> <span class="n">way</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span> <span class="n">dirs</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> 
+                <span class="k">while</span> <span class="p">(</span><span class="n">nx</span> <span class="o">+</span> <span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="o">&amp;&amp;</span> <span class="n">nx</span> <span class="o">+</span> <span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">ny</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">ny</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span> 
+                       <span class="o">&amp;&amp;</span> <span class="n">maze</span><span class="p">[</span><span class="n">nx</span> <span class="o">+</span> <span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="n">ny</span> <span class="o">+</span> <span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">nx</span> <span class="o">+=</span> <span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                    <span class="n">ny</span> <span class="o">+=</span> <span class="n">dy</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                    <span class="n">nd</span><span class="o">++</span><span class="p">;</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">nx</span> <span class="o">==</span> <span class="n">hole</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">ny</span> <span class="o">==</span> <span class="n">hole</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+                        <span class="k">break</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">nd</span> <span class="o">&lt;</span> <span class="n">dis</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">])</span> <span class="p">{</span>
+                    <span class="n">dis</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">=</span> <span class="n">nd</span><span class="p">;</span>
+                    <span class="n">way</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span><span class="p">;</span>
+                    <span class="n">pq</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">nd</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">nd</span> <span class="o">==</span> <span class="n">dis</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">])</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">path</span> <span class="o">&lt;</span> <span class="n">way</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">])</span> <span class="p">{</span>
+                        <span class="n">way</span><span class="p">[</span><span class="n">nx</span><span class="p">][</span><span class="n">ny</span><span class="p">]</span> <span class="o">=</span> <span class="n">path</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="s">&#34;impossible&#34;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h2 id="leetcode-317-shortest-distance-from-all-buildings">Leetcode 317: Shortest Distance from All Buildings</h2>
 
 <p>找到一个点，从他开始到所有的buildings的距离最短的和，中间有障碍物。对每个点做BFS，然后加起来求一个最小值。这样的时间复杂度是 $O(m*n)[BFS] * O(m*n)[matrix] = O(m^2*n^2)$。优化：从building开始搜。那么时间复杂度为$O(k*m*n)$。 $k$ 是 building 的个数。</p>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    int shortestDistance(vector&lt;vector&lt;int&gt;&gt;&amp; grid) {
-        int res = INT_MAX;
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">shortestDistance</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>
         
-        vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt; dis(grid.size(), vector&lt;pair&lt;int, int&gt;&gt;(grid[0].size()));    
-        //dis[i][j].first =&gt; total distance from k buildings to grid[i][j]
-        //dis[i][j].second =&gt; num of times search from k buildings and visited to grid[i][j] successfully (avoid dead end)
-        int m = grid.size();
-        int n = grid[0].size();
-        int num_buildings = 0;
-        for (int i = 0; i &lt; m; i++) {
-            for (int j = 0; j &lt; n; j++) {
-                if (grid[i][j] == 1) {
-                    bfs(grid, dis, i, j);
-                    num_buildings++;
-                }
-            }
-        }
-        for (int i = 0; i &lt; m; i++) {
-            for (int j = 0; j &lt; n; j++) {
-                if (dis[i][j].second == num_buildings) {
-                    res = min(res, dis[i][j].first);
-                }
-            }
-        }
-        return res == INT_MAX? -1 : res;
-    }
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">dis</span><span class="p">(</span><span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()));</span>    
+        <span class="c1">//dis[i][j].first =&gt; total distance from k buildings to grid[i][j]
+</span><span class="c1"></span>        <span class="c1">//dis[i][j].second =&gt; num of times search from k buildings and visited to grid[i][j] successfully (avoid dead end)
+</span><span class="c1"></span>        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">num_buildings</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">bfs</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">dis</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+                    <span class="n">num_buildings</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">second</span> <span class="o">==</span> <span class="n">num_buildings</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">first</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span> <span class="o">==</span> <span class="n">INT_MAX</span><span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="n">res</span><span class="p">;</span>
+    <span class="p">}</span>
     
     
-    void bfs(const vector&lt;vector&lt;int&gt;&gt; &amp; grid, vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt; &amp; dis, int i, int j) {
-        queue&lt;pair&lt;int, int&gt;&gt; q;
-        q.emplace(i, j);
-        int m = grid.size();
-        int n = grid[0].size();
-        deque&lt;deque&lt;bool&gt;&gt; visited(m, deque&lt;bool&gt;(n, false));
+    <span class="kt">void</span> <span class="n">bfs</span><span class="p">(</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span> <span class="n">grid</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="o">&amp;</span> <span class="n">dis</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">q</span><span class="p">;</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">deque</span><span class="o">&lt;</span><span class="n">deque</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;&gt;</span> <span class="n">visited</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">deque</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">false</span><span class="p">));</span>
         
-        vector&lt;pair&lt;int, int&gt;&gt; dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">dirs</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}};</span>
         
-        int level = 0;      //distance to building in grid[i][j]
-        while (!q.empty()) {
-            int size = q.size();
-            for (int i = 0; i &lt; size; i++) {
-                int x = q.front().first;
-                int y = q.front().second;
-                q.pop();
-                if (level != 0) {
-                    dis[x][y].first += level;
-                    dis[x][y].second++;
-                }
-                for (const auto &amp; dir : dirs) {
-                    int x_prime = x + dir.first;
-                    int y_prime = y + dir.second;
-                    if (x_prime &lt; m &amp;&amp; x_prime &gt;= 0 &amp;&amp; y_prime &lt; n &amp;&amp; y_prime &gt;= 0 &amp;&amp; 
-                        grid[x_prime][y_prime] == 0 &amp;&amp;
-                        visited[x_prime][y_prime] == false) {
-                        q.emplace(x_prime, y_prime);
-                        visited[x_prime][y_prime] = true;
-                    }
-                }    
-            }            
-            level++;
-        }
+        <span class="kt">int</span> <span class="n">level</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>      <span class="c1">//distance to building in grid[i][j]
+</span><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">;</span>
+                <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">;</span>
+                <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">dis</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">].</span><span class="n">first</span> <span class="o">+=</span> <span class="n">level</span><span class="p">;</span>
+                    <span class="n">dis</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">].</span><span class="n">second</span><span class="o">++</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span> <span class="nl">dir</span> <span class="p">:</span> <span class="n">dirs</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kt">int</span> <span class="n">x_prime</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dir</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+                    <span class="kt">int</span> <span class="n">y_prime</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dir</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">x_prime</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="o">&amp;&amp;</span> <span class="n">x_prime</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">y_prime</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">y_prime</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> 
+                        <span class="n">grid</span><span class="p">[</span><span class="n">x_prime</span><span class="p">][</span><span class="n">y_prime</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>
+                        <span class="n">visited</span><span class="p">[</span><span class="n">x_prime</span><span class="p">][</span><span class="n">y_prime</span><span class="p">]</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">q</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">x_prime</span><span class="p">,</span> <span class="n">y_prime</span><span class="p">);</span>
+                        <span class="n">visited</span><span class="p">[</span><span class="n">x_prime</span><span class="p">][</span><span class="n">y_prime</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>    
+            <span class="p">}</span>            
+            <span class="n">level</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
         
-    }
-};
-</code></pre>
-
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h2 id="best-meeting-point">Best Meeting Point</h2>
 
 <p>和上题一样的做法，只是可以在人所在的位置。做BFS标记visited的时候要注意。</p>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    int minTotalDistance(vector&lt;vector&lt;int&gt;&gt;&amp; grid) {
-        int res = INT_MAX;        
-        vector&lt;vector&lt;int&gt;&gt; dis(grid.size(), vector&lt;int&gt;(grid[0].size()));    
-        int m = grid.size();
-        int n = grid[0].size();
-        for (int i = 0; i &lt; m; i++) {
-            for (int j = 0; j &lt; n; j++) {
-                if (grid[i][j] == 1) {
-                    bfs(grid, dis, i, j);
-                }
-            }
-        }
-        for (int i = 0; i &lt; m; i++) {
-            for (int j = 0; j &lt; n; j++) {
-                    res = min(res, dis[i][j]);
-            }
-        }
-        return res == INT_MAX? -1 : res;        
-    }
-    void bfs(const vector&lt;vector&lt;int&gt;&gt; &amp; grid, vector&lt;vector&lt;int&gt;&gt; &amp; dis, int i, int j) {
-        queue&lt;pair&lt;int, int&gt;&gt; q;
-        q.emplace(i, j);
-        int m = grid.size();
-        int n = grid[0].size();
-        deque&lt;deque&lt;bool&gt;&gt; visited(m, deque&lt;bool&gt;(n, false));
-        visited[i][j] = true;
-        vector&lt;pair&lt;int, int&gt;&gt; dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">minTotalDistance</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="n">INT_MAX</span><span class="p">;</span>        
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">dis</span><span class="p">(</span><span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">(),</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">()));</span>    
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">bfs</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">dis</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">res</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">dis</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">res</span> <span class="o">==</span> <span class="n">INT_MAX</span><span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="n">res</span><span class="p">;</span>        
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">bfs</span><span class="p">(</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span> <span class="n">grid</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span> <span class="n">dis</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">q</span><span class="p">;</span>
+        <span class="n">q</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span>
+        <span class="n">deque</span><span class="o">&lt;</span><span class="n">deque</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;&gt;</span> <span class="n">visited</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">deque</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">false</span><span class="p">));</span>
+        <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">dirs</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}};</span>
         
-        int level = 0;      //distance to grid[i][j]
-        while (!q.empty()) {
-            int size = q.size();
-            for (int i = 0; i &lt; size; i++) {
-                int x = q.front().first;
-                int y = q.front().second;
-                q.pop();
-                if (level != 0) {
-                    dis[x][y] += level;
-                }
-                for (const auto &amp; dir : dirs) {
-                    int x_prime = x + dir.first;
-                    int y_prime = y + dir.second;
-                    if (x_prime &lt; m &amp;&amp; x_prime &gt;= 0 &amp;&amp; y_prime &lt; n &amp;&amp; y_prime &gt;= 0 &amp;&amp; 
-                        visited[x_prime][y_prime] == false) {
-                        q.emplace(x_prime, y_prime);
-                        visited[x_prime][y_prime] = true;
-                    }
-                }    
-            }            
-            level++;
-        }
-    }    
-};
-</code></pre>
-
+        <span class="kt">int</span> <span class="n">level</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>      <span class="c1">//distance to grid[i][j]
+</span><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">q</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">first</span><span class="p">;</span>
+                <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">front</span><span class="p">().</span><span class="n">second</span><span class="p">;</span>
+                <span class="n">q</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">dis</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+=</span> <span class="n">level</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span> <span class="nl">dir</span> <span class="p">:</span> <span class="n">dirs</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kt">int</span> <span class="n">x_prime</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">dir</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+                    <span class="kt">int</span> <span class="n">y_prime</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="n">dir</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">x_prime</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="o">&amp;&amp;</span> <span class="n">x_prime</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">y_prime</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">y_prime</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> 
+                        <span class="n">visited</span><span class="p">[</span><span class="n">x_prime</span><span class="p">][</span><span class="n">y_prime</span><span class="p">]</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">q</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">x_prime</span><span class="p">,</span> <span class="n">y_prime</span><span class="p">);</span>
+                        <span class="n">visited</span><span class="p">[</span><span class="n">x_prime</span><span class="p">][</span><span class="n">y_prime</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>    
+            <span class="p">}</span>            
+            <span class="n">level</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>    
+<span class="p">};</span>
+</code></pre></div>
 <p>但超时啦。
 答案里给的方法是算出median。并不适用有obstacle的情况（是嘛？）。</p>
-
-<pre><code class="language-cpp">// Time:  O(mn)
-// Space: O(m+n)
-class Solution {
-public:
-    int minTotalDistance(vector&lt;vector&lt;int&gt;&gt;&amp; grid) {
-        vector&lt;int&gt; x, y;
-        for (int i = 0; i &lt; grid.size(); ++i) {
-            for (int j = 0; j &lt; grid[0].size(); ++j) {
-                if (grid[i][j]) {
-                    x.emplace_back(i);
-                    y.emplace_back(j);
-                }
-            }
-        }
-        nth_element(x.begin(), x.begin() + x.size() / 2, x.end());
-        nth_element(y.begin(), y.begin() + y.size() / 2, y.end());
-        const int mid_x = x[x.size() / 2];
-        const int mid_y = y[y.size() / 2];
-        int sum = 0;
-        for (int i = 0; i &lt; grid.size(); ++i) {
-            for (int j = 0; j &lt; grid[0].size(); ++j) {
-                if (grid[i][j]) {
-                    sum += abs(mid_x - i) + abs(mid_y - j);
-                }
-            }
-        }
-        return sum;
-    }
-};
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="c1">// Time:  O(mn)
+</span><span class="c1">// Space: O(m+n)
+</span><span class="c1"></span><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">minTotalDistance</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+                    <span class="n">x</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+                    <span class="n">y</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">nth_element</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">x</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="n">nth_element</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">y</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="k">const</span> <span class="kt">int</span> <span class="n">mid_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">];</span>
+        <span class="k">const</span> <span class="kt">int</span> <span class="n">mid_y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">y</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">];</span>
+        <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+                    <span class="n">sum</span> <span class="o">+=</span> <span class="n">abs</span><span class="p">(</span><span class="n">mid_x</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="n">abs</span><span class="p">(</span><span class="n">mid_y</span> <span class="o">-</span> <span class="n">j</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <p><a href="https://math.stackexchange.com/questions/113270/the-median-minimizes-the-sum-of-absolute-deviations">数学证明参考链接</a></p>
 
 <ul>
@@ -477,16 +431,86 @@ public:
 
 <p><a href="https://github.com/pineal/-O_O-/blob/master/A_Star_Search/A_Star_Search.cpp">https://github.com/pineal/-O_O-/blob/master/A_Star_Search/A_Star_Search.cpp</a></p>
 
-
-  <a href="/tags/bfs/">BFS</a></a>&nbsp;&nbsp;&nbsp;
-
+</div>
 </div>
 
 
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/hesenzhang//">about me</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
 
 
-<footer>
-	<p>© 2017-2018, all rights reserved.</a>
-</footer>
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.bf1e1f7ae8e03db5f012356e825843facdff51c0a559cb0d27fe2bbe1db405c2.js"></script>
+  
+
+  
+  
+  
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141209571-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141209571-1');
+</script>
+    
+  
+
+
 </body>
+
 </html>

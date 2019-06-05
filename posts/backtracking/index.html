@@ -1,149 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title>Basic Backtracking Problems</title>
-	
-	<meta name="description" content="">
-	<meta name="image" content="">
-	
-	<meta itemprop="name" content="Basic Backtracking Problems">
-	<meta itemprop="description" content="">
-	<meta itemprop="image" content="">
-	
-	<meta name="og:title" content="Basic Backtracking Problems">
-	<meta name="og:description" content="">
-	
-	<meta name="og:url" content="https://pineal.github.com/posts/backtracking/">
-	<meta name="og:site_name" content="Basic Backtracking Problems">
-	<meta name="og:type" content="article">
-	
-	<meta name="article:tag" content="search DFS backtracking ">
-	<link rel="stylesheet" type="text/css" href="https://pineal.github.com/css/style.css">
-	
-	
-	
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
-	<script type="text/javascript" async
-	src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
-  </script>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Basic Backtracking Problems - PINEAL.ME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-	tex2jax: {
-	  inlineMath: [['$','$'], ['\\(','\\)']],
-	  displayMath: [['$$','$$'], ['\[','\]']],
-	  processEscapes: true,
-	  processEnvironments: true,
-	  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code'],
-	  TeX: { equationNumbers: { autoNumber: "AMS" },
-		   extensions: ["AMSmath.js", "AMSsymbols.js"] }
-	}
-  });
-  </script>
+  <link rel="icon" href="https://pineal.github.com/favicon.png">
+
+  
+  
+  <link rel="stylesheet" href="/css/style.min.51f9758ebedaebb8122900b7464b612d113097d9e170af8375c7cb311bb6a003.css">
+  
+
+  
+
 </head>
 
-<body>
+<body class='page page-default-single'>
+  <div id="main-menu-mobile" class="main-menu-mobile">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+  <div class="wrapper">
+    <div class='header'>
+  <div class="container">
+    <div id="main-menu" class="main-menu">
+  <ul>
+    
+    
+    <li class="menu-item-home">
+      <a href="/">
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="menu-item-posts">
+      <a href="/posts/">
+        <span>Posts</span>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+    <button id="toggle-main-menu-mobile" class="hamburger hamburger--slider" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+</button>
+  </div>
+</div>
 
-<header>
-	
-	<a href="https://pineal.github.com/" style="float: left;color:#777;"><strong>PINEAL.ME</strong></a>
-	
-	&nbsp;&nbsp;<a href="https://pineal.github.com/archives/" style="color:#777;"><strong>Archives</strong></a>&nbsp;&nbsp;<a href="https://pineal.github.com/about/" style="color:#777;"><strong>About</strong></a>
-	
-	
-	
-	<a href="https://pineal.github.com/index.xml" style="color:#777;float: right;"><strong><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></strong></a>
-</header>
 
 
-<div id="loadingMask" style="width: 100%; height: 100%; position: fixed; background: #fff;"></div>
-<script>
-function fadeOut(el) {
-  el.style.opacity = 1;
-
-  var last = +new Date();
-  var tick = function() {
-    el.style.opacity = +el.style.opacity - (new Date() - last) / 80;
-    last = +new Date();
+    
+    
+    
+    
+    
     
 
-    if (el.style.opacity > 0) {
-      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-    } else {
-      el.style.display='none';
-    }
-  };
+    
+    <div class="container pt-2 pt-md-6 pb-3 pb-md-6">
+      <div class="row">
+        <div class="col-12 col-md-3 mb-3">
+          <div class="sidebar">
+            
+<div class="docs-menu">
+  
+</div>
 
-  tick();
-}
-
-function ready(fn) {
-    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
-         el = document.getElementById('loadingMask');
-         fadeOut(el);
-        var elements = document.querySelectorAll("img");
-        Array.prototype.forEach.call(elements, function(el, i) {
-            if (el.getAttribute("alt")) {
-                const caption = document.createElement('figcaption');
-                var node = document.createTextNode(el.getAttribute("alt"));
-                caption.appendChild(node);
-                const wrapper = document.createElement('figure');
-                wrapper.className = 'image';
-                el.parentNode.insertBefore(wrapper, el);
-                el.parentNode.removeChild(el);
-                wrapper.appendChild(el);
-                wrapper.appendChild(caption);
-            }
-        });
-
-    } else {
-        document.addEventListener('DOMContentLoaded', fn);
-    }
-}
-window.onload = ready;
-</script>
-
+          </div>
+        </div>
+        <div class="col-12 col-md-9">
+          
+<h1 class="title">Basic Backtracking Problems</h1>
 <div class="content">
-  <h1>Basic Backtracking Problems</h1>
-  <aside> <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#subsets">Subsets</a>
-<ul>
-<li><a href="#subsets-i-http-www-lintcode-com-en-problem-subsets"><a href="http://www.lintcode.com/en/problem/subsets/">Subsets I</a></a></li>
-<li><a href="#subsets-ii-dedup-http-www-lintcode-com-en-problem-subsets-ii"><a href="http://www.lintcode.com/en/problem/subsets-ii/">Subsets II - Dedup</a></a></li>
-<li><a href="#variant-i-combination">Variant I - Combination</a></li>
-<li><a href="#variant-ii-permutations-of-inserting-spaces-into-a-string">Variant II - Permutations of inserting spaces into a string</a></li>
-<li><a href="#others">Others</a></li>
-</ul></li>
-<li><a href="#permutations">Permutations</a>
-<ul>
-<li><a href="#permutations-i">Permutations I</a></li>
-<li><a href="#permutations-ii-dedup">Permutations II - Dedup</a></li>
-</ul></li>
-<li><a href="#parenthesis-problems">Parenthesis Problems</a>
-<ul>
-<li><a href="#valid">Valid</a></li>
-</ul></li>
-<li><a href="#coin-combinations">Coin Combinations</a>
-<ul>
-<li><a href="#99-cents">99 Cents</a></li>
-<li><a href="#find-all-valid-combinations-of-factors-that-form-an-integer">find all valid combinations of factors that form an integer</a></li>
-</ul></li>
-<li><a href="#backtracking-on-tree">Backtracking on Tree</a>
-<ul>
-<li><a href="#longest-consecutive-sequence">Longest consecutive sequence</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav></aside>
   
 
 <h2 id="introduction">Introduction</h2>
@@ -159,62 +106,58 @@ window.onload = ready;
 <p>这一类的题目的框架为，在递归树中的第 i 层，代表正在处理 nums 里的第 i 个元素。 从该层的父节点一定会伸展出两个分叉： 第一个分叉代表着一层会放这个元素，第二个分叉代表不放这个元素。 这样出来的递归树非常平衡。</p>
 
 <h3 id="subsets-i-http-www-lintcode-com-en-problem-subsets"><a href="http://www.lintcode.com/en/problem/subsets/">Subsets I</a></h3>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    vector&lt;vector&lt;int&gt;&gt; subsets(vector&lt;int&gt;&amp; nums) {
-        vector&lt;vector&lt;int&gt;&gt; rst;
-        sort(nums.begin(), nums.end());
-        vector&lt;int&gt; cur;
-        dfs(rst, cur, nums, 0);
-        return rst;
-    }
-    void dfs(vector&lt;vector&lt;int&gt;&gt; &amp; rst, vector&lt;int&gt; &amp; cur, const vector&lt;int&gt;&amp; nums, int level) {
-        if (level == nums.size()) {
-            rst.emplace_back(cur);
-            return;
-        }
-        cur.emplace_back(nums[level]);
-        dfs(rst, cur, nums, level + 1);
-        cur.pop_back();
-        dfs(rst, cur, nums, level + 1);
-    }
-};
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">subsets</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">rst</span><span class="p">;</span>
+        <span class="n">sort</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">cur</span><span class="p">;</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">rst</span><span class="p">,</span> <span class="n">cur</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">dfs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span> <span class="n">rst</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">cur</span><span class="p">,</span> <span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">level</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">==</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">rst</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">cur</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">level</span><span class="p">]);</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">rst</span><span class="p">,</span> <span class="n">cur</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">cur</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">rst</span><span class="p">,</span> <span class="n">cur</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h3 id="subsets-ii-dedup-http-www-lintcode-com-en-problem-subsets-ii"><a href="http://www.lintcode.com/en/problem/subsets-ii/">Subsets II - Dedup</a></h3>
 
 <p>去重首先需要排序，要利用有序性。从递归树上看的话，放的那一个分支不变，因为我们是先做放元素，再走不放该元素的。如果不放该元素，那么此时的结果会跟父节点的是重复的。ab1 -&gt; ab1b2, ab1。  a -&gt; ab2, a。 ab1 和 ab2 不能同时出现。 所以这个分支就需要直接跳到跟当前层元素不同的那一层。在代码上体现就是level++。</p>
 
 <p>ab1 ab2 出发产生的分支都是完全一样的。那么我们可以去掉ab2。</p>
-
-<pre><code class="language-cpp">class Solution {
-public:
-    vector&lt;vector&lt;int&gt;&gt; subsetsWithDup(vector&lt;int&gt;&amp; nums) {
-        vector&lt;vector&lt;int&gt;&gt; rst;
-        vector&lt;int&gt; cur;
-        sort(nums.begin(), nums.end());
-        dfs(rst, nums, 0, cur);
-        return rst;
-    }
-    void dfs(vector&lt;vector&lt;int&gt;&gt; &amp; result, vector&lt;int&gt; &amp; nums, int level, vector&lt;int&gt; &amp; cur) {
-        if (level == nums.size()) {
-            result.emplace_back(cur);
-            return;
-        }
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">subsetsWithDup</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">rst</span><span class="p">;</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">cur</span><span class="p">;</span>
+        <span class="n">sort</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">nums</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">rst</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">dfs</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span> <span class="n">result</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">level</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">cur</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">==</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">result</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
         
-        cur.emplace_back(nums[level]);
-        dfs(result, nums, level + 1, cur);
-        cur.pop_back();
-        //pruning techniques
-        while (level &lt; nums.size() - 1 &amp;&amp; nums[level] == nums[level+1]) {
-            level++;
-        }                
-        dfs(result, nums, level + 1, cur);
-    }
-};
-</code></pre>
-
+        <span class="n">cur</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">level</span><span class="p">]);</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
+        <span class="n">cur</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+        <span class="c1">//pruning techniques
+</span><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="n">level</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">nums</span><span class="p">[</span><span class="n">level</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">level</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">level</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>                
+        <span class="n">dfs</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h3 id="variant-i-combination">Variant I - Combination</h3>
 
 <p>整体框架跟 Subset I 一模一样， 唯一的区别是 base case return 的时候加上条件： 当前结果的长度为 k 才返回。
@@ -245,70 +188,66 @@ public:
 <p>如果要求 一个长度不变的array/string 的 permutation 只是 order 不一样，就可以考虑用 swap-swap 的方法。</p>
 
 <h3 id="permutations-i">Permutations I</h3>
-
-<pre><code class="language-cpp">class Solution {
- public:
-  vector&lt;string&gt; solve(string input) {
-  if (input == &quot;&quot;) {
-    return {&quot;&quot;};
-  }
-  vector&lt;string&gt; result;
-  helper(result, input, 0);
-  return result;
-  }
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">solve</span><span class="p">(</span><span class="n">string</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">input</span> <span class="o">==</span> <span class="s">&#34;&#34;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">&#34;&#34;</span><span class="p">};</span>
+  <span class="p">}</span>
+  <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+  <span class="n">helper</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">input</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+  <span class="p">}</span>
   
-private:
-  void swap(string &amp;s, int i, int j) {
-    auto temp = s[i];
-    s[i] = s[j];
-    s[j] = temp;
-  }
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">swap</span><span class="p">(</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+    <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+  <span class="p">}</span>
 
-  void helper(vector&lt;string&gt; &amp; result, string &amp; s, int index) {
-    if (index == s.size()){
-      result.emplace_back(s);
-      return;
-    }
-    for (int i = index; i &lt; s.size(); i++) {
-      swap(s, i, index);
-      helper(result, s, index + 1);
-      swap(s, i, index);
-    }
-  }
-};
-</code></pre>
-
+  <span class="kt">void</span> <span class="n">helper</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">result</span><span class="p">,</span> <span class="n">string</span> <span class="o">&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">()){</span>
+      <span class="n">result</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">index</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">swap</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+      <span class="n">helper</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="n">swap</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h3 id="permutations-ii-dedup">Permutations II - Dedup</h3>
-
-<pre><code class="language-cpp">class Solution {
- public:
-  vector&lt;string&gt; solve(string input) {
-    vector&lt;string&gt; result;
-    helper(input, result, 0);
-    return result;
-  }
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span><span class="err"> </span><span class="nc">Solution</span> <span class="p">{</span>
+ <span class="k">public</span><span class="o">:</span>
+  <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">solve</span><span class="p">(</span><span class="n">string</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+    <span class="n">helper</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+  <span class="p">}</span>
   
-private:
-  void helper(string &amp; input, vector&lt;string&gt; &amp; result, int level) {
-    if (level == input.size()) {
-        result.emplace_back(input);
-        return;
-    }
+<span class="k">private</span><span class="o">:</span>
+  <span class="kt">void</span> <span class="n">helper</span><span class="p">(</span><span class="n">string</span> <span class="o">&amp;</span> <span class="n">input</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">result</span><span class="p">,</span> <span class="kt">int</span> <span class="n">level</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">==</span> <span class="n">input</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">result</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    set&lt;char&gt; charset;
-    for (int i = level; i &lt; input.size(); ++i) {
-      if (charset.find(input[i]) != charset.end()) {
-        continue;
-      }
-      charset.emplace(input[i]);
-      swap(input[i], input[level]);
-      helper(input, result, level + 1);
-      swap(input[i], input[level]);
-    }
-  }
-};
-</code></pre>
-
+    <span class="n">set</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span> <span class="n">charset</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">level</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">input</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">charset</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">!=</span> <span class="n">charset</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">continue</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="n">charset</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="n">swap</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">input</span><span class="p">[</span><span class="n">level</span><span class="p">]);</span>
+      <span class="n">helper</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="n">swap</span><span class="p">(</span><span class="n">input</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">input</span><span class="p">[</span><span class="n">level</span><span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div>
 <h2 id="parenthesis-problems">Parenthesis Problems</h2>
 
 <h3 id="valid">Valid</h3>
@@ -316,41 +255,39 @@ private:
 <p><strong>Given N pairs of parentheses “()”, return a list with all the valid permutations</strong>.</p>
 
 <p>分析：</p>
-
-<pre><code class="language-cpp">void validParenthesisHelper(int l, int r, int n, string &amp; cur, vector&lt;string&gt; &amp; res) {
-    if (l + r ==  2 * n) {
-        res.emplace_back(cur);
-        return;
-    }
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">validParenthesisHelper</span><span class="p">(</span><span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="kt">int</span> <span class="n">r</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">string</span> <span class="o">&amp;</span> <span class="n">cur</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="n">r</span> <span class="o">==</span>  <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
     
-    if (l &lt; n) {
-        cur += &quot;(&quot;;
-        validParenthesisHelper(l + 1, r, n, cur, res);
-        cur.pop_back();
-    }
+    <span class="k">if</span> <span class="p">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cur</span> <span class="o">+=</span> <span class="s">&#34;(&#34;</span><span class="p">;</span>
+        <span class="n">validParenthesisHelper</span><span class="p">(</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">cur</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+        <span class="n">cur</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+    <span class="p">}</span>
     
-    if (r &lt; l) {
-        cur += &quot;)&quot;;
-        validParenthesisHelper(l, r + 1, n, cur, res);
-        cur.pop_back();
-    }
-}
+    <span class="k">if</span> <span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="n">l</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cur</span> <span class="o">+=</span> <span class="s">&#34;)&#34;</span><span class="p">;</span>
+        <span class="n">validParenthesisHelper</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">cur</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+        <span class="n">cur</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-vector&lt;string&gt; validParenthesis(int n) {
-    vector&lt;string&gt; res;
-    string cur;
-    validParenthesisHelper(0, 0, n, cur, res);
-    return res;
-}
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">validParenthesis</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">res</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">cur</span><span class="p">;</span>
+    <span class="n">validParenthesisHelper</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">cur</span><span class="p">,</span> <span class="n">res</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
 
-void testvalidParenthesis() {
-    auto res = validParenthesis(3);
-    for (const auto &amp; str : res) {
-        cout &lt;&lt; str &lt;&lt; endl;
-    }
-}
-</code></pre>
-
+<span class="kt">void</span> <span class="n">testvalidParenthesis</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">res</span> <span class="o">=</span> <span class="n">validParenthesis</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span> <span class="nl">str</span> <span class="p">:</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">str</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <p>Time: O(2^2n)
 Space: O(2n)</p>
 
@@ -359,46 +296,44 @@ Space: O(2n)</p>
 <h3 id="99-cents">99 Cents</h3>
 
 <p><a href="https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/">https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/</a></p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">void</span> <span class="nf">coinCombinationHelper</span><span class="p">(</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">coins</span><span class="p">,</span>
+                           <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span> <span class="n">res</span><span class="p">,</span>
+                           <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">cur</span><span class="p">,</span>
+                           <span class="kt">int</span> <span class="n">remaining</span><span class="p">,</span>
+                           <span class="kt">int</span> <span class="n">level</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">level</span> <span class="o">==</span> <span class="n">coins</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">remaining</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">res</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
 
-<pre><code class="language-cpp">void coinCombinationHelper(const vector&lt;int&gt; &amp; coins,
-                           vector&lt;vector&lt;int&gt;&gt; &amp; res,
-                           vector&lt;int&gt; &amp; cur,
-                           int remaining,
-                           int level) {
-    if (level == coins.size()) {
-        if (remaining == 0) {
-            res.emplace_back(cur);
-        }
-        return;
-    }
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">remaining</span><span class="o">/</span><span class="n">coins</span><span class="p">[</span><span class="n">level</span><span class="p">];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cur</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="n">coinCombinationHelper</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">cur</span><span class="p">,</span> <span class="n">remaining</span> <span class="o">-</span> <span class="n">i</span> <span class="o">*</span> <span class="n">coins</span><span class="p">[</span><span class="n">level</span><span class="p">],</span> <span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">cur</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-    int n = remaining/coins[level];
-    for (int i = 0; i &lt;= n; i++) {
-        cur.emplace_back(i);
-        coinCombinationHelper(coins, res, cur, remaining - i * coins[level], level + 1);
-        cur.pop_back();
-    }
-}
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">coinCombination</span><span class="p">(</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span> <span class="n">coins</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">res</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">cur</span><span class="p">;</span>
+    <span class="n">coinCombinationHelper</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">cur</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
 
-vector&lt;vector&lt;int&gt;&gt; coinCombination(const vector&lt;int&gt; &amp; coins, int target) {
-    vector&lt;vector&lt;int&gt;&gt; res;
-    vector&lt;int&gt; cur;
-    coinCombinationHelper(coins, res, cur, target, 0);
-    return res;
-}
-
-void testCoinsCombination() {
-    vector&lt;int&gt; coins = {25, 10, 5, 1};
-    auto res = coinCombination(coins, 99);
-    for (const auto &amp; v : res) {
-        for (const auto &amp; c : v) {
-            cout &lt;&lt; c &lt;&lt; &quot; &quot;;
-        }
-        cout &lt;&lt; endl;
-    }
-}
-</code></pre>
-
+<span class="kt">void</span> <span class="n">testCoinsCombination</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">coins</span> <span class="o">=</span> <span class="p">{</span><span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+    <span class="k">auto</span> <span class="n">res</span> <span class="o">=</span> <span class="n">coinCombination</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="mi">99</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span> <span class="nl">v</span> <span class="p">:</span> <span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span> <span class="nl">c</span> <span class="p">:</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h3 id="find-all-valid-combinations-of-factors-that-form-an-integer">find all valid combinations of factors that form an integer</h3>
 
 <p><a href="https://www.geeksforgeeks.org/given-array-strings-find-strings-can-chained-form-circle/">https://www.geeksforgeeks.org/given-array-strings-find-strings-can-chained-form-circle/</a></p>
@@ -408,38 +343,106 @@ void testCoinsCombination() {
 <h3 id="longest-consecutive-sequence">Longest consecutive sequence</h3>
 
 <p>int global_max = INT_MIN;</p>
+<div class="highlight"><pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="nf">helper</span><span class="p">(</span><span class="n">TreeNode</span><span class="o">*</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
 
-<pre><code class="language-cpp">int helper(TreeNode* root) {
-  if (root == nullptr) {
-    return 0;
-  }
+  <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-  int left = 0;
-  int right = 0;
+  <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">-</span><span class="mi">1</span> <span class="o">==</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+  <span class="p">}</span> 
+  <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">-</span><span class="mi">1</span> <span class="o">==</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+  <span class="p">}</span> 
+  <span class="kt">int</span> <span class="n">local_max</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="n">global_max</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">global_max</span><span class="p">,</span> <span class="n">local_max</span><span class="p">)</span><span class="n">l</span>
+  <span class="k">return</span> <span class="n">local_max</span><span class="p">;</span>
 
-  if (root-&gt;left &amp;&amp; root-&gt;left-&gt;val -1 == root-&gt;val) {
-    left = helper(root-&gt;left);
-  } 
-  if (root-&gt;right &amp;&amp; root-&gt;right-&gt;val -1 == root-&gt;val) {
-    right = helper(root-&gt;right);
-  } 
-  int local_max = max(left, right) + 1;
-  global_max = max(global_max, local_max)l
-  return local_max;
-
-} 
-</code></pre>
-
-
-  <a href="/tags/search/">search</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/dfs/">DFS</a></a>&nbsp;&nbsp;&nbsp;<a href="/tags/backtracking/">backtracking</a></a>&nbsp;&nbsp;&nbsp;
-
+<span class="p">}</span> 
+</code></pre></div>
+</div>
 </div>
 
 
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="sub-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sub-footer-inner">
+          <ul>
+            <li class="zerostatic"><a href="https://www.linkedin.com/in/hesenzhang//">about me</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
 
 
-<footer>
-	<p>© 2017-2018, all rights reserved.</a>
-</footer>
+  
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/scripts.min.bf1e1f7ae8e03db5f012356e825843facdff51c0a559cb0d27fe2bbe1db405c2.js"></script>
+  
+
+  
+  
+  
+    
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-141209571-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-141209571-1');
+</script>
+    
+  
+
+
 </body>
+
 </html>
